@@ -1,0 +1,6 @@
+# Consistent source files across Windows/macOS/Linux.
+* text=auto eol=lf
+*.docx binary
+*.pdf binary
+# Preserve archived research originals byte-for-byte for their SHA-256 manifest.
+docs/references/research/** -text

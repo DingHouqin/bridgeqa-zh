@@ -1,0 +1,17 @@
+{
+  "status": "proposal_requires_pilot",
+  "unit": "unique_seed_before_variants",
+  "hop_ratio": {"2": 0.25, "3": 0.60, "4": 0.15},
+  "domain_ratio": {"main_domain_TBD": 0.70, "secondary_domain_TBD": 0.30},
+  "translated_seed_ratio": {"pilot_range": [0.40, 0.60], "final_range": [0.20, 0.30]},
+  "split_ratio": {"dev_public": 0.60, "test_hidden": 0.40},
+  "pilot_seeds_per_hop": 20,
+  "contexts": ["gold_only", "clean_control", "adversarial"],
+  "primary_attacks": ["redundant", "false_bridge", "misleading_relation"],
+  "initial_three_hop_languages": ["ZZZ", "EZZ", "ZEZ", "ZZE"],
+  "expanded_three_hop_languages": ["ZZZ", "EZZ", "ZEZ", "ZZE", "ZEE", "EEZ", "EZE", "EEE"],
+  "question_language": "zh",
+  "output_language": "zh",
+  "formal_seed_count": null,
+  "note": "比例为建议，不是课程硬要求；严格配对不能以变体数虚增独立样本量。"
+}

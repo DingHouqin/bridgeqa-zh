@@ -1,0 +1,42 @@
+# 私有数据及答案
+/data/private/**
+!/data/private/README.md
+!/data/private/hidden/
+/data/private/hidden/**
+!/data/private/hidden/README.md
+/experiments/private/**
+!/experiments/private/README.md
+
+# 大型数据、下载及候选，README 保留
+/data/raw/**
+!/data/raw/README.md
+/data/normalized/**
+!/data/normalized/README.md
+/data/candidates/**
+!/data/candidates/README.md
+/data/public/dev/**
+!/data/public/dev/README.md
+/artifacts/**
+!/artifacts/README.md
+
+# 环境、模型、缓存、凭据
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.onnx
+*.log
+.DS_Store
+Thumbs.db

@@ -1,0 +1,19 @@
+{
+  "run_id": "TBD",
+  "status": "template_not_executed",
+  "started_at": null,
+  "git_revision": null,
+  "dataset_version": null,
+  "dataset_sha256": null,
+  "split_manifest_sha256": null,
+  "model": {"model_id": null, "revision": null, "license": null, "total_parameters": null, "quantization": null},
+  "system_condition": "supplied_candidates",
+  "prompt_version": null,
+  "decoding": {"temperature": null, "max_new_tokens": null, "rng_seed": null},
+  "context_budget": {"max_tokens": null, "truncation_policy": null},
+  "retrieval": {"index_hash": null, "top_k": null},
+  "hardware": null,
+  "prediction_file": null,
+  "error_count": null,
+  "notes": "填写后移入私有运行目录；不得用此模板宣称已跑实验。"
+}

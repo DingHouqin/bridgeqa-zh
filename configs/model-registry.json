@@ -1,0 +1,7 @@
+{
+  "status": "unselected",
+  "policy": {"closed_llm_allowed": false, "open_total_parameters_must_be_less_than": 30000000000},
+  "models": [],
+  "required_model_fields": ["model_id", "revision", "license", "total_parameters", "role", "hardware", "quantization", "source_url"],
+  "note": "由 A4 与 B 组选择后填写；MoE 用总参数核对，不能只填激活参数。"
+}

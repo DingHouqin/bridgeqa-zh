@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:bridgeqa-zh:prediction:0.1",
+  "title": "BridgeQA model prediction",
+  "type": "object",
+  "required": ["schema_version", "sample_id", "run_id", "status", "answer", "support", "submitted_steps"],
+  "properties": {
+    "schema_version": {"const": "0.1"},
+    "sample_id": {"type": "string", "minLength": 1},
+    "run_id": {"type": "string", "minLength": 1},
+    "status": {"enum": ["ok", "error", "abstain"]},
+    "answer": {"oneOf": [{"type": "null"}, {"type": "object", "required": ["canonical_id", "text"], "properties": {"canonical_id": {"type": "string"}, "text": {"type": "string"}}, "additionalProperties": false}]},
+    "support": {"type": "array", "uniqueItems": true, "items": {"type": "object", "required": ["doc_id", "sent_id"], "properties": {"doc_id": {"type": "string"}, "sent_id": {"type": "integer", "minimum": 0}}, "additionalProperties": false}},
+    "submitted_steps": {"type": "array", "items": {"type": "object", "required": ["hop", "head", "relation", "tail"], "properties": {"hop": {"type": "integer", "minimum": 1}, "head": {"type": "string"}, "relation": {"type": "string"}, "tail": {"type": "string"}}, "additionalProperties": false}},
+    "raw_output": {"type": ["string", "null"]},
+    "error_message": {"type": ["string", "null"]},
+    "latency_ms": {"type": ["number", "null"], "minimum": 0}
+  },
+  "allOf": [{"if": {"properties": {"status": {"const": "ok"}}}, "then": {"properties": {"answer": {"type": "object"}}}}],
+  "additionalProperties": false
+}
