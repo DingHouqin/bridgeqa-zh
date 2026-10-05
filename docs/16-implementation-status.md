@@ -9,6 +9,10 @@
 
 ## 待实现
 
+最新 [设计草案](17-benchmark-spec-proposal.md) 新增 Strict SR、Path-CFS、独立 Oracle-CS、有效多证明及反向/歧义评分建议；均未修改当前评分器或 v0.1 Schema。`configs/benchmark-spec.proposal.json` 是建议参数，不是运行配置。
+
+[贡献定位](18-purpose-and-contributions.md)、[验证计划](../experiments/plans/contribution-validation.md) 与报告/证据模板已落入文档；C1–C4 效果状态仍为 planned。文档验收映射不代表真实题库、生成器、独立干预 runner 或新增评分已经完成。
+
 | 模块 | 主责 | 输入/输出 | 依赖与验收 |
 |---|---|---|---|
 | ingest | A2 | 原语料→稳定句与来源 | 来源许可、分句与 gold 单位核对 |

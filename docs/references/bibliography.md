@@ -5,8 +5,11 @@
 | 名称 | 论文 | 官方项目/数据线索 |
 |---|---|---|
 | HotpotQA | https://aclanthology.org/D18-1259/ | https://hotpotqa.github.io/ |
+| Avoiding Reasoning Shortcuts（HotpotQA 对抗评测） | https://aclanthology.org/P19-1262/ | 论文中的攻击、普通比较与捷径检查 |
+| 基于推理链的多跳问答对抗攻击和对抗增强训练方法 | https://aclanthology.org/2023.ccl-1.1/ | CCL 2023；推理链/类型构造干扰与增强训练 |
 | 2WikiMultiHopQA | https://aclanthology.org/2020.coling-main.580/ | https://github.com/Alab-NII/2wikimultihop |
 | MuSiQue | https://aclanthology.org/2022.tacl-1.31/ | https://github.com/stonybrooknlp/musique |
+| DAComp | https://arxiv.org/pdf/2512.04324 | https://github.com/ByteDance-Seed/DAComp；确定性 DE 评分见附录 A.1 |
 | MultiHop-RAG | https://arxiv.org/abs/2401.15391 | https://github.com/yixuantt/MultiHop-RAG/ |
 | CofCA | https://proceedings.iclr.cc/paper_files/paper/2025/hash/2628d4d3b054c2d7ad33ab03435204f4-Abstract-Conference.html | 阅读原论文 |
 | CRiT-QA | https://aclanthology.org/2026.lrec-1.410/ | 阅读原论文 |

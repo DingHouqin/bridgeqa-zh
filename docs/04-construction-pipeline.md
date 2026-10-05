@@ -22,3 +22,9 @@
 自动检查覆盖字段/ID、路径连续性、证据存在、配对 gold 一致、split、重复、长度及明显答案泄漏。字符串“不含答案”不是完整的泄漏证明；图搜索找不到其他路径也不是唯一性的证明。
 
 每次生成保存 source_method、generator_revision、prompt_version、rng_seed 和修改位置。机器提案与 final gold 分目录保存；被拒绝候选保留理由，用于统计构建失败原因。
+
+## 与贡献验证的衔接
+
+[Source Schema 字段建议](17-benchmark-spec-proposal.md) 贯通原文事实、问题蓝图、合法证明、攻击不变量与评分要求；Schema 的正式实现仍待完成。来源/必要链和匹配攻击分别对应 [C1/C2](18-purpose-and-contributions.md)。
+
+候选状态及拒绝原因需保留，审核、修订、复审和一次性准备成本分别记时。可选的 C4 使用同事实包和模型比较普通提示/Schema 驱动流程，详见 [E5 验证计划](../experiments/plans/contribution-validation.md)。有 Schema 或机器通过记录不自动证明 judge 更准确，也不能直接把候选转为 gold。
