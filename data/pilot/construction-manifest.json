@@ -1,0 +1,25 @@
+{
+  "seeds": 6,
+  "source_graph_clusters": 3,
+  "works": 1,
+  "source_chapters": 7,
+  "source_spans": 16,
+  "hop_distribution": {
+    "2": 2,
+    "3": 3,
+    "4": 1
+  },
+  "samples": 22,
+  "pairs": 8,
+  "formal_accepted_seeds": 0,
+  "human_review": "pending",
+  "token_counts": null,
+  "samples_sha256": "418a0d6fa8fedf82694543a7b987426dbaae895f075849233856246653714939",
+  "input_sha256": "24a36a8ed6ade665d8e65db6f431793b655e9fefef72c81615fd401eaa2e675e",
+  "derived_spans_sha256": "f5baf5a1c20455c20faba3767fb3dcab4131a9009786f8e5bd68fbee33581f9b",
+  "derivation_ledger_sha256": "2b02d6ba55e7810ce9dc69e2b3a88ffd3dcb11645a254842e544aacb1927a51c",
+  "conversion_profile_sha256": "c2d998e9a4fa9d5e11e7346a99d26521d3b8a4095719bd764d841649704f1ee8",
+  "source_access_record_sha256": "0750898690d31e67ad317ebfb1328527e8a0ba93aa1ce9778bcff5066124a72a",
+  "method": "fixed-revision original span extraction; frozen glyph derivation; frozen natural questions; neutral relations and exact qualifiers; candidate blueprint; explicit synthetic appendix; declared graph deletion only",
+  "source_registry": "docs/plan/draft/source-snapshots/download-manifest.json"
+}

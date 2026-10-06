@@ -1,0 +1,34 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "controlled-submission-error-1"
+    },
+    "status": {
+      "const": "submission_parse_error"
+    },
+    "error": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "raw_submission": {
+      "type": "string"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "required": [
+    "schema_version",
+    "status",
+    "error",
+    "raw_submission",
+    "sha256"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:bridgeqa-zh:controlled-submission-error:1",
+  "title": "Independent controlled submission-error"
+}

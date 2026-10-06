@@ -1,0 +1,130 @@
+{
+  "samples": 22,
+  "seeds": 6,
+  "source_clusters": 3,
+  "pairs": 8,
+  "pair_audits": [
+    {
+      "pair_id": "s1:false_bridge",
+      "control_characters": 235,
+      "attack_characters": 235,
+      "relative_character_difference": 0.0,
+      "token_counts": null,
+      "token_matching": "not_measured",
+      "changed_sentences": [
+        {
+          "doc_id": "d3",
+          "sent_id": 0
+        }
+      ],
+      "semantic_review": "not_certified_by_program"
+    },
+    {
+      "pair_id": "s1:redundant",
+      "control_characters": 238,
+      "attack_characters": 238,
+      "relative_character_difference": 0.0,
+      "token_counts": null,
+      "token_matching": "not_measured",
+      "changed_sentences": [
+        {
+          "doc_id": "d3",
+          "sent_id": 0
+        }
+      ],
+      "semantic_review": "not_certified_by_program"
+    },
+    {
+      "pair_id": "s2:false_bridge",
+      "control_characters": 278,
+      "attack_characters": 278,
+      "relative_character_difference": 0.0,
+      "token_counts": null,
+      "token_matching": "not_measured",
+      "changed_sentences": [
+        {
+          "doc_id": "d4",
+          "sent_id": 0
+        }
+      ],
+      "semantic_review": "not_certified_by_program"
+    },
+    {
+      "pair_id": "s2:misleading_relation",
+      "control_characters": 273,
+      "attack_characters": 273,
+      "relative_character_difference": 0.0,
+      "token_counts": null,
+      "token_matching": "not_measured",
+      "changed_sentences": [
+        {
+          "doc_id": "d4",
+          "sent_id": 0
+        }
+      ],
+      "semantic_review": "not_certified_by_program"
+    },
+    {
+      "pair_id": "s3:false_bridge",
+      "control_characters": 259,
+      "attack_characters": 259,
+      "relative_character_difference": 0.0,
+      "token_counts": null,
+      "token_matching": "not_measured",
+      "changed_sentences": [
+        {
+          "doc_id": "d4",
+          "sent_id": 0
+        }
+      ],
+      "semantic_review": "not_certified_by_program"
+    },
+    {
+      "pair_id": "s4:false_bridge",
+      "control_characters": 287,
+      "attack_characters": 287,
+      "relative_character_difference": 0.0,
+      "token_counts": null,
+      "token_matching": "not_measured",
+      "changed_sentences": [
+        {
+          "doc_id": "d5",
+          "sent_id": 0
+        }
+      ],
+      "semantic_review": "not_certified_by_program"
+    },
+    {
+      "pair_id": "s5:false_bridge",
+      "control_characters": 145,
+      "attack_characters": 145,
+      "relative_character_difference": 0.0,
+      "token_counts": null,
+      "token_matching": "not_measured",
+      "changed_sentences": [
+        {
+          "doc_id": "d3",
+          "sent_id": 0
+        }
+      ],
+      "semantic_review": "not_certified_by_program"
+    },
+    {
+      "pair_id": "s6:false_bridge",
+      "control_characters": 159,
+      "attack_characters": 159,
+      "relative_character_difference": 0.0,
+      "token_counts": null,
+      "token_matching": "not_measured",
+      "changed_sentences": [
+        {
+          "doc_id": "d4",
+          "sent_id": 0
+        }
+      ],
+      "semantic_review": "not_certified_by_program"
+    }
+  ],
+  "semantic_validation": "not_performed",
+  "schema_validation": "runtime_contract_checks"
+}

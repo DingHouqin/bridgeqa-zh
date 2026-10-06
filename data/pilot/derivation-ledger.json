@@ -1,0 +1,454 @@
+{
+  "version": "glyph-derivation-v1",
+  "profile": {
+    "name": "opencc-derived-longest-first-v1",
+    "upstream_version": "ver.1.1.9",
+    "algorithm": "left-to-right; longest phrase first (lexical key tie order); first candidate; otherwise character first candidate; otherwise unchanged; single nonrecursive pass",
+    "scope": "glyph conversion, not semantic correction or full OpenCC mmseg equivalence",
+    "resource_sha256": {
+      "TSPhrases.txt": "504169029c43f7f234b8e2ae470720af3657675c5574ff8aa0feb257e1dc5ce2",
+      "TSCharacters.txt": "6b5a0a799bea2bb22c001f635eaa3fc2904310f0c08addbff275477a80ecf09a",
+      "LICENSE": "b534e465949558eec2597b04f5092b5e161236a68dfbfd04d547592ac3964308"
+    },
+    "profile_sha256": "c2d998e9a4fa9d5e11e7346a99d26521d3b8a4095719bd764d841649704f1ee8"
+  },
+  "source_access_record_sha256": "0750898690d31e67ad317ebfb1328527e8a0ba93aa1ce9778bcff5066124a72a",
+  "original_spans_sha256": "ea38e7a781193226ec6b6a8ba1b87facc0a51ae40d046292ee08fd170a118f62",
+  "derived_spans_sha256": "74f5a5f8c70351fca708a5302197f6bd8efe87a7ae19318784fea307dd4107f1",
+  "entities": [
+    {
+      "original_canonical": "武安國",
+      "original_aliases": [
+        "武安国"
+      ],
+      "canonical": "武安国",
+      "aliases": []
+    },
+    {
+      "original_canonical": "方悅",
+      "original_aliases": [
+        "方悦"
+      ],
+      "canonical": "方悦",
+      "aliases": []
+    },
+    {
+      "original_canonical": "穆順",
+      "original_aliases": [
+        "穆顺"
+      ],
+      "canonical": "穆顺",
+      "aliases": []
+    },
+    {
+      "original_canonical": "公孫瓚",
+      "original_aliases": [
+        "公孙瓒"
+      ],
+      "canonical": "公孙瓒",
+      "aliases": []
+    },
+    {
+      "original_canonical": "呂布",
+      "original_aliases": [
+        "吕布",
+        "布"
+      ],
+      "canonical": "吕布",
+      "aliases": [
+        "布"
+      ]
+    },
+    {
+      "original_canonical": "董卓",
+      "original_aliases": [
+        "卓"
+      ],
+      "canonical": "董卓",
+      "aliases": [
+        "卓"
+      ]
+    },
+    {
+      "original_canonical": "董旻",
+      "original_aliases": [],
+      "canonical": "董旻",
+      "aliases": []
+    },
+    {
+      "original_canonical": "牛輔",
+      "original_aliases": [
+        "牛辅"
+      ],
+      "canonical": "牛辅",
+      "aliases": []
+    },
+    {
+      "original_canonical": "胡赤兒",
+      "original_aliases": [
+        "胡赤儿"
+      ],
+      "canonical": "胡赤儿",
+      "aliases": []
+    },
+    {
+      "original_canonical": "孫權",
+      "original_aliases": [
+        "孙权",
+        "權"
+      ],
+      "canonical": "孙权",
+      "aliases": [
+        "权"
+      ]
+    },
+    {
+      "original_canonical": "孫堅",
+      "original_aliases": [
+        "孙坚",
+        "堅"
+      ],
+      "canonical": "孙坚",
+      "aliases": [
+        "坚"
+      ]
+    },
+    {
+      "original_canonical": "文臺",
+      "original_aliases": [
+        "文台"
+      ],
+      "canonical": "文台",
+      "aliases": []
+    },
+    {
+      "original_canonical": "顧雍",
+      "original_aliases": [
+        "顾雍"
+      ],
+      "canonical": "顾雍",
+      "aliases": []
+    },
+    {
+      "original_canonical": "蔡邕",
+      "original_aliases": [
+        "邕"
+      ],
+      "canonical": "蔡邕",
+      "aliases": [
+        "邕"
+      ]
+    },
+    {
+      "original_canonical": "蔡琰",
+      "original_aliases": [
+        "琰"
+      ],
+      "canonical": "蔡琰",
+      "aliases": [
+        "琰"
+      ]
+    },
+    {
+      "original_canonical": "董祀",
+      "original_aliases": [],
+      "canonical": "董祀",
+      "aliases": []
+    }
+  ],
+  "samples": [
+    {
+      "seed_id": "s1",
+      "variant": "gold_only",
+      "pair_id": null,
+      "original_sample_id": "q_e683de56a01109e4714ccde4",
+      "sample_id": "q_b76c4eb3ae11e0c4a11d2c30",
+      "original_visible_sha256": "e683de56a01109e4714ccde4d99f215f5f3b3f6747cad95a50bf6cf1a2bc57f2",
+      "visible_sha256": "b76c4eb3ae11e0c4a11d2c303bedac2ee56f6c096ac86903157200697257336f",
+      "proof_sha256": "791e2edab7c97415028a25a051b9c628e6578ca92cec1cede89aa594ae3d9e84",
+      "answer_alias_sha256": "21a07c14045372d6f5a1607da476570c7bdbe26675aa2865a4a334f06c5523d4",
+      "metadata_sha256": "d6bdaa6396e355cc409da3a8014cfff843fa3e6783c957533e38d0c467a9816e",
+      "sample_sha256": "f28960dba792089dc244d62bd4eeac1438c575059bf3879d787368d12191a2e3"
+    },
+    {
+      "seed_id": "s1",
+      "variant": "clean_control",
+      "pair_id": "s1:false_bridge",
+      "original_sample_id": "q_8c808a4ef6e24bb2afe647c8",
+      "sample_id": "q_d8018f0b7f5163b31b616496",
+      "original_visible_sha256": "8c808a4ef6e24bb2afe647c8ce9e5675b676b7ad84cde35c4adce0ddfa85abe6",
+      "visible_sha256": "d8018f0b7f5163b31b616496c60825fc4f5e93882e4a1a8ad6771ba5dd89e5c7",
+      "proof_sha256": "791e2edab7c97415028a25a051b9c628e6578ca92cec1cede89aa594ae3d9e84",
+      "answer_alias_sha256": "21a07c14045372d6f5a1607da476570c7bdbe26675aa2865a4a334f06c5523d4",
+      "metadata_sha256": "d6bdaa6396e355cc409da3a8014cfff843fa3e6783c957533e38d0c467a9816e",
+      "sample_sha256": "6ef5a49bcb7a1c9b644032aa97e34ce0e1da39a54341b5dcb75e55d80dbcaa99"
+    },
+    {
+      "seed_id": "s1",
+      "variant": "adversarial",
+      "pair_id": "s1:false_bridge",
+      "original_sample_id": "q_0a0a8a7148face62cb770fbd",
+      "sample_id": "q_6006860addf10792a09a916d",
+      "original_visible_sha256": "0a0a8a7148face62cb770fbd804c6aae6f848a8738ad5141ff095493247ca5ff",
+      "visible_sha256": "6006860addf10792a09a916d3e7c6fb252a496ca3c73be128c0b0b75093502f2",
+      "proof_sha256": "791e2edab7c97415028a25a051b9c628e6578ca92cec1cede89aa594ae3d9e84",
+      "answer_alias_sha256": "21a07c14045372d6f5a1607da476570c7bdbe26675aa2865a4a334f06c5523d4",
+      "metadata_sha256": "d6bdaa6396e355cc409da3a8014cfff843fa3e6783c957533e38d0c467a9816e",
+      "sample_sha256": "d02af90242873f23032f933c713155105f3b876de8ef70a9da2c58f0556dbd57"
+    },
+    {
+      "seed_id": "s1",
+      "variant": "clean_control",
+      "pair_id": "s1:redundant",
+      "original_sample_id": "q_dcc5f8bdac08a5b5407b6838",
+      "sample_id": "q_7a7759ea613862211c70f20b",
+      "original_visible_sha256": "dcc5f8bdac08a5b5407b683872f3a5b099632fa11d17f48ea57dc799d1f4eda9",
+      "visible_sha256": "7a7759ea613862211c70f20b2d396a6d5d8826a76004b724fb824f3a9a6553e1",
+      "proof_sha256": "791e2edab7c97415028a25a051b9c628e6578ca92cec1cede89aa594ae3d9e84",
+      "answer_alias_sha256": "21a07c14045372d6f5a1607da476570c7bdbe26675aa2865a4a334f06c5523d4",
+      "metadata_sha256": "d6bdaa6396e355cc409da3a8014cfff843fa3e6783c957533e38d0c467a9816e",
+      "sample_sha256": "b7c3d0d74cbc44ba2eb303e01ec329989fb113f27b82fba84d75f2f470633ff8"
+    },
+    {
+      "seed_id": "s1",
+      "variant": "adversarial",
+      "pair_id": "s1:redundant",
+      "original_sample_id": "q_7116f3806dcace6e70230933",
+      "sample_id": "q_fedc7801098c1ec9f67a866e",
+      "original_visible_sha256": "7116f3806dcace6e70230933114d17a71e0cd272e478fc3d69c215b6cf7c1bde",
+      "visible_sha256": "fedc7801098c1ec9f67a866e34ec47a40a3f8982335decce6b830446aaf20d8a",
+      "proof_sha256": "791e2edab7c97415028a25a051b9c628e6578ca92cec1cede89aa594ae3d9e84",
+      "answer_alias_sha256": "21a07c14045372d6f5a1607da476570c7bdbe26675aa2865a4a334f06c5523d4",
+      "metadata_sha256": "d6bdaa6396e355cc409da3a8014cfff843fa3e6783c957533e38d0c467a9816e",
+      "sample_sha256": "f9a4ffe52e65e43d5bdb4f0ae37f95ca75249a0bc4c9db52e664405442f9a416"
+    },
+    {
+      "seed_id": "s2",
+      "variant": "gold_only",
+      "pair_id": null,
+      "original_sample_id": "q_ddd5d18805ff07206a5c70d4",
+      "sample_id": "q_3187daf16b49de015b2b67ad",
+      "original_visible_sha256": "ddd5d18805ff07206a5c70d41bce7a7352cd710be5bf4782e7bbb777894f5933",
+      "visible_sha256": "3187daf16b49de015b2b67adda28a6a530f0a1be847d2a0fe299bfce50f5d9f6",
+      "proof_sha256": "a795eae8055bcc28013c28274930ded6a2edefba677790f4872a57df1dc7d926",
+      "answer_alias_sha256": "f20795e01149e0ef0b1019bb592606f95bbe543c779a61c6c196eff5b065b330",
+      "metadata_sha256": "d6bdaa6396e355cc409da3a8014cfff843fa3e6783c957533e38d0c467a9816e",
+      "sample_sha256": "e201300c490b29790e15ae793bd479727f5d1c2cef7afb8af49ae443ee40a589"
+    },
+    {
+      "seed_id": "s2",
+      "variant": "clean_control",
+      "pair_id": "s2:false_bridge",
+      "original_sample_id": "q_706ad0a9d99761579372876a",
+      "sample_id": "q_45fdc6447aa7dd35f8fa1493",
+      "original_visible_sha256": "706ad0a9d99761579372876aaa974ef37bb01c947de5d18604c79a574e89d9c9",
+      "visible_sha256": "45fdc6447aa7dd35f8fa149323f8a2927c7848ebfd3ea30cbdc2c878ccf48fa3",
+      "proof_sha256": "a795eae8055bcc28013c28274930ded6a2edefba677790f4872a57df1dc7d926",
+      "answer_alias_sha256": "f20795e01149e0ef0b1019bb592606f95bbe543c779a61c6c196eff5b065b330",
+      "metadata_sha256": "d6bdaa6396e355cc409da3a8014cfff843fa3e6783c957533e38d0c467a9816e",
+      "sample_sha256": "d6704205c67c8331525fccb3bda52ef38031065e7af5013b5760b77f7fc64411"
+    },
+    {
+      "seed_id": "s2",
+      "variant": "adversarial",
+      "pair_id": "s2:false_bridge",
+      "original_sample_id": "q_2d5eb6a32966c3cd4df2a601",
+      "sample_id": "q_b90840b7d92db68291ef90b7",
+      "original_visible_sha256": "2d5eb6a32966c3cd4df2a6010da1b31d1e78b7fe4505720ebd12f53555a440a6",
+      "visible_sha256": "b90840b7d92db68291ef90b729fe2d15d5be01d667381502246f530bdd8b7598",
+      "proof_sha256": "a795eae8055bcc28013c28274930ded6a2edefba677790f4872a57df1dc7d926",
+      "answer_alias_sha256": "f20795e01149e0ef0b1019bb592606f95bbe543c779a61c6c196eff5b065b330",
+      "metadata_sha256": "d6bdaa6396e355cc409da3a8014cfff843fa3e6783c957533e38d0c467a9816e",
+      "sample_sha256": "0a9faf42fea87206473e8c993059774a85b84f86781226b292d9afd36947c113"
+    },
+    {
+      "seed_id": "s2",
+      "variant": "clean_control",
+      "pair_id": "s2:misleading_relation",
+      "original_sample_id": "q_5d40c3eb835e642e6cac0b8a",
+      "sample_id": "q_fb4c43ded3ad8340ee1813c4",
+      "original_visible_sha256": "5d40c3eb835e642e6cac0b8a80530a7b0371521d85c4f6d4643f0142f96203ce",
+      "visible_sha256": "fb4c43ded3ad8340ee1813c4e6ca4a555db5623cfa5adfc409a1cd67e4280885",
+      "proof_sha256": "a795eae8055bcc28013c28274930ded6a2edefba677790f4872a57df1dc7d926",
+      "answer_alias_sha256": "f20795e01149e0ef0b1019bb592606f95bbe543c779a61c6c196eff5b065b330",
+      "metadata_sha256": "d6bdaa6396e355cc409da3a8014cfff843fa3e6783c957533e38d0c467a9816e",
+      "sample_sha256": "163e9c17931bbbb41c295476d992ad5697dcac5357bd9f08c1ef753a97fc72b5"
+    },
+    {
+      "seed_id": "s2",
+      "variant": "adversarial",
+      "pair_id": "s2:misleading_relation",
+      "original_sample_id": "q_8f481b7f7aa94c9dad6d3941",
+      "sample_id": "q_092d7045c9f8f0ad66e3d98a",
+      "original_visible_sha256": "8f481b7f7aa94c9dad6d39417d8d7e9eaa322171d3d09d94ef155684f511d6b3",
+      "visible_sha256": "092d7045c9f8f0ad66e3d98a790126703d09f122ea482da1c005e3ee872be197",
+      "proof_sha256": "a795eae8055bcc28013c28274930ded6a2edefba677790f4872a57df1dc7d926",
+      "answer_alias_sha256": "f20795e01149e0ef0b1019bb592606f95bbe543c779a61c6c196eff5b065b330",
+      "metadata_sha256": "d6bdaa6396e355cc409da3a8014cfff843fa3e6783c957533e38d0c467a9816e",
+      "sample_sha256": "de50f0a391f404dfd0066b9feb3433cab9edddb887413708d65f6570a2d45740"
+    },
+    {
+      "seed_id": "s3",
+      "variant": "gold_only",
+      "pair_id": null,
+      "original_sample_id": "q_4792a75d97e95e455189a31b",
+      "sample_id": "q_17e52654d5ca3313ab58e96d",
+      "original_visible_sha256": "4792a75d97e95e455189a31b3c642a78f17eb9819ddb8a6fb4227159bf253d82",
+      "visible_sha256": "17e52654d5ca3313ab58e96d296f0321d3c11df767e5a7771350124a00112e97",
+      "proof_sha256": "baea02619816b2096f4c0e2324bb7721fc8a2c6a05755bc6d6b721f08c7eefe1",
+      "answer_alias_sha256": "a6de03788deeabc1b4af54fa7712227bb804fa46740bbd373dda2956c4ff2864",
+      "metadata_sha256": "d6bdaa6396e355cc409da3a8014cfff843fa3e6783c957533e38d0c467a9816e",
+      "sample_sha256": "8343effe4bac7858085319701cf4a9856f393a3fa0ff54f21c2f89a5c8d87e07"
+    },
+    {
+      "seed_id": "s3",
+      "variant": "clean_control",
+      "pair_id": "s3:false_bridge",
+      "original_sample_id": "q_bfda5f834747cae9408f649b",
+      "sample_id": "q_dd9ecdcaab5ff2abdf15e66f",
+      "original_visible_sha256": "bfda5f834747cae9408f649b2b1a27c014204958600302c8b9b2f5f839da847d",
+      "visible_sha256": "dd9ecdcaab5ff2abdf15e66f6925a958f99b4063ba3479562ed129088e899ef9",
+      "proof_sha256": "baea02619816b2096f4c0e2324bb7721fc8a2c6a05755bc6d6b721f08c7eefe1",
+      "answer_alias_sha256": "a6de03788deeabc1b4af54fa7712227bb804fa46740bbd373dda2956c4ff2864",
+      "metadata_sha256": "d6bdaa6396e355cc409da3a8014cfff843fa3e6783c957533e38d0c467a9816e",
+      "sample_sha256": "884972df4cb57b39a6e702258f7e9eecfcabd340a0da7d3e103252d0369acd6f"
+    },
+    {
+      "seed_id": "s3",
+      "variant": "adversarial",
+      "pair_id": "s3:false_bridge",
+      "original_sample_id": "q_e2bf337774af8f94c3b8e849",
+      "sample_id": "q_d2c17c61be89f44b1c4fc843",
+      "original_visible_sha256": "e2bf337774af8f94c3b8e849cfd30ef14f1756cd4f7d221cac03c5d0823409aa",
+      "visible_sha256": "d2c17c61be89f44b1c4fc843307c846123f8a88a8d18f021c78d74d43a186d9c",
+      "proof_sha256": "baea02619816b2096f4c0e2324bb7721fc8a2c6a05755bc6d6b721f08c7eefe1",
+      "answer_alias_sha256": "a6de03788deeabc1b4af54fa7712227bb804fa46740bbd373dda2956c4ff2864",
+      "metadata_sha256": "d6bdaa6396e355cc409da3a8014cfff843fa3e6783c957533e38d0c467a9816e",
+      "sample_sha256": "56638b17782a32afb906e7b5ba752ac0c1bdaf6726a36e779d2d0c350b50a4c3"
+    },
+    {
+      "seed_id": "s4",
+      "variant": "gold_only",
+      "pair_id": null,
+      "original_sample_id": "q_24f424516cc6eedd360b3636",
+      "sample_id": "q_9038664239d335f373db6912",
+      "original_visible_sha256": "24f424516cc6eedd360b3636e494a234fedc1169d50cb658996bce8c6e32d192",
+      "visible_sha256": "9038664239d335f373db6912d550621f95e0594f9d499ad119d036e9b49230b1",
+      "proof_sha256": "76d7145ee33f94fdc51423b07d7f26df078742cd082092da914df57d90966e1e",
+      "answer_alias_sha256": "e60f139091d0a91c5d7e37a04706269b6b732afa0a2b4ebf2e31f165422fc322",
+      "metadata_sha256": "698577cbe615b2542a270e9d78d19e86aca11e4627f8143fddc76909c3af50c9",
+      "sample_sha256": "b0c7db2356348a71c293d81968303f48220b46687a3c9213dcf61d724d95fb81"
+    },
+    {
+      "seed_id": "s4",
+      "variant": "clean_control",
+      "pair_id": "s4:false_bridge",
+      "original_sample_id": "q_7a38f57169137d2e8010654b",
+      "sample_id": "q_fb5b59b318925bed5dfc5f0c",
+      "original_visible_sha256": "7a38f57169137d2e8010654b7044467134bcff9418c3cc2a8069409cebe3f1d6",
+      "visible_sha256": "fb5b59b318925bed5dfc5f0cc81b52a0d95e7237954549eee7b8bff7df63f16e",
+      "proof_sha256": "76d7145ee33f94fdc51423b07d7f26df078742cd082092da914df57d90966e1e",
+      "answer_alias_sha256": "e60f139091d0a91c5d7e37a04706269b6b732afa0a2b4ebf2e31f165422fc322",
+      "metadata_sha256": "698577cbe615b2542a270e9d78d19e86aca11e4627f8143fddc76909c3af50c9",
+      "sample_sha256": "671824c15ebfa518c9b61a9771ded32ae46e938ad60799c5af4f3299c23428f5"
+    },
+    {
+      "seed_id": "s4",
+      "variant": "adversarial",
+      "pair_id": "s4:false_bridge",
+      "original_sample_id": "q_69e97f70216d0fbdf790830e",
+      "sample_id": "q_64836ad0857f49565407e221",
+      "original_visible_sha256": "69e97f70216d0fbdf790830e0dfe5e64da5c04f8f782ff0552f85ff680a21ea9",
+      "visible_sha256": "64836ad0857f49565407e2210d82151c5349591d072e4557d2e1a9b25894d51e",
+      "proof_sha256": "76d7145ee33f94fdc51423b07d7f26df078742cd082092da914df57d90966e1e",
+      "answer_alias_sha256": "e60f139091d0a91c5d7e37a04706269b6b732afa0a2b4ebf2e31f165422fc322",
+      "metadata_sha256": "698577cbe615b2542a270e9d78d19e86aca11e4627f8143fddc76909c3af50c9",
+      "sample_sha256": "4694011ce8d41d5d96caefef7d33e5d72b388006d1e9b04519ebb7bb768f3878"
+    },
+    {
+      "seed_id": "s5",
+      "variant": "gold_only",
+      "pair_id": null,
+      "original_sample_id": "q_afb13a4f61c434ff07d08136",
+      "sample_id": "q_803667ac4054d9b9c17d6688",
+      "original_visible_sha256": "afb13a4f61c434ff07d08136833202d7d00908c187eb96cd84a33cdf51b23c42",
+      "visible_sha256": "803667ac4054d9b9c17d6688034dcb755366e480ed38f17d472ed8f25592b9da",
+      "proof_sha256": "f1266e12f487ee560a39f9320b2d7595febfc237963a5d80220016e6e004cdd6",
+      "answer_alias_sha256": "5c194295a75f106c7a90857f8ea1c57c90adb7cc4af35d60f9a9e076286619c9",
+      "metadata_sha256": "f56daf27b24dcd94a191fc09a7114dba254fbde483481524eb53fc4608a12b10",
+      "sample_sha256": "c58aa245c2eebeec214db756dc8b6824e73d0eb6a01530398dcdd90325ef444c"
+    },
+    {
+      "seed_id": "s5",
+      "variant": "clean_control",
+      "pair_id": "s5:false_bridge",
+      "original_sample_id": "q_b5916cff6f9026042ba3eaee",
+      "sample_id": "q_57e6913750443e5d9bccac24",
+      "original_visible_sha256": "b5916cff6f9026042ba3eaeed7745218f79b54a49d0d82749ae89149cd8a4375",
+      "visible_sha256": "57e6913750443e5d9bccac2427448c0025b82142e702821f6859772e0925a041",
+      "proof_sha256": "f1266e12f487ee560a39f9320b2d7595febfc237963a5d80220016e6e004cdd6",
+      "answer_alias_sha256": "5c194295a75f106c7a90857f8ea1c57c90adb7cc4af35d60f9a9e076286619c9",
+      "metadata_sha256": "f56daf27b24dcd94a191fc09a7114dba254fbde483481524eb53fc4608a12b10",
+      "sample_sha256": "b83936147d4453c1492216c9fa6b1e5a63e5106e110cb33dc667cdf1fffdd847"
+    },
+    {
+      "seed_id": "s5",
+      "variant": "adversarial",
+      "pair_id": "s5:false_bridge",
+      "original_sample_id": "q_c47d56c00b15d672d7125092",
+      "sample_id": "q_6d7b616fba3c5b08700f3326",
+      "original_visible_sha256": "c47d56c00b15d672d7125092895c14d26290faded9213e123c455417e5cbf318",
+      "visible_sha256": "6d7b616fba3c5b08700f332611e5884be133367680af823c727155f954ace8dd",
+      "proof_sha256": "f1266e12f487ee560a39f9320b2d7595febfc237963a5d80220016e6e004cdd6",
+      "answer_alias_sha256": "5c194295a75f106c7a90857f8ea1c57c90adb7cc4af35d60f9a9e076286619c9",
+      "metadata_sha256": "f56daf27b24dcd94a191fc09a7114dba254fbde483481524eb53fc4608a12b10",
+      "sample_sha256": "5aa90dbdc5dc3df6acf9c106f9293bd0f9e94b2eff70dfea7178fdf6291ff4d2"
+    },
+    {
+      "seed_id": "s6",
+      "variant": "gold_only",
+      "pair_id": null,
+      "original_sample_id": "q_888ab7a308135fcb251a7610",
+      "sample_id": "q_059f936a9d2214b83ad4cd74",
+      "original_visible_sha256": "888ab7a308135fcb251a76103ced5e86c8e112aaf190349e42acdfe69252ba87",
+      "visible_sha256": "059f936a9d2214b83ad4cd744367a491d62bfe051cc1bce2ed7af675717bd5b0",
+      "proof_sha256": "bccddcf8b7a2d5c359a70f7d848fe89e9e74feb47721e139d8698a6496fc47b8",
+      "answer_alias_sha256": "326d9918774fb2c4b4f5189e07404cdbab7cf7c086370f58c3e28b26592a684a",
+      "metadata_sha256": "7051b94dc9713c157d679d6e97ecd3ef2c0697edf0d6f42a43546c7410d22312",
+      "sample_sha256": "040861b1572658d58b388df274fe6c13085e9f5333cae019123dc9a45a09e402"
+    },
+    {
+      "seed_id": "s6",
+      "variant": "clean_control",
+      "pair_id": "s6:false_bridge",
+      "original_sample_id": "q_029fa17fa68ab8b708d93429",
+      "sample_id": "q_9d3b7efcc281a7be210e8dd7",
+      "original_visible_sha256": "029fa17fa68ab8b708d934299fac2de6d512f7ee56ffcd025cf14bcc5c862985",
+      "visible_sha256": "9d3b7efcc281a7be210e8dd7208c30f9b596552b92361569ac38082c6cd0b709",
+      "proof_sha256": "bccddcf8b7a2d5c359a70f7d848fe89e9e74feb47721e139d8698a6496fc47b8",
+      "answer_alias_sha256": "326d9918774fb2c4b4f5189e07404cdbab7cf7c086370f58c3e28b26592a684a",
+      "metadata_sha256": "7051b94dc9713c157d679d6e97ecd3ef2c0697edf0d6f42a43546c7410d22312",
+      "sample_sha256": "79c13f08bd926a60505c1f2a8e95a0c95e18b3d230d27b09bcae5693e33f2bd9"
+    },
+    {
+      "seed_id": "s6",
+      "variant": "adversarial",
+      "pair_id": "s6:false_bridge",
+      "original_sample_id": "q_1310c34af839b44cfd391ef5",
+      "sample_id": "q_fe9a954d3ebe16e0c543a774",
+      "original_visible_sha256": "1310c34af839b44cfd391ef55866effef11cf7b08face8475f1187743002b351",
+      "visible_sha256": "fe9a954d3ebe16e0c543a774ed9fbb8ef39668ca2c62afe26f95aaebf6323b8a",
+      "proof_sha256": "bccddcf8b7a2d5c359a70f7d848fe89e9e74feb47721e139d8698a6496fc47b8",
+      "answer_alias_sha256": "326d9918774fb2c4b4f5189e07404cdbab7cf7c086370f58c3e28b26592a684a",
+      "metadata_sha256": "7051b94dc9713c157d679d6e97ecd3ef2c0697edf0d6f42a43546c7410d22312",
+      "sample_sha256": "2877e83b711808ea13183282fdeeffe963a2e1cbd39aded0a49c5e9eca6c4643"
+    }
+  ],
+  "review_ledger_sha256": "0010a752713c49f74a0951aa2be01c62e72b2dccfd543accc844026498f8801e",
+  "display_exceptions": [
+    "original HTML/TXT/spans and historical evidence",
+    "source URLs, machine IDs and hashes"
+  ],
+  "question_profile": "natural-compositional-v2; neutral relation and explicit qualifier; historical IDs retain pre-S1 grammar",
+  "limitations": "natural questions remove explicit intermediate names; real names and source snippets may still permit knowledge shortcuts; no human semantic certification"
+}

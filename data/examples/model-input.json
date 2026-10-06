@@ -1,0 +1,74 @@
+{
+  "schema_version": "0.1",
+  "sample_id": "example_002",
+  "question": "《星桥图》的作者创办的研究所位于哪座城市？",
+  "question_language": "zh",
+  "documents": [
+    {
+      "doc_id": "d1",
+      "title": "虚构资料 d1",
+      "language": "zh",
+      "sentences": [
+        {
+          "sent_id": 0,
+          "text": "《星桥图》的作者是林牧。"
+        }
+      ]
+    },
+    {
+      "doc_id": "d2",
+      "title": "虚构资料 d2",
+      "language": "zh",
+      "sentences": [
+        {
+          "sent_id": 0,
+          "text": "林牧创办了北澜研究所。"
+        }
+      ]
+    },
+    {
+      "doc_id": "d3",
+      "title": "虚构资料 d3",
+      "language": "zh",
+      "sentences": [
+        {
+          "sent_id": 0,
+          "text": "北澜研究所位于青屿市。"
+        }
+      ]
+    },
+    {
+      "doc_id": "d4",
+      "title": "虚构资料 d4",
+      "language": "zh",
+      "sentences": [
+        {
+          "sent_id": 0,
+          "text": "《星桥图》的画框采用银色。"
+        }
+      ]
+    },
+    {
+      "doc_id": "d5",
+      "title": "虚构资料 d5",
+      "language": "zh",
+      "sentences": [
+        {
+          "sent_id": 0,
+          "text": "南泽研究所的馆藏以书籍为主。"
+        }
+      ]
+    },
+    {
+      "doc_id": "d6",
+      "title": "虚构资料 d6",
+      "language": "zh",
+      "sentences": [
+        {
+          "sent_id": 0,
+          "text": "海临市每年举办冬季读书活动。"
+        }
+      ]
+    }
+  ]
+}

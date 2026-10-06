@@ -1,0 +1,807 @@
+[
+  {
+    "seed_id": "s1",
+    "source_cluster": "sg-lubu-dongzhuo",
+    "sample_ids": [
+      "q_b76c4eb3ae11e0c4a11d2c30",
+      "q_d8018f0b7f5163b31b616496",
+      "q_6006860addf10792a09a916d",
+      "q_7a7759ea613862211c70f20b",
+      "q_fedc7801098c1ec9f67a866e"
+    ],
+    "start": "武安国",
+    "reference_chain": [
+      {
+        "hop": 1,
+        "head": "武安国",
+        "relation": "斩断手腕者",
+        "tail": "吕布",
+        "qualifier": "",
+        "evidence": [
+          {
+            "doc_id": "d1",
+            "sent_id": 0
+          }
+        ]
+      },
+      {
+        "hop": 2,
+        "head": "吕布",
+        "relation": "所认义父",
+        "tail": "董卓",
+        "qualifier": "归附后本段拜认事件",
+        "evidence": [
+          {
+            "doc_id": "d2",
+            "sent_id": 0
+          },
+          {
+            "doc_id": "d2",
+            "sent_id": 1
+          }
+        ]
+      }
+    ],
+    "span_bindings": [
+      {
+        "doc_id": "d1",
+        "sent_id": 0,
+        "span_id": "e1"
+      },
+      {
+        "doc_id": "d2",
+        "sent_id": 0,
+        "span_id": "e5a"
+      },
+      {
+        "doc_id": "d2",
+        "sent_id": 1,
+        "span_id": "e5b"
+      }
+    ],
+    "source_documents": 2,
+    "deletion_checks": [
+      {
+        "removed_hop": 1,
+        "removed_evidence": [
+          {
+            "doc_id": "d1",
+            "sent_id": 0
+          }
+        ],
+        "declared_answer_reachable": false,
+        "type": "declared_graph_only; not_semantic_certification"
+      },
+      {
+        "removed_hop": 2,
+        "removed_evidence": [
+          {
+            "doc_id": "d2",
+            "sent_id": 0
+          },
+          {
+            "doc_id": "d2",
+            "sent_id": 1
+          }
+        ],
+        "declared_answer_reachable": false,
+        "type": "declared_graph_only; not_semantic_certification"
+      }
+    ],
+    "human_review": {
+      "source_identity": "pending",
+      "pronoun_resolution": "pending",
+      "unique_answer": "pending",
+      "shortest_necessary_chain": "pending",
+      "remove_evidence_semantics": "pending",
+      "attack_excludability": "pending",
+      "naturalness_and_strength": "pending",
+      "reviewers": []
+    },
+    "known_risks": [
+      "single novel, three shared source-graph clusters",
+      "names/pronouns and time roles require independent review",
+      "original snippets may expose semantic shortcuts; graph checks cannot rule them out",
+      "explicit synthetic identity may make attacks weak",
+      "partial/non-contiguous source spans disclosed"
+    ]
+  },
+  {
+    "seed_id": "s2",
+    "source_cluster": "sg-lubu-dongzhuo",
+    "sample_ids": [
+      "q_3187daf16b49de015b2b67ad",
+      "q_45fdc6447aa7dd35f8fa1493",
+      "q_b90840b7d92db68291ef90b7",
+      "q_fb4c43ded3ad8340ee1813c4",
+      "q_092d7045c9f8f0ad66e3d98a"
+    ],
+    "start": "方悦",
+    "reference_chain": [
+      {
+        "hop": 1,
+        "head": "方悦",
+        "relation": "刺于马下者",
+        "tail": "吕布",
+        "qualifier": "",
+        "evidence": [
+          {
+            "doc_id": "d1",
+            "sent_id": 0
+          }
+        ]
+      },
+      {
+        "hop": 2,
+        "head": "吕布",
+        "relation": "所认义父",
+        "tail": "董卓",
+        "qualifier": "归附后本段拜认事件",
+        "evidence": [
+          {
+            "doc_id": "d2",
+            "sent_id": 0
+          },
+          {
+            "doc_id": "d2",
+            "sent_id": 1
+          }
+        ]
+      },
+      {
+        "hop": 3,
+        "head": "董卓",
+        "relation": "弟弟",
+        "tail": "董旻",
+        "qualifier": "",
+        "evidence": [
+          {
+            "doc_id": "d3",
+            "sent_id": 0
+          },
+          {
+            "doc_id": "d3",
+            "sent_id": 1
+          }
+        ]
+      }
+    ],
+    "span_bindings": [
+      {
+        "doc_id": "d1",
+        "sent_id": 0,
+        "span_id": "e2"
+      },
+      {
+        "doc_id": "d2",
+        "sent_id": 0,
+        "span_id": "e5a"
+      },
+      {
+        "doc_id": "d2",
+        "sent_id": 1,
+        "span_id": "e5b"
+      },
+      {
+        "doc_id": "d3",
+        "sent_id": 0,
+        "span_id": "e6a"
+      },
+      {
+        "doc_id": "d3",
+        "sent_id": 1,
+        "span_id": "e6b"
+      }
+    ],
+    "source_documents": 2,
+    "deletion_checks": [
+      {
+        "removed_hop": 1,
+        "removed_evidence": [
+          {
+            "doc_id": "d1",
+            "sent_id": 0
+          }
+        ],
+        "declared_answer_reachable": false,
+        "type": "declared_graph_only; not_semantic_certification"
+      },
+      {
+        "removed_hop": 2,
+        "removed_evidence": [
+          {
+            "doc_id": "d2",
+            "sent_id": 0
+          },
+          {
+            "doc_id": "d2",
+            "sent_id": 1
+          }
+        ],
+        "declared_answer_reachable": false,
+        "type": "declared_graph_only; not_semantic_certification"
+      },
+      {
+        "removed_hop": 3,
+        "removed_evidence": [
+          {
+            "doc_id": "d3",
+            "sent_id": 0
+          },
+          {
+            "doc_id": "d3",
+            "sent_id": 1
+          }
+        ],
+        "declared_answer_reachable": false,
+        "type": "declared_graph_only; not_semantic_certification"
+      }
+    ],
+    "human_review": {
+      "source_identity": "pending",
+      "pronoun_resolution": "pending",
+      "unique_answer": "pending",
+      "shortest_necessary_chain": "pending",
+      "remove_evidence_semantics": "pending",
+      "attack_excludability": "pending",
+      "naturalness_and_strength": "pending",
+      "reviewers": []
+    },
+    "known_risks": [
+      "single novel, three shared source-graph clusters",
+      "names/pronouns and time roles require independent review",
+      "original snippets may expose semantic shortcuts; graph checks cannot rule them out",
+      "explicit synthetic identity may make attacks weak",
+      "partial/non-contiguous source spans disclosed"
+    ]
+  },
+  {
+    "seed_id": "s3",
+    "source_cluster": "sg-lubu-dongzhuo",
+    "sample_ids": [
+      "q_17e52654d5ca3313ab58e96d",
+      "q_dd9ecdcaab5ff2abdf15e66f",
+      "q_d2c17c61be89f44b1c4fc843"
+    ],
+    "start": "穆顺",
+    "reference_chain": [
+      {
+        "hop": 1,
+        "head": "穆顺",
+        "relation": "刺于马下者",
+        "tail": "吕布",
+        "qualifier": "",
+        "evidence": [
+          {
+            "doc_id": "d1",
+            "sent_id": 0
+          }
+        ]
+      },
+      {
+        "hop": 2,
+        "head": "吕布",
+        "relation": "所认义父",
+        "tail": "董卓",
+        "qualifier": "归附后本段拜认事件",
+        "evidence": [
+          {
+            "doc_id": "d2",
+            "sent_id": 0
+          },
+          {
+            "doc_id": "d2",
+            "sent_id": 1
+          }
+        ]
+      },
+      {
+        "hop": 3,
+        "head": "董卓",
+        "relation": "女婿",
+        "tail": "牛辅",
+        "qualifier": "驻守陕西的中郎将",
+        "evidence": [
+          {
+            "doc_id": "d3",
+            "sent_id": 0
+          },
+          {
+            "doc_id": "d3",
+            "sent_id": 1
+          }
+        ]
+      }
+    ],
+    "span_bindings": [
+      {
+        "doc_id": "d1",
+        "sent_id": 0,
+        "span_id": "e3"
+      },
+      {
+        "doc_id": "d2",
+        "sent_id": 0,
+        "span_id": "e5a"
+      },
+      {
+        "doc_id": "d2",
+        "sent_id": 1,
+        "span_id": "e5b"
+      },
+      {
+        "doc_id": "d3",
+        "sent_id": 0,
+        "span_id": "e6a"
+      },
+      {
+        "doc_id": "d3",
+        "sent_id": 1,
+        "span_id": "e7a"
+      }
+    ],
+    "source_documents": 2,
+    "deletion_checks": [
+      {
+        "removed_hop": 1,
+        "removed_evidence": [
+          {
+            "doc_id": "d1",
+            "sent_id": 0
+          }
+        ],
+        "declared_answer_reachable": false,
+        "type": "declared_graph_only; not_semantic_certification"
+      },
+      {
+        "removed_hop": 2,
+        "removed_evidence": [
+          {
+            "doc_id": "d2",
+            "sent_id": 0
+          },
+          {
+            "doc_id": "d2",
+            "sent_id": 1
+          }
+        ],
+        "declared_answer_reachable": false,
+        "type": "declared_graph_only; not_semantic_certification"
+      },
+      {
+        "removed_hop": 3,
+        "removed_evidence": [
+          {
+            "doc_id": "d3",
+            "sent_id": 0
+          },
+          {
+            "doc_id": "d3",
+            "sent_id": 1
+          }
+        ],
+        "declared_answer_reachable": false,
+        "type": "declared_graph_only; not_semantic_certification"
+      }
+    ],
+    "human_review": {
+      "source_identity": "pending",
+      "pronoun_resolution": "pending",
+      "unique_answer": "pending",
+      "shortest_necessary_chain": "pending",
+      "remove_evidence_semantics": "pending",
+      "attack_excludability": "pending",
+      "naturalness_and_strength": "pending",
+      "reviewers": []
+    },
+    "known_risks": [
+      "single novel, three shared source-graph clusters",
+      "names/pronouns and time roles require independent review",
+      "original snippets may expose semantic shortcuts; graph checks cannot rule them out",
+      "explicit synthetic identity may make attacks weak",
+      "partial/non-contiguous source spans disclosed"
+    ]
+  },
+  {
+    "seed_id": "s4",
+    "source_cluster": "sg-lubu-dongzhuo",
+    "sample_ids": [
+      "q_9038664239d335f373db6912",
+      "q_fb5b59b318925bed5dfc5f0c",
+      "q_64836ad0857f49565407e221"
+    ],
+    "start": "公孙瓒",
+    "reference_chain": [
+      {
+        "hop": 1,
+        "head": "公孙瓒",
+        "relation": "追赶者",
+        "tail": "吕布",
+        "qualifier": "本段骑赤兔马追赶事件",
+        "evidence": [
+          {
+            "doc_id": "d1",
+            "sent_id": 0
+          }
+        ]
+      },
+      {
+        "hop": 2,
+        "head": "吕布",
+        "relation": "所认义父",
+        "tail": "董卓",
+        "qualifier": "归附后本段拜认事件",
+        "evidence": [
+          {
+            "doc_id": "d2",
+            "sent_id": 0
+          },
+          {
+            "doc_id": "d2",
+            "sent_id": 1
+          }
+        ]
+      },
+      {
+        "hop": 3,
+        "head": "董卓",
+        "relation": "女婿",
+        "tail": "牛辅",
+        "qualifier": "驻守陕西的中郎将",
+        "evidence": [
+          {
+            "doc_id": "d3",
+            "sent_id": 0
+          },
+          {
+            "doc_id": "d3",
+            "sent_id": 1
+          }
+        ]
+      },
+      {
+        "hop": 4,
+        "head": "牛辅",
+        "relation": "谋杀者",
+        "tail": "胡赤儿",
+        "qualifier": "",
+        "evidence": [
+          {
+            "doc_id": "d4",
+            "sent_id": 0
+          }
+        ]
+      }
+    ],
+    "span_bindings": [
+      {
+        "doc_id": "d1",
+        "sent_id": 0,
+        "span_id": "e4"
+      },
+      {
+        "doc_id": "d2",
+        "sent_id": 0,
+        "span_id": "e5a"
+      },
+      {
+        "doc_id": "d2",
+        "sent_id": 1,
+        "span_id": "e5b"
+      },
+      {
+        "doc_id": "d3",
+        "sent_id": 0,
+        "span_id": "e6a"
+      },
+      {
+        "doc_id": "d3",
+        "sent_id": 1,
+        "span_id": "e7a"
+      },
+      {
+        "doc_id": "d4",
+        "sent_id": 0,
+        "span_id": "e8"
+      }
+    ],
+    "source_documents": 3,
+    "deletion_checks": [
+      {
+        "removed_hop": 1,
+        "removed_evidence": [
+          {
+            "doc_id": "d1",
+            "sent_id": 0
+          }
+        ],
+        "declared_answer_reachable": false,
+        "type": "declared_graph_only; not_semantic_certification"
+      },
+      {
+        "removed_hop": 2,
+        "removed_evidence": [
+          {
+            "doc_id": "d2",
+            "sent_id": 0
+          },
+          {
+            "doc_id": "d2",
+            "sent_id": 1
+          }
+        ],
+        "declared_answer_reachable": false,
+        "type": "declared_graph_only; not_semantic_certification"
+      },
+      {
+        "removed_hop": 3,
+        "removed_evidence": [
+          {
+            "doc_id": "d3",
+            "sent_id": 0
+          },
+          {
+            "doc_id": "d3",
+            "sent_id": 1
+          }
+        ],
+        "declared_answer_reachable": false,
+        "type": "declared_graph_only; not_semantic_certification"
+      },
+      {
+        "removed_hop": 4,
+        "removed_evidence": [
+          {
+            "doc_id": "d4",
+            "sent_id": 0
+          }
+        ],
+        "declared_answer_reachable": false,
+        "type": "declared_graph_only; not_semantic_certification"
+      }
+    ],
+    "human_review": {
+      "source_identity": "pending",
+      "pronoun_resolution": "pending",
+      "unique_answer": "pending",
+      "shortest_necessary_chain": "pending",
+      "remove_evidence_semantics": "pending",
+      "attack_excludability": "pending",
+      "naturalness_and_strength": "pending",
+      "reviewers": []
+    },
+    "known_risks": [
+      "single novel, three shared source-graph clusters",
+      "names/pronouns and time roles require independent review",
+      "original snippets may expose semantic shortcuts; graph checks cannot rule them out",
+      "explicit synthetic identity may make attacks weak",
+      "partial/non-contiguous source spans disclosed"
+    ]
+  },
+  {
+    "seed_id": "s5",
+    "source_cluster": "sg-sunjian-family",
+    "sample_ids": [
+      "q_803667ac4054d9b9c17d6688",
+      "q_57e6913750443e5d9bccac24",
+      "q_6d7b616fba3c5b08700f3326"
+    ],
+    "start": "孙权",
+    "reference_chain": [
+      {
+        "hop": 1,
+        "head": "孙权",
+        "relation": "父亲",
+        "tail": "孙坚",
+        "qualifier": "",
+        "evidence": [
+          {
+            "doc_id": "d1",
+            "sent_id": 0
+          }
+        ]
+      },
+      {
+        "hop": 2,
+        "head": "孙坚",
+        "relation": "字",
+        "tail": "文台",
+        "qualifier": "",
+        "evidence": [
+          {
+            "doc_id": "d2",
+            "sent_id": 0
+          }
+        ]
+      }
+    ],
+    "span_bindings": [
+      {
+        "doc_id": "d1",
+        "sent_id": 0,
+        "span_id": "e9"
+      },
+      {
+        "doc_id": "d2",
+        "sent_id": 0,
+        "span_id": "e10"
+      }
+    ],
+    "source_documents": 2,
+    "deletion_checks": [
+      {
+        "removed_hop": 1,
+        "removed_evidence": [
+          {
+            "doc_id": "d1",
+            "sent_id": 0
+          }
+        ],
+        "declared_answer_reachable": false,
+        "type": "declared_graph_only; not_semantic_certification"
+      },
+      {
+        "removed_hop": 2,
+        "removed_evidence": [
+          {
+            "doc_id": "d2",
+            "sent_id": 0
+          }
+        ],
+        "declared_answer_reachable": false,
+        "type": "declared_graph_only; not_semantic_certification"
+      }
+    ],
+    "human_review": {
+      "source_identity": "pending",
+      "pronoun_resolution": "pending",
+      "unique_answer": "pending",
+      "shortest_necessary_chain": "pending",
+      "remove_evidence_semantics": "pending",
+      "attack_excludability": "pending",
+      "naturalness_and_strength": "pending",
+      "reviewers": []
+    },
+    "known_risks": [
+      "single novel, three shared source-graph clusters",
+      "names/pronouns and time roles require independent review",
+      "original snippets may expose semantic shortcuts; graph checks cannot rule them out",
+      "explicit synthetic identity may make attacks weak",
+      "partial/non-contiguous source spans disclosed"
+    ]
+  },
+  {
+    "seed_id": "s6",
+    "source_cluster": "sg-caiyong-family",
+    "sample_ids": [
+      "q_059f936a9d2214b83ad4cd74",
+      "q_9d3b7efcc281a7be210e8dd7",
+      "q_fe9a954d3ebe16e0c543a774"
+    ],
+    "start": "顾雍",
+    "reference_chain": [
+      {
+        "hop": 1,
+        "head": "顾雍",
+        "relation": "老师",
+        "tail": "蔡邕",
+        "qualifier": "",
+        "evidence": [
+          {
+            "doc_id": "d1",
+            "sent_id": 0
+          }
+        ]
+      },
+      {
+        "hop": 2,
+        "head": "蔡邕",
+        "relation": "女儿",
+        "tail": "蔡琰",
+        "qualifier": "",
+        "evidence": [
+          {
+            "doc_id": "d2",
+            "sent_id": 0
+          }
+        ]
+      },
+      {
+        "hop": 3,
+        "head": "蔡琰",
+        "relation": "所配之夫",
+        "tail": "董祀",
+        "qualifier": "还汉后本段配婚事件",
+        "evidence": [
+          {
+            "doc_id": "d3",
+            "sent_id": 0
+          },
+          {
+            "doc_id": "d3",
+            "sent_id": 1
+          }
+        ]
+      }
+    ],
+    "span_bindings": [
+      {
+        "doc_id": "d1",
+        "sent_id": 0,
+        "span_id": "e11"
+      },
+      {
+        "doc_id": "d2",
+        "sent_id": 0,
+        "span_id": "e12"
+      },
+      {
+        "doc_id": "d3",
+        "sent_id": 0,
+        "span_id": "e13a"
+      },
+      {
+        "doc_id": "d3",
+        "sent_id": 1,
+        "span_id": "e13b"
+      }
+    ],
+    "source_documents": 2,
+    "deletion_checks": [
+      {
+        "removed_hop": 1,
+        "removed_evidence": [
+          {
+            "doc_id": "d1",
+            "sent_id": 0
+          }
+        ],
+        "declared_answer_reachable": false,
+        "type": "declared_graph_only; not_semantic_certification"
+      },
+      {
+        "removed_hop": 2,
+        "removed_evidence": [
+          {
+            "doc_id": "d2",
+            "sent_id": 0
+          }
+        ],
+        "declared_answer_reachable": false,
+        "type": "declared_graph_only; not_semantic_certification"
+      },
+      {
+        "removed_hop": 3,
+        "removed_evidence": [
+          {
+            "doc_id": "d3",
+            "sent_id": 0
+          },
+          {
+            "doc_id": "d3",
+            "sent_id": 1
+          }
+        ],
+        "declared_answer_reachable": false,
+        "type": "declared_graph_only; not_semantic_certification"
+      }
+    ],
+    "human_review": {
+      "source_identity": "pending",
+      "pronoun_resolution": "pending",
+      "unique_answer": "pending",
+      "shortest_necessary_chain": "pending",
+      "remove_evidence_semantics": "pending",
+      "attack_excludability": "pending",
+      "naturalness_and_strength": "pending",
+      "reviewers": []
+    },
+    "known_risks": [
+      "single novel, three shared source-graph clusters",
+      "names/pronouns and time roles require independent review",
+      "original snippets may expose semantic shortcuts; graph checks cannot rule them out",
+      "explicit synthetic identity may make attacks weak",
+      "partial/non-contiguous source spans disclosed"
+    ]
+  }
+]

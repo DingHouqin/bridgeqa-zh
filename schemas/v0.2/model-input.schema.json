@@ -1,0 +1,87 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.2"
+    },
+    "sample_id": {
+      "type": "string",
+      "pattern": "^q_[0-9a-f]{24}$"
+    },
+    "question": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "question_language": {
+      "const": "zh"
+    },
+    "instruction": {
+      "const": "仅依据给定正文回答。输出JSON：sample_id、schema_version=0.2、run_id、status(ok/error/abstain)、answer{text}、support[{doc_id,sent_id}]、submitted_steps[{hop,head,relation,tail,qualifier,evidence}]。实体用正文名称；自然问句按语义填写下列规范关系，时间、事件和角色范围独立填写qualifier，没有限定时填空字符串。通用全集：位于（自然含义：所在地点；限定：空字符串）；作者（自然含义：作品的作者；限定：空字符串）；创办（自然含义：创办的机构；限定：空字符串）；刺于马下者（自然含义：将某人刺于马下之人；限定：空字符串）；女儿（自然含义：某人的女儿；限定：空字符串）；女婿（自然含义：女婿中驻守陕西的中郎将或驻守陕西的中郎将女婿；限定：驻守陕西的中郎将）；字（自然含义：某人的字；限定：空字符串）；属于（自然含义：所属地区或组织；限定：空字符串）；弟弟（自然含义：某人的弟弟；限定：空字符串）；所认义父（自然含义：归附后的拜认事件中所认义父或认谁为义父；限定：归附后本段拜认事件）；所配之夫（自然含义：女子还汉后在本段配婚事件中被配给谁；限定：还汉后本段配婚事件）；斩断手腕者（自然含义：砍断某人手腕之人；限定：空字符串）；父亲（自然含义：某人的父亲；限定：空字符串）；老师（自然含义：某人的老师；限定：空字符串）；谋杀者（自然含义：某人被谁谋杀；限定：空字符串）；追赶者（自然含义：骑赤兔马追赶某人之人；限定：本段骑赤兔马追赶事件）。每一步引用支持句；全局support恰为步骤引用的并集。资料不足、关系多解或无法解析时用status=abstain、answer=null，可保留已证实的连续前缀。不得使用外部知识或跨题记忆。临时世界事实只在所给世界内有效，不能按小说常识补全；正文代号标记的引号不是名称本体，答案和步骤填写引号内代码本体。代号名册和缺信息提示不陈述关系，不可作为步骤证据。"
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "doc_id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "title": {
+            "type": "string"
+          },
+          "language": {
+            "const": "zh"
+          },
+          "sentences": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "sent_id": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "text": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                }
+              },
+              "required": [
+                "sent_id",
+                "text"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1,
+            "uniqueItems": false
+          }
+        },
+        "required": [
+          "doc_id",
+          "title",
+          "language",
+          "sentences"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1,
+      "uniqueItems": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "sample_id",
+    "question",
+    "question_language",
+    "instruction",
+    "documents"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:bridgeqa-zh:model-input:0.2",
+  "title": "BridgeQA 0.2 model-input"
+}

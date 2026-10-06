@@ -1,0 +1,1170 @@
+[
+  {
+    "span_id": "e1",
+    "source_id": "sgyy-005",
+    "original_text_sha256": "0f0ce6558684b514909b8ce5eec414224da6944e05ed1ba6bea8ce57b96a017c",
+    "text": "北海太守孔融部将武安国，使铁锤飞马而出。吕布挥戟拍马来迎。战到十余合，一戟砍断安国手腕，弃锤于地而走。",
+    "text_sha256": "51c73f8e79a622f8a46a3174abb418f3f7e882618faa0ea592fcc695372e459c",
+    "profile_sha256": "c2d998e9a4fa9d5e11e7346a99d26521d3b8a4095719bd764d841649704f1ee8",
+    "changes": [
+      {
+        "original_start": 7,
+        "original_end": 8,
+        "derived_start": 7,
+        "derived_end": 8,
+        "original": "將",
+        "derived": "将"
+      },
+      {
+        "original_start": 10,
+        "original_end": 11,
+        "derived_start": 10,
+        "derived_end": 11,
+        "original": "國",
+        "derived": "国"
+      },
+      {
+        "original_start": 13,
+        "original_end": 14,
+        "derived_start": 13,
+        "derived_end": 14,
+        "original": "鐵",
+        "derived": "铁"
+      },
+      {
+        "original_start": 14,
+        "original_end": 15,
+        "derived_start": 14,
+        "derived_end": 15,
+        "original": "鎚",
+        "derived": "锤"
+      },
+      {
+        "original_start": 15,
+        "original_end": 16,
+        "derived_start": 15,
+        "derived_end": 16,
+        "original": "飛",
+        "derived": "飞"
+      },
+      {
+        "original_start": 16,
+        "original_end": 17,
+        "derived_start": 16,
+        "derived_end": 17,
+        "original": "馬",
+        "derived": "马"
+      },
+      {
+        "original_start": 20,
+        "original_end": 21,
+        "derived_start": 20,
+        "derived_end": 21,
+        "original": "呂",
+        "derived": "吕"
+      },
+      {
+        "original_start": 22,
+        "original_end": 23,
+        "derived_start": 22,
+        "derived_end": 23,
+        "original": "揮",
+        "derived": "挥"
+      },
+      {
+        "original_start": 25,
+        "original_end": 26,
+        "derived_start": 25,
+        "derived_end": 26,
+        "original": "馬",
+        "derived": "马"
+      },
+      {
+        "original_start": 26,
+        "original_end": 27,
+        "derived_start": 26,
+        "derived_end": 27,
+        "original": "來",
+        "derived": "来"
+      },
+      {
+        "original_start": 29,
+        "original_end": 30,
+        "derived_start": 29,
+        "derived_end": 30,
+        "original": "戰",
+        "derived": "战"
+      },
+      {
+        "original_start": 32,
+        "original_end": 33,
+        "derived_start": 32,
+        "derived_end": 33,
+        "original": "餘",
+        "derived": "余"
+      },
+      {
+        "original_start": 38,
+        "original_end": 39,
+        "derived_start": 38,
+        "derived_end": 39,
+        "original": "斷",
+        "derived": "断"
+      },
+      {
+        "original_start": 40,
+        "original_end": 41,
+        "derived_start": 40,
+        "derived_end": 41,
+        "original": "國",
+        "derived": "国"
+      },
+      {
+        "original_start": 44,
+        "original_end": 45,
+        "derived_start": 44,
+        "derived_end": 45,
+        "original": "棄",
+        "derived": "弃"
+      },
+      {
+        "original_start": 45,
+        "original_end": 46,
+        "derived_start": 45,
+        "derived_end": 46,
+        "original": "鎚",
+        "derived": "锤"
+      },
+      {
+        "original_start": 46,
+        "original_end": 47,
+        "derived_start": 46,
+        "derived_end": 47,
+        "original": "於",
+        "derived": "于"
+      }
+    ],
+    "presentation": "简体字形转换，非原始字节；原offset仅属于原文"
+  },
+  {
+    "span_id": "e2",
+    "source_id": "sgyy-005",
+    "original_text_sha256": "1ed5755b1697530c02b63d145c14b2f6a180f03aa6ee8e97e0b5a1c3b8592593",
+    "text": "匡视之，乃河内名将方悦。两马相交，无五合，被吕布一戟刺于马下，挺戟直冲过来。",
+    "text_sha256": "45278605590397da40b1234375f78ef01ad1854fa3d0b6349d65ec6f3af0d4cd",
+    "profile_sha256": "c2d998e9a4fa9d5e11e7346a99d26521d3b8a4095719bd764d841649704f1ee8",
+    "changes": [
+      {
+        "original_start": 1,
+        "original_end": 2,
+        "derived_start": 1,
+        "derived_end": 2,
+        "original": "視",
+        "derived": "视"
+      },
+      {
+        "original_start": 6,
+        "original_end": 7,
+        "derived_start": 6,
+        "derived_end": 7,
+        "original": "內",
+        "derived": "内"
+      },
+      {
+        "original_start": 8,
+        "original_end": 9,
+        "derived_start": 8,
+        "derived_end": 9,
+        "original": "將",
+        "derived": "将"
+      },
+      {
+        "original_start": 10,
+        "original_end": 11,
+        "derived_start": 10,
+        "derived_end": 11,
+        "original": "悅",
+        "derived": "悦"
+      },
+      {
+        "original_start": 12,
+        "original_end": 13,
+        "derived_start": 12,
+        "derived_end": 13,
+        "original": "兩",
+        "derived": "两"
+      },
+      {
+        "original_start": 13,
+        "original_end": 14,
+        "derived_start": 13,
+        "derived_end": 14,
+        "original": "馬",
+        "derived": "马"
+      },
+      {
+        "original_start": 17,
+        "original_end": 18,
+        "derived_start": 17,
+        "derived_end": 18,
+        "original": "無",
+        "derived": "无"
+      },
+      {
+        "original_start": 22,
+        "original_end": 23,
+        "derived_start": 22,
+        "derived_end": 23,
+        "original": "呂",
+        "derived": "吕"
+      },
+      {
+        "original_start": 27,
+        "original_end": 28,
+        "derived_start": 27,
+        "derived_end": 28,
+        "original": "於",
+        "derived": "于"
+      },
+      {
+        "original_start": 28,
+        "original_end": 29,
+        "derived_start": 28,
+        "derived_end": 29,
+        "original": "馬",
+        "derived": "马"
+      },
+      {
+        "original_start": 34,
+        "original_end": 35,
+        "derived_start": 34,
+        "derived_end": 35,
+        "original": "衝",
+        "derived": "冲"
+      },
+      {
+        "original_start": 35,
+        "original_end": 36,
+        "derived_start": 35,
+        "derived_end": 36,
+        "original": "過",
+        "derived": "过"
+      },
+      {
+        "original_start": 36,
+        "original_end": 37,
+        "derived_start": 36,
+        "derived_end": 37,
+        "original": "來",
+        "derived": "来"
+      }
+    ],
+    "presentation": "简体字形转换，非原始字节；原offset仅属于原文"
+  },
+  {
+    "span_id": "e3",
+    "source_id": "sgyy-005",
+    "original_text_sha256": "ccbee08dcb8504114814226bb8ee620753ba16fc66878cc29c196b93c35ed9a0",
+    "text": "上党太守张杨部将穆顺，出马挺鎗迎战，被吕布手起一戟，刺于马下。",
+    "text_sha256": "2a0cb740646d3d8b6db51cafdf23b40e162add0b3f320f496aafae7183b6803f",
+    "profile_sha256": "c2d998e9a4fa9d5e11e7346a99d26521d3b8a4095719bd764d841649704f1ee8",
+    "changes": [
+      {
+        "original_start": 1,
+        "original_end": 2,
+        "derived_start": 1,
+        "derived_end": 2,
+        "original": "黨",
+        "derived": "党"
+      },
+      {
+        "original_start": 4,
+        "original_end": 5,
+        "derived_start": 4,
+        "derived_end": 5,
+        "original": "張",
+        "derived": "张"
+      },
+      {
+        "original_start": 5,
+        "original_end": 6,
+        "derived_start": 5,
+        "derived_end": 6,
+        "original": "楊",
+        "derived": "杨"
+      },
+      {
+        "original_start": 7,
+        "original_end": 8,
+        "derived_start": 7,
+        "derived_end": 8,
+        "original": "將",
+        "derived": "将"
+      },
+      {
+        "original_start": 9,
+        "original_end": 10,
+        "derived_start": 9,
+        "derived_end": 10,
+        "original": "順",
+        "derived": "顺"
+      },
+      {
+        "original_start": 12,
+        "original_end": 13,
+        "derived_start": 12,
+        "derived_end": 13,
+        "original": "馬",
+        "derived": "马"
+      },
+      {
+        "original_start": 16,
+        "original_end": 17,
+        "derived_start": 16,
+        "derived_end": 17,
+        "original": "戰",
+        "derived": "战"
+      },
+      {
+        "original_start": 19,
+        "original_end": 20,
+        "derived_start": 19,
+        "derived_end": 20,
+        "original": "呂",
+        "derived": "吕"
+      },
+      {
+        "original_start": 27,
+        "original_end": 28,
+        "derived_start": 27,
+        "derived_end": 28,
+        "original": "於",
+        "derived": "于"
+      },
+      {
+        "original_start": 28,
+        "original_end": 29,
+        "derived_start": 28,
+        "derived_end": 29,
+        "original": "馬",
+        "derived": "马"
+      }
+    ],
+    "presentation": "简体字形转换，非原始字节；原offset仅属于原文"
+  },
+  {
+    "span_id": "e4",
+    "source_id": "sgyy-005",
+    "original_text_sha256": "926f936073baa1caa403668840b9441671a84d1b02e1c1026af16aaa08877dc3",
+    "text": "公孙瓒挥槊亲战吕布。战不数合，瓒败走。吕布纵赤兔马赶来。",
+    "text_sha256": "069221892d1bb2bcc0ad201dfbc6588a05f0bda049677c1fea24dedd0c8ab510",
+    "profile_sha256": "c2d998e9a4fa9d5e11e7346a99d26521d3b8a4095719bd764d841649704f1ee8",
+    "changes": [
+      {
+        "original_start": 1,
+        "original_end": 2,
+        "derived_start": 1,
+        "derived_end": 2,
+        "original": "孫",
+        "derived": "孙"
+      },
+      {
+        "original_start": 2,
+        "original_end": 3,
+        "derived_start": 2,
+        "derived_end": 3,
+        "original": "瓚",
+        "derived": "瓒"
+      },
+      {
+        "original_start": 3,
+        "original_end": 4,
+        "derived_start": 3,
+        "derived_end": 4,
+        "original": "揮",
+        "derived": "挥"
+      },
+      {
+        "original_start": 5,
+        "original_end": 6,
+        "derived_start": 5,
+        "derived_end": 6,
+        "original": "親",
+        "derived": "亲"
+      },
+      {
+        "original_start": 6,
+        "original_end": 7,
+        "derived_start": 6,
+        "derived_end": 7,
+        "original": "戰",
+        "derived": "战"
+      },
+      {
+        "original_start": 7,
+        "original_end": 8,
+        "derived_start": 7,
+        "derived_end": 8,
+        "original": "呂",
+        "derived": "吕"
+      },
+      {
+        "original_start": 10,
+        "original_end": 11,
+        "derived_start": 10,
+        "derived_end": 11,
+        "original": "戰",
+        "derived": "战"
+      },
+      {
+        "original_start": 12,
+        "original_end": 13,
+        "derived_start": 12,
+        "derived_end": 13,
+        "original": "數",
+        "derived": "数"
+      },
+      {
+        "original_start": 15,
+        "original_end": 16,
+        "derived_start": 15,
+        "derived_end": 16,
+        "original": "瓚",
+        "derived": "瓒"
+      },
+      {
+        "original_start": 16,
+        "original_end": 17,
+        "derived_start": 16,
+        "derived_end": 17,
+        "original": "敗",
+        "derived": "败"
+      },
+      {
+        "original_start": 19,
+        "original_end": 20,
+        "derived_start": 19,
+        "derived_end": 20,
+        "original": "呂",
+        "derived": "吕"
+      },
+      {
+        "original_start": 21,
+        "original_end": 22,
+        "derived_start": 21,
+        "derived_end": 22,
+        "original": "縱",
+        "derived": "纵"
+      },
+      {
+        "original_start": 24,
+        "original_end": 25,
+        "derived_start": 24,
+        "derived_end": 25,
+        "original": "馬",
+        "derived": "马"
+      },
+      {
+        "original_start": 25,
+        "original_end": 26,
+        "derived_start": 25,
+        "derived_end": 26,
+        "original": "趕",
+        "derived": "赶"
+      },
+      {
+        "original_start": 26,
+        "original_end": 27,
+        "derived_start": 26,
+        "derived_end": 27,
+        "original": "來",
+        "derived": "来"
+      }
+    ],
+    "presentation": "简体字形转换，非原始字节；原offset仅属于原文"
+  },
+  {
+    "span_id": "e5a",
+    "source_id": "sgyy-003",
+    "original_text_sha256": "568c8090a0ab7e314a99b59f9aafa890556189297af851667023fbdbb73bd441",
+    "text": "董卓未及回言，吕布飞马直杀过来。",
+    "text_sha256": "52d024035031142b2936f9ff4c7fbab58b29d6e8889c14481ddef46b9956d3b4",
+    "profile_sha256": "c2d998e9a4fa9d5e11e7346a99d26521d3b8a4095719bd764d841649704f1ee8",
+    "changes": [
+      {
+        "original_start": 7,
+        "original_end": 8,
+        "derived_start": 7,
+        "derived_end": 8,
+        "original": "呂",
+        "derived": "吕"
+      },
+      {
+        "original_start": 9,
+        "original_end": 10,
+        "derived_start": 9,
+        "derived_end": 10,
+        "original": "飛",
+        "derived": "飞"
+      },
+      {
+        "original_start": 10,
+        "original_end": 11,
+        "derived_start": 10,
+        "derived_end": 11,
+        "original": "馬",
+        "derived": "马"
+      },
+      {
+        "original_start": 12,
+        "original_end": 13,
+        "derived_start": 12,
+        "derived_end": 13,
+        "original": "殺",
+        "derived": "杀"
+      },
+      {
+        "original_start": 13,
+        "original_end": 14,
+        "derived_start": 13,
+        "derived_end": 14,
+        "original": "過",
+        "derived": "过"
+      },
+      {
+        "original_start": 14,
+        "original_end": 15,
+        "derived_start": 14,
+        "derived_end": 15,
+        "original": "來",
+        "derived": "来"
+      }
+    ],
+    "presentation": "简体字形转换，非原始字节；原offset仅属于原文"
+  },
+  {
+    "span_id": "e5b",
+    "source_id": "sgyy-003",
+    "original_text_sha256": "d647fa72c63926f8c0715ecef94781b01e5b6c4564120879054846fe71b9a650",
+    "text": "次日，布持丁原首级，往见李肃。肃遂引布见卓。卓大喜，置酒相待。卓先下拜曰：「卓今得将军，如旱苗之得甘雨也。」布纳卓坐而拜之曰：「公若不弃，布请拜为义父。」卓以金甲锦袍赐布，畅饮而散。",
+    "text_sha256": "724f29e6ba93650b757037787d5314bd0693e9a0931bceccbdf8dd3388da649f",
+    "profile_sha256": "c2d998e9a4fa9d5e11e7346a99d26521d3b8a4095719bd764d841649704f1ee8",
+    "changes": [
+      {
+        "original_start": 8,
+        "original_end": 9,
+        "derived_start": 8,
+        "derived_end": 9,
+        "original": "級",
+        "derived": "级"
+      },
+      {
+        "original_start": 11,
+        "original_end": 12,
+        "derived_start": 11,
+        "derived_end": 12,
+        "original": "見",
+        "derived": "见"
+      },
+      {
+        "original_start": 13,
+        "original_end": 14,
+        "derived_start": 13,
+        "derived_end": 14,
+        "original": "肅",
+        "derived": "肃"
+      },
+      {
+        "original_start": 15,
+        "original_end": 16,
+        "derived_start": 15,
+        "derived_end": 16,
+        "original": "肅",
+        "derived": "肃"
+      },
+      {
+        "original_start": 19,
+        "original_end": 20,
+        "derived_start": 19,
+        "derived_end": 20,
+        "original": "見",
+        "derived": "见"
+      },
+      {
+        "original_start": 41,
+        "original_end": 42,
+        "derived_start": 41,
+        "derived_end": 42,
+        "original": "將",
+        "derived": "将"
+      },
+      {
+        "original_start": 42,
+        "original_end": 43,
+        "derived_start": 42,
+        "derived_end": 43,
+        "original": "軍",
+        "derived": "军"
+      },
+      {
+        "original_start": 55,
+        "original_end": 56,
+        "derived_start": 55,
+        "derived_end": 56,
+        "original": "納",
+        "derived": "纳"
+      },
+      {
+        "original_start": 67,
+        "original_end": 68,
+        "derived_start": 67,
+        "derived_end": 68,
+        "original": "棄",
+        "derived": "弃"
+      },
+      {
+        "original_start": 70,
+        "original_end": 71,
+        "derived_start": 70,
+        "derived_end": 71,
+        "original": "請",
+        "derived": "请"
+      },
+      {
+        "original_start": 72,
+        "original_end": 73,
+        "derived_start": 72,
+        "derived_end": 73,
+        "original": "為",
+        "derived": "为"
+      },
+      {
+        "original_start": 73,
+        "original_end": 74,
+        "derived_start": 73,
+        "derived_end": 74,
+        "original": "義",
+        "derived": "义"
+      },
+      {
+        "original_start": 81,
+        "original_end": 82,
+        "derived_start": 81,
+        "derived_end": 82,
+        "original": "錦",
+        "derived": "锦"
+      },
+      {
+        "original_start": 83,
+        "original_end": 84,
+        "derived_start": 83,
+        "derived_end": 84,
+        "original": "賜",
+        "derived": "赐"
+      },
+      {
+        "original_start": 86,
+        "original_end": 87,
+        "derived_start": 86,
+        "derived_end": 87,
+        "original": "暢",
+        "derived": "畅"
+      },
+      {
+        "original_start": 87,
+        "original_end": 88,
+        "derived_start": 87,
+        "derived_end": 88,
+        "original": "飲",
+        "derived": "饮"
+      }
+    ],
+    "presentation": "简体字形转换，非原始字节；原offset仅属于原文"
+  },
+  {
+    "span_id": "e6a",
+    "source_id": "sgyy-003",
+    "original_text_sha256": "d08970d7775aa73021fe796817673cf0b6c8b0623b2ce24019c2f48fbb0db720",
+    "text": "却说前将军斄乡侯西凉刺史董卓",
+    "text_sha256": "4104efeb14e70370db1c76ca55859ea63842c746f8eabc230f54ce3d9cf63e9c",
+    "profile_sha256": "c2d998e9a4fa9d5e11e7346a99d26521d3b8a4095719bd764d841649704f1ee8",
+    "changes": [
+      {
+        "original_start": 0,
+        "original_end": 1,
+        "derived_start": 0,
+        "derived_end": 1,
+        "original": "卻",
+        "derived": "却"
+      },
+      {
+        "original_start": 1,
+        "original_end": 2,
+        "derived_start": 1,
+        "derived_end": 2,
+        "original": "說",
+        "derived": "说"
+      },
+      {
+        "original_start": 3,
+        "original_end": 4,
+        "derived_start": 3,
+        "derived_end": 4,
+        "original": "將",
+        "derived": "将"
+      },
+      {
+        "original_start": 4,
+        "original_end": 5,
+        "derived_start": 4,
+        "derived_end": 5,
+        "original": "軍",
+        "derived": "军"
+      },
+      {
+        "original_start": 6,
+        "original_end": 7,
+        "derived_start": 6,
+        "derived_end": 7,
+        "original": "鄉",
+        "derived": "乡"
+      },
+      {
+        "original_start": 9,
+        "original_end": 10,
+        "derived_start": 9,
+        "derived_end": 10,
+        "original": "涼",
+        "derived": "凉"
+      }
+    ],
+    "presentation": "简体字形转换，非原始字节；原offset仅属于原文"
+  },
+  {
+    "span_id": "e6b",
+    "source_id": "sgyy-003",
+    "original_text_sha256": "d19d4d79043796807dedaf92cded961a974c4060116c7f5a75933304caa3fea5",
+    "text": "卓自是威势越大，自领前将军事，封弟董旻为左将军鄠侯",
+    "text_sha256": "4e3228bb7a8e9dd955c81f4fee5cc9ab29f323073fccd067d8b77798a293cb3f",
+    "profile_sha256": "c2d998e9a4fa9d5e11e7346a99d26521d3b8a4095719bd764d841649704f1ee8",
+    "changes": [
+      {
+        "original_start": 4,
+        "original_end": 5,
+        "derived_start": 4,
+        "derived_end": 5,
+        "original": "勢",
+        "derived": "势"
+      },
+      {
+        "original_start": 9,
+        "original_end": 10,
+        "derived_start": 9,
+        "derived_end": 10,
+        "original": "領",
+        "derived": "领"
+      },
+      {
+        "original_start": 11,
+        "original_end": 12,
+        "derived_start": 11,
+        "derived_end": 12,
+        "original": "將",
+        "derived": "将"
+      },
+      {
+        "original_start": 12,
+        "original_end": 13,
+        "derived_start": 12,
+        "derived_end": 13,
+        "original": "軍",
+        "derived": "军"
+      },
+      {
+        "original_start": 19,
+        "original_end": 20,
+        "derived_start": 19,
+        "derived_end": 20,
+        "original": "為",
+        "derived": "为"
+      },
+      {
+        "original_start": 21,
+        "original_end": 22,
+        "derived_start": 21,
+        "derived_end": 22,
+        "original": "將",
+        "derived": "将"
+      },
+      {
+        "original_start": 22,
+        "original_end": 23,
+        "derived_start": 22,
+        "derived_end": 23,
+        "original": "軍",
+        "derived": "军"
+      }
+    ],
+    "presentation": "简体字形转换，非原始字节；原offset仅属于原文"
+  },
+  {
+    "span_id": "e7a",
+    "source_id": "sgyy-003",
+    "original_text_sha256": "0a8305e6f9b262e8e19f3f76d95980eb98bd68a90724945a914251e3caab07b7",
+    "text": "使其婿中郎将牛辅，守住陕西",
+    "text_sha256": "25c8b4d83e758132482aa12d60e4e626c34209af3e3f1df3f6faa8875d47e12e",
+    "profile_sha256": "c2d998e9a4fa9d5e11e7346a99d26521d3b8a4095719bd764d841649704f1ee8",
+    "changes": [
+      {
+        "original_start": 5,
+        "original_end": 6,
+        "derived_start": 5,
+        "derived_end": 6,
+        "original": "將",
+        "derived": "将"
+      },
+      {
+        "original_start": 7,
+        "original_end": 8,
+        "derived_start": 7,
+        "derived_end": 8,
+        "original": "輔",
+        "derived": "辅"
+      },
+      {
+        "original_start": 11,
+        "original_end": 12,
+        "derived_start": 11,
+        "derived_end": 12,
+        "original": "陝",
+        "derived": "陕"
+      }
+    ],
+    "presentation": "简体字形转换，非原始字节；原offset仅属于原文"
+  },
+  {
+    "span_id": "e8",
+    "source_id": "sgyy-009",
+    "original_text_sha256": "5ec39ffe31446f68cebdf00f8d7ffca9f23093ca71f4d07a4daa5d01f5e3c073",
+    "text": "胡赤儿谋杀牛辅，夺其金宝。",
+    "text_sha256": "c08a40ee4e0a2824b1f71916294c6532ba448cd479ff1dfa50ed41db261833a8",
+    "profile_sha256": "c2d998e9a4fa9d5e11e7346a99d26521d3b8a4095719bd764d841649704f1ee8",
+    "changes": [
+      {
+        "original_start": 2,
+        "original_end": 3,
+        "derived_start": 2,
+        "derived_end": 3,
+        "original": "兒",
+        "derived": "儿"
+      },
+      {
+        "original_start": 3,
+        "original_end": 4,
+        "derived_start": 3,
+        "derived_end": 4,
+        "original": "謀",
+        "derived": "谋"
+      },
+      {
+        "original_start": 4,
+        "original_end": 5,
+        "derived_start": 4,
+        "derived_end": 5,
+        "original": "殺",
+        "derived": "杀"
+      },
+      {
+        "original_start": 6,
+        "original_end": 7,
+        "derived_start": 6,
+        "derived_end": 7,
+        "original": "輔",
+        "derived": "辅"
+      },
+      {
+        "original_start": 8,
+        "original_end": 9,
+        "derived_start": 8,
+        "derived_end": 9,
+        "original": "奪",
+        "derived": "夺"
+      },
+      {
+        "original_start": 11,
+        "original_end": 12,
+        "derived_start": 11,
+        "derived_end": 12,
+        "original": "寶",
+        "derived": "宝"
+      }
+    ],
+    "presentation": "简体字形转换，非原始字节；原offset仅属于原文"
+  },
+  {
+    "span_id": "e9",
+    "source_id": "sgyy-007",
+    "original_text_sha256": "37e17e902d27fddcc48e680d5f1cf8f0f7f088366c87aa2660fe96ffacb55c53",
+    "text": "却说孙坚有四子，皆吴夫人所生：长子名策，字伯符；次子名权，字仲谋；三子名翊，字叔弼；四子名匡，字季佐。",
+    "text_sha256": "a9f5ce699d3c39a947124e74598159d7c736ea0ac070282246b0a062e1bd337c",
+    "profile_sha256": "c2d998e9a4fa9d5e11e7346a99d26521d3b8a4095719bd764d841649704f1ee8",
+    "changes": [
+      {
+        "original_start": 0,
+        "original_end": 1,
+        "derived_start": 0,
+        "derived_end": 1,
+        "original": "卻",
+        "derived": "却"
+      },
+      {
+        "original_start": 1,
+        "original_end": 2,
+        "derived_start": 1,
+        "derived_end": 2,
+        "original": "說",
+        "derived": "说"
+      },
+      {
+        "original_start": 2,
+        "original_end": 3,
+        "derived_start": 2,
+        "derived_end": 3,
+        "original": "孫",
+        "derived": "孙"
+      },
+      {
+        "original_start": 3,
+        "original_end": 4,
+        "derived_start": 3,
+        "derived_end": 4,
+        "original": "堅",
+        "derived": "坚"
+      },
+      {
+        "original_start": 9,
+        "original_end": 10,
+        "derived_start": 9,
+        "derived_end": 10,
+        "original": "吳",
+        "derived": "吴"
+      },
+      {
+        "original_start": 15,
+        "original_end": 16,
+        "derived_start": 15,
+        "derived_end": 16,
+        "original": "長",
+        "derived": "长"
+      },
+      {
+        "original_start": 27,
+        "original_end": 28,
+        "derived_start": 27,
+        "derived_end": 28,
+        "original": "權",
+        "derived": "权"
+      },
+      {
+        "original_start": 31,
+        "original_end": 32,
+        "derived_start": 31,
+        "derived_end": 32,
+        "original": "謀",
+        "derived": "谋"
+      }
+    ],
+    "presentation": "简体字形转换，非原始字节；原offset仅属于原文"
+  },
+  {
+    "span_id": "e10",
+    "source_id": "sgyy-002",
+    "original_text_sha256": "86b5c193218295ab7cfb9c6e32379ac6fb3946791ef9230fcdf9f4d0a88933f5",
+    "text": "吴郡富春人也：姓孙，名坚，字文台，乃孙武子之后。",
+    "text_sha256": "7f58fdb2b5ccd10c76df8d9f0a520f6f9763a9aef4f27b2a1d0316432759b9b7",
+    "profile_sha256": "c2d998e9a4fa9d5e11e7346a99d26521d3b8a4095719bd764d841649704f1ee8",
+    "changes": [
+      {
+        "original_start": 0,
+        "original_end": 1,
+        "derived_start": 0,
+        "derived_end": 1,
+        "original": "吳",
+        "derived": "吴"
+      },
+      {
+        "original_start": 8,
+        "original_end": 9,
+        "derived_start": 8,
+        "derived_end": 9,
+        "original": "孫",
+        "derived": "孙"
+      },
+      {
+        "original_start": 11,
+        "original_end": 12,
+        "derived_start": 11,
+        "derived_end": 12,
+        "original": "堅",
+        "derived": "坚"
+      },
+      {
+        "original_start": 15,
+        "original_end": 16,
+        "derived_start": 15,
+        "derived_end": 16,
+        "original": "臺",
+        "derived": "台"
+      },
+      {
+        "original_start": 18,
+        "original_end": 19,
+        "derived_start": 18,
+        "derived_end": 19,
+        "original": "孫",
+        "derived": "孙"
+      },
+      {
+        "original_start": 22,
+        "original_end": 23,
+        "derived_start": 22,
+        "derived_end": 23,
+        "original": "後",
+        "derived": "后"
+      }
+    ],
+    "presentation": "简体字形转换，非原始字节；原offset仅属于原文"
+  },
+  {
+    "span_id": "e11",
+    "source_id": "sgyy-029",
+    "original_text_sha256": "92aacc2da3fca8118a65ff98f4a66caad85d24ade0cccc111161d2748e15740a",
+    "text": "此人姓顾，名雍，子元叹，乃中郎蔡邕之徒。",
+    "text_sha256": "122b5e8a7a6994e65039cacb76ae474cff8406334e71df03ab920428d37509ef",
+    "profile_sha256": "c2d998e9a4fa9d5e11e7346a99d26521d3b8a4095719bd764d841649704f1ee8",
+    "changes": [
+      {
+        "original_start": 3,
+        "original_end": 4,
+        "derived_start": 3,
+        "derived_end": 4,
+        "original": "顧",
+        "derived": "顾"
+      },
+      {
+        "original_start": 10,
+        "original_end": 11,
+        "derived_start": 10,
+        "derived_end": 11,
+        "original": "嘆",
+        "derived": "叹"
+      }
+    ],
+    "presentation": "简体字形转换，非原始字节；原offset仅属于原文"
+  },
+  {
+    "span_id": "e12",
+    "source_id": "sgyy-071",
+    "original_text_sha256": "d30051f90207af4a495c18931650e6f4803723b9cfea818be59bd809ffce850b",
+    "text": "林木之间，乃蔡邕庄也。今邕女蔡琰",
+    "text_sha256": "f906ca37f9f3a15cfaa970f0f3d87649dae8396ffada92024bcf3dfb9dbb0ec9",
+    "profile_sha256": "c2d998e9a4fa9d5e11e7346a99d26521d3b8a4095719bd764d841649704f1ee8",
+    "changes": [
+      {
+        "original_start": 3,
+        "original_end": 4,
+        "derived_start": 3,
+        "derived_end": 4,
+        "original": "間",
+        "derived": "间"
+      },
+      {
+        "original_start": 8,
+        "original_end": 9,
+        "derived_start": 8,
+        "derived_end": 9,
+        "original": "莊",
+        "derived": "庄"
+      }
+    ],
+    "presentation": "简体字形转换，非原始字节；原offset仅属于原文"
+  },
+  {
+    "span_id": "e13a",
+    "source_id": "sgyy-071",
+    "original_text_sha256": "979632a78f26070fbc67a5b88b312e5946ab1f9fb124afd7ec9f094de21c9bf3",
+    "text": "曹操兵分三路而进",
+    "text_sha256": "253f3fb98907dda5b86350ab310986a8e3a337d21e52f7599f1714bc5b137d80",
+    "profile_sha256": "c2d998e9a4fa9d5e11e7346a99d26521d3b8a4095719bd764d841649704f1ee8",
+    "changes": [
+      {
+        "original_start": 7,
+        "original_end": 8,
+        "derived_start": 7,
+        "derived_end": 8,
+        "original": "進",
+        "derived": "进"
+      }
+    ],
+    "presentation": "简体字形转换，非原始字节；原offset仅属于原文"
+  },
+  {
+    "span_id": "e13b",
+    "source_id": "sgyy-071",
+    "original_text_sha256": "848e66454de21cfc15f8cac00d3940b4fb7ceb01967efa9214f9464967c2db5c",
+    "text": "左贤王惧操之势，送蔡琰还汉。操乃以琰配董祀为妻。",
+    "text_sha256": "afe4887af022ffb00b63d1e32975aeb7eb5f1b2507b20bb403903a65ce414c5a",
+    "profile_sha256": "c2d998e9a4fa9d5e11e7346a99d26521d3b8a4095719bd764d841649704f1ee8",
+    "changes": [
+      {
+        "original_start": 1,
+        "original_end": 2,
+        "derived_start": 1,
+        "derived_end": 2,
+        "original": "賢",
+        "derived": "贤"
+      },
+      {
+        "original_start": 3,
+        "original_end": 4,
+        "derived_start": 3,
+        "derived_end": 4,
+        "original": "懼",
+        "derived": "惧"
+      },
+      {
+        "original_start": 6,
+        "original_end": 7,
+        "derived_start": 6,
+        "derived_end": 7,
+        "original": "勢",
+        "derived": "势"
+      },
+      {
+        "original_start": 11,
+        "original_end": 12,
+        "derived_start": 11,
+        "derived_end": 12,
+        "original": "還",
+        "derived": "还"
+      },
+      {
+        "original_start": 12,
+        "original_end": 13,
+        "derived_start": 12,
+        "derived_end": 13,
+        "original": "漢",
+        "derived": "汉"
+      },
+      {
+        "original_start": 21,
+        "original_end": 22,
+        "derived_start": 21,
+        "derived_end": 22,
+        "original": "為",
+        "derived": "为"
+      }
+    ],
+    "presentation": "简体字形转换，非原始字节；原offset仅属于原文"
+  }
+]

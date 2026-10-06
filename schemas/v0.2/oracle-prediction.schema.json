@@ -1,0 +1,135 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.2"
+    },
+    "sample_id": {
+      "type": "string",
+      "pattern": "^q_[0-9a-f]{24}$"
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "status": {
+      "enum": [
+        "ok",
+        "error",
+        "abstain"
+      ]
+    },
+    "answer": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "text": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "text"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "support": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "doc_id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "sent_id": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "doc_id",
+          "sent_id"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "submitted_steps": {
+      "description": "Optional arbitrary JSON retained for step diagnostics only; not an Oracle-CS condition."
+    },
+    "raw_output": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "error_message": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "latency_ms": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    }
+  },
+  "required": [
+    "schema_version",
+    "sample_id",
+    "run_id",
+    "status",
+    "answer",
+    "support"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "ok"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "answer": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "abstain"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "answer": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:bridgeqa-zh:oracle-prediction:0.2",
+  "title": "BridgeQA 0.2 oracle-prediction"
+}

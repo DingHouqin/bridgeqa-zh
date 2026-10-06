@@ -1,0 +1,43 @@
+{
+  "schema_version": "source-access-record-1",
+  "kind": "frozen_historical_record_not_independent_time_verification",
+  "source_git_commit": "dcda36ca8efb6e9d0423daa49385b041487c2f7e",
+  "source_manifest_sha256": "69ff505887f2e4a5f999a7763c08c74533a7542b5aad7ad8ec517f1dfb25d703",
+  "sources": [
+    {
+      "source_id": "sgyy-002",
+      "url": "https://zh.wikisource.org/w/index.php?title=%E4%B8%89%E5%9C%8B%E6%BC%94%E7%BE%A9%2F%E7%AC%AC002%E5%9B%9E&oldid=8185068",
+      "accessed_at": "2026-10-05T13:13:43.160722+00:00"
+    },
+    {
+      "source_id": "sgyy-003",
+      "url": "https://zh.wikisource.org/w/index.php?title=%E4%B8%89%E5%9C%8B%E6%BC%94%E7%BE%A9%2F%E7%AC%AC003%E5%9B%9E&oldid=2567965",
+      "accessed_at": "2026-10-05T13:09:10.993175+00:00"
+    },
+    {
+      "source_id": "sgyy-005",
+      "url": "https://zh.wikisource.org/w/index.php?title=%E4%B8%89%E5%9C%8B%E6%BC%94%E7%BE%A9%2F%E7%AC%AC005%E5%9B%9E&oldid=7910939",
+      "accessed_at": "2026-10-05T13:09:12.583056+00:00"
+    },
+    {
+      "source_id": "sgyy-007",
+      "url": "https://zh.wikisource.org/w/index.php?title=%E4%B8%89%E5%9C%8B%E6%BC%94%E7%BE%A9%2F%E7%AC%AC007%E5%9B%9E&oldid=2567970",
+      "accessed_at": "2026-10-05T13:09:14.407868+00:00"
+    },
+    {
+      "source_id": "sgyy-009",
+      "url": "https://zh.wikisource.org/w/index.php?title=%E4%B8%89%E5%9C%8B%E6%BC%94%E7%BE%A9%2F%E7%AC%AC009%E5%9B%9E&oldid=2567971",
+      "accessed_at": "2026-10-05T13:09:16.956523+00:00"
+    },
+    {
+      "source_id": "sgyy-029",
+      "url": "https://zh.wikisource.org/w/index.php?title=%E4%B8%89%E5%9C%8B%E6%BC%94%E7%BE%A9%2F%E7%AC%AC029%E5%9B%9E&oldid=2567991",
+      "accessed_at": "2026-10-05T13:09:20.030820+00:00"
+    },
+    {
+      "source_id": "sgyy-071",
+      "url": "https://zh.wikisource.org/w/index.php?title=%E4%B8%89%E5%9C%8B%E6%BC%94%E7%BE%A9%2F%E7%AC%AC071%E5%9B%9E&oldid=2568034",
+      "accessed_at": "2026-10-05T13:10:15.286522+00:00"
+    }
+  ]
+}

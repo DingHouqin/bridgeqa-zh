@@ -1,0 +1,10 @@
+artifacts/
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.env.*
+*.safetensors
+*.ckpt
+*.pt
+*.pth

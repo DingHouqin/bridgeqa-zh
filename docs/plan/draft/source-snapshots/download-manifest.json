@@ -1,0 +1,51 @@
+[
+  {
+    "chapter": "003",
+    "url": "https://zh.wikisource.org/w/index.php?title=%E4%B8%89%E5%9C%8B%E6%BC%94%E7%BE%A9%2F%E7%AC%AC003%E5%9B%9E&oldid=2567965",
+    "path": "docs\\plan\\draft\\source-snapshots\\ch003-oldid2567965.html",
+    "sha256": "f13ccdb280fc18cf23b65c16296d70da6c69dbad3c47514d8079c0264760e6b4",
+    "bytes": 71444
+  },
+  {
+    "chapter": "005",
+    "url": "https://zh.wikisource.org/w/index.php?title=%E4%B8%89%E5%9C%8B%E6%BC%94%E7%BE%A9%2F%E7%AC%AC005%E5%9B%9E&oldid=7910939",
+    "path": "docs\\plan\\draft\\source-snapshots\\ch005-oldid7910939.html",
+    "sha256": "43c1b4f18270b7c9b1ef15ea1f11e87d131e6da047a4c0662cda56654b328897",
+    "bytes": 73629
+  },
+  {
+    "chapter": "007",
+    "url": "https://zh.wikisource.org/w/index.php?title=%E4%B8%89%E5%9C%8B%E6%BC%94%E7%BE%A9%2F%E7%AC%AC007%E5%9B%9E&oldid=2567970",
+    "path": "docs\\plan\\draft\\source-snapshots\\ch007-oldid2567970.html",
+    "sha256": "71f60abb0a6c7d6a5c9cb1be4bfafa90c675c365ff893cd9c3de525b15a05285",
+    "bytes": 70281
+  },
+  {
+    "chapter": "009",
+    "url": "https://zh.wikisource.org/w/index.php?title=%E4%B8%89%E5%9C%8B%E6%BC%94%E7%BE%A9%2F%E7%AC%AC009%E5%9B%9E&oldid=2567971",
+    "path": "docs\\plan\\draft\\source-snapshots\\ch009-oldid2567971.html",
+    "sha256": "c65dd3ac396122078c22a805b93db367c8908932952883e1197ab7e07bb31a39",
+    "bytes": 72607
+  },
+  {
+    "chapter": "029",
+    "url": "https://zh.wikisource.org/w/index.php?title=%E4%B8%89%E5%9C%8B%E6%BC%94%E7%BE%A9%2F%E7%AC%AC029%E5%9B%9E&oldid=2567991",
+    "path": "docs\\plan\\draft\\source-snapshots\\ch029-oldid2567991.html",
+    "sha256": "028c2a93e1fd95320d7678446da0fd2d6bfc9f3c216e759c1e61e927b2bb5dc7",
+    "bytes": 72621
+  },
+  {
+    "chapter": "071",
+    "url": "https://zh.wikisource.org/w/index.php?title=%E4%B8%89%E5%9C%8B%E6%BC%94%E7%BE%A9%2F%E7%AC%AC071%E5%9B%9E&oldid=2568034",
+    "path": "docs\\plan\\draft\\source-snapshots\\ch071-oldid2568034.html",
+    "sha256": "09040bc2dcb21ffe8793d0118340461cbafcc1aaf644737ecc607211a69c3bbc",
+    "bytes": 73041
+  },
+  {
+    "chapter": "002",
+    "url": "https://zh.wikisource.org/w/index.php?title=%E4%B8%89%E5%9C%8B%E6%BC%94%E7%BE%A9%2F%E7%AC%AC002%E5%9B%9E&oldid=8185068",
+    "path": "docs\\plan\\draft\\source-snapshots\\ch002-oldid8185068.html",
+    "sha256": "c46a861449f889aac5fbf805736bc77f21ee1fd695a3b86df0ae5f954e3726b9",
+    "bytes": 73588
+  }
+]

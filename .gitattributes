@@ -1,0 +1,2 @@
+# Preserve every shared-manifest byte across clone platforms.
+* -text

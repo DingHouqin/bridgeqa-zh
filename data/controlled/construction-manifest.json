@@ -1,0 +1,21 @@
+{
+  "schema_version": "controlled-construction-1",
+  "profile": "controlled-temporary-world-1",
+  "generator": "parallel-chain-sha256-v1",
+  "salt": "bridgeqa-controlled-2026-10-06-v1",
+  "source_samples_sha256": "418a0d6fa8fedf82694543a7b987426dbaae895f075849233856246653714939",
+  "files": {
+    "inputs.jsonl": "2a1ad590175f3d158167f73e8a79379c884d27d7579021f70f6ef98072fa63c9",
+    "reference.json": "27f66048edf8352170c914940d4000f6c81619e486e773aa7b4030d57b7d0491"
+  },
+  "generator_code_sha256": "024210eae63a0ed520b328a7c1a303fa1fc4fae447285b10136f3ddaca1fc0d2",
+  "schema_validation": "runtime_contract_checks",
+  "counts": {
+    "full": 6,
+    "order-shuffle": 6,
+    "internal-reroute": 11,
+    "delete-hop": 17,
+    "no-context": 6
+  },
+  "disclosure": "all facts synthetic; source mapping/reference excluded from predictor; six families, three source topology clusters; no human certification"
+}

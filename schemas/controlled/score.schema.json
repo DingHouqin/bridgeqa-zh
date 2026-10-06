@@ -1,0 +1,1675 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "controlled-score-1"
+    },
+    "profile": {
+      "const": "controlled-temporary-world-1"
+    },
+    "kind": {
+      "const": "controlled_diagnostic_not_benchmark_or_llm_accuracy"
+    },
+    "counts": {
+      "type": "object",
+      "properties": {
+        "cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "predictions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "missing": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "roots": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "source_topology_clusters": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "answerable": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "insufficient": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "cases",
+        "predictions",
+        "missing",
+        "roots",
+        "source_topology_clusters",
+        "answerable",
+        "insufficient"
+      ],
+      "additionalProperties": false
+    },
+    "by_condition": {
+      "type": "object",
+      "properties": {
+        "full": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "cases": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "roots": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "successes": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "raw_micro": {
+                  "type": "object",
+                  "properties": {
+                    "contract_success": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "answer_em": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "support_f1": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "strict_sr": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "path_cfs": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "contract_success",
+                    "answer_em",
+                    "support_f1",
+                    "strict_sr",
+                    "path_cfs"
+                  ],
+                  "additionalProperties": false
+                },
+                "root_macro": {
+                  "type": "object",
+                  "properties": {
+                    "contract_success": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "answer_em": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "support_f1": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "strict_sr": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "path_cfs": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "contract_success",
+                    "answer_em",
+                    "support_f1",
+                    "strict_sr",
+                    "path_cfs"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "cases",
+                "roots",
+                "successes",
+                "raw_micro",
+                "root_macro"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "cases": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "roots": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "successes": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "raw_micro": {
+                  "type": "object",
+                  "properties": {
+                    "contract_success": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "correct_refusal": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "contract_success",
+                    "correct_refusal"
+                  ],
+                  "additionalProperties": false
+                },
+                "root_macro": {
+                  "type": "object",
+                  "properties": {
+                    "contract_success": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "correct_refusal": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "contract_success",
+                    "correct_refusal"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "cases",
+                "roots",
+                "successes",
+                "raw_micro",
+                "root_macro"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "order-shuffle": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "cases": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "roots": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "successes": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "raw_micro": {
+                  "type": "object",
+                  "properties": {
+                    "contract_success": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "answer_em": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "support_f1": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "strict_sr": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "path_cfs": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "contract_success",
+                    "answer_em",
+                    "support_f1",
+                    "strict_sr",
+                    "path_cfs"
+                  ],
+                  "additionalProperties": false
+                },
+                "root_macro": {
+                  "type": "object",
+                  "properties": {
+                    "contract_success": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "answer_em": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "support_f1": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "strict_sr": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "path_cfs": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "contract_success",
+                    "answer_em",
+                    "support_f1",
+                    "strict_sr",
+                    "path_cfs"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "cases",
+                "roots",
+                "successes",
+                "raw_micro",
+                "root_macro"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "cases": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "roots": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "successes": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "raw_micro": {
+                  "type": "object",
+                  "properties": {
+                    "contract_success": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "correct_refusal": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "contract_success",
+                    "correct_refusal"
+                  ],
+                  "additionalProperties": false
+                },
+                "root_macro": {
+                  "type": "object",
+                  "properties": {
+                    "contract_success": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "correct_refusal": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "contract_success",
+                    "correct_refusal"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "cases",
+                "roots",
+                "successes",
+                "raw_micro",
+                "root_macro"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "internal-reroute": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "cases": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "roots": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "successes": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "raw_micro": {
+                  "type": "object",
+                  "properties": {
+                    "contract_success": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "answer_em": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "support_f1": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "strict_sr": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "path_cfs": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "contract_success",
+                    "answer_em",
+                    "support_f1",
+                    "strict_sr",
+                    "path_cfs"
+                  ],
+                  "additionalProperties": false
+                },
+                "root_macro": {
+                  "type": "object",
+                  "properties": {
+                    "contract_success": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "answer_em": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "support_f1": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "strict_sr": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "path_cfs": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "contract_success",
+                    "answer_em",
+                    "support_f1",
+                    "strict_sr",
+                    "path_cfs"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "cases",
+                "roots",
+                "successes",
+                "raw_micro",
+                "root_macro"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "cases": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "roots": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "successes": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "raw_micro": {
+                  "type": "object",
+                  "properties": {
+                    "contract_success": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "correct_refusal": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "contract_success",
+                    "correct_refusal"
+                  ],
+                  "additionalProperties": false
+                },
+                "root_macro": {
+                  "type": "object",
+                  "properties": {
+                    "contract_success": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "correct_refusal": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "contract_success",
+                    "correct_refusal"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "cases",
+                "roots",
+                "successes",
+                "raw_micro",
+                "root_macro"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "delete-hop": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "cases": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "roots": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "successes": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "raw_micro": {
+                  "type": "object",
+                  "properties": {
+                    "contract_success": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "answer_em": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "support_f1": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "strict_sr": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "path_cfs": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "contract_success",
+                    "answer_em",
+                    "support_f1",
+                    "strict_sr",
+                    "path_cfs"
+                  ],
+                  "additionalProperties": false
+                },
+                "root_macro": {
+                  "type": "object",
+                  "properties": {
+                    "contract_success": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "answer_em": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "support_f1": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "strict_sr": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "path_cfs": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "contract_success",
+                    "answer_em",
+                    "support_f1",
+                    "strict_sr",
+                    "path_cfs"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "cases",
+                "roots",
+                "successes",
+                "raw_micro",
+                "root_macro"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "cases": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "roots": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "successes": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "raw_micro": {
+                  "type": "object",
+                  "properties": {
+                    "contract_success": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "correct_refusal": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "contract_success",
+                    "correct_refusal"
+                  ],
+                  "additionalProperties": false
+                },
+                "root_macro": {
+                  "type": "object",
+                  "properties": {
+                    "contract_success": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "correct_refusal": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "contract_success",
+                    "correct_refusal"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "cases",
+                "roots",
+                "successes",
+                "raw_micro",
+                "root_macro"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "no-context": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "cases": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "roots": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "successes": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "raw_micro": {
+                  "type": "object",
+                  "properties": {
+                    "contract_success": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "answer_em": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "support_f1": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "strict_sr": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "path_cfs": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "contract_success",
+                    "answer_em",
+                    "support_f1",
+                    "strict_sr",
+                    "path_cfs"
+                  ],
+                  "additionalProperties": false
+                },
+                "root_macro": {
+                  "type": "object",
+                  "properties": {
+                    "contract_success": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "answer_em": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "support_f1": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "strict_sr": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "path_cfs": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "contract_success",
+                    "answer_em",
+                    "support_f1",
+                    "strict_sr",
+                    "path_cfs"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "cases",
+                "roots",
+                "successes",
+                "raw_micro",
+                "root_macro"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "cases": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "roots": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "successes": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "raw_micro": {
+                  "type": "object",
+                  "properties": {
+                    "contract_success": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "correct_refusal": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "contract_success",
+                    "correct_refusal"
+                  ],
+                  "additionalProperties": false
+                },
+                "root_macro": {
+                  "type": "object",
+                  "properties": {
+                    "contract_success": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "correct_refusal": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "contract_success",
+                    "correct_refusal"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "cases",
+                "roots",
+                "successes",
+                "raw_micro",
+                "root_macro"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "full",
+        "order-shuffle",
+        "internal-reroute",
+        "delete-hop",
+        "no-context"
+      ],
+      "additionalProperties": false
+    },
+    "answerable": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "cases": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "roots": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "successes": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "raw_micro": {
+              "type": "object",
+              "properties": {
+                "contract_success": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "answer_em": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "support_f1": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "strict_sr": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "path_cfs": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              },
+              "required": [
+                "contract_success",
+                "answer_em",
+                "support_f1",
+                "strict_sr",
+                "path_cfs"
+              ],
+              "additionalProperties": false
+            },
+            "root_macro": {
+              "type": "object",
+              "properties": {
+                "contract_success": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "answer_em": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "support_f1": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "strict_sr": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "path_cfs": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              },
+              "required": [
+                "contract_success",
+                "answer_em",
+                "support_f1",
+                "strict_sr",
+                "path_cfs"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "cases",
+            "roots",
+            "successes",
+            "raw_micro",
+            "root_macro"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "cases": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "roots": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "successes": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "raw_micro": {
+              "type": "object",
+              "properties": {
+                "contract_success": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "correct_refusal": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              },
+              "required": [
+                "contract_success",
+                "correct_refusal"
+              ],
+              "additionalProperties": false
+            },
+            "root_macro": {
+              "type": "object",
+              "properties": {
+                "contract_success": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "correct_refusal": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              },
+              "required": [
+                "contract_success",
+                "correct_refusal"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "cases",
+            "roots",
+            "successes",
+            "raw_micro",
+            "root_macro"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "insufficient": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "cases": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "roots": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "successes": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "raw_micro": {
+              "type": "object",
+              "properties": {
+                "contract_success": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "answer_em": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "support_f1": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "strict_sr": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "path_cfs": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              },
+              "required": [
+                "contract_success",
+                "answer_em",
+                "support_f1",
+                "strict_sr",
+                "path_cfs"
+              ],
+              "additionalProperties": false
+            },
+            "root_macro": {
+              "type": "object",
+              "properties": {
+                "contract_success": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "answer_em": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "support_f1": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "strict_sr": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "path_cfs": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              },
+              "required": [
+                "contract_success",
+                "answer_em",
+                "support_f1",
+                "strict_sr",
+                "path_cfs"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "cases",
+            "roots",
+            "successes",
+            "raw_micro",
+            "root_macro"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "cases": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "roots": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "successes": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "raw_micro": {
+              "type": "object",
+              "properties": {
+                "contract_success": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "correct_refusal": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              },
+              "required": [
+                "contract_success",
+                "correct_refusal"
+              ],
+              "additionalProperties": false
+            },
+            "root_macro": {
+              "type": "object",
+              "properties": {
+                "contract_success": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "correct_refusal": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              },
+              "required": [
+                "contract_success",
+                "correct_refusal"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "cases",
+            "roots",
+            "successes",
+            "raw_micro",
+            "root_macro"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "contract_success": {
+      "type": "object",
+      "properties": {
+        "definition": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "root_macro": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "raw_micro": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "successes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "per_root": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "root_id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "condition_means": {
+                "type": "object",
+                "properties": {
+                  "full": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "order-shuffle": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "internal-reroute": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "delete-hop": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "no-context": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                },
+                "required": [
+                  "full",
+                  "order-shuffle",
+                  "internal-reroute",
+                  "delete-hop",
+                  "no-context"
+                ],
+                "additionalProperties": false
+              },
+              "contract_success": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "required": [
+              "root_id",
+              "condition_means",
+              "contract_success"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 6,
+          "uniqueItems": false
+        }
+      },
+      "required": [
+        "definition",
+        "root_macro",
+        "raw_micro",
+        "successes",
+        "per_root"
+      ],
+      "additionalProperties": false
+    },
+    "bridge_sensitivity": {
+      "type": "object",
+      "properties": {
+        "definition": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "pairs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "successes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "raw_micro": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "root_macro": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "per_pair": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "root_id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "full_id": {
+                "type": "string",
+                "pattern": "^q_[0-9a-f]{24}$"
+              },
+              "reroute_id": {
+                "type": "string",
+                "pattern": "^q_[0-9a-f]{24}$"
+              },
+              "intervention_hop": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1,
+                "maximum": 4
+              },
+              "targets_differ": {
+                "type": "boolean"
+              },
+              "success": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "required": [
+              "root_id",
+              "full_id",
+              "reroute_id",
+              "intervention_hop",
+              "targets_differ",
+              "success"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 11,
+          "uniqueItems": false
+        }
+      },
+      "required": [
+        "definition",
+        "pairs",
+        "successes",
+        "raw_micro",
+        "root_macro",
+        "per_pair"
+      ],
+      "additionalProperties": false
+    },
+    "model_metrics": {
+      "const": null
+    },
+    "human_semantic_review": {
+      "const": "pending"
+    },
+    "official_samples": {
+      "const": 0
+    },
+    "per_case": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sample_id": {
+            "type": "string",
+            "pattern": "^q_[0-9a-f]{24}$"
+          },
+          "root_id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "source_cluster": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "condition": {
+            "enum": [
+              "full",
+              "order-shuffle",
+              "internal-reroute",
+              "delete-hop",
+              "no-context"
+            ]
+          },
+          "intervention_hop": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1,
+            "maximum": 4
+          },
+          "expected_answerable": {
+            "type": "boolean"
+          },
+          "prediction_status": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "prediction_valid": {
+            "type": "boolean"
+          },
+          "answer_em": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              }
+            ]
+          },
+          "support_f1": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              }
+            ]
+          },
+          "strict_sr": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              }
+            ]
+          },
+          "path_cfs": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              }
+            ]
+          },
+          "correct_refusal": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              }
+            ]
+          },
+          "contract_success": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "diagnostics": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 0,
+            "uniqueItems": false
+          },
+          "partial_fact_semantics": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "steps_supported_by_current_facts": {
+                    "type": "array",
+                    "items": {
+                      "type": "boolean"
+                    },
+                    "minItems": 0,
+                    "uniqueItems": false
+                  },
+                  "all_steps_supported": {
+                    "type": "boolean"
+                  },
+                  "complete_proof_scored": {
+                    "const": false
+                  }
+                },
+                "required": [
+                  "steps_supported_by_current_facts",
+                  "all_steps_supported",
+                  "complete_proof_scored"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          },
+          "raw_prediction": {
+            "description": "Finite raw preserves original structure. Direct Python non-finite values use python-nonfinite-tagged-v1: every node is typed, with nonfinite_paths; diagnostic only, never re-scored."
+          }
+        },
+        "required": [
+          "sample_id",
+          "root_id",
+          "source_cluster",
+          "condition",
+          "intervention_hop",
+          "expected_answerable",
+          "prediction_status",
+          "prediction_valid",
+          "answer_em",
+          "support_f1",
+          "strict_sr",
+          "path_cfs",
+          "correct_refusal",
+          "contract_success",
+          "diagnostics",
+          "partial_fact_semantics",
+          "raw_prediction"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 46,
+      "uniqueItems": false
+    },
+    "raw_predictions": {
+      "type": "array",
+      "items": {
+        "description": "Same finite-or-python-nonfinite-tagged-v1 diagnostic representation as per_case.raw_prediction."
+      },
+      "minItems": 0,
+      "uniqueItems": false
+    },
+    "submission": {
+      "type": "object",
+      "properties": {
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "raw_submission": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "sha256",
+        "raw_submission"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "profile",
+    "kind",
+    "counts",
+    "by_condition",
+    "answerable",
+    "insufficient",
+    "contract_success",
+    "bridge_sensitivity",
+    "model_metrics",
+    "human_semantic_review",
+    "official_samples",
+    "per_case",
+    "raw_predictions"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:bridgeqa-zh:controlled-score:1",
+  "title": "Independent controlled score"
+}
