@@ -1,5 +1,0 @@
-claim_id,priority,status,claim_scope,owner_role,evidence_paths,experiment_ids,dataset_version,run_ids,scoring_version,observed_result,limitations,reviewer,review_date
-C1,core,planned,原生中文来源与必要链可审计,A2/A3,,E1,,,,,,,
-C2,core,planned,保持任务真值的匹配攻击,A1/A4,,E2/E4,,,,,,,
-C3,core,planned,答案证明与独立上游诊断,A3/A4,,E3/E4,,,,,,,
-C4,optional,planned,Schema构题的质量与人工成本,A2/A3,,E5,,,,,,,
