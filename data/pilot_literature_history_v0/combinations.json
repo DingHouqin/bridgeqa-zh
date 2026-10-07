@@ -1,0 +1,224 @@
+{
+  "version": "pilot-v0.1",
+  "created_at": "2026-10-07",
+  "status": "candidate_design_not_frozen",
+  "phase": "combination_registry_before_question_construction",
+  "shared_diagnostic_scene_ids": ["S28", "S26"],
+  "shared_diagnostic_note": "无材料诊断使用 S28；漏时间诊断可额外使用 S26。逐题实际标签以 benchmark 记录为准，不能机械继承整组标签。",
+  "design_links": {
+    "scenario_catalog": "[场景单元来源](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)",
+    "protocol": "[多步骤协议](../../docs/benchmark-survey/09_多步骤评判与核心创新点回收.md)"
+  },
+  "combinations": [
+    {
+      "combination_id": "C01",
+      "title": "串行桥接与角色、条件假桥",
+      "planned_scene_ids": [
+        "S01",
+        "S09",
+        "S12",
+        "S13"
+      ],
+      "scenario_links": {
+        "S01": "[S01](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)",
+        "S09": "[S09](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)",
+        "S12": "[S12](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)",
+        "S13": "[S13](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)"
+      },
+      "material_plan": "原文改写",
+      "validation_goal": "错误关系而非直接事实冲突",
+      "planned_families": 2,
+      "coverage_unit": "one_literature_family_and_one_history_family",
+      "priority": "initial_pilot",
+      "automatically_approved_for_formal_benchmark": false
+    },
+    {
+      "combination_id": "C02",
+      "title": "桥接比较与阶段时间错配",
+      "planned_scene_ids": [
+        "S04",
+        "S12",
+        "S24"
+      ],
+      "scenario_links": {
+        "S04": "[S04](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)",
+        "S12": "[S12](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)",
+        "S24": "[S24](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)"
+      },
+      "material_plan": "合成文学/历史事件名录",
+      "validation_goal": "正式与试行的日期不能混用",
+      "planned_families": 2,
+      "coverage_unit": "one_literature_family_and_one_history_family",
+      "priority": "initial_pilot",
+      "automatically_approved_for_formal_benchmark": false
+    },
+    {
+      "combination_id": "C03",
+      "title": "别名与多解释歧义",
+      "planned_scene_ids": [
+        "S01",
+        "S18",
+        "S26"
+      ],
+      "scenario_links": {
+        "S01": "[S01](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)",
+        "S18": "[S18](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)",
+        "S26": "[S26](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)"
+      },
+      "material_plan": "合成同名档案",
+      "validation_goal": "明确身份→歧义→另一明确身份",
+      "planned_families": 2,
+      "coverage_unit": "one_literature_family_and_one_history_family",
+      "priority": "initial_pilot",
+      "automatically_approved_for_formal_benchmark": false
+    },
+    {
+      "combination_id": "C04",
+      "title": "冗余证明与事实级删桥",
+      "planned_scene_ids": [
+        "S01",
+        "S10",
+        "S28"
+      ],
+      "scenario_links": {
+        "S01": "[S01](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)",
+        "S10": "[S10](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)",
+        "S28": "[S28](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)"
+      },
+      "material_plan": "原文改写",
+      "validation_goal": "删一处仍可答；删全部支持才不足",
+      "planned_families": 2,
+      "coverage_unit": "one_literature_family_and_one_history_family",
+      "priority": "initial_pilot",
+      "automatically_approved_for_formal_benchmark": false
+    },
+    {
+      "combination_id": "C05",
+      "title": "正反关系的成对访问",
+      "planned_scene_ids": [
+        "S01",
+        "S19",
+        "S20"
+      ],
+      "scenario_links": {
+        "S01": "[S01](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)",
+        "S19": "[S19](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)",
+        "S20": "[S20](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)"
+      },
+      "material_plan": "原文改写",
+      "validation_goal": "正反向分别求解，不把关系当对称",
+      "planned_families": 2,
+      "coverage_unit": "one_literature_family_and_one_history_family",
+      "priority": "initial_pilot",
+      "automatically_approved_for_formal_benchmark": false
+    },
+    {
+      "combination_id": "C06",
+      "title": "集合过滤、扇出聚合与表文连接",
+      "planned_scene_ids": [
+        "S05",
+        "S06",
+        "S07",
+        "S32"
+      ],
+      "scenario_links": {
+        "S05": "[S05](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)",
+        "S06": "[S06](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)",
+        "S07": "[S07](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)",
+        "S32": "[S32](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)"
+      },
+      "material_plan": "合成文学目录/历史档案",
+      "validation_goal": "完整候选范围、逐条连接、明确单位",
+      "planned_families": 2,
+      "coverage_unit": "one_literature_family_and_one_history_family",
+      "priority": "initial_pilot",
+      "automatically_approved_for_formal_benchmark": false
+    },
+    {
+      "combination_id": "C07",
+      "title": "长背景、证据远隔与重复顺序",
+      "planned_scene_ids": [
+        "S01",
+        "S08",
+        "S16",
+        "S17"
+      ],
+      "scenario_links": {
+        "S01": "[S01](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)",
+        "S08": "[S08](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)",
+        "S16": "[S16](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)",
+        "S17": "[S17](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)"
+      },
+      "material_plan": "原文改写+原创背景",
+      "validation_goal": "分档长度与位置；初轮不宣称大规模长窗验证",
+      "planned_families": 2,
+      "coverage_unit": "one_literature_family_and_one_history_family",
+      "priority": "initial_pilot",
+      "automatically_approved_for_formal_benchmark": false
+    },
+    {
+      "combination_id": "C08",
+      "title": "反事实内部桥与知识更新传播",
+      "planned_scene_ids": [
+        "S01",
+        "S15",
+        "S30"
+      ],
+      "scenario_links": {
+        "S01": "[S01](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)",
+        "S15": "[S15](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)",
+        "S30": "[S30](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)"
+      },
+      "material_plan": "原文启发的混合临时世界",
+      "validation_goal": "双边交换保度数、终点保留、gold更新",
+      "planned_families": 2,
+      "coverage_unit": "one_literature_family_and_one_history_family",
+      "priority": "initial_pilot",
+      "automatically_approved_for_formal_benchmark": false
+    },
+    {
+      "combination_id": "C09",
+      "title": "规则组合、无效逆推与受限溯因",
+      "planned_scene_ids": [
+        "S03",
+        "S21",
+        "S22",
+        "S23"
+      ],
+      "scenario_links": {
+        "S03": "[S03](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)",
+        "S21": "[S21](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)",
+        "S22": "[S22](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)",
+        "S23": "[S23](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)"
+      },
+      "material_plan": "合成卷册规则",
+      "validation_goal": "真、未知、补充假设分别评分",
+      "planned_families": 2,
+      "coverage_unit": "one_literature_family_and_one_history_family",
+      "priority": "initial_pilot",
+      "automatically_approved_for_formal_benchmark": false
+    },
+    {
+      "combination_id": "C10",
+      "title": "时间语境与层级条件分支",
+      "planned_scene_ids": [
+        "S01",
+        "S24",
+        "S25",
+        "S27"
+      ],
+      "scenario_links": {
+        "S01": "[S01](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)",
+        "S24": "[S24](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)",
+        "S25": "[S25](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)",
+        "S27": "[S27](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)"
+      },
+      "material_plan": "合成编纂/档案任职表",
+      "validation_goal": "时间改变应更新；漏时间时接受条件回答",
+      "planned_families": 2,
+      "coverage_unit": "one_literature_family_and_one_history_family",
+      "priority": "initial_pilot",
+      "automatically_approved_for_formal_benchmark": false
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "version": "pilot-v0.1",
+  "source_links": {
+    "readme": "[数据说明](README.md)"
+  },
+  "sources": [
+    {
+      "source_id": "SRC-L1",
+      "domain": "literature",
+      "title": "《三国演义》第三回",
+      "author_attribution": "罗贯中（网站署名；不作为作者归属考题）",
+      "url": "https://zh.wikisource.org/wiki/%E4%B8%89%E5%9C%8B%E6%BC%94%E7%BE%A9%2F%E7%AC%AC003%E5%9B%9E",
+      "revision_url": "https://zh.wikisource.org/w/index.php?title=%E4%B8%89%E5%9C%8B%E6%BC%94%E7%BE%A9%2F%E7%AC%AC003%E5%9B%9E&oldid=2567965",
+      "source_link": "[《三国演义》第三回](https://zh.wikisource.org/w/index.php?title=%E4%B8%89%E5%9C%8B%E6%BC%94%E7%BE%A9%2F%E7%AC%AC003%E5%9B%9E&oldid=2567965)",
+      "retrieved_at": "2026-10-07",
+      "license_displayed": "CC BY-SA 4.0; 页面附加条款可能适用，古籍底本文本与网站编校贡献分别考虑",
+      "license_link": "[网站显示的许可](https://creativecommons.org/licenses/by-sa/4.0/)",
+      "capture_scope": "selected_quotation_snapshot_not_entire_page",
+      "verification": "assistant_web_read_not_independent_human_review",
+      "quotes": [
+        {
+          "quote_id": "L1-A",
+          "locator": "李儒询问及李肃献策",
+          "text": "卓問李儒：「此言可乎？」儒曰：「主公欲取天下，何惜一馬？」"
+        },
+        {
+          "quote_id": "L1-B",
+          "locator": "送礼、引见和拜认义父",
+          "text": "李肅齎了禮物，投呂布寨來。"
+        },
+        {
+          "quote_id": "L1-C",
+          "locator": "赤兔的赠予者",
+          "text": "赤兔馬亦董公所贈也。"
+        },
+        {
+          "quote_id": "L1-D",
+          "locator": "引见与称呼",
+          "text": "次日，布持丁原首級，往見李肅。肅遂引布見卓。"
+        },
+        {
+          "quote_id": "L1-E",
+          "locator": "该次拜认与授官",
+          "text": "布納卓坐而拜之曰：「公若不棄，布請拜為義父。」"
+        },
+        {
+          "quote_id": "L1-F",
+          "locator": "董卓之弟",
+          "text": "封弟董旻為左將軍鄠侯"
+        },
+        {
+          "quote_id": "L1-G",
+          "locator": "丁原别称",
+          "text": "某在丁建陽處，亦出於無奈。"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-L2",
+      "domain": "literature",
+      "title": "《西游记》第一回",
+      "author_attribution": "吴承恩（网站署名；不作为作者归属考题）",
+      "url": "https://zh.wikisource.org/wiki/%E8%A5%BF%E9%81%8A%E8%A8%98%2F%E7%AC%AC001%E5%9B%9E",
+      "revision_url": "https://zh.wikisource.org/w/index.php?title=%E8%A5%BF%E9%81%8A%E8%A8%98%2F%E7%AC%AC001%E5%9B%9E&oldid=2562136",
+      "source_link": "[《西游记》第一回](https://zh.wikisource.org/w/index.php?title=%E8%A5%BF%E9%81%8A%E8%A8%98%2F%E7%AC%AC001%E5%9B%9E&oldid=2562136)",
+      "retrieved_at": "2026-10-07",
+      "license_displayed": "CC BY-SA 4.0; 页面附加条款可能适用，古籍底本文本与网站编校贡献分别考虑",
+      "license_link": "[网站显示的许可](https://creativecommons.org/licenses/by-sa/4.0/)",
+      "capture_scope": "selected_quotation_snapshot_not_entire_page",
+      "verification": "assistant_web_read_not_independent_human_review",
+      "quotes": [
+        {
+          "quote_id": "L2-A",
+          "locator": "国、山与部洲",
+          "text": "這部書單表東勝神洲。海外有一國土，名曰傲來國。國近大海，海中有一座名山，喚為花果山。"
+        },
+        {
+          "quote_id": "L2-B",
+          "locator": "出生山",
+          "text": "我只記得花果山上有一塊仙石，其年石破，我便生也。"
+        },
+        {
+          "quote_id": "L2-C",
+          "locator": "山洞与神仙",
+          "text": "此山叫做靈臺方寸山，山中有座斜月三星洞，那洞中有一個神仙，稱名須菩提祖師。"
+        },
+        {
+          "quote_id": "L2-D",
+          "locator": "授名",
+          "text": "與你起個法名叫做『孫悟空』，好麼？"
+        },
+        {
+          "quote_id": "L2-E",
+          "locator": "见祖师及拜师，需与 L2-C、L2-D 联合核验",
+          "text": "見那菩提祖師端坐在臺上；美猴王一見，倒身下拜，磕頭不計其數，口中只道：「師父，師父，我弟子志心朝禮，志心朝禮。」",
+          "capture_note": "两处原文短片段以分号连接；不是连续逐字引文"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-H1",
+      "domain": "history",
+      "title": "《史记》卷七·项羽本纪",
+      "author_attribution": "司马迁",
+      "url": "https://zh.wikisource.org/wiki/%E5%8F%B2%E8%A8%98%2F%E5%8D%B7007",
+      "revision_url": "https://zh.wikisource.org/w/index.php?title=%E5%8F%B2%E8%A8%98%2F%E5%8D%B7007&oldid=5978360",
+      "source_link": "[《史记》卷七·项羽本纪](https://zh.wikisource.org/w/index.php?title=%E5%8F%B2%E8%A8%98%2F%E5%8D%B7007&oldid=5978360)",
+      "retrieved_at": "2026-10-07",
+      "license_displayed": "CC BY-SA 4.0; 页面附加条款可能适用，古籍底本文本与网站编校贡献分别考虑",
+      "license_link": "[网站显示的许可](https://creativecommons.org/licenses/by-sa/4.0/)",
+      "capture_scope": "selected_quotation_snapshot_not_entire_page",
+      "verification": "assistant_web_read_not_independent_human_review",
+      "quotes": [
+        {
+          "quote_id": "H1-A",
+          "locator": "身份、籍贯与季父",
+          "text": "項籍者，下相人也，字羽。初起時，年二十四。其季父項梁，梁父即楚將項燕，為秦將王翦所戮者也。"
+        },
+        {
+          "quote_id": "H1-B",
+          "locator": "求助书信与官署",
+          "text": "項梁嘗有櫟陽逮，乃請蘄獄掾曹咎書抵櫟陽獄掾司馬欣，以故事得已。"
+        },
+        {
+          "quote_id": "H1-C",
+          "locator": "避仇",
+          "text": "項梁殺人，與籍避仇於吳中。"
+        },
+        {
+          "quote_id": "H1-D",
+          "locator": "起事月份",
+          "text": "秦二世元年七月，陳涉等起大澤中。其九月，會稽守通謂梁曰"
+        },
+        {
+          "quote_id": "H1-E",
+          "locator": "该阶段身份",
+          "text": "於是梁為會稽守，籍為裨將，徇下縣。"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-H2",
+      "domain": "history",
+      "title": "《史记》卷四十八·陈涉世家",
+      "author_attribution": "司马迁",
+      "url": "https://zh.wikisource.org/wiki/%E5%8F%B2%E8%A8%98%2F%E5%8D%B7048",
+      "revision_url": "https://zh.wikisource.org/w/index.php?title=%E5%8F%B2%E8%A8%98%2F%E5%8D%B7048&oldid=2531218",
+      "source_link": "[《史记》卷四十八·陈涉世家](https://zh.wikisource.org/w/index.php?title=%E5%8F%B2%E8%A8%98%2F%E5%8D%B7048&oldid=2531218)",
+      "retrieved_at": "2026-10-07",
+      "license_displayed": "CC BY-SA 4.0; 页面附加条款可能适用，古籍底本文本与网站编校贡献分别考虑",
+      "license_link": "[网站显示的许可](https://creativecommons.org/licenses/by-sa/4.0/)",
+      "capture_scope": "selected_quotation_snapshot_not_entire_page",
+      "verification": "assistant_web_read_not_independent_human_review",
+      "quotes": [
+        {
+          "quote_id": "H2-A",
+          "locator": "姓名、表字与籍贯",
+          "text": "陳勝者，陽城人也，字涉。吳廣者，陽夏人也，字叔。"
+        },
+        {
+          "quote_id": "H2-B",
+          "locator": "早期职务",
+          "text": "陳勝自立為將軍，吳廣為都尉。"
+        },
+        {
+          "quote_id": "H2-C",
+          "locator": "张楚称王",
+          "text": "陳涉乃立為王，號為張楚。"
+        },
+        {
+          "quote_id": "H2-D",
+          "locator": "假王与任务",
+          "text": "乃以吳叔為假王，監諸將以西擊滎陽。"
+        }
+      ]
+    }
+  ]
+}

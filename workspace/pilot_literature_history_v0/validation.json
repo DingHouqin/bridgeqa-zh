@@ -1,0 +1,104 @@
+{
+  "status": "passed",
+  "families": 20,
+  "records": 128,
+  "combinations": 10,
+  "scene_ids": [
+    "S01",
+    "S03",
+    "S04",
+    "S05",
+    "S06",
+    "S07",
+    "S08",
+    "S09",
+    "S10",
+    "S12",
+    "S13",
+    "S15",
+    "S16",
+    "S17",
+    "S18",
+    "S19",
+    "S20",
+    "S21",
+    "S22",
+    "S23",
+    "S24",
+    "S25",
+    "S26",
+    "S27",
+    "S28",
+    "S30",
+    "S32"
+  ],
+  "scene_count": 27,
+  "domains": {
+    "history": 64,
+    "literature": 64
+  },
+  "answer_states": {
+    "answerable": 98,
+    "insufficient": 22,
+    "ambiguous": 8
+  },
+  "variant_counts": {
+    "control": 20,
+    "challenge": 20,
+    "anonymous_challenge": 20,
+    "unfamiliar_challenge": 20,
+    "no_context": 20,
+    "clarify_second": 2,
+    "delete_one_support": 2,
+    "delete_all_bridge_supports": 2,
+    "delete_irrelevant": 2,
+    "noise_1000": 2,
+    "noise_12000": 2,
+    "reorder_same_noise": 2,
+    "anonymous_control": 2,
+    "switch_question_start": 2,
+    "same_answer_other_proof": 2,
+    "same_answer_original_start": 2,
+    "bounded_abduction": 2,
+    "time_2": 2,
+    "time_unspecified": 2
+  },
+  "context_character_range": [
+    0,
+    12037
+  ],
+  "proof_depths": {
+    "3": 74,
+    "0": 22,
+    "4": 18,
+    "5": 8,
+    "2": 6
+  },
+  "sources": 4,
+  "independent_human_review": false,
+  "model_runs": 0,
+  "oracle_tasks": 58,
+  "negative_validation_tests": [
+    "wrong_gold",
+    "missing_support",
+    "leaked_metadata",
+    "dependency_cycle"
+  ],
+  "output_hashes": {
+    "seeds.json": "e8bbd8cc371d40d643ee8e097c0bd044935f59e3ea2a08604a5d5ce023f18fc3",
+    "benchmark.jsonl": "d6a5eb2b5d599e83d60cd178236f6d68642b48ab3a074d294e950494205fcd40",
+    "inputs.jsonl": "caf84424bce13c43d67234c42399c19385dc0b45bd1a788bff96dde044d54a81",
+    "oracle_inputs.jsonl": "eae23c6840523fa4cdc66bf25dce5a83aa298a968e3e4618a1aee081c3a2e116",
+    "oracle_gold.jsonl": "de6f10dd3dc93be097d938af4071505b515b82365c7002420f95c3f1bc681963",
+    "题目审阅册.md": "5ba5fa7764332ceeb72ba2c2b0b492697e11e4dfb0a8418f7010ea94bce593f3"
+  },
+  "input_hashes": {
+    "sources.json": "e86ac26b53fa0de1398df4a62cf7c1667bf3845c5edd428fc677c19b5e4096fe",
+    "combinations.json": "b4219f75988b716b4046ef8c91d27c4f324fa5cd2acd3a7344e83ace3f54213a",
+    "build_pilot.py": "864b7cdd341e041928c2a44cdd0ec11d53120fd1fd9c7413aa9a59109a88ae29"
+  },
+  "file_links": {
+    "readme": "[检查说明](README.md)",
+    "dataset": "[数据说明](../../data/pilot_literature_history_v0/README.md)"
+  }
+}

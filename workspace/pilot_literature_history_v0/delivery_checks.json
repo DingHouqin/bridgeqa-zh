@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "rebuilds": 2,
+  "all_generated_hashes_identical": true,
+  "hashes_are_raw_file_sha256": true,
+  "on_disk_records_revalidated": 128,
+  "input_export_matches_admin_projection": true,
+  "oracle_ids_aligned": 58,
+  "markdown_files": 7,
+  "local_links_checked": 123,
+  "broken_local_links": [],
+  "model_calls": 0,
+  "independent_human_review": false,
+  "report_link": "[检查说明](README.md)",
+  "dataset_link": "[数据说明](../../data/pilot_literature_history_v0/README.md)"
+}

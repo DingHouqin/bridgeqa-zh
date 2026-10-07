@@ -1,0 +1,138 @@
+<!-- [Guide contract](../specs/01_产品与信息架构.md). Fixed authored content; append one section for each new dataset. -->
+<article class="testing-guide" id="testing-guide">
+  <section class="guide-intro">
+    <div><p class="eyebrow">使用对象 / B 组模型测试</p><h2>从正确的输入开始，再分别核验答案与依据。</h2>
+      <p>这页集中说明 B 组如何使用已交付的 benchmark。它不随顶部数据集选择变更；每次新增数据集，在本页追加一章并保留既有章节。其他页面继续服务于题目设计与审查，不按测试组的工作方式改造。</p></div>
+    <span class="hero-badge">当前收录 1 个数据集</span>
+  </section>
+  <nav class="guide-toc" aria-label="测试指引目录">
+    <a href="#guide?section=guide-folders">目录用途</a>
+    <a href="#guide?section=guide-pilot">pilot 文件使用</a>
+    <a href="#guide?section=guide-main-run">主任务测试</a>
+    <a href="#guide?section=guide-oracle">节点诊断</a>
+    <a href="#guide?section=guide-scoring">评分口径</a>
+    <a href="#guide?section=guide-delivery">结果记录</a>
+  </nav>
+
+  <section class="panel" id="guide-folders">
+    <div class="section-heading"><h2>项目文件夹：哪些要用，哪些只是背景</h2>
+      <a href="/files/README.md" target="_blank" rel="noopener">项目 README ↗</a></div>
+    <div class="table-wrap"><table class="guide-table"><thead><tr><th>目录</th><th>用途</th><th>测试时怎么使用</th></tr></thead><tbody>
+      <tr><td><a href="/files/data/README.md" target="_blank" rel="noopener">data/ · 数据入口</a></td><td>版本化数据集，包括输入、答案、证明和来源快照。</td><td>按本页逐文件说明使用，不将整个目录交给模型。</td></tr>
+      <tr><td><a href="/files/docs/README.md" target="_blank" rel="noopener">docs/ · 研究文档</a></td><td>文献调研、场景、指标、协议，以及 report/ 报告归档。</td><td>理解定义与评分边界；不是题面材料。参考报告不作为设计决策或标准答案来源。</td></tr>
+      <tr><td><a href="/files/src/pilot_literature_history_v0/README.md" target="_blank" rel="noopener">src/ · 构建与校验</a></td><td>数据构建器和结构检查。</td><td>测试已交付文件通常无需重建。重建会改写数据，必须另行固定新版本。</td></tr>
+      <tr><td><a href="/files/README.md" target="_blank" rel="noopener">evaluation/ · 评测实现位置</a></td><td>预留配置、评分与错误归因实现。</td><td>当前没有正式评分器；不能把空目录理解成已交付可执行评分流程。</td></tr>
+      <tr><td><a href="/files/README.md" target="_blank" rel="noopener">artifacts/ · 保留的实验产物</a></td><td>正式运行记录、结果和分析。</td><td>建议按独立运行编号保存输入快照、输出与评分；不要覆盖原始数据。</td></tr>
+      <tr><td><a href="/files/README.md" target="_blank" rel="noopener">workspace/ · 临时工作输出</a></td><td>检索、程序检查、浏览器截图与临时日志。</td><td>这些是构建/系统检查，不是模型成绩。需要保留的实验结果应整理到正式产物位置。</td></tr>
+      <tr><td><a href="/files/explorer/README.md" target="_blank" rel="noopener">explorer/ · 可视化系统</a></td><td>题目、标签、合法证明、资料和潜在干扰审查。</td><td>页面和 bundle API 含 gold，仅用于人工审查，不可把网页或完整 API 响应作为模型输入。</td></tr>
+      <tr><td><a href="/files/README.md" target="_blank" rel="noopener">.github/ · 仓库协作配置</a></td><td>已有仓库协作设置。</td><td>不属于 benchmark 题面或模型评测标注。</td></tr>
+    </tbody></table></div>
+    <p class="caption">目录链接指向对应说明；没有独立说明的目录链接到项目 README。本页不要求测试组修改构建流程或系统结构。</p>
+  </section>
+
+  <section class="panel" id="guide-pilot">
+    <div class="section-heading"><div><p class="eyebrow">DATASET 01</p><h2>pilot_literature_history_v0</h2></div>
+      <a href="/files/data/pilot_literature_history_v0/README.md" target="_blank" rel="noopener">数据集完整说明 ↗</a></div>
+    <p>目录为 <code>data/pilot_literature_history_v0/</code>。版本 <code>pilot-v0.1</code>：10 个设计组合、20 个题目家族、128 条主任务，文学和历史各 64 条，覆盖 27 个实际场景单元；另有 58 条独立节点诊断。</p>
+    <div class="guide-numbers"><div><b>98</b><span>可作答记录</span></div><div><b>8</b><span>多解释歧义</span></div><div><b>22</b><span>材料不足</span></div><div><b>58</b><span>Oracle 节点题另列</span></div></div>
+    <p class="caption">128 条包含共享家族的变体，不能当成 128 道独立原题。当前全部属于开发候选集，没有独立人工复核、正式测试划分或模型实跑结果。</p>
+    <div class="table-wrap"><table class="guide-table file-guide"><thead><tr><th>数据集文件</th><th>由谁/在哪使用</th><th>具体用途</th><th>能否直接送入模型</th></tr></thead><tbody>
+      <tr class="input-file"><td><a href="/files/data/pilot_literature_history_v0/inputs.jsonl" target="_blank" rel="noopener">inputs.jsonl</a></td><td>主任务模型调用</td><td>128 行清洁输入。每行包含 id、instruction、question、documents、output_contract。</td><td><b>可以</b>，每行作为一题；保留统一指令、材料 ID 和材料顺序。</td></tr>
+      <tr class="input-file"><td><a href="/files/data/pilot_literature_history_v0/oracle_inputs.jsonl" target="_blank" rel="noopener">oracle_inputs.jsonl</a></td><td>独立节点模型调用</td><td>58 行诊断输入，题面已给正确上游，用于 Oracle-CS。</td><td><b>可以</b>，另开诊断运行；不接续主任务对话。</td></tr>
+      <tr><td><a href="/files/data/pilot_literature_history_v0/benchmark.jsonl" target="_blank" rel="noopener">benchmark.jsonl</a></td><td>评分、分组与错误分析</td><td>128 行完整标注：标准答案、状态、证明 DAG、场景、家族、配对差异、映射及设计预期。</td><td><b>不可以整行送入</b>，含 gold。按 id 与主任务输出关联，只在评测侧使用。</td></tr>
+      <tr><td><a href="/files/data/pilot_literature_history_v0/oracle_gold.jsonl" target="_blank" rel="noopener">oracle_gold.jsonl</a></td><td>节点诊断评分</td><td>58 行节点答案、母题、家族、正确上游与支持材料，与节点输入按 id 对齐。</td><td><b>不可以</b>，尤其不能把节点答案加入提示。</td></tr>
+      <tr><td><a href="/files/data/pilot_literature_history_v0/seeds.json" target="_blank" rel="noopener">seeds.json</a></td><td>构建审查与溯源</td><td>20 个家族的原型关系图、问句、风险和来源组；不是额外测试题。</td><td><b>不可以</b>，可能透露路径、答案和原型设置。</td></tr>
+      <tr><td><a href="/files/data/pilot_literature_history_v0/sources.json" target="_blank" rel="noopener">sources.json</a></td><td>资料核验</td><td>4 页原文的摘录、定位、修订链接和许可。反事实只保留改写前锚点。</td><td><b>不可以当额外材料补入</b>，否则会改变证据条件或覆盖反事实世界。</td></tr>
+      <tr><td><a href="/files/data/pilot_literature_history_v0/combinations.json" target="_blank" rel="noopener">combinations.json</a></td><td>设计组合核验</td><td>构题前的计划配方。逐题场景以完整标注的 scenario_ids 为准。</td><td><b>不可以</b>，计划标签不属于题面，也不能机械套到所有变体。</td></tr>
+      <tr><td><a href="/files/data/pilot_literature_history_v0/题目审阅册.md" target="_blank" rel="noopener">题目审阅册.md</a></td><td>人工查题</td><td>可读的问句、主要材料、答案、完整证明和变体列表。</td><td><b>不可以</b>，包含标准答案和证明。</td></tr>
+      <tr><td><a href="/files/data/pilot_literature_history_v0/README.md" target="_blank" rel="noopener">README.md</a></td><td>协议准备</td><td>来源、数据字段、构造控制、局限、重建和预备评分口径。</td><td><b>不是模型题面</b>；先理解协议，再运行清洁输入。</td></tr>
+    </tbody></table></div>
+    <div class="notice warning"><b>输入边界</b><span>模型只接收对应清洁输入文件中的当前题。不要附上答案、标签、实体映射、原型链、删除证据、来源全文或先前变体答案。</span></div>
+  </section>
+
+  <section class="panel" id="guide-main-run">
+    <div class="section-heading"><h2>主任务：建议按这个顺序运行</h2><span class="badge">128 条 / 独立题次</span></div>
+    <ol class="guide-steps">
+      <li><b>先固定数据快照。</b>记录数据集 ID、版本、所用输入与 gold 文件 SHA-256。运行期间不重建、不编辑文件；不同模型用同一快照。</li>
+      <li><b>逐行读取 <a href="/files/data/pilot_literature_history_v0/inputs.jsonl" target="_blank" rel="noopener">主任务输入</a>。</b>保留 instruction、question、documents 的 ID/文字/顺序以及 output_contract；id 用于关联输出，可以作为不透明题号。无材料题的 documents=[] 必须原样保留。</li>
+      <li><b>每一题使用独立上下文。</b>不把同一家族各变体串成同一对话；不从上一题继承事实、答案或反事实更正。主测试按给定材料闭合运行，不增加联网、检索或其他外部知识工具。</li>
+      <li><b>保留回答与证据记录。</b>按 output_contract 要求答案、状态、引用材料 ID 和简短关系/操作步骤；不要求模型揭示隐藏思维链。原始回答即使无法解析也要保存。</li>
+      <li><b>调用侧与评分侧分开。</b>生成完成后，按 id 关联 <a href="/files/data/pilot_literature_history_v0/benchmark.jsonl" target="_blank" rel="noopener">完整标注</a>。不要先读 gold 形成提示，或让模型看到可视化详情页面。</li>
+      <li><b>先核对完整性，再统计成绩。</b>记录计划题数、已提交题数、有效响应数、解析失败、超时和失败重试；不静默删除失败样本或只保留答对的重试。</li>
+    </ol>
+    <h3>一次调用应包含什么</h3>
+    <pre>题号：当前记录的 id
+统一指令：instruction
+问题：question
+材料：按 documents 原顺序逐份呈现 [材料 id] + text
+输出要求：output_contract
+
+评分侧保留：gold、facts、query、scenario_ids、family_id、
+control_id、challenge_id、paired_changes、entity_mapping 等；
+这些不进入模型提示。</pre>
+    <p class="caption">这里规定信息边界，不指定某家模型的 API、角色消息格式或 SDK。若使用不同消息包装，需事先固定模板、保留全部题面并记录模板版本；不能对某个模型追加提示。</p>
+    <h3>模型设置须可追溯</h3>
+    <p>记录实际模型/端点版本、运行日期、提示模板、温度与采样参数、输出长度限制、随机种子（若支持）、工具权限、调用预算和重试规则。相同设置不保证服务端绝对确定；需要重复运行时事先固定次数，分别报告，不挑最好的一次。</p>
+    <p>背景档按字符构造，没有针对所有模型做 token 匹配。先检查每题是否完整进入上下文；输入截断必须单独标记，不能把截断导致缺证据全部算成推理错误。</p>
+  </section>
+
+  <section class="panel" id="guide-oracle">
+    <div class="section-heading"><h2>独立节点诊断：Oracle-CS 怎么跑</h2><span class="badge">58 条 / 基础查找节点</span></div>
+    <p>使用 <a href="/files/data/pilot_literature_history_v0/oracle_inputs.jsonl" target="_blank" rel="noopener">节点输入</a> 新开一组独立调用；这些问题已经把正确上游写入题面。保持相同模型设置，不携带主任务作答记录。</p>
+    <p>输出按节点 id 关联 <a href="/files/data/pilot_literature_history_v0/oracle_gold.jsonl" target="_blank" rel="noopener">节点标注</a>，再用 parent_id、family_id、node_id 汇回母题。本批 Oracle-CS 分母为 58 条计划节点题，解析/运行失败规则提前固定并单列；不能靠删除失败来缩小分母。</p>
+    <pre>Oracle-CS = 正确完成的独立节点题数 / 58
+本批覆盖：基础对照中的关系查找节点
+尚未覆盖：比较、成员过滤、求和、溯因等全部部件</pre>
+    <div class="notice"><b>不能替代</b><span>普通回答里某一步写对，不等于在正确上游条件下独立完成节点题，也不能冒称 Oracle-CS。主任务和节点诊断数量分开报告。</span></div>
+  </section>
+
+  <section class="panel" id="guide-scoring">
+    <div class="section-heading"><h2>评分与配对：先冻结规则，再批量跑</h2>
+      <a href="/files/docs/benchmark-survey/09_多步骤评判与核心创新点回收.md" target="_blank" rel="noopener">多步骤评判协议 ↗</a></div>
+    <p>当前交付有输入、gold 和参考证明，<b>尚无正式可执行评分器</b>。先固定中文答案规范化、解释映射、支持与操作匹配、拒答/澄清、失败响应和重试规则，做小批核对，再批量比较；不要拿浏览器或构建器测试通过当模型得分。</p>
+    <div class="table-wrap"><table class="guide-table"><thead><tr><th>指标/统计</th><th>本批怎么用</th><th>容易混淆的边界</th></tr></thead><tbody>
+      <tr><td>答案与状态</td><td>全体128条报告状态行为；98条可答、8条歧义、22条不足分别统计。</td><td>标准答案“不确定”的规则判断仍为 answerable，logical_truth=unknown；不同于缺材料的 insufficient。</td></tr>
+      <tr><td>Strict SR</td><td>在98条可答题中，答案正确且交出一条完整合法证明才通过；提前固定失败响应计法。</td><td>gold.proofs 是多条完整参考图，不能从不同路径挑有利节点拼接。歧义/不足合规率另报。</td></tr>
+      <tr><td>Path-CFS</td><td>按可观察的短证明检查局部合法性与上游依赖；以一个完整匹配参考图确定节点分母。</td><td>只答末端不能缩小分母；生成的证明不是模型内部思考，也不是原论文的执行流水线观测。</td></tr>
+      <tr><td>保持型配对</td><td>按照实际配对 ID 比较添加背景、重排、删除无关项等条件；报告两题均通过率及条件失效率。</td><td>条件失效率的分母为基础题通过的有效配对数，分母为0记不可计算。</td></tr>
+      <tr><td>改变型配对</td><td>内部桥改接、正反方向、换起点、换馆年等按各自 gold 检查应有变化。</td><td>不能用“答案是否与基础题相同”评分。匿名/陌生名比较先按 entity_mapping 反向对应。</td></tr>
+      <tr><td>歧义与缺证据</td><td>歧义检查解释—答案映射或有效澄清；不足检查证据限定下的合理拒答。</td><td>有效澄清的计法需事先单列；删一处重复支持仍可答，删全部支持才不足。不能对照单一句子机械评分。</td></tr>
+    </tbody></table></div>
+    <h3>用于分组与配对的字段</h3>
+    <p><code>family_id</code> 连接同一母题全部变体；<code>control_id</code>/<code>challenge_id</code> 给基础与组合记录；<code>paired_changes.parent_id</code> 给实际比较对象及新增/删除/改写。不要只靠题号顺序或 variant 名称猜配对。</p>
+    <p><code>scenario_ids</code> 是逐题实际场景；<code>combination_id</code> 回溯先行配方；<code>domain</code>、<code>source_cluster_id</code>、证明深度与命名方式用于分组。场景非互斥，场景样本数相加会重复计数。</p>
+    <h3>汇报时必须分开</h3>
+    <ul class="guide-bullets">
+      <li>记录数、家族数、有效配对数、节点题数；先呈现家族的各条件，再汇总场景/组合。</li>
+      <li>答对但证明错、证据或角色错、加工操作错、歧义/不足行为错、运行/解析失败。</li>
+      <li>绝对成绩、保持型稳定性、改变型更新响应、无材料证据约束和 Oracle 节点能力。</li>
+      <li>本批共享来源和模板，全部是开发候选；没有正式独立测试划分，source_cluster_id 也不等于已完成全局防泄漏分组。</li>
+      <li>匿名和自然名称的分数差包含表达、分词与可读性差异，不能直接解释为背景知识干扰的因果效应。</li>
+    </ul>
+  </section>
+
+  <section class="panel" id="guide-delivery">
+    <div class="section-heading"><h2>B 组结果记录与核对清单</h2><span class="badge">保留原始输出</span></div>
+    <p>建议按独立运行编号在 <a href="/files/README.md" target="_blank" rel="noopener">artifacts/ 对应实验位置</a> 保存结果。以下是建议记录项，不冒称已有冻结的结果 schema 或自动评分脚本。</p>
+    <div class="guide-delivery-grid">
+      <div><h3>运行配置与快照</h3><p>数据集/版本、输入与gold散列、模型与设置、模板、日期、上下文限制、重试预算、计划与完成数量。</p></div>
+      <div><h3>逐题原始与解析结果</h3><p>run_id、task_type（主任务/节点）、id、原始回答、解析答案/状态/证据/步骤、调用状态与尝试次数。超时、空输出、截断和解析失败也保留。</p></div>
+      <div><h3>评分与分组分析</h3><p>评分规则/版本、逐题结果、匹配的完整证明、有效配对、家族与实际场景、失败类型及样例引用。修改评分规则时保留旧版本并重新一致评分。</p></div>
+    </div>
+    <ul class="guide-checklist">
+      <li>✓ 主调用只使用主任务清洁输入；节点调用只使用节点清洁输入。</li>
+      <li>✓ 标准答案、证明、标签与原型资料未泄漏进提示；无材料条件未被补齐。</li>
+      <li>✓ 家族变体在独立上下文运行，设置和输入快照一致。</li>
+      <li>✓ 128条主任务与58条节点诊断分开记账，失败与重试有完整记录。</li>
+      <li>✓ 多证明、规则未知、歧义、删桥、反事实和改名使用对应口径。</li>
+      <li>✓ 不覆盖数据集，不把原型/浏览器检查或设计预期写成模型实测。</li>
+    </ul>
+  </section>
+
+  <section class="protocol-strip guide-maintenance">
+    <div><p class="eyebrow">本页维护</p><h2>新增数据集时，新增一章</h2>
+      <p>目前只收录 pilot_literature_history_v0，说明日期为2026-10-07。新增数据集须补目录、版本/规模、逐文件用途、合法输入、标注关联、特殊状态、评分与结果口径，并检查链接。保留已有章节，不依据当前选择器自动替换内容。</p></div>
+    <a href="/files/data/pilot_literature_history_v0/README.md" target="_blank" rel="noopener">核对当前数据说明 ↗</a>
+  </section>
+</article>
+

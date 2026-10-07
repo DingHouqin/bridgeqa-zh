@@ -1,0 +1,3555 @@
+{
+  "version": "pilot-v0.1",
+  "construction_link": "[构建器](../../src/pilot_literature_history_v0/build_pilot.py)",
+  "seeds": [
+    {
+      "family_id": "F-C01-H",
+      "combination_id": "C01",
+      "domain": "history",
+      "question": "项梁因拘捕求书之人所写的那封信，其收信人任职官署位于哪里？",
+      "query": {
+        "kind": "walk",
+        "start": "项梁",
+        "relations": [
+          {
+            "relation": "拘捕求书之人",
+            "direction": "out"
+          },
+          {
+            "relation": "该信收信人",
+            "direction": "out"
+          },
+          {
+            "relation": "狱掾官署所在地",
+            "direction": "out"
+          }
+        ],
+        "time": null
+      },
+      "core_facts": [
+        {
+          "fact_id": "a",
+          "subject": "项梁",
+          "relation": "拘捕求书之人",
+          "object": "曹咎",
+          "text": "项梁的拘捕求书之人是曹咎。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H1-B"
+          ]
+        },
+        {
+          "fact_id": "b",
+          "subject": "曹咎",
+          "relation": "该信收信人",
+          "object": "司马欣",
+          "text": "曹咎的该信收信人是司马欣。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H1-B"
+          ]
+        },
+        {
+          "fact_id": "c",
+          "subject": "司马欣",
+          "relation": "狱掾官署所在地",
+          "object": "栎阳",
+          "text": "司马欣的狱掾官署所在地是栎阳。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H1-B"
+          ]
+        }
+      ],
+      "target_facts": [
+        {
+          "fact_id": "a",
+          "subject": "项梁",
+          "relation": "拘捕求书之人",
+          "object": "曹咎",
+          "text": "项梁的拘捕求书之人是曹咎。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H1-B"
+          ]
+        },
+        {
+          "fact_id": "b",
+          "subject": "曹咎",
+          "relation": "该信收信人",
+          "object": "司马欣",
+          "text": "曹咎的该信收信人是司马欣。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H1-B"
+          ]
+        },
+        {
+          "fact_id": "c",
+          "subject": "司马欣",
+          "relation": "狱掾官署所在地",
+          "object": "栎阳",
+          "text": "司马欣的狱掾官署所在地是栎阳。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H1-B"
+          ]
+        },
+        {
+          "fact_id": "x",
+          "subject": "曹咎",
+          "relation": "狱掾官署所在地",
+          "object": "蕲",
+          "text": "曹咎的狱掾官署所在地是蕲。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H1-B"
+          ]
+        },
+        {
+          "fact_id": "y",
+          "subject": "项梁",
+          "relation": "避仇同行者",
+          "object": "项籍",
+          "text": "项梁的避仇同行者是项籍。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H1-C"
+          ]
+        },
+        {
+          "fact_id": "z",
+          "subject": "项籍",
+          "relation": "籍贯",
+          "object": "下相",
+          "text": "项籍的籍贯是下相。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H1-A"
+          ]
+        }
+      ],
+      "base_scene_ids": [
+        "S01"
+      ],
+      "decoy_answers": [
+        "蕲",
+        "下相"
+      ],
+      "knowledge_risks": [
+        "人物名、官职和史记固定叙事可能触发记忆"
+      ],
+      "source_cluster_id": "SRC-H1"
+    },
+    {
+      "family_id": "F-C01-L",
+      "combination_id": "C01",
+      "domain": "literature",
+      "question": "赤兔在该次馈赠中的送礼人所引见的将领，这次拜认的义父是谁？",
+      "query": {
+        "kind": "walk",
+        "start": "赤兔",
+        "relations": [
+          {
+            "relation": "该次送礼人",
+            "direction": "out"
+          },
+          {
+            "relation": "该次引见将领",
+            "direction": "out"
+          },
+          {
+            "relation": "该次拜认义父",
+            "direction": "out"
+          }
+        ],
+        "time": null
+      },
+      "core_facts": [
+        {
+          "fact_id": "a",
+          "subject": "赤兔",
+          "relation": "该次送礼人",
+          "object": "李肃",
+          "text": "赤兔在该次馈赠中的送礼人是李肃。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L1-B",
+            "L1-C"
+          ]
+        },
+        {
+          "fact_id": "b",
+          "subject": "李肃",
+          "relation": "该次引见将领",
+          "object": "吕布",
+          "text": "李肃的该次引见将领是吕布。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L1-D"
+          ]
+        },
+        {
+          "fact_id": "c",
+          "subject": "吕布",
+          "relation": "该次拜认义父",
+          "object": "董卓",
+          "text": "吕布的该次拜认义父是董卓。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L1-E"
+          ]
+        }
+      ],
+      "target_facts": [
+        {
+          "fact_id": "a",
+          "subject": "赤兔",
+          "relation": "该次送礼人",
+          "object": "李肃",
+          "text": "赤兔在该次馈赠中的送礼人是李肃。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L1-B",
+            "L1-C"
+          ]
+        },
+        {
+          "fact_id": "b",
+          "subject": "李肃",
+          "relation": "该次引见将领",
+          "object": "吕布",
+          "text": "李肃的该次引见将领是吕布。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L1-D"
+          ]
+        },
+        {
+          "fact_id": "c",
+          "subject": "吕布",
+          "relation": "该次拜认义父",
+          "object": "董卓",
+          "text": "吕布的该次拜认义父是董卓。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L1-E"
+          ]
+        },
+        {
+          "fact_id": "x",
+          "subject": "赤兔",
+          "relation": "该次讨论用马者",
+          "object": "李儒",
+          "text": "赤兔的该次讨论用马者是李儒。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L1-A"
+          ]
+        },
+        {
+          "fact_id": "y",
+          "subject": "李儒",
+          "relation": "献策对象",
+          "object": "董卓",
+          "text": "李儒的献策对象是董卓。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L1-A"
+          ]
+        },
+        {
+          "fact_id": "z",
+          "subject": "董卓",
+          "relation": "弟弟",
+          "object": "董旻",
+          "text": "董卓的弟弟是董旻。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L1-F"
+          ]
+        }
+      ],
+      "base_scene_ids": [
+        "S01"
+      ],
+      "decoy_answers": [
+        "董旻",
+        "李儒"
+      ],
+      "knowledge_risks": [
+        "赤兔与吕布的熟悉剧情",
+        "中间姓名或人物称号可能唤起知识"
+      ],
+      "source_cluster_id": "SRC-L1"
+    },
+    {
+      "family_id": "F-C02-H",
+      "combination_id": "C02",
+      "domain": "history",
+      "question": "本题同年，北关仪式与南关仪式的正式主使中，谁的正式就任月份更早？",
+      "query": {
+        "kind": "compare",
+        "left": {
+          "kind": "walk",
+          "start": "北关仪式",
+          "relations": [
+            {
+              "relation": "正式主使",
+              "direction": "out"
+            },
+            {
+              "relation": "正式就任月份",
+              "direction": "out"
+            }
+          ],
+          "time": null
+        },
+        "right": {
+          "kind": "walk",
+          "start": "南关仪式",
+          "relations": [
+            {
+              "relation": "正式主使",
+              "direction": "out"
+            },
+            {
+              "relation": "正式就任月份",
+              "direction": "out"
+            }
+          ],
+          "time": null
+        }
+      },
+      "core_facts": [
+        {
+          "fact_id": "a",
+          "subject": "北关仪式",
+          "relation": "正式主使",
+          "object": "衡岳",
+          "text": "北关仪式的正式主使是衡岳。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "b",
+          "subject": "衡岳",
+          "relation": "正式就任月份",
+          "object": 10,
+          "text": "衡岳的正式就任月份是10。",
+          "datatype": "number",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "c",
+          "subject": "南关仪式",
+          "relation": "正式主使",
+          "object": "沧衡",
+          "text": "南关仪式的正式主使是沧衡。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "d",
+          "subject": "沧衡",
+          "relation": "正式就任月份",
+          "object": 7,
+          "text": "沧衡的正式就任月份是7。",
+          "datatype": "number",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        }
+      ],
+      "target_facts": [
+        {
+          "fact_id": "a",
+          "subject": "北关仪式",
+          "relation": "正式主使",
+          "object": "衡岳",
+          "text": "北关仪式的正式主使是衡岳。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "b",
+          "subject": "衡岳",
+          "relation": "正式就任月份",
+          "object": 10,
+          "text": "衡岳的正式就任月份是10。",
+          "datatype": "number",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "c",
+          "subject": "南关仪式",
+          "relation": "正式主使",
+          "object": "沧衡",
+          "text": "南关仪式的正式主使是沧衡。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "d",
+          "subject": "沧衡",
+          "relation": "正式就任月份",
+          "object": 7,
+          "text": "沧衡的正式就任月份是7。",
+          "datatype": "number",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "x",
+          "subject": "北关仪式",
+          "relation": "试行负责人",
+          "object": "文嶂",
+          "text": "北关仪式的试行负责人是文嶂。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "y",
+          "subject": "文嶂",
+          "relation": "试行就任月份",
+          "object": 12,
+          "text": "文嶂的试行就任月份是12。",
+          "datatype": "number",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "z",
+          "subject": "南关仪式",
+          "relation": "试行负责人",
+          "object": "弥川",
+          "text": "南关仪式的试行负责人是弥川。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "w",
+          "subject": "弥川",
+          "relation": "试行就任月份",
+          "object": 2,
+          "text": "弥川的试行就任月份是2。",
+          "datatype": "number",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        }
+      ],
+      "base_scene_ids": [
+        "S04",
+        "S24"
+      ],
+      "decoy_answers": [
+        "弥川"
+      ],
+      "knowledge_risks": [
+        "虚构事件控制熟悉度；需分清正式与试行"
+      ],
+      "source_cluster_id": "SYN-C02-H"
+    },
+    {
+      "family_id": "F-C02-L",
+      "combination_id": "C02",
+      "domain": "literature",
+      "question": "本题同年，霜河记与灯山集的正式编定者中，谁的正式就任月份更早？",
+      "query": {
+        "kind": "compare",
+        "left": {
+          "kind": "walk",
+          "start": "霜河记",
+          "relations": [
+            {
+              "relation": "正式编定者",
+              "direction": "out"
+            },
+            {
+              "relation": "正式就任月份",
+              "direction": "out"
+            }
+          ],
+          "time": null
+        },
+        "right": {
+          "kind": "walk",
+          "start": "灯山集",
+          "relations": [
+            {
+              "relation": "正式编定者",
+              "direction": "out"
+            },
+            {
+              "relation": "正式就任月份",
+              "direction": "out"
+            }
+          ],
+          "time": null
+        }
+      },
+      "core_facts": [
+        {
+          "fact_id": "a",
+          "subject": "霜河记",
+          "relation": "正式编定者",
+          "object": "霁川",
+          "text": "霜河记的正式编定者是霁川。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "b",
+          "subject": "霁川",
+          "relation": "正式就任月份",
+          "object": 9,
+          "text": "霁川的正式就任月份是9。",
+          "datatype": "number",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "c",
+          "subject": "灯山集",
+          "relation": "正式编定者",
+          "object": "浦溪",
+          "text": "灯山集的正式编定者是浦溪。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "d",
+          "subject": "浦溪",
+          "relation": "正式就任月份",
+          "object": 11,
+          "text": "浦溪的正式就任月份是11。",
+          "datatype": "number",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        }
+      ],
+      "target_facts": [
+        {
+          "fact_id": "a",
+          "subject": "霜河记",
+          "relation": "正式编定者",
+          "object": "霁川",
+          "text": "霜河记的正式编定者是霁川。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "b",
+          "subject": "霁川",
+          "relation": "正式就任月份",
+          "object": 9,
+          "text": "霁川的正式就任月份是9。",
+          "datatype": "number",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "c",
+          "subject": "灯山集",
+          "relation": "正式编定者",
+          "object": "浦溪",
+          "text": "灯山集的正式编定者是浦溪。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "d",
+          "subject": "浦溪",
+          "relation": "正式就任月份",
+          "object": 11,
+          "text": "浦溪的正式就任月份是11。",
+          "datatype": "number",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "x",
+          "subject": "霜河记",
+          "relation": "试行负责人",
+          "object": "照岑",
+          "text": "霜河记的试行负责人是照岑。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "y",
+          "subject": "照岑",
+          "relation": "试行就任月份",
+          "object": 12,
+          "text": "照岑的试行就任月份是12。",
+          "datatype": "number",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "z",
+          "subject": "灯山集",
+          "relation": "试行负责人",
+          "object": "暮渚",
+          "text": "灯山集的试行负责人是暮渚。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "w",
+          "subject": "暮渚",
+          "relation": "试行就任月份",
+          "object": 2,
+          "text": "暮渚的试行就任月份是2。",
+          "datatype": "number",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        }
+      ],
+      "base_scene_ids": [
+        "S04",
+        "S24"
+      ],
+      "decoy_answers": [
+        "暮渚"
+      ],
+      "knowledge_risks": [
+        "虚构事件控制熟悉度；需分清正式与试行"
+      ],
+      "source_cluster_id": "SYN-C02-L"
+    },
+    {
+      "family_id": "F-C03-H",
+      "combination_id": "C03",
+      "domain": "history",
+      "question": "沈恒（史官）所属馆的馆长使用哪间书房？",
+      "query": {
+        "kind": "walk",
+        "start": "沈恒（史官）",
+        "relations": [
+          {
+            "relation": "所属馆",
+            "direction": "out"
+          },
+          {
+            "relation": "馆长",
+            "direction": "out"
+          },
+          {
+            "relation": "书房",
+            "direction": "out"
+          }
+        ],
+        "time": null
+      },
+      "core_facts": [
+        {
+          "fact_id": "a",
+          "subject": "沈恒（史官）",
+          "relation": "别名",
+          "object": "沈恒",
+          "text": "沈恒（史官）的别名是沈恒。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "b",
+          "subject": "沈恒（武官）",
+          "relation": "别名",
+          "object": "沈恒",
+          "text": "沈恒（武官）的别名是沈恒。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "c",
+          "subject": "沈恒（史官）",
+          "relation": "所属馆",
+          "object": "听雪馆",
+          "text": "沈恒（史官）的所属馆是听雪馆。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "d",
+          "subject": "听雪馆",
+          "relation": "馆长",
+          "object": "岑照",
+          "text": "听雪馆的馆长是岑照。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "e",
+          "subject": "岑照",
+          "relation": "书房",
+          "object": "松窗",
+          "text": "岑照的书房是松窗。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "f",
+          "subject": "沈恒（武官）",
+          "relation": "所属馆",
+          "object": "照溪馆",
+          "text": "沈恒（武官）的所属馆是照溪馆。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "g",
+          "subject": "照溪馆",
+          "relation": "馆长",
+          "object": "澜素",
+          "text": "照溪馆的馆长是澜素。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "h",
+          "subject": "澜素",
+          "relation": "书房",
+          "object": "竹轩",
+          "text": "澜素的书房是竹轩。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        }
+      ],
+      "target_facts": [
+        {
+          "fact_id": "a",
+          "subject": "沈恒（史官）",
+          "relation": "别名",
+          "object": "沈恒",
+          "text": "沈恒（史官）的别名是沈恒。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "b",
+          "subject": "沈恒（武官）",
+          "relation": "别名",
+          "object": "沈恒",
+          "text": "沈恒（武官）的别名是沈恒。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "c",
+          "subject": "沈恒（史官）",
+          "relation": "所属馆",
+          "object": "听雪馆",
+          "text": "沈恒（史官）的所属馆是听雪馆。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "d",
+          "subject": "听雪馆",
+          "relation": "馆长",
+          "object": "岑照",
+          "text": "听雪馆的馆长是岑照。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "e",
+          "subject": "岑照",
+          "relation": "书房",
+          "object": "松窗",
+          "text": "岑照的书房是松窗。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "f",
+          "subject": "沈恒（武官）",
+          "relation": "所属馆",
+          "object": "照溪馆",
+          "text": "沈恒（武官）的所属馆是照溪馆。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "g",
+          "subject": "照溪馆",
+          "relation": "馆长",
+          "object": "澜素",
+          "text": "照溪馆的馆长是澜素。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "h",
+          "subject": "澜素",
+          "relation": "书房",
+          "object": "竹轩",
+          "text": "澜素的书房是竹轩。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        }
+      ],
+      "base_scene_ids": [
+        "S01",
+        "S18"
+      ],
+      "decoy_answers": [
+        "竹轩"
+      ],
+      "knowledge_risks": [
+        "匿名化不能消除指代/身份歧义；两身份必须分别映射"
+      ],
+      "source_cluster_id": "SYN-C03-H"
+    },
+    {
+      "family_id": "F-C03-L",
+      "combination_id": "C03",
+      "domain": "literature",
+      "question": "子衡（校勘者）所属馆的馆长使用哪间书房？",
+      "query": {
+        "kind": "walk",
+        "start": "子衡（校勘者）",
+        "relations": [
+          {
+            "relation": "所属馆",
+            "direction": "out"
+          },
+          {
+            "relation": "馆长",
+            "direction": "out"
+          },
+          {
+            "relation": "书房",
+            "direction": "out"
+          }
+        ],
+        "time": null
+      },
+      "core_facts": [
+        {
+          "fact_id": "a",
+          "subject": "子衡（校勘者）",
+          "relation": "别名",
+          "object": "子衡",
+          "text": "子衡（校勘者）的别名是子衡。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "b",
+          "subject": "子衡（抄手）",
+          "relation": "别名",
+          "object": "子衡",
+          "text": "子衡（抄手）的别名是子衡。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "c",
+          "subject": "子衡（校勘者）",
+          "relation": "所属馆",
+          "object": "听雪馆",
+          "text": "子衡（校勘者）的所属馆是听雪馆。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "d",
+          "subject": "听雪馆",
+          "relation": "馆长",
+          "object": "岑照",
+          "text": "听雪馆的馆长是岑照。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "e",
+          "subject": "岑照",
+          "relation": "书房",
+          "object": "松窗",
+          "text": "岑照的书房是松窗。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "f",
+          "subject": "子衡（抄手）",
+          "relation": "所属馆",
+          "object": "照溪馆",
+          "text": "子衡（抄手）的所属馆是照溪馆。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "g",
+          "subject": "照溪馆",
+          "relation": "馆长",
+          "object": "澜素",
+          "text": "照溪馆的馆长是澜素。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "h",
+          "subject": "澜素",
+          "relation": "书房",
+          "object": "竹轩",
+          "text": "澜素的书房是竹轩。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        }
+      ],
+      "target_facts": [
+        {
+          "fact_id": "a",
+          "subject": "子衡（校勘者）",
+          "relation": "别名",
+          "object": "子衡",
+          "text": "子衡（校勘者）的别名是子衡。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "b",
+          "subject": "子衡（抄手）",
+          "relation": "别名",
+          "object": "子衡",
+          "text": "子衡（抄手）的别名是子衡。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "c",
+          "subject": "子衡（校勘者）",
+          "relation": "所属馆",
+          "object": "听雪馆",
+          "text": "子衡（校勘者）的所属馆是听雪馆。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "d",
+          "subject": "听雪馆",
+          "relation": "馆长",
+          "object": "岑照",
+          "text": "听雪馆的馆长是岑照。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "e",
+          "subject": "岑照",
+          "relation": "书房",
+          "object": "松窗",
+          "text": "岑照的书房是松窗。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "f",
+          "subject": "子衡（抄手）",
+          "relation": "所属馆",
+          "object": "照溪馆",
+          "text": "子衡（抄手）的所属馆是照溪馆。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "g",
+          "subject": "照溪馆",
+          "relation": "馆长",
+          "object": "澜素",
+          "text": "照溪馆的馆长是澜素。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "h",
+          "subject": "澜素",
+          "relation": "书房",
+          "object": "竹轩",
+          "text": "澜素的书房是竹轩。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        }
+      ],
+      "base_scene_ids": [
+        "S01",
+        "S18"
+      ],
+      "decoy_answers": [
+        "竹轩"
+      ],
+      "knowledge_risks": [
+        "匿名化不能消除指代/身份歧义；两身份必须分别映射"
+      ],
+      "source_cluster_id": "SYN-C03-L"
+    },
+    {
+      "family_id": "F-C04-H",
+      "combination_id": "C04",
+      "domain": "history",
+      "question": "项籍季父的父亲，记载为哪位秦将所杀？",
+      "query": {
+        "kind": "walk",
+        "start": "项籍",
+        "relations": [
+          {
+            "relation": "季父",
+            "direction": "out"
+          },
+          {
+            "relation": "父亲",
+            "direction": "out"
+          },
+          {
+            "relation": "杀害者",
+            "direction": "out"
+          }
+        ],
+        "time": null
+      },
+      "core_facts": [
+        {
+          "fact_id": "a",
+          "subject": "项籍",
+          "relation": "季父",
+          "object": "项梁",
+          "text": "项籍的季父是项梁。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H1-A"
+          ]
+        },
+        {
+          "fact_id": "b",
+          "subject": "项梁",
+          "relation": "父亲",
+          "object": "项燕",
+          "text": "项梁的父亲是项燕。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H1-A"
+          ]
+        },
+        {
+          "fact_id": "c",
+          "subject": "项燕",
+          "relation": "杀害者",
+          "object": "王翦",
+          "text": "记载中，项燕为秦将王翦所杀。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H1-A"
+          ]
+        }
+      ],
+      "target_facts": [
+        {
+          "fact_id": "a",
+          "subject": "项籍",
+          "relation": "季父",
+          "object": "项梁",
+          "text": "项籍的季父是项梁。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H1-A"
+          ]
+        },
+        {
+          "fact_id": "b",
+          "subject": "项梁",
+          "relation": "父亲",
+          "object": "项燕",
+          "text": "项梁的父亲是项燕。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H1-A"
+          ]
+        },
+        {
+          "fact_id": "c",
+          "subject": "项燕",
+          "relation": "杀害者",
+          "object": "王翦",
+          "text": "记载中，项燕为秦将王翦所杀。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H1-A"
+          ]
+        },
+        {
+          "fact_id": "b2",
+          "subject": "项梁",
+          "relation": "父亲",
+          "object": "项燕",
+          "text": "项燕是项梁的父亲。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H1-A"
+          ]
+        }
+      ],
+      "base_scene_ids": [
+        "S01"
+      ],
+      "decoy_answers": [
+        "章邯"
+      ],
+      "knowledge_risks": [
+        "项羽家系与名将事实可直接背出"
+      ],
+      "source_cluster_id": "SRC-H1"
+    },
+    {
+      "family_id": "F-C04-L",
+      "combination_id": "C04",
+      "domain": "literature",
+      "question": "孙悟空所拜见师父的洞府位于哪座山？",
+      "query": {
+        "kind": "walk",
+        "start": "孙悟空",
+        "relations": [
+          {
+            "relation": "拜见的师父",
+            "direction": "out"
+          },
+          {
+            "relation": "居住洞府",
+            "direction": "out"
+          },
+          {
+            "relation": "所在山",
+            "direction": "out"
+          }
+        ],
+        "time": null
+      },
+      "core_facts": [
+        {
+          "fact_id": "a",
+          "subject": "孙悟空",
+          "relation": "拜见的师父",
+          "object": "须菩提祖师",
+          "text": "孙悟空的拜见的师父是须菩提祖师。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L2-C",
+            "L2-D",
+            "L2-E"
+          ]
+        },
+        {
+          "fact_id": "b",
+          "subject": "须菩提祖师",
+          "relation": "居住洞府",
+          "object": "斜月三星洞",
+          "text": "须菩提祖师的居住洞府是斜月三星洞。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L2-C"
+          ]
+        },
+        {
+          "fact_id": "c",
+          "subject": "斜月三星洞",
+          "relation": "所在山",
+          "object": "灵台方寸山",
+          "text": "斜月三星洞的所在山是灵台方寸山。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L2-C"
+          ]
+        }
+      ],
+      "target_facts": [
+        {
+          "fact_id": "a",
+          "subject": "孙悟空",
+          "relation": "拜见的师父",
+          "object": "须菩提祖师",
+          "text": "孙悟空的拜见的师父是须菩提祖师。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L2-C",
+            "L2-D",
+            "L2-E"
+          ]
+        },
+        {
+          "fact_id": "b",
+          "subject": "须菩提祖师",
+          "relation": "居住洞府",
+          "object": "斜月三星洞",
+          "text": "须菩提祖师的居住洞府是斜月三星洞。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L2-C"
+          ]
+        },
+        {
+          "fact_id": "c",
+          "subject": "斜月三星洞",
+          "relation": "所在山",
+          "object": "灵台方寸山",
+          "text": "斜月三星洞的所在山是灵台方寸山。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L2-C"
+          ]
+        },
+        {
+          "fact_id": "b2",
+          "subject": "须菩提祖师",
+          "relation": "居住洞府",
+          "object": "斜月三星洞",
+          "text": "斜月三星洞是须菩提祖师的洞府。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L2-C"
+          ]
+        }
+      ],
+      "base_scene_ids": [
+        "S01"
+      ],
+      "decoy_answers": [
+        "花果山"
+      ],
+      "knowledge_risks": [
+        "祖师与洞府名称之间有强记忆关联"
+      ],
+      "source_cluster_id": "SRC-L2"
+    },
+    {
+      "family_id": "F-C05-H",
+      "combination_id": "C05",
+      "domain": "history",
+      "question": "项籍季父的父亲的杀害者是谁？",
+      "query": {
+        "kind": "walk",
+        "start": "项籍",
+        "relations": [
+          {
+            "relation": "季父",
+            "direction": "out"
+          },
+          {
+            "relation": "父亲",
+            "direction": "out"
+          },
+          {
+            "relation": "杀害者",
+            "direction": "out"
+          }
+        ],
+        "time": null
+      },
+      "core_facts": [
+        {
+          "fact_id": "a",
+          "subject": "项籍",
+          "relation": "季父",
+          "object": "项梁",
+          "text": "项籍的季父是项梁。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H1-A"
+          ]
+        },
+        {
+          "fact_id": "b",
+          "subject": "项梁",
+          "relation": "父亲",
+          "object": "项燕",
+          "text": "项梁的父亲是项燕。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H1-A"
+          ]
+        },
+        {
+          "fact_id": "c",
+          "subject": "项燕",
+          "relation": "杀害者",
+          "object": "王翦",
+          "text": "记载中，项燕为秦将王翦所杀。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H1-A"
+          ]
+        }
+      ],
+      "target_facts": [
+        {
+          "fact_id": "a",
+          "subject": "项籍",
+          "relation": "季父",
+          "object": "项梁",
+          "text": "项籍的季父是项梁。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H1-A"
+          ]
+        },
+        {
+          "fact_id": "b",
+          "subject": "项梁",
+          "relation": "父亲",
+          "object": "项燕",
+          "text": "项梁的父亲是项燕。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H1-A"
+          ]
+        },
+        {
+          "fact_id": "c",
+          "subject": "项燕",
+          "relation": "杀害者",
+          "object": "王翦",
+          "text": "记载中，项燕为秦将王翦所杀。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H1-A"
+          ]
+        }
+      ],
+      "base_scene_ids": [
+        "S01"
+      ],
+      "decoy_answers": [],
+      "knowledge_risks": [
+        "同一史料图在不同题目中复用，不能视为独立来源"
+      ],
+      "source_cluster_id": "SRC-H1"
+    },
+    {
+      "family_id": "F-C05-L",
+      "combination_id": "C05",
+      "domain": "literature",
+      "question": "李肃该次引见的将领所拜认义父的弟弟是谁？",
+      "query": {
+        "kind": "walk",
+        "start": "李肃",
+        "relations": [
+          {
+            "relation": "该次引见将领",
+            "direction": "out"
+          },
+          {
+            "relation": "该次拜认义父",
+            "direction": "out"
+          },
+          {
+            "relation": "弟弟",
+            "direction": "out"
+          }
+        ],
+        "time": null
+      },
+      "core_facts": [
+        {
+          "fact_id": "a",
+          "subject": "李肃",
+          "relation": "该次引见将领",
+          "object": "吕布",
+          "text": "李肃的该次引见将领是吕布。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L1-D"
+          ]
+        },
+        {
+          "fact_id": "b",
+          "subject": "吕布",
+          "relation": "该次拜认义父",
+          "object": "董卓",
+          "text": "吕布的该次拜认义父是董卓。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L1-E"
+          ]
+        },
+        {
+          "fact_id": "c",
+          "subject": "董卓",
+          "relation": "弟弟",
+          "object": "董旻",
+          "text": "董卓的弟弟是董旻。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L1-F"
+          ]
+        }
+      ],
+      "target_facts": [
+        {
+          "fact_id": "a",
+          "subject": "李肃",
+          "relation": "该次引见将领",
+          "object": "吕布",
+          "text": "李肃的该次引见将领是吕布。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L1-D"
+          ]
+        },
+        {
+          "fact_id": "b",
+          "subject": "吕布",
+          "relation": "该次拜认义父",
+          "object": "董卓",
+          "text": "吕布的该次拜认义父是董卓。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L1-E"
+          ]
+        },
+        {
+          "fact_id": "c",
+          "subject": "董卓",
+          "relation": "弟弟",
+          "object": "董旻",
+          "text": "董卓的弟弟是董旻。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L1-F"
+          ]
+        }
+      ],
+      "base_scene_ids": [
+        "S01"
+      ],
+      "decoy_answers": [],
+      "knowledge_risks": [
+        "熟悉人物家系；逆关系不能按同一谓词反读"
+      ],
+      "source_cluster_id": "SRC-L1"
+    },
+    {
+      "family_id": "F-C06-H",
+      "combination_id": "C06",
+      "domain": "history",
+      "question": "本题卷本表中，作者属于甲组的卷本合计多少页？",
+      "query": {
+        "kind": "sum_join",
+        "group": "甲组",
+        "items": [
+          "关防册",
+          "郡兵簿",
+          "渡口志"
+        ]
+      },
+      "core_facts": [
+        {
+          "fact_id": "scope",
+          "subject": "本题卷本表",
+          "relation": "表列范围完整",
+          "object": true,
+          "text": "本题卷本表的三条卷本是全部统计对象，页数单位均为页。",
+          "datatype": "boolean",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "complete",
+          "subject": "甲组",
+          "relation": "名录完整",
+          "object": true,
+          "text": "本题所列甲组成员条目构成完整名录，没有未列出的该组成员。",
+          "datatype": "boolean",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "m1",
+          "subject": "甲组",
+          "relation": "全部成员之一",
+          "object": "陆简",
+          "text": "甲组的全部成员之一是陆简。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "m2",
+          "subject": "甲组",
+          "relation": "全部成员之一",
+          "object": "沈珩",
+          "text": "甲组的全部成员之一是沈珩。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "a0",
+          "subject": "关防册",
+          "relation": "作者",
+          "object": "陆简",
+          "text": "关防册的作者是陆简。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "p0",
+          "subject": "关防册",
+          "relation": "统计页数",
+          "object": 8,
+          "text": "卷本表行：作品=关防册；页数=8页。",
+          "datatype": "number",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "a1",
+          "subject": "郡兵簿",
+          "relation": "作者",
+          "object": "沈珩",
+          "text": "郡兵簿的作者是沈珩。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "p1",
+          "subject": "郡兵簿",
+          "relation": "统计页数",
+          "object": 17,
+          "text": "卷本表行：作品=郡兵簿；页数=17页。",
+          "datatype": "number",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "a2",
+          "subject": "渡口志",
+          "relation": "作者",
+          "object": "章砚",
+          "text": "渡口志的作者是章砚。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "p2",
+          "subject": "渡口志",
+          "relation": "统计页数",
+          "object": 75,
+          "text": "卷本表行：作品=渡口志；页数=75页。",
+          "datatype": "number",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        }
+      ],
+      "target_facts": [
+        {
+          "fact_id": "scope",
+          "subject": "本题卷本表",
+          "relation": "表列范围完整",
+          "object": true,
+          "text": "本题卷本表的三条卷本是全部统计对象，页数单位均为页。",
+          "datatype": "boolean",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "complete",
+          "subject": "甲组",
+          "relation": "名录完整",
+          "object": true,
+          "text": "本题所列甲组成员条目构成完整名录，没有未列出的该组成员。",
+          "datatype": "boolean",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "m1",
+          "subject": "甲组",
+          "relation": "全部成员之一",
+          "object": "陆简",
+          "text": "甲组的全部成员之一是陆简。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "m2",
+          "subject": "甲组",
+          "relation": "全部成员之一",
+          "object": "沈珩",
+          "text": "甲组的全部成员之一是沈珩。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "a0",
+          "subject": "关防册",
+          "relation": "作者",
+          "object": "陆简",
+          "text": "关防册的作者是陆简。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "p0",
+          "subject": "关防册",
+          "relation": "统计页数",
+          "object": 8,
+          "text": "卷本表行：作品=关防册；页数=8页。",
+          "datatype": "number",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "a1",
+          "subject": "郡兵簿",
+          "relation": "作者",
+          "object": "沈珩",
+          "text": "郡兵簿的作者是沈珩。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "p1",
+          "subject": "郡兵簿",
+          "relation": "统计页数",
+          "object": 17,
+          "text": "卷本表行：作品=郡兵簿；页数=17页。",
+          "datatype": "number",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "a2",
+          "subject": "渡口志",
+          "relation": "作者",
+          "object": "章砚",
+          "text": "渡口志的作者是章砚。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "p2",
+          "subject": "渡口志",
+          "relation": "统计页数",
+          "object": 75,
+          "text": "卷本表行：作品=渡口志；页数=75页。",
+          "datatype": "number",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "x",
+          "subject": "章砚",
+          "relation": "乙组成员",
+          "object": true,
+          "text": "章砚的乙组成员是True。",
+          "datatype": "boolean",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "y",
+          "subject": "渡口志",
+          "relation": "评奖组关联",
+          "object": "甲组",
+          "text": "渡口志曾由甲组评奖；评奖不表示作者是成员。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        }
+      ],
+      "base_scene_ids": [
+        "S05",
+        "S06",
+        "S07",
+        "S32"
+      ],
+      "decoy_answers": [
+        100,
+        75
+      ],
+      "knowledge_risks": [
+        "完整名录是任务设定，不根据史书未提到某人推断否定"
+      ],
+      "source_cluster_id": "SYN-C06-H"
+    },
+    {
+      "family_id": "F-C06-L",
+      "combination_id": "C06",
+      "domain": "literature",
+      "question": "本题卷本表中，作者属于甲组的卷本合计多少页？",
+      "query": {
+        "kind": "sum_join",
+        "group": "甲组",
+        "items": [
+          "霜林稿",
+          "听泉录",
+          "南桥序"
+        ]
+      },
+      "core_facts": [
+        {
+          "fact_id": "scope",
+          "subject": "本题卷本表",
+          "relation": "表列范围完整",
+          "object": true,
+          "text": "本题卷本表的三条卷本是全部统计对象，页数单位均为页。",
+          "datatype": "boolean",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "complete",
+          "subject": "甲组",
+          "relation": "名录完整",
+          "object": true,
+          "text": "本题所列甲组成员条目构成完整名录，没有未列出的该组成员。",
+          "datatype": "boolean",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "m1",
+          "subject": "甲组",
+          "relation": "全部成员之一",
+          "object": "汀和",
+          "text": "甲组的全部成员之一是汀和。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "m2",
+          "subject": "甲组",
+          "relation": "全部成员之一",
+          "object": "谷舟",
+          "text": "甲组的全部成员之一是谷舟。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "a0",
+          "subject": "霜林稿",
+          "relation": "作者",
+          "object": "汀和",
+          "text": "霜林稿的作者是汀和。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "p0",
+          "subject": "霜林稿",
+          "relation": "统计页数",
+          "object": 10,
+          "text": "卷本表行：作品=霜林稿；页数=10页。",
+          "datatype": "number",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "a1",
+          "subject": "听泉录",
+          "relation": "作者",
+          "object": "谷舟",
+          "text": "听泉录的作者是谷舟。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "p1",
+          "subject": "听泉录",
+          "relation": "统计页数",
+          "object": 14,
+          "text": "卷本表行：作品=听泉录；页数=14页。",
+          "datatype": "number",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "a2",
+          "subject": "南桥序",
+          "relation": "作者",
+          "object": "澜序",
+          "text": "南桥序的作者是澜序。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "p2",
+          "subject": "南桥序",
+          "relation": "统计页数",
+          "object": 90,
+          "text": "卷本表行：作品=南桥序；页数=90页。",
+          "datatype": "number",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        }
+      ],
+      "target_facts": [
+        {
+          "fact_id": "scope",
+          "subject": "本题卷本表",
+          "relation": "表列范围完整",
+          "object": true,
+          "text": "本题卷本表的三条卷本是全部统计对象，页数单位均为页。",
+          "datatype": "boolean",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "complete",
+          "subject": "甲组",
+          "relation": "名录完整",
+          "object": true,
+          "text": "本题所列甲组成员条目构成完整名录，没有未列出的该组成员。",
+          "datatype": "boolean",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "m1",
+          "subject": "甲组",
+          "relation": "全部成员之一",
+          "object": "汀和",
+          "text": "甲组的全部成员之一是汀和。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "m2",
+          "subject": "甲组",
+          "relation": "全部成员之一",
+          "object": "谷舟",
+          "text": "甲组的全部成员之一是谷舟。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "a0",
+          "subject": "霜林稿",
+          "relation": "作者",
+          "object": "汀和",
+          "text": "霜林稿的作者是汀和。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "p0",
+          "subject": "霜林稿",
+          "relation": "统计页数",
+          "object": 10,
+          "text": "卷本表行：作品=霜林稿；页数=10页。",
+          "datatype": "number",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "a1",
+          "subject": "听泉录",
+          "relation": "作者",
+          "object": "谷舟",
+          "text": "听泉录的作者是谷舟。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "p1",
+          "subject": "听泉录",
+          "relation": "统计页数",
+          "object": 14,
+          "text": "卷本表行：作品=听泉录；页数=14页。",
+          "datatype": "number",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "a2",
+          "subject": "南桥序",
+          "relation": "作者",
+          "object": "澜序",
+          "text": "南桥序的作者是澜序。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "p2",
+          "subject": "南桥序",
+          "relation": "统计页数",
+          "object": 90,
+          "text": "卷本表行：作品=南桥序；页数=90页。",
+          "datatype": "number",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "x",
+          "subject": "澜序",
+          "relation": "乙组成员",
+          "object": true,
+          "text": "澜序的乙组成员是True。",
+          "datatype": "boolean",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "y",
+          "subject": "南桥序",
+          "relation": "评奖组关联",
+          "object": "甲组",
+          "text": "南桥序曾由甲组评奖；评奖不表示作者是成员。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        }
+      ],
+      "base_scene_ids": [
+        "S05",
+        "S06",
+        "S07",
+        "S32"
+      ],
+      "decoy_answers": [
+        114,
+        90
+      ],
+      "knowledge_risks": [
+        "完整名录是任务设定，不根据史书未提到某人推断否定"
+      ],
+      "source_cluster_id": "SYN-C06-L"
+    },
+    {
+      "family_id": "F-C07-H",
+      "combination_id": "C07",
+      "domain": "history",
+      "question": "张楚称王者所任假王的籍贯在哪里？",
+      "query": {
+        "kind": "walk",
+        "start": "张楚",
+        "relations": [
+          {
+            "relation": "称王者",
+            "direction": "out"
+          },
+          {
+            "relation": "所任假王",
+            "direction": "out"
+          },
+          {
+            "relation": "籍贯",
+            "direction": "out"
+          }
+        ],
+        "time": null
+      },
+      "core_facts": [
+        {
+          "fact_id": "a",
+          "subject": "张楚",
+          "relation": "称王者",
+          "object": "陈胜",
+          "text": "张楚的称王者是陈胜。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H2-C",
+            "H2-A"
+          ]
+        },
+        {
+          "fact_id": "b",
+          "subject": "陈胜",
+          "relation": "所任假王",
+          "object": "吴广",
+          "text": "陈胜的所任假王是吴广。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H2-D",
+            "H2-A"
+          ]
+        },
+        {
+          "fact_id": "c",
+          "subject": "吴广",
+          "relation": "籍贯",
+          "object": "阳夏",
+          "text": "吴广的籍贯是阳夏。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H2-A"
+          ]
+        }
+      ],
+      "target_facts": [
+        {
+          "fact_id": "a",
+          "subject": "张楚",
+          "relation": "称王者",
+          "object": "陈胜",
+          "text": "张楚的称王者是陈胜。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H2-C",
+            "H2-A"
+          ]
+        },
+        {
+          "fact_id": "b",
+          "subject": "陈胜",
+          "relation": "所任假王",
+          "object": "吴广",
+          "text": "陈胜的所任假王是吴广。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H2-D",
+            "H2-A"
+          ]
+        },
+        {
+          "fact_id": "c",
+          "subject": "吴广",
+          "relation": "籍贯",
+          "object": "阳夏",
+          "text": "吴广的籍贯是阳夏。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H2-A"
+          ]
+        }
+      ],
+      "base_scene_ids": [
+        "S01"
+      ],
+      "decoy_answers": [
+        "阳城"
+      ],
+      "knowledge_risks": [
+        "陈涉、吴叔等别称及张楚知识能绕开材料"
+      ],
+      "source_cluster_id": "SRC-H2"
+    },
+    {
+      "family_id": "F-C07-L",
+      "combination_id": "C07",
+      "domain": "literature",
+      "question": "孙悟空出生山所在国界对应哪个部洲？",
+      "query": {
+        "kind": "walk",
+        "start": "孙悟空",
+        "relations": [
+          {
+            "relation": "出生山",
+            "direction": "out"
+          },
+          {
+            "relation": "国界归属",
+            "direction": "out"
+          },
+          {
+            "relation": "部洲",
+            "direction": "out"
+          }
+        ],
+        "time": null
+      },
+      "core_facts": [
+        {
+          "fact_id": "a",
+          "subject": "孙悟空",
+          "relation": "出生山",
+          "object": "花果山",
+          "text": "孙悟空的出生山是花果山。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L2-B",
+            "L2-D"
+          ]
+        },
+        {
+          "fact_id": "b",
+          "subject": "花果山",
+          "relation": "国界归属",
+          "object": "傲来国",
+          "text": "花果山的国界归属是傲来国。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L2-A"
+          ]
+        },
+        {
+          "fact_id": "c",
+          "subject": "傲来国",
+          "relation": "部洲",
+          "object": "东胜神洲",
+          "text": "傲来国的部洲是东胜神洲。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L2-A"
+          ]
+        }
+      ],
+      "target_facts": [
+        {
+          "fact_id": "a",
+          "subject": "孙悟空",
+          "relation": "出生山",
+          "object": "花果山",
+          "text": "孙悟空的出生山是花果山。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L2-B",
+            "L2-D"
+          ]
+        },
+        {
+          "fact_id": "b",
+          "subject": "花果山",
+          "relation": "国界归属",
+          "object": "傲来国",
+          "text": "花果山的国界归属是傲来国。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L2-A"
+          ]
+        },
+        {
+          "fact_id": "c",
+          "subject": "傲来国",
+          "relation": "部洲",
+          "object": "东胜神洲",
+          "text": "傲来国的部洲是东胜神洲。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L2-A"
+          ]
+        }
+      ],
+      "base_scene_ids": [
+        "S01"
+      ],
+      "decoy_answers": [
+        "灵台方寸山"
+      ],
+      "knowledge_risks": [
+        "出生地与求道地易串线；剧名和名号暗示答案"
+      ],
+      "source_cluster_id": "SRC-L2"
+    },
+    {
+      "family_id": "F-C08-H",
+      "combination_id": "C08",
+      "domain": "history",
+      "question": "按本题世界，项籍季父的父亲的杀害者是谁？",
+      "query": {
+        "kind": "walk",
+        "start": "项籍",
+        "relations": [
+          {
+            "relation": "季父",
+            "direction": "out"
+          },
+          {
+            "relation": "父亲",
+            "direction": "out"
+          },
+          {
+            "relation": "杀害者",
+            "direction": "out"
+          }
+        ],
+        "time": null
+      },
+      "core_facts": [
+        {
+          "fact_id": "a",
+          "subject": "项籍",
+          "relation": "季父",
+          "object": "项梁",
+          "text": "项籍的季父是项梁。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H1-A"
+          ]
+        },
+        {
+          "fact_id": "b",
+          "subject": "项梁",
+          "relation": "父亲",
+          "object": "项燕",
+          "text": "项梁的父亲是项燕。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H1-A"
+          ]
+        },
+        {
+          "fact_id": "c",
+          "subject": "项燕",
+          "relation": "杀害者",
+          "object": "王翦",
+          "text": "项燕的杀害者是王翦。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H1-A"
+          ]
+        },
+        {
+          "fact_id": "d",
+          "subject": "白洵",
+          "relation": "季父",
+          "object": "卫嶂",
+          "text": "白洵的季父是卫嶂。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "e",
+          "subject": "卫嶂",
+          "relation": "父亲",
+          "object": "萧圻",
+          "text": "卫嶂的父亲是萧圻。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "f",
+          "subject": "萧圻",
+          "relation": "杀害者",
+          "object": "庞崖",
+          "text": "萧圻的杀害者是庞崖。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        }
+      ],
+      "target_facts": [
+        {
+          "fact_id": "a",
+          "subject": "项籍",
+          "relation": "季父",
+          "object": "项梁",
+          "text": "项籍的季父是项梁。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H1-A"
+          ]
+        },
+        {
+          "fact_id": "b",
+          "subject": "项梁",
+          "relation": "父亲",
+          "object": "项燕",
+          "text": "项梁的父亲是项燕。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H1-A"
+          ]
+        },
+        {
+          "fact_id": "c",
+          "subject": "项燕",
+          "relation": "杀害者",
+          "object": "王翦",
+          "text": "项燕的杀害者是王翦。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "H1-A"
+          ]
+        },
+        {
+          "fact_id": "d",
+          "subject": "白洵",
+          "relation": "季父",
+          "object": "卫嶂",
+          "text": "白洵的季父是卫嶂。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "e",
+          "subject": "卫嶂",
+          "relation": "父亲",
+          "object": "萧圻",
+          "text": "卫嶂的父亲是萧圻。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "f",
+          "subject": "萧圻",
+          "relation": "杀害者",
+          "object": "庞崖",
+          "text": "萧圻的杀害者是庞崖。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        }
+      ],
+      "base_scene_ids": [
+        "S01"
+      ],
+      "decoy_answers": [
+        "王翦"
+      ],
+      "knowledge_risks": [
+        "历史家系答案应随材料改接，不能凭记忆坚持旧答案"
+      ],
+      "source_cluster_id": "MIXED-H1-C08"
+    },
+    {
+      "family_id": "F-C08-L",
+      "combination_id": "C08",
+      "domain": "literature",
+      "question": "按本题世界，孙悟空师父的洞府位于哪座山？",
+      "query": {
+        "kind": "walk",
+        "start": "孙悟空",
+        "relations": [
+          {
+            "relation": "师父",
+            "direction": "out"
+          },
+          {
+            "relation": "居住洞府",
+            "direction": "out"
+          },
+          {
+            "relation": "所在山",
+            "direction": "out"
+          }
+        ],
+        "time": null
+      },
+      "core_facts": [
+        {
+          "fact_id": "a",
+          "subject": "孙悟空",
+          "relation": "师父",
+          "object": "须菩提祖师",
+          "text": "孙悟空的师父是须菩提祖师。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L2-C",
+            "L2-D",
+            "L2-E"
+          ]
+        },
+        {
+          "fact_id": "b",
+          "subject": "须菩提祖师",
+          "relation": "居住洞府",
+          "object": "斜月三星洞",
+          "text": "须菩提祖师的居住洞府是斜月三星洞。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L2-C"
+          ]
+        },
+        {
+          "fact_id": "c",
+          "subject": "斜月三星洞",
+          "relation": "所在山",
+          "object": "灵台方寸山",
+          "text": "斜月三星洞的所在山是灵台方寸山。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L2-C"
+          ]
+        },
+        {
+          "fact_id": "d",
+          "subject": "夜禾",
+          "relation": "师父",
+          "object": "青砚子",
+          "text": "夜禾的师父是青砚子。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "e",
+          "subject": "青砚子",
+          "relation": "居住洞府",
+          "object": "照云洞",
+          "text": "青砚子的居住洞府是照云洞。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "f",
+          "subject": "照云洞",
+          "relation": "所在山",
+          "object": "玄栈山",
+          "text": "照云洞的所在山是玄栈山。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        }
+      ],
+      "target_facts": [
+        {
+          "fact_id": "a",
+          "subject": "孙悟空",
+          "relation": "师父",
+          "object": "须菩提祖师",
+          "text": "孙悟空的师父是须菩提祖师。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L2-C",
+            "L2-D",
+            "L2-E"
+          ]
+        },
+        {
+          "fact_id": "b",
+          "subject": "须菩提祖师",
+          "relation": "居住洞府",
+          "object": "斜月三星洞",
+          "text": "须菩提祖师的居住洞府是斜月三星洞。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L2-C"
+          ]
+        },
+        {
+          "fact_id": "c",
+          "subject": "斜月三星洞",
+          "relation": "所在山",
+          "object": "灵台方寸山",
+          "text": "斜月三星洞的所在山是灵台方寸山。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "source_paraphrase",
+          "quote_ids": [
+            "L2-C"
+          ]
+        },
+        {
+          "fact_id": "d",
+          "subject": "夜禾",
+          "relation": "师父",
+          "object": "青砚子",
+          "text": "夜禾的师父是青砚子。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "e",
+          "subject": "青砚子",
+          "relation": "居住洞府",
+          "object": "照云洞",
+          "text": "青砚子的居住洞府是照云洞。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "f",
+          "subject": "照云洞",
+          "relation": "所在山",
+          "object": "玄栈山",
+          "text": "照云洞的所在山是玄栈山。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        }
+      ],
+      "base_scene_ids": [
+        "S01"
+      ],
+      "decoy_answers": [
+        "灵台方寸山"
+      ],
+      "knowledge_risks": [
+        "须菩提与方寸山的记忆会与改接后材料冲突"
+      ],
+      "source_cluster_id": "MIXED-L2-C08"
+    },
+    {
+      "family_id": "F-C09-H",
+      "combination_id": "C09",
+      "domain": "history",
+      "question": "墨原校定的卷本按本题印记规则应收入哪里？",
+      "query": {
+        "kind": "walk",
+        "start": "墨原",
+        "relations": [
+          {
+            "relation": "校定卷",
+            "direction": "out"
+          },
+          {
+            "relation": "带印",
+            "direction": "out"
+          },
+          {
+            "relation": "规定收藏处",
+            "direction": "out"
+          }
+        ],
+        "time": null
+      },
+      "core_facts": [
+        {
+          "fact_id": "a",
+          "subject": "墨原",
+          "relation": "校定卷",
+          "object": "关防副册",
+          "text": "墨原的校定卷是关防副册。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "b",
+          "subject": "关防副册",
+          "relation": "带印",
+          "object": "朱印",
+          "text": "关防副册的带印是朱印。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "c",
+          "subject": "朱印",
+          "relation": "规定收藏处",
+          "object": "北府",
+          "text": "本题规则：凡带朱印的卷本都收入北府；没有声明逆向规则。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        }
+      ],
+      "target_facts": [
+        {
+          "fact_id": "a",
+          "subject": "墨原",
+          "relation": "校定卷",
+          "object": "关防副册",
+          "text": "墨原的校定卷是关防副册。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "b",
+          "subject": "关防副册",
+          "relation": "带印",
+          "object": "朱印",
+          "text": "关防副册的带印是朱印。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "c",
+          "subject": "朱印",
+          "relation": "规定收藏处",
+          "object": "北府",
+          "text": "本题规则：凡带朱印的卷本都收入北府；没有声明逆向规则。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        }
+      ],
+      "base_scene_ids": [
+        "S03"
+      ],
+      "decoy_answers": [
+        "青印"
+      ],
+      "knowledge_risks": [
+        "规则世界不借助现实藏书或印章知识"
+      ],
+      "source_cluster_id": "SYN-C09-H"
+    },
+    {
+      "family_id": "F-C09-L",
+      "combination_id": "C09",
+      "domain": "literature",
+      "question": "明昙校定的卷本按本题印记规则应收入哪里？",
+      "query": {
+        "kind": "walk",
+        "start": "明昙",
+        "relations": [
+          {
+            "relation": "校定卷",
+            "direction": "out"
+          },
+          {
+            "relation": "带印",
+            "direction": "out"
+          },
+          {
+            "relation": "规定收藏处",
+            "direction": "out"
+          }
+        ],
+        "time": null
+      },
+      "core_facts": [
+        {
+          "fact_id": "a",
+          "subject": "明昙",
+          "relation": "校定卷",
+          "object": "绛雪稿",
+          "text": "明昙的校定卷是绛雪稿。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "b",
+          "subject": "绛雪稿",
+          "relation": "带印",
+          "object": "朱印",
+          "text": "绛雪稿的带印是朱印。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "c",
+          "subject": "朱印",
+          "relation": "规定收藏处",
+          "object": "东阁",
+          "text": "本题规则：凡带朱印的卷本都收入东阁；没有声明逆向规则。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        }
+      ],
+      "target_facts": [
+        {
+          "fact_id": "a",
+          "subject": "明昙",
+          "relation": "校定卷",
+          "object": "绛雪稿",
+          "text": "明昙的校定卷是绛雪稿。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "b",
+          "subject": "绛雪稿",
+          "relation": "带印",
+          "object": "朱印",
+          "text": "绛雪稿的带印是朱印。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "c",
+          "subject": "朱印",
+          "relation": "规定收藏处",
+          "object": "东阁",
+          "text": "本题规则：凡带朱印的卷本都收入东阁；没有声明逆向规则。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        }
+      ],
+      "base_scene_ids": [
+        "S03"
+      ],
+      "decoy_answers": [
+        "青印"
+      ],
+      "knowledge_risks": [
+        "规则世界不借助现实藏书或印章知识"
+      ],
+      "source_cluster_id": "SYN-C09-L"
+    },
+    {
+      "family_id": "F-C10-H",
+      "combination_id": "C10",
+      "domain": "history",
+      "question": "按本题馆年4，边郡副志作为首抄卷本，应依据当期校勘者所属馆归入哪册？",
+      "query": {
+        "kind": "walk",
+        "start": "边郡副志",
+        "relations": [
+          {
+            "relation": "当期校勘者",
+            "direction": "out"
+          },
+          {
+            "relation": "所属馆",
+            "direction": "out"
+          },
+          {
+            "relation": "所属区",
+            "direction": "out"
+          },
+          {
+            "relation": "首抄归档册",
+            "direction": "out"
+          }
+        ],
+        "time": 4
+      },
+      "core_facts": [
+        {
+          "fact_id": "a",
+          "subject": "边郡副志",
+          "relation": "当期校勘者",
+          "object": "昔闻",
+          "text": "本题馆年4至6年（含端点），边郡副志的当期校勘者是昔闻。",
+          "datatype": "entity",
+          "period": [
+            4,
+            6
+          ],
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "b",
+          "subject": "边郡副志",
+          "relation": "当期校勘者",
+          "object": "青河",
+          "text": "本题馆年1至3年（含端点），边郡副志的当期校勘者是青河。",
+          "datatype": "entity",
+          "period": [
+            1,
+            3
+          ],
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "c",
+          "subject": "昔闻",
+          "relation": "所属馆",
+          "object": "承露馆",
+          "text": "昔闻的所属馆是承露馆。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "d",
+          "subject": "青河",
+          "relation": "所属馆",
+          "object": "听潮馆",
+          "text": "青河的所属馆是听潮馆。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "e",
+          "subject": "承露馆",
+          "relation": "所属区",
+          "object": "东区",
+          "text": "承露馆的所属区是东区。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "f",
+          "subject": "听潮馆",
+          "relation": "所属区",
+          "object": "西区",
+          "text": "听潮馆的所属区是西区。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "g",
+          "subject": "东区",
+          "relation": "首抄归档册",
+          "object": "甲册",
+          "text": "本题规则：首抄卷本若校勘馆属东区，归甲册。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "h",
+          "subject": "西区",
+          "relation": "首抄归档册",
+          "object": "乙册",
+          "text": "本题规则：首抄卷本若校勘馆属西区，归乙册。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "i",
+          "subject": "复抄",
+          "relation": "归档册",
+          "object": "丙册",
+          "text": "本题规则：复抄卷本无论馆区一律归丙册；以下问题指定首抄。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        }
+      ],
+      "target_facts": [
+        {
+          "fact_id": "a",
+          "subject": "边郡副志",
+          "relation": "当期校勘者",
+          "object": "昔闻",
+          "text": "本题馆年4至6年（含端点），边郡副志的当期校勘者是昔闻。",
+          "datatype": "entity",
+          "period": [
+            4,
+            6
+          ],
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "b",
+          "subject": "边郡副志",
+          "relation": "当期校勘者",
+          "object": "青河",
+          "text": "本题馆年1至3年（含端点），边郡副志的当期校勘者是青河。",
+          "datatype": "entity",
+          "period": [
+            1,
+            3
+          ],
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "c",
+          "subject": "昔闻",
+          "relation": "所属馆",
+          "object": "承露馆",
+          "text": "昔闻的所属馆是承露馆。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "d",
+          "subject": "青河",
+          "relation": "所属馆",
+          "object": "听潮馆",
+          "text": "青河的所属馆是听潮馆。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "e",
+          "subject": "承露馆",
+          "relation": "所属区",
+          "object": "东区",
+          "text": "承露馆的所属区是东区。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "f",
+          "subject": "听潮馆",
+          "relation": "所属区",
+          "object": "西区",
+          "text": "听潮馆的所属区是西区。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "g",
+          "subject": "东区",
+          "relation": "首抄归档册",
+          "object": "甲册",
+          "text": "本题规则：首抄卷本若校勘馆属东区，归甲册。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "h",
+          "subject": "西区",
+          "relation": "首抄归档册",
+          "object": "乙册",
+          "text": "本题规则：首抄卷本若校勘馆属西区，归乙册。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "i",
+          "subject": "复抄",
+          "relation": "归档册",
+          "object": "丙册",
+          "text": "本题规则：复抄卷本无论馆区一律归丙册；以下问题指定首抄。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "x",
+          "subject": "边郡副志",
+          "relation": "当期复核者",
+          "object": "浦遥",
+          "text": "本题馆年4至6年（含端点），边郡副志的当期复核者是浦遥。",
+          "datatype": "entity",
+          "period": [
+            4,
+            6
+          ],
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "y",
+          "subject": "浦遥",
+          "relation": "所属馆",
+          "object": "承露馆",
+          "text": "浦遥的所属馆是承露馆。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        }
+      ],
+      "base_scene_ids": [
+        "S01",
+        "S24",
+        "S25",
+        "S27"
+      ],
+      "decoy_answers": [
+        "乙册",
+        "丙册"
+      ],
+      "knowledge_risks": [
+        "合成馆年不等于真实历史年份；时间与复核/校勘角色分开"
+      ],
+      "source_cluster_id": "SYN-C10-H"
+    },
+    {
+      "family_id": "F-C10-L",
+      "combination_id": "C10",
+      "domain": "literature",
+      "question": "按本题馆年4，寒桥札作为首抄卷本，应依据当期校勘者所属馆归入哪册？",
+      "query": {
+        "kind": "walk",
+        "start": "寒桥札",
+        "relations": [
+          {
+            "relation": "当期校勘者",
+            "direction": "out"
+          },
+          {
+            "relation": "所属馆",
+            "direction": "out"
+          },
+          {
+            "relation": "所属区",
+            "direction": "out"
+          },
+          {
+            "relation": "首抄归档册",
+            "direction": "out"
+          }
+        ],
+        "time": 4
+      },
+      "core_facts": [
+        {
+          "fact_id": "a",
+          "subject": "寒桥札",
+          "relation": "当期校勘者",
+          "object": "昔闻",
+          "text": "本题馆年1至3年（含端点），寒桥札的当期校勘者是昔闻。",
+          "datatype": "entity",
+          "period": [
+            1,
+            3
+          ],
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "b",
+          "subject": "寒桥札",
+          "relation": "当期校勘者",
+          "object": "青河",
+          "text": "本题馆年4至6年（含端点），寒桥札的当期校勘者是青河。",
+          "datatype": "entity",
+          "period": [
+            4,
+            6
+          ],
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "c",
+          "subject": "昔闻",
+          "relation": "所属馆",
+          "object": "承露馆",
+          "text": "昔闻的所属馆是承露馆。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "d",
+          "subject": "青河",
+          "relation": "所属馆",
+          "object": "听潮馆",
+          "text": "青河的所属馆是听潮馆。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "e",
+          "subject": "承露馆",
+          "relation": "所属区",
+          "object": "东区",
+          "text": "承露馆的所属区是东区。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "f",
+          "subject": "听潮馆",
+          "relation": "所属区",
+          "object": "西区",
+          "text": "听潮馆的所属区是西区。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "g",
+          "subject": "东区",
+          "relation": "首抄归档册",
+          "object": "甲册",
+          "text": "本题规则：首抄卷本若校勘馆属东区，归甲册。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "h",
+          "subject": "西区",
+          "relation": "首抄归档册",
+          "object": "乙册",
+          "text": "本题规则：首抄卷本若校勘馆属西区，归乙册。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "i",
+          "subject": "复抄",
+          "relation": "归档册",
+          "object": "丙册",
+          "text": "本题规则：复抄卷本无论馆区一律归丙册；以下问题指定首抄。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        }
+      ],
+      "target_facts": [
+        {
+          "fact_id": "a",
+          "subject": "寒桥札",
+          "relation": "当期校勘者",
+          "object": "昔闻",
+          "text": "本题馆年1至3年（含端点），寒桥札的当期校勘者是昔闻。",
+          "datatype": "entity",
+          "period": [
+            1,
+            3
+          ],
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "b",
+          "subject": "寒桥札",
+          "relation": "当期校勘者",
+          "object": "青河",
+          "text": "本题馆年4至6年（含端点），寒桥札的当期校勘者是青河。",
+          "datatype": "entity",
+          "period": [
+            4,
+            6
+          ],
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "c",
+          "subject": "昔闻",
+          "relation": "所属馆",
+          "object": "承露馆",
+          "text": "昔闻的所属馆是承露馆。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "d",
+          "subject": "青河",
+          "relation": "所属馆",
+          "object": "听潮馆",
+          "text": "青河的所属馆是听潮馆。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "e",
+          "subject": "承露馆",
+          "relation": "所属区",
+          "object": "东区",
+          "text": "承露馆的所属区是东区。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "f",
+          "subject": "听潮馆",
+          "relation": "所属区",
+          "object": "西区",
+          "text": "听潮馆的所属区是西区。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "g",
+          "subject": "东区",
+          "relation": "首抄归档册",
+          "object": "甲册",
+          "text": "本题规则：首抄卷本若校勘馆属东区，归甲册。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "h",
+          "subject": "西区",
+          "relation": "首抄归档册",
+          "object": "乙册",
+          "text": "本题规则：首抄卷本若校勘馆属西区，归乙册。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "i",
+          "subject": "复抄",
+          "relation": "归档册",
+          "object": "丙册",
+          "text": "本题规则：复抄卷本无论馆区一律归丙册；以下问题指定首抄。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "x",
+          "subject": "寒桥札",
+          "relation": "当期复核者",
+          "object": "浦遥",
+          "text": "本题馆年4至6年（含端点），寒桥札的当期复核者是浦遥。",
+          "datatype": "entity",
+          "period": [
+            4,
+            6
+          ],
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        },
+        {
+          "fact_id": "y",
+          "subject": "浦遥",
+          "relation": "所属馆",
+          "object": "承露馆",
+          "text": "浦遥的所属馆是承露馆。",
+          "datatype": "entity",
+          "period": null,
+          "provenance": "synthetic_editor_setting",
+          "quote_ids": []
+        }
+      ],
+      "base_scene_ids": [
+        "S01",
+        "S24",
+        "S25",
+        "S27"
+      ],
+      "decoy_answers": [
+        "甲册",
+        "丙册"
+      ],
+      "knowledge_risks": [
+        "合成馆年不等于真实历史年份；时间与复核/校勘角色分开"
+      ],
+      "source_cluster_id": "SYN-C10-L"
+    }
+  ]
+}

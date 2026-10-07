@@ -40,3 +40,8 @@ dist/
 *.log
 .DS_Store
 Thumbs.db
+
+# 静态发布物由 [导出流程](explorer/README.md) 自动生成
+/workspace/pages/
+/workspace/pages-preview/
+/workspace/explorer/failure.png

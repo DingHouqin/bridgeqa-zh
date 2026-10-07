@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "base": "http://127.0.0.1:8765",
+  "checks": [
+    "overview: topic, scale, sources, combinations and diagram",
+    "catalog: all rows, search, label visibility and zero result",
+    "cross-facet AND and scene ALL, reload and return preservation",
+    "C01 correct chain, role diversion and evidence navigation",
+    "C04 alternative proofs and material role switching",
+    "C03 ambiguity, alias proof and source-independent settings",
+    "C06 table/text aggregation displays DAG and 25 pages",
+    "C09 unknown is answerable, no-context has no current documents",
+    "C08 updated world, bridge differences and original quotation",
+    "long background is expandable and raw source preserved",
+    "reverse access, conditional time ambiguity and explicit abduction",
+    "mobile overview and detail fit 390px without page overflow",
+    "fixed testing guide is dataset-independent, linked and mobile-readable",
+    "invalid dataset and question offer recovery"
+  ],
+  "unexpected_browser_errors": [],
+  "expected_error_route_test": true,
+  "failed_requests": [
+    {
+      "url": "http://127.0.0.1:8765/api/datasets/not_registered/bundle",
+      "status": 404
+    }
+  ],
+  "viewports": [
+    "1440x1050",
+    "390x844"
+  ],
+  "report_link": "[检查说明](README.md)"
+}
