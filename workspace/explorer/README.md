@@ -37,10 +37,12 @@
 
 ## 静态发布与文档补充检查
 
-新增2项 [导出测试](../../explorer/tests/static_test.py)，覆盖数据/文件一致性、重复导出清理及输出目录边界。使用 [文档浏览器检查](../../explorer/tests/docs_checks.cjs) 验证全部30章、40个原文/下载链接、章节刷新、标题锚点、内部跳转、恢复入口及390px布局；记录见 [文档检查](docs_checks.json)。原有14组交互在静态子路径和本地服务均通过，2项接口检查也通过。
+新增2项 [导出测试](../../explorer/tests/static_test.py)，覆盖数据/文件一致性、重复导出清理及输出目录边界。使用 [文档浏览器检查](../../explorer/tests/docs_checks.cjs) 逐章等待加载完成，验证全部30章、48个原文/下载链接、章节刷新、标题锚点、内部跳转、恢复入口及390px布局；记录见 [文档检查](docs_checks.json)。原有14组交互在静态子路径和本地服务均通过，2项接口检查也通过。
 
 - [文档 · 桌面](09-docs-desktop.png)
 - [文档 · 窄屏](10-docs-mobile.png)
 
 检查日期为2026-10-07；静态结果与正式线上访问分别验证。站点部署规则见 [静态规格](../../explorer/specs/06_静态发布与文档.md)。
+
+正式 [网站](https://dinghouqin.github.io/bridgeqa-zh/) 已完成14组交互与4组文档验收，线上无意外脚本异常。初次成功部署为 [f78a1c9](https://github.com/DingHouqin/bridgeqa-zh/commit/f78a1c92a6551c0071b2f027b1f4d4737ebbbbe0)，[Actions运行](https://github.com/DingHouqin/bridgeqa-zh/actions/runs/37580550362) 成功；[已验证发布快照](published_build.json) 保存版本和发布源散列。后续仅测试脚本与验收记录的提交不修改网站功能，发布版本继续由 [线上build记录](https://dinghouqin.github.io/bridgeqa-zh/build.json) 核对。
 

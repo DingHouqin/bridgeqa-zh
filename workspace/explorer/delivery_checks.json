@@ -6,7 +6,7 @@
   "http_tests": 2,
   "browser_check_groups": 14,
   "markdown_files_checked": 14,
-  "local_links_checked": 157,
+  "local_links_checked": 158,
   "broken_local_links": [],
   "original_dataset_and_source_hashes_unchanged": true,
   "browser_errors": [],
@@ -25,7 +25,7 @@
     "explorer\\specs\\06_静态发布与文档.md": "811e1028e9928cffcfe0a477c2e4362be4cb6ce447edbfa4735aff4a0720ca09",
     "explorer\\specs\\README.md": "f310c7d3f8854d6cf6146c1f024e91a528c0a5ab284df0a98ee2dfcb94175c3a",
     "explorer\\tests\\api_test.py": "a37c1144e0bae26c1ff50e568ac937ad1737b918e250c7c88a765af2e203a874",
-    "explorer\\tests\\docs_checks.cjs": "68f90f012d0e47c752db050def0ecb85530d03197df16e2f74ef20e5c78ff38a",
+    "explorer\\tests\\docs_checks.cjs": "ac9e87fc1653878f47a9d31946f3e6591485fa963b0d38a9d34f33101b8ccaa7",
     "explorer\\tests\\model.test.mjs": "36800a6fd10af458ca30f98edb5208eb76937fa8f3fbc2056c66176ff5ea795a",
     "explorer\\tests\\static_test.py": "a7fa48032007aa774f0cb2d1e341184a7411bf17ca6230eace5723c0951a39db",
     "explorer\\tests\\ui_checks.cjs": "3f911ab49f2486822e431ac9ec1c62e2ef465dd7d89fbfaf0498e95b7e615fa4",
@@ -45,7 +45,7 @@
     "docs\\README.md": "bbc2a39f1470967cdbc0ac3c51fac4a31a578fe6847cf669fbfc3cdb306c43af",
     "docs\\report\\README.md": "d30016835be11412ba49ca397c6d1303c1eeffeced5926a4eb37bc7b8dbc4ded",
     "docs\\benchmark-survey\\README.md": "b3a211582674ebbe3d512c6d01aa2f7f00d92ce666873e38a074ec09b0031f34",
-    "workspace\\explorer\\README.md": "287b05136c8e7fad1d14ee9b66a721a726e34d9a59ce9e5b7ce6f8e275958f6c"
+    "workspace\\explorer\\README.md": "38f38caeb359b24fe82b4c859a73cbdef7cb182f15ecf10d1cfbc8869d26a3c5"
   },
   "readme_link": "[交付说明](../../explorer/README.md)",
   "checks_link": "[检查口径](README.md)",

@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "base": "http://127.0.0.1:8765",
+  "base": "https://dinghouqin.github.io/bridgeqa-zh",
   "checks": [
     "overview: topic, scale, sources, combinations and diagram",
     "catalog: all rows, search, label visibility and zero result",
@@ -21,7 +21,7 @@
   "expected_error_route_test": true,
   "failed_requests": [
     {
-      "url": "http://127.0.0.1:8765/api/datasets/not_registered/bundle.json",
+      "url": "https://dinghouqin.github.io/bridgeqa-zh/api/datasets/not_registered/bundle.json",
       "status": 404
     }
   ],

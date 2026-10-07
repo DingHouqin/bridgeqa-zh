@@ -12,7 +12,12 @@ const out=path.resolve(__dirname,'../../workspace/explorer');
   page.on('pageerror',e=>errors.push(e.message));
   page.on('request',r=>{if(r.url().includes('/bundle'))bundles.push(r.url());});
   const catalog=await (await page.request.get(base+'/documents.json')).json();
-  const open=async slug=>{await page.goto(base+'/#/docs/'+slug+'?dataset=not_registered');await page.waitForSelector('.markdown-body');};
+  const open=async slug=>{
+    await page.goto(base+'/#/docs/'+slug+'?dataset=not_registered');
+    const expected=catalog.documents.find(d=>d.slug===slug).title;
+    await page.waitForFunction(title=>document.title===title+' · BridgeQA',expected);
+    await page.waitForSelector('.markdown-body');
+  };
   try{
     await open('benchmark-survey/07-scenes');
     assert.ok(await page.locator('.markdown-body table').count());
