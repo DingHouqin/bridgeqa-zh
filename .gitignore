@@ -45,3 +45,10 @@ Thumbs.db
 /workspace/pages/
 /workspace/pages-preview/
 /workspace/explorer/failure.png
+
+# 本地任务与进度，说明见 [本地任务入口](TODO/README.md)，不得上传
+/TODO/
+
+# 本地去重前快照与审表备份不发布
+/workspace/pilot_literature_history_v0/pre_dedup_2026-10-07/
+/workspace/spreadsheet-review/

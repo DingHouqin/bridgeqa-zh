@@ -15,7 +15,10 @@ text = text.replace('以上是可重新生成', '- [测试指引 · 桌面](07-t
 readme.write_text(text, encoding='utf-8')
 
 docs = [project / p for p in ['README.md', 'AGENTS.md', 'docs/README.md',
-    'docs/report/README.md', 'docs/benchmark-survey/README.md', 'explorer/README.md']]
+    'docs/report/README.md', 'docs/工作计划.md', 'docs/report/2026-10-07_项目进展报告.md',
+    'docs/report/2026-10-07_评分器可执行性评估.md',
+    'docs/report/2026-10-07_在线文档网站可行性评估.md',
+    'docs/benchmark-survey/README.md', 'explorer/README.md']]
 docs += sorted((project / 'explorer/specs').glob('*.md'))
 docs.append(readme)
 broken = []
@@ -54,16 +57,17 @@ for file in project.rglob('*'):
         allowed_mentions.append(file)
 assert allowed_mentions == [guide], allowed_mentions
 assert not (project / '研究设计参考报告.md').exists()
-report = project / 'docs/report/研究设计参考报告.md'
+report = project / 'docs/report/2026-10-07_研究设计参考报告.md'
 assert report.exists()
 browser = json.loads((out / 'browser_checks.json').read_text(encoding='utf-8'))
 assert browser['status'] == 'passed' and len(browser['checks']) == 14
 delivery = json.loads((out / 'delivery_checks.json').read_text(encoding='utf-8'))
+delivery.pop('original_dataset_and_source_hashes_unchanged', None)
 delivery.update(browser_check_groups=14, markdown_files_checked=len(docs), local_links_checked=count,
-    broken_local_links=broken, original_dataset_and_source_hashes_unchanged=True,
+    broken_local_links=broken, dataset_matches_current_validation_hashes=True,
     fixed_guide_verified=True, reference_report_archive_sha256=sha(report))
 files = list((project / 'explorer').rglob('*')) + docs
 delivery['files'] = {str(p.relative_to(project)): sha(p) for p in files if p.is_file() and '__pycache__' not in p.parts}
 (out / 'delivery_checks.json').write_text(json.dumps(delivery, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 print(json.dumps({'status':'passed','markdown_files':len(docs),'local_links':count,
-    'dataset_hashes':'unchanged','fixed_guide':'passed'}, ensure_ascii=False))
+    'dataset_hashes':'match_current_version','fixed_guide':'passed'}, ensure_ascii=False))

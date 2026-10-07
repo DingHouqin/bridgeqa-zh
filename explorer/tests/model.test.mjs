@@ -2,21 +2,21 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {FACETS,filterRows,tagsFor,evidenceRoles,candidatesFor,layoutProof} from '../web/model.js';
+import {FACETS,filterRows,tagsFor,evidenceRoles,candidatesFor,layoutProof,proofWithStart} from '../web/model.js';
 const rows=readFileSync(new URL('../../data/pilot_literature_history_v0/benchmark.jsonl',import.meta.url),'utf8')
   .trim().split(/\r?\n/).map(JSON.parse);
-const row=(combo,variant='challenge',domain='history')=>rows.find(r=>r.combination_id===combo&&r.variant===variant&&r.domain===domain);
+const row=(combo,variant='challenge',domain='history')=>rows.find(r=>r.combination_id===combo&&r.domain===domain&&(variant==='challenge'?['challenge','anonymous_challenge','unfamiliar_challenge'].includes(r.variant):r.variant===variant));
 
 test('facet AND, within-facet OR, scene ANY/ALL, text and impossible combinations',()=>{
-  assert.equal(filterRows(rows).length,128);
+  assert.equal(filterRows(rows).length,86);
   const both=filterRows(rows,{scene:['S01','S28']},'','all');
   assert.equal(both.length,2);
   assert.ok(both.every(r=>r.variant==='delete_all_bridge_supports'));
   const any=filterRows(rows,{scene:['S01','S28']},'','any');
   assert.equal(any.length,rows.filter(r=>r.scenario_ids.includes('S01')||r.scenario_ids.includes('S28')).length);
   const compound=filterRows(rows,{scene:['S15','S30'],domain:['history'],variant:['challenge','anonymous_challenge']},'','all');
-  assert.equal(compound.length,2);
-  assert.equal(filterRows(rows,{},'F-C08-H').length,9);
+  assert.equal(compound.length,1);
+  assert.equal(filterRows(rows,{},'F-C08-H').length,6);
   assert.equal(filterRows(rows,{domain:['history'],family:['F-C08-L']}).length,0);
 });
 test('every label group is available, planned scenes are not inherited',()=>{
@@ -67,3 +67,19 @@ test('comparison, member filtering and sums only flag the relevant non-support o
   assert.equal(candidatesFor(aggregate,filter)[0].fact.relation,'评奖组关联');
 });
 
+
+test('display start adds root connections and preserves every original dependency',()=>{
+  for(const row of rows)for(const proof of row.gold.proofs){
+    const before=JSON.stringify(proof),visual=proofWithStart(row,proof);
+    assert.equal(visual.length,proof.length+1);
+    assert.equal(visual[0].node_id,'n0');
+    for(const n of proof){
+      const v=visual.find(x=>x.node_id===n.node_id);
+      assert.deepEqual(v.dependencies,n.dependencies.length?n.dependencies:['n0']);
+    }
+    assert.equal(JSON.stringify(proof),before);
+    const graph=layoutProof(visual);
+    assert.ok(graph.edges.some(e=>e.from==='n0'));
+    assert.equal(graph.positions.size,proof.length+1);
+  }
+});

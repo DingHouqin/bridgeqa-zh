@@ -144,6 +144,11 @@ export function candidatesFor(row,node) {
   }
   return found;
 }
+export function proofWithStart(row,proof){
+  if(!proof.length)return [];
+  const start={node_id:'n0',operation:'question_start',expected_value:row.query.start??row.query.subject??proof[0].upstream??'题目给定条件',support_fact_ids:[],support_evidence_ids:[],dependencies:[]};
+  return [start,...proof.map(n=>({...n,dependencies:n.dependencies.length?[...n.dependencies]:['n0']}))];
+}
 export function layoutProof(proof) {
   const layers=new Map();
   for(const node of proof) layers.set(node.node_id,1+Math.max(0,...node.dependencies.map(id=>layers.get(id)||0)));
@@ -156,9 +161,9 @@ export function layoutProof(proof) {
   const maxRows=Math.max(1,...[...groups.values()].map(g=>g.length));
   const positions=new Map();
   for(const [layer,nodes] of groups) nodes.forEach((node,i)=>{
-    positions.set(node.node_id,{x:24+(layer-1)*244,y:30+i*112+(maxRows-nodes.length)*56});
+    positions.set(node.node_id,{x:24+(layer-1)*304,y:30+i*112+(maxRows-nodes.length)*56});
   });
-  return {positions,width:Math.max(460,groups.size*244+20),height:Math.max(170,maxRows*112+50),
+  return {positions,width:Math.max(460,groups.size*304+20),height:Math.max(170,maxRows*112+50),
     edges:proof.flatMap(node=>node.dependencies.map(from=>({from,to:node.node_id})))};
 }
 export function missingFacts(row,index) {

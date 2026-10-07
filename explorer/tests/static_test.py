@@ -10,7 +10,7 @@ from pathlib import Path
 APP=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(APP))
 from export_site import export
-from server import PROJECT, load_bundle
+from site_data import PROJECT, load_bundle
 
 class StaticTest(unittest.TestCase):
     def test_export_roundtrip_and_public_files(self):

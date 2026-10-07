@@ -7,7 +7,7 @@ const root=path.resolve(__dirname,'../..');
 const out=path.join(root,'workspace/explorer');
 const base=process.env.BRIDGEQA_URL||'http://127.0.0.1:8765';
 const rows=fs.readFileSync(path.join(root,'data/pilot_literature_history_v0/benchmark.jsonl'),'utf8').trim().split(/\r?\n/).map(JSON.parse);
-const find=(c,v='challenge',d='history')=>rows.find(r=>r.combination_id===c&&r.variant===v&&r.domain===d);
+const find=(c,v='challenge',d='history')=>rows.find(r=>r.combination_id===c&&r.domain===d&&(v==='challenge'?['challenge','anonymous_challenge','unfamiliar_challenge'].includes(r.variant):r.variant===v));
 (async()=>{
   const browser=await chromium.launch({headless:true});
   const page=await browser.newPage({viewport:{width:1440,height:1050},deviceScaleFactor:1});
@@ -32,21 +32,21 @@ const find=(c,v='challenge',d='history')=>rows.find(r=>r.combination_id===c&&r.v
     await check('overview: topic, scale, sources, combinations and diagram',async()=>{
       await overview();
       assert.match(await page.locator('h1').innerText(),/文学与历史/);
-      assert.equal(await page.locator('.stat strong').first().innerText(),'128');
+      assert.equal(await page.locator('.stat strong').first().innerText(),'86');
       assert.equal(await page.locator('.combination-table tbody tr').count(),10);
       assert.equal(await page.locator('.scene-cell').count(),32);
       assert.equal(await page.locator('#dataset option').count(),1);
       await screenshot('01-overview-desktop.png');
     });
     await check('catalog: all rows, search, label visibility and zero result',async()=>{
-      await catalog();await count(128);
+      await catalog();await count(86);
       assert.equal(await page.locator('.question-card').count(),12);
       await page.locator('.card-all-tags').first().locator('summary').click();
       assert.ok(await page.locator('.card-all-tags').first().locator('.tag').count()>=18);
-      await page.locator('#search').fill('F-C08-H');await count(9);
+      await page.locator('#search').fill('F-C08-H');await count(6);
       await page.locator('#search').fill('不存在的独立测试问题');await count(0);
       assert.ok(await page.locator('.empty-state').isVisible());
-      await page.locator('.filter-heading [data-act=clear]').click();await count(128);
+      await page.locator('.filter-heading [data-act=clear]').click();await count(86);
     });
     await check('cross-facet AND and scene ALL, reload and return preservation',async()=>{
       await page.locator('.facet-value[data-key=scene][data-value=S01]').click();
@@ -58,45 +58,51 @@ const find=(c,v='challenge',d='history')=>rows.find(r=>r.combination_id===c&&r.v
       assert.match(await page.locator('.proof-panel h2').innerText(),/原型/);
       assert.ok(await page.locator('.missing-support').isVisible());
       await page.getByRole('link',{name:'← 返回筛选结果',exact:true}).click();await count(2);
-      await page.locator('.filter-heading [data-act=clear]').click();await count(128);
-      await page.locator('.facet-value[data-key=scene][data-value=S15]').click();await count(12);
-      await page.locator('.facet-value[data-key=domain][data-value=history]').click();await count(6);
+      await page.locator('.filter-heading [data-act=clear]').click();await count(86);
+      await page.locator('.facet-value[data-key=scene][data-value=S15]').click();await count(8);
+      await page.locator('.facet-value[data-key=domain][data-value=history]').click();await count(4);
       await screenshot('02-catalog-filtered.png');
     });
     await check('C01 correct chain, role diversion and evidence navigation',async()=>{
       const row=find('C01','challenge','literature');
       await detail(row);
-      assert.equal(await page.locator('.proof-node').count(),3);
+      assert.equal(await page.locator('.proof-node').count(),4);
       assert.ok(await page.locator('.potential-fact').count()>0);
-      await page.locator('.proof-node[data-node=n2]').click();
+      await page.locator('.proof-connection[data-node=n2]').click();
       assert.match(await page.locator('.node-analysis h3').innerText(),/n2/);
-      await page.locator('.evidence-jumps button').first().click();
-      assert.ok(await page.locator('.document.focused').count()>0);
-      await page.locator('.source-record').first().locator('blockquote').first().scrollIntoViewIfNeeded();
-      assert.ok(await page.locator('.source-record').count()>0);
+      assert.match(await page.locator('.node-analysis h3').innerText(),/n1 → n2/);
+      assert.ok(await page.locator('.hop-document').count()>0);
+      assert.equal(await page.locator('#materials, #source-materials').count(),0);
+      const quotation=page.locator('.fact-quotation').first();await quotation.locator('summary').click();
+      assert.ok(await quotation.locator('blockquote').isVisible());
+      const edge=page.locator('.proof-connection[data-from=n0][data-node=n1]');await edge.focus();await page.keyboard.press('Enter');
+      assert.match(await page.locator('.node-analysis h3').innerText(),/n0 → n1/);
+      assert.equal(await page.locator('.proof-node[role=button]').count(),0);
+      assert.ok(await page.locator('.family-links .unavailable').count()>0);
       await screenshot('03-chain-detail.png');
     });
     await check('C04 alternative proofs and material role switching',async()=>{
       const row=find('C04');await detail(row);
       assert.equal(await page.locator('#proof-choice option').count(),2);
-      const second=row.fact_to_evidence.b2,first=row.fact_to_evidence.b;
-      assert.ok(await page.locator('#doc-'+second+'.alternative').count());
+      await page.locator('.proof-connection[data-node=n2]').click();
+      assert.match(await page.locator('.node-analysis .support-fact .mono').first().innerText(),/^b$/);
       await page.locator('#proof-choice').selectOption('1');
-      assert.ok(await page.locator('#doc-'+second+'.current').count());
-      assert.ok(await page.locator('#doc-'+first+'.alternative').count());
+      await page.locator('.proof-connection[data-node=n2]').click();
+      assert.match(await page.locator('.node-analysis .support-fact .mono').first().innerText(),/^b2$/);
     });
     await check('C03 ambiguity, alias proof and source-independent settings',async()=>{
       const row=find('C03');await detail(row);
       assert.equal(await page.locator('.interpretations>div').count(),2);
-      assert.equal(await page.locator('.proof-node').count(),4);
+      assert.equal(await page.locator('.proof-node').count(),5);
       assert.ok(await page.locator('.proof-node[data-node=alias]').count());
     });
     await check('C06 table/text aggregation displays DAG and 25 pages',async()=>{
       const row=find('C06');await detail(row);
-      assert.equal(await page.locator('.proof-node').count(),row.gold.proofs[0].length);
-      assert.equal(await page.locator('.source-table tbody tr').count(),3);
+      assert.equal(await page.locator('.proof-node').count(),row.gold.proofs[0].length+1);
+      await page.locator('.proof-connection[data-node=sum]').first().click();
+      assert.equal(await page.locator('.hop-original .source-table tbody tr').first().count(),1);
       assert.equal(await page.locator('.answer-box strong').innerText(),'25');
-      await page.locator('.proof-node[data-node=sum]').click();
+      await page.locator('.proof-connection[data-node=sum]').first().click();
       assert.match(await page.locator('.node-analysis').innerText(),/合计求和/);
       assert.ok(await page.locator('.proof-canvas').evaluate(el=>el.scrollLeft>0));
       assert.match(await page.locator('.node-analysis .potential-fact').innerText(),/75/);
@@ -109,32 +115,32 @@ const find=(c,v='challenge',d='history')=>rows.find(r=>r.combination_id===c&&r.v
       await detail(find('C01','no_context'));
       assert.equal(await page.locator('.document').count(),0);
       assert.ok(await page.locator('.prototype').count());
-      assert.match(await page.locator('#materials').innerText(),/当前材料为空/);
+      assert.match(await page.locator('.node-analysis .hop-original').innerText(),/原型材料/);
     });
     await check('C08 updated world, bridge differences and original quotation',async()=>{
       const row=find('C08');await detail(row);
       assert.equal(await page.locator('.answer-box strong').innerText(),'庞崖');
       assert.equal(await page.locator('.change-item').count(),2);
-      await page.locator('.proof-node[data-node=n2]').click();
+      await page.locator('.proof-connection[data-node=n2]').click();
       assert.ok(await page.locator('.old-bridge').count());
       assert.match(await page.locator('.old-bridge').innerText(),/项燕/);
-      const anon=find('C08','anonymous_challenge');await detail(anon);
+      const anon=find('C06','anonymous_challenge');await detail(anon);
       assert.ok(await page.getByText('实体命名映射',{exact:false}).count());
     });
     await check('long background is expandable and raw source preserved',async()=>{
       const row=find('C07','noise_12000');await detail(row);
-      assert.equal(await page.locator('.document.background').count(),2);
-      await page.locator('.document.background details summary').first().click();
+      assert.equal(await page.locator('.potential-fact.background').count(),2);
+      await page.locator('.potential-fact.background details summary').first().click();
       assert.ok(await page.locator('.full-background').first().isVisible());
       assert.equal((await page.locator('.full-background').first().innerText()).length,6000);
     });
     await check('reverse access, conditional time ambiguity and explicit abduction',async()=>{
       await detail(find('C05'));
-      assert.match(await page.locator('.proof-node').first().textContent(),/逆查/);
+      assert.match(await page.locator('.proof-node').nth(1).textContent(),/逆查/);
       await detail(find('C10','time_unspecified'));
       assert.equal(await page.locator('.interpretations>div').count(),2);
       await detail(find('C09','bounded_abduction'));
-      await page.locator('.proof-node[data-node=assume]').click();
+      await page.locator('.proof-connection[data-node=assume]').click();
       assert.match(await page.locator('.node-analysis').innerText(),/待补假设/);
     });
     await check('mobile overview and detail fit 390px without page overflow',async()=>{
@@ -145,10 +151,10 @@ const find=(c,v='challenge',d='history')=>rows.find(r=>r.combination_id===c&&r.v
       await detail(find('C08'));
       assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
       await screenshot('06-detail-mobile.png');
-      await page.locator('.proof-node[data-node=n2]').focus();
+      await page.locator('.proof-connection[data-node=n2]').focus();
       await page.keyboard.press('Enter');
       assert.match(await page.locator('.node-analysis h3').innerText(),/n2/);
-      await catalog();await count(128);
+      await catalog();await count(86);
       await page.locator('.filter-shell-title').click();
       assert.equal(await page.locator('.filter-shell').getAttribute('open'),null);
       assert.ok(await page.locator('.question-results').isVisible());

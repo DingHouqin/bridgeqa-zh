@@ -15,6 +15,18 @@
       "title": "研究文档"
     },
     {
+      "source": "docs/report/2026-10-07_项目进展报告.md",
+      "slug": "project/progress-2026-10-07",
+      "group": "项目管理",
+      "title": "项目进展报告｜2026-10-07"
+    },
+    {
+      "source": "docs/工作计划.md",
+      "slug": "project/work-plan",
+      "group": "项目管理",
+      "title": "接下来还要做什么"
+    },
+    {
       "source": "data/README.md",
       "slug": "data/index",
       "group": "数据与构建",
@@ -39,22 +51,22 @@
       "title": "评测实现"
     },
     {
-      "source": "evaluation/评分器可执行性评估.md",
+      "source": "docs/report/2026-10-07_评分器可执行性评估.md",
       "slug": "evaluation/readiness",
-      "group": "评测方案",
-      "title": "当前候选集是否足以构建完整评分器"
+      "group": "报告归档",
+      "title": "当前候选集是否足以构建完整评分器｜2026-10-07"
     },
     {
       "source": "explorer/README.md",
       "slug": "explorer/index",
       "group": "系统与发布",
-      "title": "BridgeQA Explorer｜题目与证据审查系统"
+      "title": "BridgeQA Explorer｜线上题目与证据审查系统"
     },
     {
-      "source": "docs/在线文档网站可行性评估.md",
+      "source": "docs/report/2026-10-07_在线文档网站可行性评估.md",
       "slug": "site/feasibility",
-      "group": "系统与发布",
-      "title": "在线文档网站可行性评估"
+      "group": "报告归档",
+      "title": "在线文档网站可行性评估｜2026-10-07"
     },
     {
       "source": "AGENTS.md",
@@ -69,10 +81,10 @@
       "title": "报告归档"
     },
     {
-      "source": "docs/report/研究设计参考报告.md",
+      "source": "docs/report/2026-10-07_研究设计参考报告.md",
       "slug": "archive/reference",
       "group": "报告归档",
-      "title": "研究设计参考报告（仅供参考）"
+      "title": "研究设计参考报告（仅供参考）｜2026-10-07"
     },
     {
       "source": "docs/benchmark-survey/README.md",
@@ -181,6 +193,18 @@
       "slug": "specs/06",
       "group": "系统规格",
       "title": "06｜静态发布与文档"
+    },
+    {
+      "source": "data/pilot_literature_history_v0/去重说明.md",
+      "slug": "data/deduplication",
+      "group": "数据与构建",
+      "title": "去重与保留分配（2026-10-07）"
+    },
+    {
+      "source": "explorer/specs/07_连线交互与线上系统.md",
+      "slug": "specs/07",
+      "group": "系统规格",
+      "title": "07｜连线交互与线上系统"
     }
   ],
   "files": [
@@ -195,6 +219,7 @@
     "data/pilot_literature_history_v0/oracle_inputs.jsonl",
     "data/pilot_literature_history_v0/seeds.json",
     "data/pilot_literature_history_v0/sources.json",
+    "data/pilot_literature_history_v0/去重说明.md",
     "data/pilot_literature_history_v0/题目审阅册.md",
     "docs/README.md",
     "docs/benchmark-survey/00_范围与资料目录.md",
@@ -208,22 +233,24 @@
     "docs/benchmark-survey/08_评测指标与项目迁移.md",
     "docs/benchmark-survey/09_多步骤评判与核心创新点回收.md",
     "docs/benchmark-survey/README.md",
+    "docs/report/2026-10-07_在线文档网站可行性评估.md",
+    "docs/report/2026-10-07_研究设计参考报告.md",
+    "docs/report/2026-10-07_评分器可执行性评估.md",
+    "docs/report/2026-10-07_项目进展报告.md",
     "docs/report/README.md",
-    "docs/report/研究设计参考报告.md",
-    "docs/在线文档网站可行性评估.md",
+    "docs/工作计划.md",
     "evaluation/README.md",
-    "evaluation/评分器可执行性评估.md",
     "explorer/README.md",
     "explorer/export_site.py",
-    "explorer/server.py",
+    "explorer/site_data.py",
     "explorer/specs/01_产品与信息架构.md",
     "explorer/specs/02_标签筛选与交互.md",
     "explorer/specs/03_数据映射与干扰语义.md",
     "explorer/specs/04_技术与运行.md",
     "explorer/specs/05_验收与测试.md",
     "explorer/specs/06_静态发布与文档.md",
+    "explorer/specs/07_连线交互与线上系统.md",
     "explorer/specs/README.md",
-    "explorer/start.cmd",
     "explorer/web/app.js",
     "explorer/web/documents.js",
     "explorer/web/index.html",

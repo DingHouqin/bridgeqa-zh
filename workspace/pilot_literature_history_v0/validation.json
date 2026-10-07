@@ -1,7 +1,7 @@
 {
   "status": "passed",
   "families": 20,
-  "records": 128,
+  "records": 86,
   "combinations": 10,
   "scene_ids": [
     "S01",
@@ -34,20 +34,20 @@
   ],
   "scene_count": 27,
   "domains": {
-    "history": 64,
-    "literature": 64
+    "history": 43,
+    "literature": 43
   },
   "answer_states": {
-    "answerable": 98,
+    "answerable": 60,
     "insufficient": 22,
-    "ambiguous": 8
+    "ambiguous": 4
   },
   "variant_counts": {
     "control": 20,
-    "challenge": 20,
-    "anonymous_challenge": 20,
-    "unfamiliar_challenge": 20,
+    "unfamiliar_challenge": 6,
     "no_context": 20,
+    "anonymous_challenge": 6,
+    "challenge": 8,
     "clarify_second": 2,
     "delete_one_support": 2,
     "delete_all_bridge_supports": 2,
@@ -55,7 +55,6 @@
     "noise_1000": 2,
     "noise_12000": 2,
     "reorder_same_noise": 2,
-    "anonymous_control": 2,
     "switch_question_start": 2,
     "same_answer_other_proof": 2,
     "same_answer_original_start": 2,
@@ -68,34 +67,63 @@
     12037
   ],
   "proof_depths": {
-    "3": 74,
+    "3": 48,
     "0": 22,
-    "4": 18,
-    "5": 8,
-    "2": 6
+    "4": 10,
+    "5": 4,
+    "2": 2
   },
   "sources": 4,
   "independent_human_review": false,
   "model_runs": 0,
+  "version": "pilot-v0.2",
+  "deduplication": {
+    "generated_records": 128,
+    "removed_records": 42,
+    "primary_by_family": {
+      "F-C01-H": "unfamiliar_challenge",
+      "F-C01-L": "anonymous_challenge",
+      "F-C02-H": "anonymous_challenge",
+      "F-C02-L": "unfamiliar_challenge",
+      "F-C03-H": "challenge",
+      "F-C03-L": "anonymous_challenge",
+      "F-C04-H": "challenge",
+      "F-C04-L": "challenge",
+      "F-C05-H": "unfamiliar_challenge",
+      "F-C05-L": "challenge",
+      "F-C06-H": "anonymous_challenge",
+      "F-C06-L": "unfamiliar_challenge",
+      "F-C07-H": "challenge",
+      "F-C07-L": "challenge",
+      "F-C08-H": "challenge",
+      "F-C08-L": "challenge",
+      "F-C09-H": "unfamiliar_challenge",
+      "F-C09-L": "anonymous_challenge",
+      "F-C10-H": "anonymous_challenge",
+      "F-C10-L": "unfamiliar_challenge"
+    }
+  },
   "oracle_tasks": 58,
   "negative_validation_tests": [
     "wrong_gold",
     "missing_support",
     "leaked_metadata",
-    "dependency_cycle"
+    "dependency_cycle",
+    "duplicate_surface_variant",
+    "dangling_pair_reference"
   ],
   "output_hashes": {
-    "seeds.json": "e8bbd8cc371d40d643ee8e097c0bd044935f59e3ea2a08604a5d5ce023f18fc3",
-    "benchmark.jsonl": "d6a5eb2b5d599e83d60cd178236f6d68642b48ab3a074d294e950494205fcd40",
-    "inputs.jsonl": "caf84424bce13c43d67234c42399c19385dc0b45bd1a788bff96dde044d54a81",
+    "seeds.json": "6cb1caef5c6bf4adbb1ea07ce20607bbc58e02fe4b6435e2651e279e7f3d17b4",
+    "benchmark.jsonl": "a97595680591ea1f6a025d532dc3e9cf99e5ebc5dfb18235788c637c0fe9abbf",
+    "inputs.jsonl": "10dd4d65d3e7eaf69fc1ac389b831ed54cea6bb88e402742d80ceb6c96165e31",
     "oracle_inputs.jsonl": "eae23c6840523fa4cdc66bf25dce5a83aa298a968e3e4618a1aee081c3a2e116",
     "oracle_gold.jsonl": "de6f10dd3dc93be097d938af4071505b515b82365c7002420f95c3f1bc681963",
-    "题目审阅册.md": "5ba5fa7764332ceeb72ba2c2b0b492697e11e4dfb0a8418f7010ea94bce593f3"
+    "题目审阅册.md": "c0dfc864059e9e5abc8b88385a4dad28184aaad9569816318864432a44782068"
   },
   "input_hashes": {
     "sources.json": "e86ac26b53fa0de1398df4a62cf7c1667bf3845c5edd428fc677c19b5e4096fe",
     "combinations.json": "b4219f75988b716b4046ef8c91d27c4f324fa5cd2acd3a7344e83ace3f54213a",
-    "build_pilot.py": "864b7cdd341e041928c2a44cdd0ec11d53120fd1fd9c7413aa9a59109a88ae29"
+    "build_pilot.py": "621ffd5240376b6548b78c777228629b1a7ac73660e0eb336843de1979efbe93"
   },
   "file_links": {
     "readme": "[检查说明](README.md)",

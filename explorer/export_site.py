@@ -6,7 +6,7 @@ import json
 import os
 import shutil
 from pathlib import Path
-from server import APP, PROJECT, REGISTRY, load_bundle
+from site_data import APP, PROJECT, REGISTRY, load_bundle
 
 def json_write(path, value):
     path.parent.mkdir(parents=True, exist_ok=True)

@@ -20,6 +20,82 @@ ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "data" / "pilot_literature_history_v0"
 TEMP = ROOT / "workspace" / "pilot_literature_history_v0"
 SEED = 20261007
+VERSION = "pilot-v0.2"
+PRIMARY_VARIANTS = ("challenge", "anonymous_challenge", "unfamiliar_challenge")
+# One surface form per family; substantive interventions remain independent records.
+PRIMARY_BY_FAMILY = {
+    "F-C01-H": "unfamiliar_challenge", "F-C01-L": "anonymous_challenge",
+    "F-C02-H": "anonymous_challenge", "F-C02-L": "unfamiliar_challenge",
+    "F-C03-H": "challenge", "F-C03-L": "anonymous_challenge",
+    "F-C04-H": "challenge", "F-C04-L": "challenge",
+    "F-C05-H": "unfamiliar_challenge", "F-C05-L": "challenge",
+    "F-C06-H": "anonymous_challenge", "F-C06-L": "unfamiliar_challenge",
+    "F-C07-H": "challenge", "F-C07-L": "challenge",
+    "F-C08-H": "challenge", "F-C08-L": "challenge",
+    "F-C09-H": "unfamiliar_challenge", "F-C09-L": "anonymous_challenge",
+    "F-C10-H": "anonymous_challenge", "F-C10-L": "unfamiliar_challenge",
+}
+
+def select_primary_variants(rows):
+    selected = []
+    for row in rows:
+        keep = PRIMARY_BY_FAMILY[row["family_id"]]
+        if row["variant"] in PRIMARY_VARIANTS and row["variant"] != keep:
+            continue
+        if row["variant"] == "anonymous_control":
+            continue
+        row = copy.deepcopy(row)
+        row["version"] = VERSION
+        primary = next(r for r in rows if r["family_id"] == row["family_id"] and r["variant"] == keep)
+        row["challenge_id"] = primary["id"]
+        if row["variant"] == "no_context":
+            row["input"]["question"] = primary["input"]["question"]
+            row["query"] = copy.deepcopy(primary["query"])
+            row["entity_mapping"] = copy.deepcopy(primary["entity_mapping"])
+            row["construction"]["naming"] = primary["construction"]["naming"]
+        reference = row["construction"]["comparison_reference"]
+        if row["variant"] == keep:
+            reference = "control"
+        elif reference == "challenge":
+            reference = keep
+        row["construction"]["comparison_reference"] = reference
+        selected.append(row)
+    for row in selected:
+        reference = row["construction"]["comparison_reference"]
+        if not reference:
+            row["paired_changes"] = None
+            continue
+        parent = next(r for r in selected if r["family_id"] == row["family_id"] and r["variant"] == reference)
+        before = {f["fact_id"]: f for f in parent["facts"]}
+        after = {f["fact_id"]: f for f in row["facts"]}
+        row["paired_changes"] = {"parent_id": parent["id"],
+            "added_fact_ids": sorted(set(after)-set(before)),
+            "removed_fact_ids": sorted(set(before)-set(after)),
+            "rewritten_fact_ids": sorted(k for k in set(before)&set(after) if before[k]!=after[k]),
+            "question_changed": parent["input"]["question"] != row["input"]["question"],
+            "answer_changed": parent["gold"]["answers"] != row["gold"]["answers"],
+            "status_changed": parent["gold"]["status"] != row["gold"]["status"]}
+    return selected
+
+def validate_selection(rows, sources):
+    ids = {r["id"] for r in rows}
+    assert len(ids) == len(rows) == 86
+    quotes = {q["quote_id"] for s in sources for q in s["quotes"]}
+    for r in rows:
+        validate_record(r, quotes)
+        assert r["control_id"] in ids and r["challenge_id"] in ids
+        if r["paired_changes"]:
+            assert r["paired_changes"]["parent_id"] in ids
+    for family, keep in PRIMARY_BY_FAMILY.items():
+        group = [r for r in rows if r["family_id"] == family]
+        assert [r["variant"] for r in group if r["variant"] in PRIMARY_VARIANTS] == [keep]
+        assert any(r["variant"] == "control" for r in group)
+        target = next(r for r in group if r["variant"] == keep)
+        empty = next(r for r in group if r["variant"] == "no_context")
+        assert empty["input"]["question"] == target["input"]["question"]
+        assert not empty["input"]["documents"]
+        assert target["paired_changes"]["parent_id"] == target["control_id"]
+    assert Counter(r["domain"] for r in rows) == {"history": 43, "literature": 43}
 POLICY = (
     "只依据本题材料回答。材料限定一个叙事或档案世界，可能含编者设定，"
     "不能用熟悉的作品、史书或现实知识覆盖材料，也不能补齐缺失关系。"
@@ -765,6 +841,23 @@ def self_test(rows,sources):
         try: validate_record(bad,quotes)
         except AssertionError: rejected.append(name)
     assert len(rejected)==4
+    for name in ("duplicate_surface_variant", "dangling_pair_reference"):
+        bad = copy.deepcopy(rows)
+        target = next(r for r in bad if r["family_id"] == "F-C04-H" and r["variant"] == "challenge")
+        if name == "duplicate_surface_variant":
+            index = next(i for i,r in enumerate(bad) if r["family_id"] == "F-C04-H" and r["variant"] == "no_context")
+            duplicate = copy.deepcopy(target)
+            duplicate["id"] = bad[index]["id"]
+            duplicate["input"]["id"] = duplicate["id"]
+            duplicate["variant"] = "unfamiliar_challenge"
+            bad[index] = duplicate
+        else:
+            target["paired_changes"]["parent_id"] = "removed-record"
+        try:
+            validate_selection(bad, sources)
+        except AssertionError:
+            rejected.append(name)
+    assert len(rejected) == 6
     return rejected
 
 def review_book(rows,combos):
@@ -775,12 +868,13 @@ def review_book(rows,combos):
     for family in sorted({r["family_id"] for r in rows}):
         group=[r for r in rows if r["family_id"]==family]
         base=next(r for r in group if r["variant"]=="control")
-        target=next(r for r in group if r["variant"]=="challenge")
+        target=next(r for r in group if r["id"]==base["challenge_id"])
         lines.extend([f"## {family}｜{combos[base['combination_id']]['title']}","",
                       f"领域：{base['domain']}；组合：{base['combination_id']}；来源组：{base['source_cluster_id']}。",
                       "场景："+"、".join(f"[{s}](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)" for s in target["scenario_ids"])+"。",
                       "材料归属："+("；".join(target["source_links"]) or "本项目原创合成档案，姓名和事件不作史实主张。"),"",
                       "**对照问句**："+base["input"]["question"],
+                      "**保留挑战类型**："+target["variant"],
                       "**组合问句**："+target["input"]["question"],"",
                       "**组合材料**（目录背景仅在机器输入保存全文）：",""])
         for d in target["input"]["documents"]:
@@ -841,10 +935,22 @@ def main():
                 "status_changed":parent["gold"]["status"]!=r["gold"]["status"]}
         else: r["paired_changes"]=None
     report=validate_dataset(rows,sources,combinations)
+    generated_count = len(rows)
+    rows = select_primary_variants(rows)
+    validate_selection(rows, sources)
+    report.update(version=VERSION, records=len(rows),
+        domains=dict(Counter(r["domain"] for r in rows)),
+        answer_states=dict(Counter(r["gold"]["status"] for r in rows)),
+        variant_counts=dict(Counter(r["variant"] for r in rows)),
+        proof_depths=dict(Counter(str(r["minimum_proof_depth"]) for r in rows)),
+        scene_ids=sorted({s for r in rows for s in r["scenario_ids"]}),
+        deduplication={"generated_records":generated_count,"removed_records":generated_count-len(rows),
+                      "primary_by_family":PRIMARY_BY_FAMILY})
+    report["scene_count"] = len(report["scene_ids"])
     oracle,oracle_gold=build_oracle(rows)
     report["oracle_tasks"]=len(oracle)
     report["negative_validation_tests"]=self_test(rows,sources) if args.self_test else []
-    write_json(DATA/"seeds.json",{"version":"pilot-v0.1","construction_link":"[构建器](../../src/pilot_literature_history_v0/build_pilot.py)","seeds":seeds})
+    write_json(DATA/"seeds.json",{"version":VERSION,"construction_link":"[构建器](../../src/pilot_literature_history_v0/build_pilot.py)","seeds":seeds})
     write_jsonl(DATA/"benchmark.jsonl",rows)
     write_jsonl(DATA/"inputs.jsonl",[r["input"] for r in rows])
     write_jsonl(DATA/"oracle_inputs.jsonl",oracle)

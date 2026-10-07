@@ -1,14 +1,14 @@
 {
   "status": "passed",
-  "base": "https://dinghouqin.github.io/bridgeqa-zh",
+  "base": "http://127.0.0.1:8766",
   "checks": [
     "nested hash, unknown dataset independence, reload, anchors and history",
-    "all 30 chapters render; 48 local file links resolve",
+    "all 34 chapters render; 49 local file links resolve",
     "source-relative Markdown links and missing chapter recovery",
     "mobile documentation/guide and no bundle requests or browser errors"
   ],
-  "chapters": 30,
-  "file_links": 48,
+  "chapters": 34,
+  "file_links": 49,
   "errors": [],
   "report_link": "[检查说明](README.md)"
 }

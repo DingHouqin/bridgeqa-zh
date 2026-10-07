@@ -2,7 +2,7 @@ import {siteURL,rewriteSiteLinks} from './urls.js';
 import {renderDocument} from './documents.js';
 // [Interaction spec](../specs/02_标签筛选与交互.md), [semantic spec](../specs/03_数据映射与干扰语义.md).
 import {FACETS,VARIANTS,STATUS,PROVENANCE,OPERATIONS,makeIndex,tagsFor,tagLabel,
-  filterRows,facetCounts,evidenceRoles,candidatesFor,layoutProof,missingFacts} from './model.js';
+  filterRows,facetCounts,evidenceRoles,candidatesFor,layoutProof,proofWithStart,missingFacts} from './model.js';
 const app=document.querySelector('#app');
 const h=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const valueText=value=>Array.isArray(value)?value.map(valueText).join('、'):
@@ -10,7 +10,7 @@ const valueText=value=>Array.isArray(value)?value.map(valueText).join('、'):
 const external=value=>{try {const url=new URL(value,location.origin);return ['http:','https:'].includes(url.protocol)?url.href:'#';}catch{return '#';}};
 let registry=[],bundle,index,counts,dataset='pilot_literature_history_v0',token=0;
 let listState={filters:{},search:'',sceneMode:'any',page:1,size:12};
-let pageName='overview',currentId='',proofIndex=0,selectedNode='',lastDetail='';
+let pageName='overview',currentId='',proofIndex=0,selectedNode='',selectedFrom='n0',lastDetail='';
 let filterExpanded=window.innerWidth>760;
 let guideMarkup;
 const sortedRows=()=>[...bundle.records].sort((a,b)=>a.family_id.localeCompare(b.family_id)||a.id.localeCompare(b.id));
@@ -180,14 +180,16 @@ function proofGraphic(proof){
   const {positions,width,height,edges}=layoutProof(proof);
   const lines=edges.map(e=>{
     const a=positions.get(e.from),b=positions.get(e.to),x1=a.x+202,y1=a.y+40,x2=b.x,y2=b.y+40;
-    return '<path class="proof-edge" d="M '+x1+' '+y1+' C '+(x1+26)+' '+y1+', '+(x2-26)+' '+y2+', '+x2+' '+y2+'" marker-end="url(#arrow)"/>';
+    const d='M '+x1+' '+y1+' C '+(x1+26)+' '+y1+', '+(x2-26)+' '+y2+', '+x2+' '+y2;
+    const chosen=e.from===selectedFrom&&e.to===selectedNode;
+    return '<g class="proof-connection '+(chosen?'selected':'')+'" role="button" tabindex="0" aria-pressed="'+chosen+'" aria-label="查看 '+h(e.from+' 到 '+e.to)+'" data-act="edge" data-from="'+h(e.from)+'" data-node="'+h(e.to)+'">'+
+      '<path class="proof-edge-hit" d="'+d+'"/><path class="proof-edge" d="'+d+'" marker-end="url(#arrow)"/>'+
+      '<text class="edge-label" x="'+((x1+x2)/2)+'" y="'+((y1+y2)/2-12)+'" text-anchor="middle">'+h(e.from+' → '+e.to)+'</text></g>';
   }).join('');
   const nodes=proof.map(n=>{
-    const pos=positions.get(n.node_id);
-    const value=valueText(n.expected_value);
-    const label=n.relation?(n.direction==='in'?'逆查 · ':'')+n.relation:OPERATIONS[n.operation]||n.operation;
-    return '<g class="proof-node '+(n.node_id===selectedNode?'selected':'')+'" tabindex="0" role="button" aria-label="'+
-      h(n.node_id+' '+label+' '+value)+'" data-act="node" data-node="'+h(n.node_id)+'" transform="translate('+pos.x+','+pos.y+')">'+
+    const pos=positions.get(n.node_id),value=valueText(n.expected_value);
+    const label=n.operation==='question_start'?'题目起点':n.relation?(n.direction==='in'?'逆查 · ':'')+n.relation:OPERATIONS[n.operation]||n.operation;
+    return '<g class="proof-node '+(n.node_id===selectedNode?'selected':'')+'" data-node="'+h(n.node_id)+'" transform="translate('+pos.x+','+pos.y+')">'+
       '<title>'+h(label+' → '+value)+'</title><rect width="202" height="80" rx="12"/><text x="14" y="21" class="node-id">'+h(n.node_id)+
       '</text><text x="14" y="42" class="node-operation">'+h(label.length>19?label.slice(0,18)+'…':label)+
       '</text><text x="14" y="64" class="node-value">'+h(value.length>19?value.slice(0,18)+'…':value)+'</text></g>';
@@ -196,42 +198,58 @@ function proofGraphic(proof){
     '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">'+
     '<path d="M0 0L10 5L0 10Z"/></marker></defs>'+lines+nodes+'</svg></div>';
 }
+function rawFactMaterial(row,facts,label='原文 · 题面提供的材料'){
+  const ids=new Set(facts.map(f=>row.fact_to_evidence[f.fact_id]).filter(Boolean));
+  const docs=row.input.documents.filter(d=>ids.has(d.id));
+  return '<div class="hop-original"><h4>'+h(label)+'</h4>'+docs.map(d=>'<article class="hop-document"><span class="mono">'+h(d.id)+'</span>'+documentText(d.text)+'</article>').join('')+
+    (!docs.length?'<p class="caption">本操作没有独立原文材料；须依据题目条件或前置操作，不能另补事实。</p>':'')+'</div>';
+}
+function factQuotations(fact){
+  return [...(fact.quote_ids||[]),...(fact.parent_quote_ids||[])].map(id=>{
+    const q=index.quotes.get(id);if(!q)return '';
+    const prior=fact.parent_quote_ids?.includes(id);
+    return '<details class="fact-quotation"><summary>'+h(id)+' · '+(prior?'改写前原文锚点':'来源原文')+'</summary><blockquote><p>'+h(q.text)+'</p><small>'+h(q.locator)+'</small></blockquote>'+
+      '<a href="'+h(external(q.source.revision_url))+'" target="_blank" rel="noopener">'+h(q.source.title)+' · 固定修订网页 ↗</a><p class="caption">'+h(q.source.author_attribution)+' · '+h(q.source.license_displayed)+(prior?'；只支撑改写前关系，不支撑当前新边。':'')+'</p></details>';
+  }).join('');
+}
 function quoteButtons(fact){
-  const refs=[...(fact.quote_ids||[]),...(fact.parent_quote_ids||[])];
-  return refs.map(q=>'<button class="quote-link" data-act="scroll" data-target="quote-'+h(q)+'">'+h(q)+
-    (fact.parent_quote_ids?.includes(q)?' · 改写前锚点':'')+' ↗</button>').join('');
+  return [...(fact.quote_ids||[]),...(fact.parent_quote_ids||[])].map(id=>{
+    const q=index.quotes.get(id);return q?'<a class="quote-link" href="'+h(external(q.source.revision_url))+'" target="_blank" rel="noopener">'+h(id)+' ↗</a>':'';
+  }).join('');
 }
 function factView(fact,extra=''){
   return '<div class="fact '+extra+'"><div class="fact-line"><span class="mono">'+h(fact.fact_id)+'</span><strong>'+h(fact.subject)+
     '</strong><span class="relation">— '+h(fact.relation)+' →</span><strong>'+h(valueText(fact.object))+'</strong></div>'+
     '<div class="fact-foot"><span>'+h(PROVENANCE[fact.provenance]||fact.provenance)+
-    (fact.period?' · 馆年 '+fact.period[0]+'–'+fact.period[1]+'（含端点）':'')+'</span>'+quoteButtons(fact)+'</div></div>';
+    (fact.period?' · 馆年 '+fact.period[0]+'–'+fact.period[1]+'（含端点）':'')+'</span>'+quoteButtons(fact)+'</div>'+factQuotations(fact)+'</div>';
 }
 function nodeAnalysis(row,displayRow,proof,isPrototype){
   const node=proof.find(n=>n.node_id===selectedNode)||proof[0];
-  if(!node) return '';
+  if(!node)return '';
   const supportFacts=node.support_fact_ids.map(id=>displayRow.facts.find(f=>f.fact_id===id)).filter(Boolean);
+  const inherited=new Set();
+  const visit=id=>{const n=proof.find(n=>n.node_id===id);if(!n)return;for(const f of n.support_fact_ids)inherited.add(f);for(const dep of n.dependencies)visit(dep);};
+  if(!supportFacts.length)node.dependencies.forEach(visit);
+  const originFacts=supportFacts.length?supportFacts:displayRow.facts.filter(f=>inherited.has(f.fact_id));
   const potential=isPrototype?[]:candidatesFor(row,node);
   const old=index.rows.get(row.control_id);
   const changed=isPrototype?[]:supportFacts.filter(f=>row.construction.changed_fact_ids.includes(f.fact_id))
     .map(f=>old?.facts.find(of=>of.fact_id===f.fact_id)).filter(Boolean);
-  const docs=new Set(row.input.documents.map(d=>d.id));
-  return '<section class="node-analysis"><div class="section-heading"><h3>选中步骤 · '+h(node.node_id)+'</h3><span class="badge">'+
-    h(OPERATIONS[node.operation]||node.operation)+'</span></div><div class="node-summary"><span>上游 '+h(valueText(node.upstream??node.dependencies))+
-    '</span><strong>→ '+h(valueText(node.expected_value))+'</strong></div><p class="caption">依赖：'+h(node.dependencies.join('、')||'问题起点 / 题面条件')+
-    (node.direction==='in'?'；这是合法逆向查前驱，不把谓词当对称关系。':'')+'</p>'+
-    '<h4>'+(isPrototype?'原型支持（不代表当前完整证据）':'本步骤的合法支持')+'</h4>'+
-    (supportFacts.length?supportFacts.map(f=>factView(f,'support-fact')).join(''):
-      '<p class="caption">'+(node.operation==='hypothesis'?'这是待补假设，不是材料中已为真的事实。':
-        '这是比较、筛选或聚合等操作节点，依据来自前置步骤，不能捏造独立证据。')+'</p>')+
-    '<div class="evidence-jumps">'+node.support_evidence_ids.map(id=>'<button class="text-button" data-act="scroll" data-target="doc-'+h(id)+
-      '" '+(!docs.has(id)?'disabled':'')+'>定位材料 '+h(id)+' ↓</button>').join('')+'</div>'+
+  const from=selectedFrom||node.dependencies[0]||'n0';
+  const source=proofWithStart(displayRow,proof).find(n=>n.node_id===from);
+  const backgrounds=isPrototype?[]:row.input.documents.filter(d=>d.text.length>700&&!Object.values(row.fact_to_evidence).includes(d.id));
+  return '<section class="node-analysis"><div class="section-heading"><h3>选中跳跃 · '+h(from+' → '+node.node_id)+'</h3><span class="badge">'+h(OPERATIONS[node.operation]||node.operation)+'</span></div>'+
+    '<div class="node-summary"><span>'+h(valueText(node.upstream??source?.expected_value??node.dependencies))+'</span><strong>→ '+h(valueText(node.expected_value))+'</strong></div>'+
+    '<p class="caption">本操作全部依赖：'+h(node.dependencies.join('、')||'n0 · 题目条件')+(node.dependencies.length>1?'；所点连接只是其中一个输入，其他必要输入仍须同时满足。':'')+
+    (node.direction==='in'?'；合法逆查前驱，不默认关系对称。':'')+'</p>'+
+    rawFactMaterial(isPrototype?displayRow:row,originFacts,isPrototype?'原型材料 · 当前题目不可据此作答':supportFacts.length?'原文 · 题面提供的材料':'原文 · 前置操作使用的材料')+
+    '<h4>结构化事实与溯源</h4>'+(supportFacts.length?supportFacts.map(f=>factView(f,'support-fact')).join(''):
+      '<p class="caption">'+(node.operation==='hypothesis'?'这是待补假设，不是材料已证明的事实。':'本操作在前置结果上进行比较、筛选或聚合，没有独立的新事实。')+'</p>'+originFacts.map(f=>factView(f,'support-fact')).join(''))+
     '<div class="potential-heading"><h4>这一跳可能如何偏离</h4><span>结构规则推定</span></div>'+
-    (potential.length?potential.map(c=>'<div class="potential-fact"><p>'+h(c.reason)+'</p>'+factView(c.fact)+'</div>').join(''):
-      '<p class="caption">'+(isPrototype?'当前没有完整证明；这里只解释原型。请在缺失支持区查看被删除的关系。':
-        '未找到符合当前结构规则的非支持分支；这不表示没有语义或知识干扰。')+'</p>')+
-    (changed.length?'<div class="old-bridge"><h4>改接前的旧关系 · 仅作记忆干扰对照</h4>'+changed.map(f=>factView(f)).join('')+
-      '<p class="caption">这条旧关系不属于当前世界的有效桥。引文只能支撑改写前内容。</p></div>':'')+
+    (potential.length?potential.map(c=>'<div class="potential-fact">'+rawFactMaterial(row,[c.fact])+'<h4>候选事实与偏离原因</h4>'+factView(c.fact)+'<p>'+h(c.reason)+'</p></div>').join(''):
+      '<p class="caption">'+(isPrototype?'当前无完整证明，以上只说明原型。':'未找到符合结构规则的非支持分支，不表示不存在其他干扰。')+'</p>')+
+    backgrounds.map(d=>'<div class="potential-fact background"><h4>原文 · 构造背景</h4><span class="mono">'+h(d.id)+'</span>'+documentText(d.text)+'<p>这段构造背景可能分散注意或隔开支持材料，不提供当前跳所需关系。</p></div>').join('')+
+    (changed.length?'<div class="old-bridge"><h4>改接前旧关系 · 仅作记忆干扰对照</h4>'+rawFactMaterial(old,changed,'原文 · 基础版本材料')+changed.map(f=>factView(f)).join('')+'<p class="caption">旧关系不属于当前世界的有效桥。</p></div>':'')+
     '<details class="operation-fields"><summary>查看操作完整标注</summary><pre>'+h(JSON.stringify(node,null,2))+'</pre></details></section>';
 }
 function documentText(text){
@@ -248,46 +266,11 @@ function documentText(text){
     text.length.toLocaleString()+' 字符</summary><pre class="full-background">'+h(text)+'</pre></details>';
   return '<p class="document-text">'+h(text)+'</p>';
 }
-function materials(row,proof,isPrototype){
-  const roles=evidenceRoles(row,isPrototype?[]:proof);
-  const currentFacts=new Set((isPrototype?[]:proof).flatMap(n=>n.support_fact_ids));
-  const allFacts=new Set(row.gold.proofs.flatMap(p=>p.flatMap(n=>n.support_fact_ids)));
-  const partial=new Set(isPrototype?proof.flatMap(n=>n.support_fact_ids):[]);
-  const selected=proof.find(n=>n.node_id===selectedNode);
-  const focused=new Set(isPrototype?[]:selected?.support_evidence_ids||[]);
-  const labels={current:'当前证明支持',alternative:'其他合法证明支持',background:'构造背景',unreferenced:'非参考支持 · 不等于干扰'};
-  return '<section id="materials" class="panel materials"><div class="section-heading"><h2>当前题面材料</h2><small>'+
-    row.input.documents.length+' 份 · '+row.context_characters.toLocaleString()+' 字符 · 原顺序</small></div>'+
-    '<p class="caption">这里只有当前实际输入；来源引文和原型缺失证据另列，不会补进题面。</p>'+
-    (row.input.documents.length?row.input.documents.map(d=>{
-      const facts=row.facts.filter(f=>row.fact_to_evidence[f.fact_id]===d.id);
-      const hasPartial=isPrototype&&facts.some(f=>partial.has(f.fact_id));
-      return '<article id="doc-'+h(d.id)+'" class="document '+h(roles[d.id])+' '+(focused.has(d.id)?'focused':'')+'">'+
-        '<div class="document-heading"><span class="mono">'+h(d.id)+'</span><span class="badge">'+
-        (hasPartial?'仍在材料中的部分原型支持':labels[roles[d.id]])+'</span></div>'+documentText(d.text)+
-        (facts.length?'<details class="document-facts" open><summary>结构化事实与溯源 · '+facts.length+' 项</summary>'+
-          facts.map(f=>factView(f,currentFacts.has(f.fact_id)?'support-fact':allFacts.has(f.fact_id)?'alternative-fact':'')).join('')+
-          '</details>':'')+'</article>';
-    }).join(''):'<div class="empty-state compact"><h3>当前材料为空</h3><p>这是无材料诊断。不能从熟悉剧情或原型资料补齐当前答案。</p></div>')+'</section>';
-}
-function sourceSection(row,missing,displayRow){
-  const facts=[...row.facts,...missing];
-  if(!row.gold.proofs.length) facts.push(...displayRow.facts);
-  const quotes=new Set(facts.flatMap(f=>[...f.quote_ids,...(f.parent_quote_ids||[])]));
-  const sources=bundle.sources.filter(s=>s.quotes.some(q=>quotes.has(q.quote_id)));
-  return '<section class="panel" id="source-materials"><div class="section-heading"><h2>溯源资料与原文</h2><small>不是额外题面证据</small></div>'+
-    '<p class="caption">原文锚点用于审查改写；合成事实没有古籍依据。反事实只保留改写前出处，匿名题须用映射回溯。</p>'+
-    (sources.length?sources.map(s=>'<article class="source-record"><div class="section-heading"><h3>'+h(s.title)+'</h3>'+
-      '<a href="'+h(external(s.revision_url))+'" target="_blank" rel="noopener">固定修订网页 ↗</a></div><p class="caption">'+h(s.author_attribution)+
-      ' · 采集 '+h(s.retrieved_at)+' · 助手阅读，未独立人工复核</p>'+
-      '<a class="license-link" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">'+h(s.license_displayed)+' ↗</a>'+
-      s.quotes.filter(q=>quotes.has(q.quote_id)).map(q=>'<blockquote id="quote-'+h(q.quote_id)+'"><div><b>'+h(q.quote_id)+'</b> · '+h(q.locator)+
-        '</div><p>'+h(q.text)+'</p>'+(q.capture_note?'<small>'+h(q.capture_note)+'</small>':'')+'</blockquote>').join('')+'</article>').join(''):
-      '<p>本题使用原创合成设定，没有外部原文引文。完整事实出处仍在材料标注中保留。</p>')+'</section>';
-}
 function pairSection(row){
   const parent=index.rows.get(row.paired_changes?.parent_id);
   const family=sortedRows().filter(r=>r.family_id===row.family_id);
+  const hasOther=family.some(r=>r.id!==row.id);
+  const variants=[...new Set(['control','challenge','anonymous_challenge','unfamiliar_challenge','no_context',...family.map(r=>r.variant)])];
   let comparison='<p class="caption">这是基础对照。其他条件的变换从本家族的实际配对记录追溯。</p>';
   if(parent){
     const dif=row.paired_changes;
@@ -306,12 +289,15 @@ function pairSection(row){
         (c.before?'<div class="before"><small>原型 / 比较对象</small>'+factView(c.before)+'</div>':'')+
         (c.after?'<div><small>当前题</small>'+factView(c.after)+'</div>':'')+'</div>').join(''):'<p class="caption">没有事实变更；可能只改变问题、材料顺序或背景长度。</p>')+'</details>';
   }
-  return '<section class="panel" id="comparison"><div class="section-heading"><h2>配对差异与家族</h2><small>'+h(row.family_id)+'</small></div>'+comparison+
+  return '<section class="panel '+(!hasOther?'disabled':'')+'" aria-disabled="'+!hasOther+'" id="comparison"><div class="section-heading"><h2>配对差异与家族</h2><small>'+h(row.family_id)+'</small></div>'+comparison+
     (Object.keys(row.entity_mapping).length?'<details><summary>实体命名映射 · '+Object.keys(row.entity_mapping).length+' 项</summary>'+
       '<table class="mapping-table"><thead><tr><th>原实体</th><th>当前名称</th></tr></thead><tbody>'+
       Object.entries(row.entity_mapping).map(([a,b])=>'<tr><td>'+h(a)+'</td><td>'+h(b)+'</td></tr>').join('')+'</tbody></table></details>':'')+
-    '<h3>同家族其他版本</h3><div class="family-links">'+family.map(r=>'<a class="'+(r.id===row.id?'current':'')+'" href="'+route('question',r.id)+'">'+
-      '<strong>'+h(VARIANTS[r.variant]||r.variant)+'</strong><small>'+h(valueText(r.gold.answers)||'材料不足')+'</small></a>').join('')+'</div></section>';
+    '<h3>同家族其他版本</h3><div class="family-links">'+variants.map(v=>{
+      const r=family.find(r=>r.variant===v);
+      if(!r)return '<span class="unavailable" aria-disabled="true"><strong>'+h(VARIANTS[v]||v)+'</strong><small>此版本未保留</small></span>';
+      return '<a class="'+(r.id===row.id?'current':'')+'" href="'+route('question',r.id)+'"><strong>'+h(VARIANTS[r.variant]||r.variant)+'</strong><small>'+h(valueText(r.gold.answers)||'材料不足')+'</small></a>';
+    }).join('')+'</div></section>';
 }
 function renderDetail(){
   const row=index.rows.get(currentId);
@@ -322,7 +308,9 @@ function renderDetail(){
   const available=displayRow.gold.proofs;
   proofIndex=Math.min(proofIndex,Math.max(0,available.length-1));
   const proof=available[proofIndex]||[];
-  if(!proof.some(n=>n.node_id===selectedNode)) selectedNode=proof[0]?.node_id||'';
+  const visualProof=proofWithStart(displayRow,proof);
+  const incoming=layoutProof(visualProof).edges;
+  if(!incoming.some(e=>e.from===selectedFrom&&e.to===selectedNode)){selectedNode=incoming[0]?.to||'';selectedFrom=incoming[0]?.from||'n0';}
   const missing=missingFacts(row,index);
   const resultRows=filterRows(sortedRows(),listState.filters,listState.search,listState.sceneMode);
   const position=resultRows.findIndex(r=>r.id===row.id);
@@ -344,7 +332,7 @@ function renderDetail(){
     '</span><span class="mono">'+h(row.combination_id)+' · '+h(combo?.title)+'</span></div><h2>'+h(row.input.question)+'</h2>'+
     '<div class="answer-box"><span>当前标准答案</span><strong>'+h(row.gold.answers.length?valueText(row.gold.answers):'材料不足 · 不补事实')+
     '</strong></div>'+explanations+'<div class="detail-tags tag-list">'+allTags(row)+'</div>'+
-    '<div class="intro-actions"><button class="text-button" data-act="scroll" data-target="materials">查看全部材料 ↓</button>'+
+    '<div class="intro-actions">'+
     '<button class="text-button" data-act="scroll" data-target="comparison">比较家族变体 ↓</button>'+
     '<button class="text-button" data-act="download">下载本题完整标注 ↧</button></div>'+
     '<details><summary>统一作答指令与输出约定</summary><p>'+h(row.input.instruction)+'</p><pre>'+h(JSON.stringify(row.input.output_contract,null,2))+
@@ -352,11 +340,11 @@ function renderDetail(){
     '<div class="section-heading"><h2>'+(isPrototype?'原型链：当前无完整支持':'正确跳跃与操作依赖')+'</h2>'+proofControls+'</div>'+
     (isPrototype?'<div class="notice warning"><b>不可作答</b><span>下图来自基础原型，仅用于解释缺失；它不是当前题目的合法证明，不能据此回答。</span></div>':'')+
     '<p class="caption">'+(isPrototype?'原型操作图':'当前完整证明')+' · '+operationCount+' 个操作 · 依赖深度 '+
-    (isPrototype?displayRow.minimum_proof_depth:row.minimum_proof_depth)+' 层。点击节点查看支持与潜在偏离。</p>'+
-    proofGraphic(proof)+nodeAnalysis(row,displayRow,proof,isPrototype)+'</section>'+
+    (isPrototype?displayRow.minimum_proof_depth:row.minimum_proof_depth)+' 层。点击连线查看这一跳的原文、依据与潜在偏离。n0为题目起点，不计入操作数。</p>'+
+    proofGraphic(visualProof)+nodeAnalysis(row,displayRow,proof,isPrototype)+'</section>'+
     (missing.length?'<section class="panel missing-support"><h2>当前缺失的原型事实</h2><p class="caption">来自实际比较对象；以下内容不在当前材料中。</p>'+
       missing.map(f=>factView(f)).join('')+'</section>':'')+
-    materials(row,proof,isPrototype)+sourceSection(row,missing,displayRow)+pairSection(row)+'</div>'+
+    pairSection(row)+'</div>'+
     '<aside class="analysis-rail"><section class="rail-card"><p class="eyebrow">DESIGN INTENT</p><h3>干扰设计预期</h3><p>'+h(trap.target_failure)+
     '</p><ol>'+trap.predicted_error_path.map(p=>'<li>'+h(p)+'</li>').join('')+'</ol><div class="rail-rule"><b>验收条件</b><p>'+
     h(trap.acceptance)+'</p></div><small>这是组合层面的设计预期，不代表该变体仍含全部干扰，也不是模型观察。</small></section>'+
@@ -457,7 +445,7 @@ app.addEventListener('click',event=>{
   else if(act==='clear') navigate('questions','',normalizedState());
   else if(act==='page') navigate('questions','',{...listState,page:Number(el.dataset.page)});
   else if(act==='scroll') jump(el.dataset.target);
-  else if(act==='node'){selectedNode=el.dataset.node;renderDetail();}
+  else if(act==='edge'){const left=document.querySelector('.proof-canvas')?.scrollLeft||0;selectedNode=el.dataset.node;selectedFrom=el.dataset.from;renderDetail();document.querySelector('.proof-canvas').scrollLeft=left;}
   else if(act==='download'){
     const row=index.rows.get(currentId);
     const url=URL.createObjectURL(new Blob([JSON.stringify(row,null,2)],{type:'application/json;charset=utf-8'}));
@@ -466,9 +454,9 @@ app.addEventListener('click',event=>{
   }
 });
 app.addEventListener('keydown',event=>{
-  if(event.target.matches('.proof-node')&&['Enter',' '].includes(event.key)){
+  if(event.target.matches('.proof-connection')&&['Enter',' '].includes(event.key)){
     event.preventDefault();event.target.dispatchEvent(new MouseEvent('click',{bubbles:true}));
-    const selected=document.querySelector('.proof-node.selected');selected?.focus();
+    const selected=document.querySelector('.proof-connection.selected');selected?.focus();
   }
 });
 let searchTimer;
