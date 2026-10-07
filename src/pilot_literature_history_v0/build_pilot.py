@@ -21,7 +21,7 @@ ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "data" / "pilot_literature_history_v0"
 TEMP = ROOT / "workspace" / "pilot_literature_history_v0"
 SEED = 20261007
-VERSION = "pilot-v0.3"
+VERSION = "pilot-v0.4"
 PRIMARY_VARIANTS = ("challenge", "anonymous_challenge", "unfamiliar_challenge")
 # One surface form per family; substantive interventions remain independent records.
 PRIMARY_BY_FAMILY = {
@@ -509,14 +509,30 @@ def identity_map(seed, mode):
     # Opaque random codes do not encode hop order, role or answer status.
     codes=rng.sample(range(0x1000,0xffff),len(entities))
     if mode=="anonymous":
-        return {e:f"实体_{c:04X}" for e,c in zip(entities,codes)}
+        mapping = {e:f"实体_{c:04X}" for e,c in zip(entities,codes)}
     chars="岚澄霁漪砚汀翎棠柚峤珩洵韶荻皎芷岑澜漱栩"
     names=[]
     while len(names)<len(entities):
         name="".join(rng.choice(chars) for _ in range(3))
         if name not in names and name not in entities:
             names.append(name)
-    return dict(zip(entities,names))
+    if mode != "anonymous":
+        mapping = dict(zip(entities,names))
+    # Keep prior assignments stable. Category words are not proper names;
+    # supplementary people appearing only in source context get their own codes.
+    for term in MATERIAL_CONFIG.get("preserved_category_terms", []):
+        mapping.pop(term, None)
+    extra_rng = random.Random(int(digest(seed["family_id"] + "source-context" + mode)[:16], 16))
+    for entity in MATERIAL_CONFIG.get("supplementary_entities_by_family", {}).get(seed["family_id"], []):
+        if entity in mapping:
+            continue
+        while True:
+            candidate = (f"实体_{extra_rng.randrange(0x1000, 0xffff):04X}" if mode == "anonymous"
+                         else "".join(extra_rng.choice(chars) for _ in range(3)))
+            if candidate not in mapping.values() and candidate not in entities:
+                mapping[entity] = candidate
+                break
+    return mapping
 
 def replace_entities(value, mapping):
     if isinstance(value,str):

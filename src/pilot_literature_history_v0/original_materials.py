@@ -53,6 +53,11 @@ def render_originals(seed, spec, mapping):
         for form in [canonical] + CONFIG['entity_forms'].get(canonical, []):
             assert form not in replacements or replacements[form] == renamed
             replacements[form] = renamed
+    # Contextual phrases prevent a short name such as 原 from modifying ordinary
+    # words. Name/surname/courtesy-name descriptions are treated as one span.
+    for form in CONFIG.get('entity_context_forms', []):
+        if form['canonical'] in mapping:
+            replacements[form['before']] = form['replacement_template'].format(entity=mapping[form['canonical']])
     units = CONFIG['families'][family]
     # Restore the whole saved quotation in ordinary conditions. Only deletion
     # conditions use the registered smaller excerpts to actually remove the bridge.

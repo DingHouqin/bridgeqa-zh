@@ -59,6 +59,32 @@ class OriginalMaterialTest(unittest.TestCase):
         for name in ['项梁', '曹咎', '司马欣', '栎阳']:
             self.assertIn(r['entity_mapping'][name], text)
 
+    def test_anonymous_people_include_courtesy_names_and_context_only_people(self):
+        r = row('F-C01-L', 'anonymous_challenge')
+        text = '\n'.join(d['text'] for d in r['input']['documents'])
+        for clue in ['奉先', '呂將軍', '姓呂', '丁原', '丁建陽', '建陽', '原曰', '原正', '儒曰']:
+            self.assertNotIn(clue, text)
+        self.assertIn(r['entity_mapping']['吕布'] + '將軍', text)
+        self.assertIn(r['entity_mapping']['丁原'] + '曰', text)
+        self.assertIn(r['entity_mapping']['李儒'] + '曰', text)
+        control_text = '\n'.join(d['text'] for d in row('F-C01-L', 'control')['input']['documents'])
+        self.assertIn('奉先', control_text)
+        self.assertIn('丁原', control_text)
+
+    def test_naming_keeps_copying_conditions_and_generic_table_labels(self):
+        for family, variant in [('F-C10-H', 'anonymous_challenge'), ('F-C10-L', 'unfamiliar_challenge')]:
+            r = row(family, variant)
+            self.assertNotIn('复抄', r['entity_mapping'])
+            text = '\n'.join(d['text'] for d in r['input']['documents'])
+            self.assertIn('复抄卷本', text)
+            self.assertIn('首抄', r['input']['question'])
+            condition = next(f for f in r['facts'] if f['fact_id'] == 'i')
+            self.assertEqual(condition['subject'], '复抄')
+        for family, variant in [('F-C06-H', 'anonymous_challenge'), ('F-C06-L', 'unfamiliar_challenge')]:
+            r = row(family, variant)
+            self.assertNotIn('本题卷本表', r['entity_mapping'])
+            self.assertIn('本题卷本表', r['input']['question'])
+
     def test_alias_resolution_evidence_and_registers_remain_outside_model_input(self):
         r = row('F-C07-H', 'control')
         self.assertEqual(len(r['gold']['proofs'][0][0]['support_evidence_ids']), 2)

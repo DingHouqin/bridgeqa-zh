@@ -1,5 +1,5 @@
 {
-  "version": "pilot-v0.3",
+  "version": "pilot-v0.4",
   "design_link": "[原文恢复说明](原文恢复说明.md)",
   "sources_link": "[引文原文](sources.json)",
   "families": {
@@ -384,7 +384,9 @@
     ],
     "吕布": [
       "呂布",
-      "布"
+      "布",
+      "奉先",
+      "呂將軍"
     ],
     "董卓": [
       "董卓",
@@ -392,7 +394,8 @@
       "卓"
     ],
     "李儒": [
-      "李儒"
+      "李儒",
+      "儒"
     ],
     "董旻": [
       "董旻"
@@ -465,10 +468,47 @@
     ],
     "阳夏": [
       "陽夏"
+    ],
+    "丁原": [
+      "丁原",
+      "丁建陽",
+      "建陽"
     ]
   },
   "background_quote_by_domain": {
     "literature": "L2-PBACKGROUND",
     "history": "H1-PBACKGROUND"
-  }
+  },
+  "supplementary_entities_by_family": {
+    "F-C01-L": [
+      "丁原"
+    ]
+  },
+  "entity_context_forms": [
+    {
+      "canonical": "丁原",
+      "before": "原正",
+      "replacement_template": "{entity}正"
+    },
+    {
+      "canonical": "丁原",
+      "before": "原曰",
+      "replacement_template": "{entity}曰"
+    },
+    {
+      "canonical": "吕布",
+      "before": "姓呂，名布，字奉先者也",
+      "replacement_template": "名{entity}者也"
+    },
+    {
+      "canonical": "吕布",
+      "before": "呂將軍",
+      "replacement_template": "{entity}將軍"
+    }
+  ],
+  "preserved_category_terms": [
+    "复抄",
+    "本题卷本表"
+  ],
+  "naming_design_link": "[改名修复与后续改进](改名修复与后续改进.md)"
 }

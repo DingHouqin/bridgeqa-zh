@@ -55,3 +55,6 @@ Thumbs.db
 /workspace/spreadsheet-review/
 /workspace/pilot_literature_history_v0/pre_original_restore_2026-10-07/
 /workspace/pilot_literature_history_v0/source_capture_2026-10-07/
+
+# 改名修复前的本地备份，见 [修复记录](data/pilot_literature_history_v0/改名修复与后续改进.md)
+/workspace/pilot-name-repair/

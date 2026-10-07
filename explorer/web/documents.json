@@ -211,6 +211,24 @@
       "slug": "data/original-restoration",
       "group": "数据与构建",
       "title": "古文原文恢复与白话文分组"
+    },
+    {
+      "source": "data/pilot_literature_history_v0/改名修复与后续改进.md",
+      "slug": "data/naming-repair",
+      "group": "数据与构建",
+      "title": "改名修复与后续改进｜2026-10-07"
+    },
+    {
+      "source": "docs/report/2026-10-07_pilot全量逐跳语义审核.md",
+      "slug": "reports/pilot-hop-audit",
+      "group": "报告归档",
+      "title": "pilot-v0.3 全量逐跳审核快照｜2026-10-07"
+    },
+    {
+      "source": "docs/report/2026-10-07_pilot全量逐跳语义审核逐题附录.md",
+      "slug": "reports/pilot-hop-audit-details",
+      "group": "报告归档",
+      "title": "pilot 全量审核逐题附录｜2026-10-07"
     }
   ],
   "files": [
@@ -268,6 +286,10 @@
     "src/pilot_literature_history_v0/build_pilot.py",
     "data/pilot_literature_history_v0/原文恢复说明.md",
     "data/pilot_literature_history_v0/material_units.json",
-    "src/pilot_literature_history_v0/original_materials.py"
+    "src/pilot_literature_history_v0/original_materials.py",
+    "data/pilot_literature_history_v0/改名修复与后续改进.md",
+    "docs/report/2026-10-07_pilot全量逐跳语义审核.md",
+    "docs/report/2026-10-07_pilot全量逐跳语义审核逐题附录.md",
+    "docs/report/2026-10-07_pilot全量逐跳语义审核记录.json"
   ]
 }
