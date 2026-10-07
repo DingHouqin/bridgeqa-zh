@@ -64,7 +64,7 @@
   },
   "context_character_range": [
     0,
-    12037
+    12557
   ],
   "proof_depths": {
     "3": 48,
@@ -76,7 +76,7 @@
   "sources": 4,
   "independent_human_review": false,
   "model_runs": 0,
-  "version": "pilot-v0.2",
+  "version": "pilot-v0.3",
   "deduplication": {
     "generated_records": 128,
     "removed_records": 42,
@@ -103,6 +103,15 @@
       "F-C10-L": "unfamiliar_challenge"
     }
   },
+  "material_style_counts": {
+    "classical": 26,
+    "vernacular": 38,
+    "mixed": 22
+  },
+  "material_document_counts": {
+    "classical": 92,
+    "vernacular": 234
+  },
   "oracle_tasks": 58,
   "negative_validation_tests": [
     "wrong_gold",
@@ -110,20 +119,24 @@
     "leaked_metadata",
     "dependency_cycle",
     "duplicate_surface_variant",
-    "dangling_pair_reference"
+    "dangling_pair_reference",
+    "fabricated_original_text",
+    "omitted_original_support"
   ],
   "output_hashes": {
-    "seeds.json": "6cb1caef5c6bf4adbb1ea07ce20607bbc58e02fe4b6435e2651e279e7f3d17b4",
-    "benchmark.jsonl": "a97595680591ea1f6a025d532dc3e9cf99e5ebc5dfb18235788c637c0fe9abbf",
-    "inputs.jsonl": "10dd4d65d3e7eaf69fc1ac389b831ed54cea6bb88e402742d80ceb6c96165e31",
-    "oracle_inputs.jsonl": "eae23c6840523fa4cdc66bf25dce5a83aa298a968e3e4618a1aee081c3a2e116",
-    "oracle_gold.jsonl": "de6f10dd3dc93be097d938af4071505b515b82365c7002420f95c3f1bc681963",
-    "题目审阅册.md": "c0dfc864059e9e5abc8b88385a4dad28184aaad9569816318864432a44782068"
+    "seeds.json": "da6840165c5c672190d94b215d4997acbfbdef5d9b0fa820594ccf47d9aa1d3f",
+    "benchmark.jsonl": "9e95cb14bb6723ce94741df35c655a319b09b5138cbc97251085332c0ba266e8",
+    "inputs.jsonl": "f7d2b6a099eb1a7a87497f481aedc47de01abbc64472cdf92af76e87694caca5",
+    "oracle_inputs.jsonl": "771d64e909889c84c7fa7bfc4c9b5e36b1ed21f04b98569ab62ae703a5655629",
+    "oracle_gold.jsonl": "04325f811a87193d151a469d701f41457df8058e8d77e4fff90d0050240dae22",
+    "题目审阅册.md": "657f100a02d1b71a02aa0b3f45bf0c3f4c6fcfb460ba1eb21ba075682e05e0f6"
   },
   "input_hashes": {
-    "sources.json": "e86ac26b53fa0de1398df4a62cf7c1667bf3845c5edd428fc677c19b5e4096fe",
-    "combinations.json": "b4219f75988b716b4046ef8c91d27c4f324fa5cd2acd3a7344e83ace3f54213a",
-    "build_pilot.py": "621ffd5240376b6548b78c777228629b1a7ac73660e0eb336843de1979efbe93"
+    "sources.json": "5f718d21b9663d09a2acece9a50fef54a5f283ef0a7c059ed500e2001fac5a0b",
+    "combinations.json": "ce7dabb220187b91f78816b0c956d1415242088c75ba6eeb07a94110fec48aab",
+    "material_units.json": "425377c06caa0ca8d8551fd7b2f0ff0740271f47138423955eb2c531ee1fe598",
+    "build_pilot.py": "bc61a35f9fc9bc83870a385c9ad73cb86389143b08617d4c28184a4fce33c15e",
+    "original_materials.py": "83da0c240eaff35623a71d17950f092b1d22df934a53711c802db6521898f39f"
   },
   "file_links": {
     "readme": "[检查说明](README.md)",

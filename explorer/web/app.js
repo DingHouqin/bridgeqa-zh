@@ -147,7 +147,7 @@ function questionCard(row){
   const otherTags=Object.entries(tags).filter(([key])=>key!=='scene').flatMap(([key,values])=>values.map(v=>tag(key,v))).join('');
   return '<article class="question-card"><div class="card-top"><span class="mono">'+h(row.id)+'</span>'+statusBadge(row)+
     '</div><a class="question-link" href="'+route('question',row.id)+'">'+h(row.input.question)+'</a>'+
-    '<div class="card-meta">'+h(row.family_id)+' <span>·</span> '+h(VARIANTS[row.variant]||row.variant)+' <span>·</span> '+
+    '<div class="card-meta">'+h(row.family_id)+' <span>·</span> '+h(VARIANTS[row.variant]||row.variant)+' <span>·</span> '+h(tagLabel('language',row.material_style,index))+' <span>·</span> '+
     (row.domain==='history'?'历史':'文学')+' <span>·</span> '+(row.minimum_proof_depth?row.minimum_proof_depth+' 层依赖':'无完整证明')+'</div>'+
     '<div class="tag-list">'+row.scenario_ids.map(s=>tag('scene',s)).join('')+'</div>'+
     '<details class="card-all-tags"><summary>全部标签 <span>'+Object.values(tags).reduce((a,v)=>a+v.length,0)+' 项</span></summary>'+
@@ -198,10 +198,18 @@ function proofGraphic(proof){
     '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">'+
     '<path d="M0 0L10 5L0 10Z"/></marker></defs>'+lines+nodes+'</svg></div>';
 }
-function rawFactMaterial(row,facts,label='原文 · 题面提供的材料'){
-  const ids=new Set(facts.map(f=>row.fact_to_evidence[f.fact_id]).filter(Boolean));
+  function materialLabel(row,doc){
+    const a=row.material_annotations?.[doc.id];
+    if(!a||a.register==='vernacular')return a?.origin==='counterfactual_vernacular'?'白话文 · 反事实合成分支':'白话文 · 合成设定';
+    if(a.origin==='repeated_source_background')return '古文 · 原文背景重复与裁切';
+    if(a.transformations.some(t=>t.kind==='counterfactual_replace'))return '古文 · 反事实改写（不是未改原文）';
+    if(a.transformations.some(t=>t.kind==='entity_rename'))return '古文 · 原文换名（不是未改原文）';
+    return '古文 · 原文摘录'+(a.fragment_join?'（片段拼接）':'（未经改写）');
+  }
+  function rawFactMaterial(row,facts,label='本跳题面材料'){
+    const ids=new Set(facts.flatMap(f=>row.fact_to_evidence_all?.[f.fact_id]||[row.fact_to_evidence[f.fact_id]]).filter(Boolean));
   const docs=row.input.documents.filter(d=>ids.has(d.id));
-  return '<div class="hop-original"><h4>'+h(label)+'</h4>'+docs.map(d=>'<article class="hop-document"><span class="mono">'+h(d.id)+'</span>'+documentText(d.text)+'</article>').join('')+
+    return '<div class="hop-original"><h4>'+h(label)+'</h4>'+docs.map(d=>'<article class="hop-document"><span class="mono">'+h(d.id)+'</span><p class="material-kind">'+h(materialLabel(row,d))+'</p>'+documentText(d.text)+'</article>').join('')+
     (!docs.length?'<p class="caption">本操作没有独立原文材料；须依据题目条件或前置操作，不能另补事实。</p>':'')+'</div>';
 }
 function factQuotations(fact){
@@ -242,13 +250,13 @@ function nodeAnalysis(row,displayRow,proof,isPrototype){
     '<div class="node-summary"><span>'+h(valueText(node.upstream??source?.expected_value??node.dependencies))+'</span><strong>→ '+h(valueText(node.expected_value))+'</strong></div>'+
     '<p class="caption">本操作全部依赖：'+h(node.dependencies.join('、')||'n0 · 题目条件')+(node.dependencies.length>1?'；所点连接只是其中一个输入，其他必要输入仍须同时满足。':'')+
     (node.direction==='in'?'；合法逆查前驱，不默认关系对称。':'')+'</p>'+
-    rawFactMaterial(isPrototype?displayRow:row,originFacts,isPrototype?'原型材料 · 当前题目不可据此作答':supportFacts.length?'原文 · 题面提供的材料':'原文 · 前置操作使用的材料')+
+      rawFactMaterial(isPrototype?displayRow:row,originFacts,isPrototype?'原型材料 · 当前题目不可据此作答':supportFacts.length?'本跳题面材料':'前置操作使用的题面材料')+
     '<h4>结构化事实与溯源</h4>'+(supportFacts.length?supportFacts.map(f=>factView(f,'support-fact')).join(''):
       '<p class="caption">'+(node.operation==='hypothesis'?'这是待补假设，不是材料已证明的事实。':'本操作在前置结果上进行比较、筛选或聚合，没有独立的新事实。')+'</p>'+originFacts.map(f=>factView(f,'support-fact')).join(''))+
     '<div class="potential-heading"><h4>这一跳可能如何偏离</h4><span>结构规则推定</span></div>'+
     (potential.length?potential.map(c=>'<div class="potential-fact">'+rawFactMaterial(row,[c.fact])+'<h4>候选事实与偏离原因</h4>'+factView(c.fact)+'<p>'+h(c.reason)+'</p></div>').join(''):
       '<p class="caption">'+(isPrototype?'当前无完整证明，以上只说明原型。':'未找到符合结构规则的非支持分支，不表示不存在其他干扰。')+'</p>')+
-    backgrounds.map(d=>'<div class="potential-fact background"><h4>原文 · 构造背景</h4><span class="mono">'+h(d.id)+'</span>'+documentText(d.text)+'<p>这段构造背景可能分散注意或隔开支持材料，不提供当前跳所需关系。</p></div>').join('')+
+      backgrounds.map(d=>'<div class="potential-fact background"><h4>'+h(materialLabel(row,d))+'</h4><span class="mono">'+h(d.id)+'</span>'+documentText(d.text)+'<p>这段重复背景可能分散注意或隔开支持材料，不提供当前跳所需关系。</p></div>').join('')+
     (changed.length?'<div class="old-bridge"><h4>改接前旧关系 · 仅作记忆干扰对照</h4>'+rawFactMaterial(old,changed,'原文 · 基础版本材料')+changed.map(f=>factView(f)).join('')+'<p class="caption">旧关系不属于当前世界的有效桥。</p></div>':'')+
     '<details class="operation-fields"><summary>查看操作完整标注</summary><pre>'+h(JSON.stringify(node,null,2))+'</pre></details></section>';
 }
@@ -339,8 +347,8 @@ function renderDetail(){
     '</pre></details></section><div class="detail-grid"><div class="detail-main"><section class="panel proof-panel '+(isPrototype?'prototype':'')+'">'+
     '<div class="section-heading"><h2>'+(isPrototype?'原型链：当前无完整支持':'正确跳跃与操作依赖')+'</h2>'+proofControls+'</div>'+
     (isPrototype?'<div class="notice warning"><b>不可作答</b><span>下图来自基础原型，仅用于解释缺失；它不是当前题目的合法证明，不能据此回答。</span></div>':'')+
-    '<p class="caption">'+(isPrototype?'原型操作图':'当前完整证明')+' · '+operationCount+' 个操作 · 依赖深度 '+
-    (isPrototype?displayRow.minimum_proof_depth:row.minimum_proof_depth)+' 层。点击连线查看这一跳的原文、依据与潜在偏离。n0为题目起点，不计入操作数。</p>'+
+    '<p class="caption">材料文体：'+h(tagLabel('language',row.material_style,index))+(row.material_label_scope==='prototype'?'（母题类别；当前无材料）':'')+'</p><p class="caption">'+(isPrototype?'原型操作图':'当前完整证明')+' · '+operationCount+' 个操作 · 依赖深度 '+
+    (isPrototype?displayRow.minimum_proof_depth:row.minimum_proof_depth)+' 层。点击连线查看这一跳的题面材料、出处与潜在偏离。n0为题目起点，不计入操作数。</p>'+
     proofGraphic(visualProof)+nodeAnalysis(row,displayRow,proof,isPrototype)+'</section>'+
     (missing.length?'<section class="panel missing-support"><h2>当前缺失的原型事实</h2><p class="caption">来自实际比较对象；以下内容不在当前材料中。</p>'+
       missing.map(f=>factView(f)).join('')+'</section>':'')+

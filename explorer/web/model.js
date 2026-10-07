@@ -1,6 +1,6 @@
 // [Data and inference contract](../specs/03_数据映射与干扰语义.md).
 export const FACETS = [
-  ['domain', '取材领域'], ['combination', '设计组合'], ['scene', '实际场景单元'],
+  ['domain', '取材领域'], ['language', '材料文体'], ['combination', '设计组合'], ['scene', '实际场景单元'],
   ['variant', '题目变体'], ['status', '作答状态'], ['family', '题目家族'],
   ['naming', '命名方式'], ['provenance', '事实出处类型'], ['source', '来源组'],
   ['query', '查询类型'], ['depth', '证明依赖深度'], ['proofs', '参考证明数'],
@@ -20,7 +20,7 @@ export const VARIANTS = {
   time_2:'时间切换：馆年 2', time_unspecified:'未指定馆年'
 };
 export const STATUS = {answerable:'可作答', ambiguous:'多解释歧义', insufficient:'材料不足'};
-export const PROVENANCE = {source_paraphrase:'原文关系改写', synthetic_editor_setting:'原创合成设定',
+export const PROVENANCE = {source_annotation:'古籍原文事实标注', source_paraphrase:'原文关系改写', synthetic_editor_setting:'原创合成设定',
   counterfactual_editor_override:'反事实编者改写', none:'无当前事实'};
 export const OPERATIONS = {lookup:'关系查找', resolve_alias:'别名消解', earlier_than:'早晚比较',
   enumerate_scope:'枚举统计范围', read_complete_roster:'读取完整名录', member_test:'成员筛选',
@@ -36,7 +36,7 @@ export function makeIndex(bundle) {
 }
 export function tagsFor(row) {
   return {
-    domain:[row.domain], combination:[row.combination_id], scene:row.scenario_ids,
+    domain:[row.domain], language:[row.material_style], combination:[row.combination_id], scene:row.scenario_ids,
     variant:[row.variant], status:[row.gold.status], family:[row.family_id],
     naming:[row.construction.naming], provenance:[...new Set(row.facts.map(f=>f.provenance))].length ?
       [...new Set(row.facts.map(f=>f.provenance))] : ['none'],
@@ -51,7 +51,7 @@ export function tagLabel(key,value,index) {
   if (key==='scene') return value+' · '+(index.scenarios.get(value)?.title || '未登记单元');
   if (key==='combination') return value+' · '+(index.combinations.get(value)?.title || '');
   const dicts={
-    domain:{literature:'文学',history:'历史'}, variant:VARIANTS,status:STATUS,provenance:PROVENANCE,
+    domain:{literature:'文学',history:'历史'}, language:{classical:'古文',vernacular:'白话文',mixed:'古文＋白话文'}, variant:VARIANTS,status:STATUS,provenance:PROVENANCE,
     naming:{named:'自然/设定名称',anonymous:'匿名代号',unfamiliar:'陌生名称'},
     query:{walk:'串行关系',ambiguous:'多解释查询',compare:'桥接比较',sum_join:'表文筛选与聚合',
       entailment:'规则判断',abduction:'受限溯因'},

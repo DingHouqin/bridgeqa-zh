@@ -15,12 +15,13 @@ import random
 import re
 from collections import Counter
 from pathlib import Path
+from original_materials import CONFIG as MATERIAL_CONFIG, render_originals, validate_materials
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "data" / "pilot_literature_history_v0"
 TEMP = ROOT / "workspace" / "pilot_literature_history_v0"
 SEED = 20261007
-VERSION = "pilot-v0.2"
+VERSION = "pilot-v0.3"
 PRIMARY_VARIANTS = ("challenge", "anonymous_challenge", "unfamiliar_challenge")
 # One surface form per family; substantive interventions remain independent records.
 PRIMARY_BY_FAMILY = {
@@ -437,13 +438,13 @@ SCENE_NOTES = {
     "S05":"按完整成员名录筛选作者。",
     "S06":"遍历全部卷本及合格作者后聚合。",
     "S07":"已连接到页数后求和，单位为页。",
-    "S08":"追加原创目录背景；记录字符数，未冒称模型长窗验证。",
+    "S08":"追加古籍原文背景；记录字符数，未冒称模型长窗验证。",
     "S09":"干扰分支共享实体，但使用非目标关系。",
     "S10":"同一事实有两处合法支持，接受任一完整证明。",
     "S12":"错用角色或正式/试行条件可形成另一条关联链。",
     "S13":"同类型人物可作错误中间节点，但关系不匹配。",
     "S15":"改写材料中的内部桥，不按现实记忆覆盖。",
-    "S16":"完整支持分布在噪声前、中、后。",
+    "S16":"当前历史原文的完整支持分布在噪声前、中、后；同段多跳不假装独立文档。",
     "S17":"背景重复；顺序变体只重排相同材料。",
     "S18":"同别名对应不同带角色身份，不能混成一人。",
     "S19":"沿事实的合法逆方向查前驱，非对称谓词。",
@@ -631,14 +632,6 @@ def make_variants(seed, combos):
                                            noise_characters=0,reverse_documents=False,no_context=True)
     return [base,target,anon,unfamiliar,empty]+extras
 
-def noise(length):
-    phrases=["目录旁记：本页讨论装订、晒书与书架清理，纸边略有磨损。",
-             "馆舍日志：晨间开窗，午后检查屋瓦，晚间整理空盒及绳结。",
-             "抄写杂记：墨色深浅各异，纸张厚薄已按批次收拢，空白页另存。",
-             "阅览备忘：桌面清扫完毕，灯罩已擦拭，门旁放着卷筒和竹帘。"]
-    text="".join(phrases*(length//sum(map(len,phrases))+1))
-    return text[:length]
-
 def render_documents(seed, spec):
     docs=[];fact_to_doc={}
     table_facts=[f for f in spec["facts"] if f["relation"] in ("作者","统计页数")]
@@ -659,10 +652,7 @@ def render_documents(seed, spec):
     if seed["combination_id"]!="C07":
         docs.sort(key=lambda d:digest(seed["family_id"]+"presentation"+d["id"]))
     if length:
-        chunks=[noise(length//2),noise(length-length//2)]
-        added=[{"id":"D"+digest(seed["family_id"]+f"background{i}")[:8],"text":t} for i,t in enumerate(chunks)]
-        assert len(docs)==3
-        docs=[docs[0],added[0],docs[1],added[1],docs[2]]
+        raise ValueError("Classical background must use the literal source renderer")
     if spec.get("reverse_documents"): docs=list(reversed(docs))
     return docs,fact_to_doc
 
@@ -679,10 +669,30 @@ def build_record(seed, original, sources):
         for alt in spec["query"]["alternatives"]:
             alt["label"]=replace_entities(alt["label"],mapping)
     gold=empty_gold() if spec.get("no_context") else solve(spec["query"],spec["facts"])
-    docs,ftd=render_documents(seed,spec)
+    if seed["family_id"] in MATERIAL_CONFIG["families"]:
+        docs,ftd,ftd_all,audits=render_originals(seed,original,mapping)
+        if seed["combination_id"]=="C08" and original["facts"] and next(f for f in original["facts"] if f["fact_id"]=="b")["object"] != next(f for f in seed["target_facts"] if f["fact_id"]=="b")["object"]:
+            original_anchor=next(f for f in seed["target_facts"] if f["fact_id"]=="b")["quote_ids"]
+            next(f for f in spec["facts"] if f["fact_id"]=="e")["parent_quote_ids"]=original_anchor
+        for f in spec["facts"]:
+            if f["quote_ids"]:
+                f["provenance"]="source_annotation"
+        if seed["family_id"]=="F-C07-L":
+            spec["scene_ids"]=[x for x in spec["scene_ids"] if x!="S16"]
+    else:
+        assert all(not f["quote_ids"] for f in spec["facts"]), "Source-backed input requires literal material units"
+        docs,ftd=render_documents(seed,spec)
+        ftd_all={fid:[docid] for fid,docid in ftd.items()}
+        audits={d["id"]:{"register":"vernacular","origin":"synthetic_editor_setting",
+                "segments":[],"transformations":[],"annotated_fact_ids":[fid for fid,x in ftd.items() if x==d["id"]]}
+                for d in docs}
+    registers=sorted({a["register"] for a in audits.values()})
+    if not registers:
+        registers=["classical","vernacular"] if seed["combination_id"] in ("C04","C08") else ["classical"] if seed["family_id"] in MATERIAL_CONFIG["families"] else ["vernacular"]
+    style="mixed" if len(registers)>1 else registers[0]
     for proof in gold["proofs"]:
         for node in proof:
-            node["support_evidence_ids"]=list(dict.fromkeys(ftd[f] for f in node["support_fact_ids"]))
+            node["support_evidence_ids"]=list(dict.fromkeys(d for f in node["support_fact_ids"] for d in ftd_all[f]))
     itemid="Q"+digest(seed["family_id"]+original["name"])[:12]
     payload={"id":itemid,"instruction":POLICY,"question":spec["question"],
              "documents":docs,"output_contract":CONTRACT}
@@ -697,9 +707,12 @@ def build_record(seed, original, sources):
             "combination_link":"[先行组合表](combinations.json)",
             "source_cluster_id":seed["source_cluster_id"],"source_links":sourcelinks,
             "input":payload,"facts":spec["facts"],"query":spec["query"],"gold":gold,
-            "fact_to_evidence":ftd,"entity_mapping":mapping,
+            "fact_to_evidence":ftd,"fact_to_evidence_all":ftd_all,"entity_mapping":mapping,
+            "material_annotations":audits,"material_registers":registers,"material_style":style,
+            "material_label_scope":"prototype" if spec.get("no_context") else "current_input",
             "construction":{"random_seed":SEED,"naming":spec.get("naming","named"),
                             "noise_characters":spec.get("noise_characters",0),
+                            "material_rendering":"literal_source_units" if seed["family_id"] in MATERIAL_CONFIG["families"] else "synthetic_vernacular",
                             "reverse_documents":spec.get("reverse_documents",False),
                             "changed_fact_ids":spec.get("changed_fact_ids",[]),
                             "comparison_reference":spec.get("comparison_reference",
@@ -742,10 +755,11 @@ def validate_record(row, quoteids):
             assert n["node_id"] not in seen
             assert set(n["support_fact_ids"])<=ids
             assert set(n["support_evidence_ids"])<=docs
-            assert n["support_evidence_ids"]==list(dict.fromkeys(row["fact_to_evidence"][f] for f in n["support_fact_ids"]))
+            assert n["support_evidence_ids"]==list(dict.fromkeys(d for f in n["support_fact_ids"] for d in row["fact_to_evidence_all"][f]))
             seen.add(n["node_id"])
     assert len(set(row["entity_mapping"].values()))==len(row["entity_mapping"])
     assert set(row["scenario_ids"])<=set(SCENE_NOTES)
+    validate_materials(row)
 
 def validate_dataset(rows, sources, combinations):
     assert len({r["id"] for r in rows})==len(rows)
@@ -858,6 +872,17 @@ def self_test(rows,sources):
         except AssertionError:
             rejected.append(name)
     assert len(rejected) == 6
+    source_sample=next(r for r in rows if r["variant"]=="control" and r["material_style"]=="classical")
+    bad=copy.deepcopy(source_sample)
+    bad["input"]["documents"][0]["text"]+="伪造的原文"
+    try: validate_materials(bad)
+    except AssertionError: rejected.append("fabricated_original_text")
+    bad=copy.deepcopy(source_sample)
+    fid=bad["gold"]["proofs"][0][0]["support_fact_ids"][0]
+    bad["fact_to_evidence_all"][fid]=[]
+    try: validate_record(bad,quotes)
+    except AssertionError: rejected.append("omitted_original_support")
+    assert len(rejected)==8
     return rejected
 
 def review_book(rows,combos):
@@ -870,7 +895,7 @@ def review_book(rows,combos):
         base=next(r for r in group if r["variant"]=="control")
         target=next(r for r in group if r["id"]==base["challenge_id"])
         lines.extend([f"## {family}｜{combos[base['combination_id']]['title']}","",
-                      f"领域：{base['domain']}；组合：{base['combination_id']}；来源组：{base['source_cluster_id']}。",
+                      f"领域：{base['domain']}；组合：{base['combination_id']}；来源组：{base['source_cluster_id']}；材料文体：{target['material_style']}。",
                       "场景："+"、".join(f"[{s}](../../docs/benchmark-survey/07_场景总表与中文构题配方.md)" for s in target["scenario_ids"])+"。",
                       "材料归属："+("；".join(target["source_links"]) or "本项目原创合成档案，姓名和事件不作史实主张。"),"",
                       "**对照问句**："+base["input"]["question"],
@@ -878,8 +903,8 @@ def review_book(rows,combos):
                       "**组合问句**："+target["input"]["question"],"",
                       "**组合材料**（目录背景仅在机器输入保存全文）：",""])
         for d in target["input"]["documents"]:
-            if d["text"].startswith(("目录旁记","馆舍日志","抄写杂记","阅览备忘")):
-                lines.append(f"- {d['id']}：原创重复背景，{len(d['text'])}字符。")
+            if target["material_annotations"][d["id"]]["origin"]=="repeated_source_background":
+                lines.append(f"- {d['id']}：古籍原文重复背景，{len(d['text'])}字符；出处见模型输入的对应标注。")
             else:
                 lines.append(f"- {d['id']}："+d["text"].replace("\n"," / "))
         lines.extend(["","**合法参考证明**：",""])
@@ -918,6 +943,14 @@ def main():
                     f["quote_ids"]=["L1-B","L1-C"]
                 if s["combination_id"]=="C07" and s["domain"]=="history" and f["fact_id"] in ("a","b"):
                     f["quote_ids"]=list(dict.fromkeys(f["quote_ids"]+["H2-A"]))
+    for seed in seeds:
+        units=MATERIAL_CONFIG["families"].get(seed["family_id"],[])
+        for key in ("core_facts","target_facts"):
+            for f in seed[key]:
+                anchors=list(dict.fromkeys(segment["quote_id"] for u in units
+                    if f["fact_id"] in u["fact_ids"]+u.get("also_supports",[])
+                    for segment in u["segments"]))
+                if anchors: f["quote_ids"]=anchors
     rows=[build_record(s,v,sources) for s in seeds for v in make_variants(s,combos)]
     for r in rows:
         r["control_id"]=next(b["id"] for b in rows if b["family_id"]==r["family_id"] and b["variant"]=="control")
@@ -947,6 +980,8 @@ def main():
         deduplication={"generated_records":generated_count,"removed_records":generated_count-len(rows),
                       "primary_by_family":PRIMARY_BY_FAMILY})
     report["scene_count"] = len(report["scene_ids"])
+    report["material_style_counts"]=dict(Counter(r["material_style"] for r in rows))
+    report["material_document_counts"]=dict(Counter(a["register"] for r in rows for a in r["material_annotations"].values()))
     oracle,oracle_gold=build_oracle(rows)
     report["oracle_tasks"]=len(oracle)
     report["negative_validation_tests"]=self_test(rows,sources) if args.self_test else []
@@ -958,7 +993,7 @@ def main():
     review_book(rows,combos)
     report["output_hashes"]={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in [DATA/f for f in
         ("seeds.json","benchmark.jsonl","inputs.jsonl","oracle_inputs.jsonl","oracle_gold.jsonl","题目审阅册.md")]}
-    report["input_hashes"]={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in [DATA/"sources.json",DATA/"combinations.json",Path(__file__)]}
+    report["input_hashes"]={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in [DATA/"sources.json",DATA/"combinations.json",DATA/"material_units.json",Path(__file__),Path(__file__).with_name("original_materials.py")]}
     report["file_links"]={"readme":"[检查说明](README.md)","dataset":"[数据说明](../../data/pilot_literature_history_v0/README.md)"}
     write_json(TEMP/"validation.json",report)
     print(json.dumps({k:v for k,v in report.items() if k not in ("output_hashes","input_hashes","variant_counts","file_links")},ensure_ascii=False,indent=2))

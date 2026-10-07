@@ -25,6 +25,13 @@ test('every label group is available, planned scenes are not inherited',()=>{
   assert.equal(tagsFor(row('C09')).status[0],'answerable');
   assert.equal(tagsFor(row('C09')).truth[0],'unknown');
 });
+
+test('original, vernacular and mixed material styles can be filtered independently',()=>{
+  assert.equal(filterRows(rows,{language:['classical']}).length,26);
+  assert.equal(filterRows(rows,{language:['vernacular']}).length,38);
+  assert.equal(filterRows(rows,{language:['mixed']}).length,22);
+  assert.equal(tagsFor(row('C01','no_context')).language[0],'classical');
+});
 test('alternative support stays legal, never becomes a distractor',()=>{
   const r=row('C04');
   assert.equal(r.gold.proofs.length,2);

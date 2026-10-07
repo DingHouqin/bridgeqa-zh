@@ -18,7 +18,7 @@ docs = [project / p for p in ['README.md', 'AGENTS.md', 'docs/README.md',
     'docs/report/README.md', 'docs/工作计划.md', 'docs/report/2026-10-07_项目进展报告.md',
     'docs/report/2026-10-07_评分器可执行性评估.md',
     'docs/report/2026-10-07_在线文档网站可行性评估.md',
-    'docs/benchmark-survey/README.md', 'explorer/README.md']]
+    'docs/benchmark-survey/README.md', 'explorer/README.md', 'data/pilot_literature_history_v0/README.md', 'data/pilot_literature_history_v0/原文恢复说明.md']]
 docs += sorted((project / 'explorer/specs').glob('*.md'))
 docs.append(readme)
 broken = []
@@ -40,7 +40,7 @@ sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
 for name, expected in baseline['output_hashes'].items():
     assert sha(data / name) == expected, name
 for name, expected in baseline['input_hashes'].items():
-    actual = data / name if name != 'build_pilot.py' else project / 'src/pilot_literature_history_v0' / name
+    actual = data / name if name not in ('build_pilot.py', 'original_materials.py') else project / 'src/pilot_literature_history_v0' / name
     assert sha(actual) == expected, name
 
 guide = project / 'explorer/web/testing-guide.html'

@@ -1,0 +1,474 @@
+{
+  "version": "pilot-v0.3",
+  "design_link": "[原文恢复说明](原文恢复说明.md)",
+  "sources_link": "[引文原文](sources.json)",
+  "families": {
+    "F-C01-L": [
+      {
+        "unit_id": "gift",
+        "fact_ids": [
+          "a"
+        ],
+        "segments": [
+          {
+            "quote_id": "L1-PGIFT",
+            "start": 0,
+            "end": 215
+          }
+        ]
+      },
+      {
+        "unit_id": "event",
+        "fact_ids": [
+          "b",
+          "c",
+          "z"
+        ],
+        "segments": [
+          {
+            "quote_id": "L1-PEVENT",
+            "start": 0,
+            "end": 251
+          }
+        ]
+      },
+      {
+        "unit_id": "advice",
+        "fact_ids": [
+          "x",
+          "y"
+        ],
+        "segments": [
+          {
+            "quote_id": "L1-PADVICE",
+            "start": 0,
+            "end": 463
+          }
+        ]
+      }
+    ],
+    "F-C01-H": [
+      {
+        "unit_id": "letter",
+        "fact_ids": [
+          "a",
+          "b",
+          "c",
+          "x"
+        ],
+        "segments": [
+          {
+            "quote_id": "H1-B",
+            "start": 0,
+            "end": 31
+          }
+        ]
+      },
+      {
+        "unit_id": "flight",
+        "fact_ids": [
+          "y"
+        ],
+        "segments": [
+          {
+            "quote_id": "H1-C",
+            "start": 0,
+            "end": 13
+          }
+        ]
+      },
+      {
+        "unit_id": "origin",
+        "fact_ids": [
+          "z"
+        ],
+        "segments": [
+          {
+            "quote_id": "H1-A",
+            "start": 0,
+            "end": 45
+          }
+        ]
+      }
+    ],
+    "F-C04-L": [
+      {
+        "unit_id": "disciple",
+        "fact_ids": [
+          "a"
+        ],
+        "segments": [
+          {
+            "quote_id": "L2-PVISIT",
+            "start": 0,
+            "end": 81
+          },
+          {
+            "quote_id": "L2-PBOW",
+            "start": 0,
+            "end": 44
+          },
+          {
+            "quote_id": "L2-PNAME",
+            "start": 0,
+            "end": 526
+          }
+        ]
+      },
+      {
+        "unit_id": "cave",
+        "fact_ids": [
+          "b"
+        ],
+        "segments": [
+          {
+            "quote_id": "L2-C",
+            "start": 10,
+            "end": 37
+          }
+        ]
+      },
+      {
+        "unit_id": "cave-copy",
+        "fact_ids": [
+          "b2"
+        ],
+        "segments": [
+          {
+            "quote_id": "L2-C",
+            "start": 10,
+            "end": 37
+          }
+        ]
+      },
+      {
+        "unit_id": "mountain",
+        "fact_ids": [
+          "c"
+        ],
+        "segments": [
+          {
+            "quote_id": "L2-C",
+            "start": 0,
+            "end": 20
+          }
+        ]
+      }
+    ],
+    "F-C04-H": [
+      {
+        "unit_id": "kin",
+        "fact_ids": [
+          "a"
+        ],
+        "segments": [
+          {
+            "quote_id": "H1-A",
+            "start": 0,
+            "end": 27
+          }
+        ]
+      },
+      {
+        "unit_id": "father",
+        "fact_ids": [
+          "b"
+        ],
+        "segments": [
+          {
+            "quote_id": "H1-A",
+            "start": 27,
+            "end": 34
+          }
+        ]
+      },
+      {
+        "unit_id": "father-copy",
+        "fact_ids": [
+          "b2"
+        ],
+        "segments": [
+          {
+            "quote_id": "H1-A",
+            "start": 27,
+            "end": 34
+          }
+        ]
+      },
+      {
+        "unit_id": "killer",
+        "fact_ids": [
+          "c"
+        ],
+        "segments": [
+          {
+            "quote_id": "H1-A",
+            "start": 32,
+            "end": 45
+          }
+        ]
+      }
+    ],
+    "F-C05-L": [
+      {
+        "unit_id": "event",
+        "fact_ids": [
+          "a",
+          "b",
+          "c"
+        ],
+        "segments": [
+          {
+            "quote_id": "L1-PEVENT",
+            "start": 0,
+            "end": 251
+          }
+        ]
+      }
+    ],
+    "F-C05-H": [
+      {
+        "unit_id": "kin",
+        "fact_ids": [
+          "a",
+          "b",
+          "c"
+        ],
+        "segments": [
+          {
+            "quote_id": "H1-A",
+            "start": 0,
+            "end": 45
+          }
+        ]
+      }
+    ],
+    "F-C07-L": [
+      {
+        "unit_id": "birth-name",
+        "fact_ids": [
+          "a"
+        ],
+        "segments": [
+          {
+            "quote_id": "L2-PNAME",
+            "start": 0,
+            "end": 526
+          }
+        ]
+      },
+      {
+        "unit_id": "geography",
+        "fact_ids": [
+          "b",
+          "c"
+        ],
+        "segments": [
+          {
+            "quote_id": "L2-PGEO",
+            "start": 278,
+            "end": 309
+          }
+        ]
+      }
+    ],
+    "F-C07-H": [
+      {
+        "unit_id": "king",
+        "fact_ids": [
+          "a"
+        ],
+        "segments": [
+          {
+            "quote_id": "H2-C",
+            "start": 0,
+            "end": 12
+          }
+        ]
+      },
+      {
+        "unit_id": "deputy",
+        "fact_ids": [
+          "b"
+        ],
+        "segments": [
+          {
+            "quote_id": "H2-PDEPUTY",
+            "start": 0,
+            "end": 86
+          }
+        ]
+      },
+      {
+        "unit_id": "identity",
+        "fact_ids": [
+          "c"
+        ],
+        "segments": [
+          {
+            "quote_id": "H2-A",
+            "start": 0,
+            "end": 24
+          }
+        ],
+        "also_supports": [
+          "a",
+          "b"
+        ]
+      }
+    ],
+    "F-C08-L": [
+      {
+        "unit_id": "disciple",
+        "fact_ids": [
+          "a"
+        ],
+        "segments": [
+          {
+            "quote_id": "L2-PVISIT",
+            "start": 0,
+            "end": 81
+          },
+          {
+            "quote_id": "L2-PBOW",
+            "start": 0,
+            "end": 44
+          },
+          {
+            "quote_id": "L2-PNAME",
+            "start": 0,
+            "end": 526
+          }
+        ]
+      },
+      {
+        "unit_id": "cave-full",
+        "fact_ids": [
+          "b",
+          "c"
+        ],
+        "segments": [
+          {
+            "quote_id": "L2-C",
+            "start": 0,
+            "end": 37
+          }
+        ]
+      }
+    ],
+    "F-C08-H": [
+      {
+        "unit_id": "kin-full",
+        "fact_ids": [
+          "a",
+          "b",
+          "c"
+        ],
+        "segments": [
+          {
+            "quote_id": "H1-A",
+            "start": 0,
+            "end": 45
+          }
+        ]
+      }
+    ]
+  },
+  "entity_forms": {
+    "赤兔": [
+      "赤兔"
+    ],
+    "李肃": [
+      "李肅",
+      "肅"
+    ],
+    "吕布": [
+      "呂布",
+      "布"
+    ],
+    "董卓": [
+      "董卓",
+      "董公",
+      "卓"
+    ],
+    "李儒": [
+      "李儒"
+    ],
+    "董旻": [
+      "董旻"
+    ],
+    "项梁": [
+      "項梁",
+      "梁"
+    ],
+    "曹咎": [
+      "曹咎"
+    ],
+    "司马欣": [
+      "司馬欣"
+    ],
+    "栎阳": [
+      "櫟陽"
+    ],
+    "蕲": [
+      "蘄"
+    ],
+    "项籍": [
+      "項籍",
+      "項羽",
+      "籍"
+    ],
+    "下相": [
+      "下相"
+    ],
+    "孙悟空": [
+      "孫悟空",
+      "美猴王",
+      "猴王"
+    ],
+    "须菩提祖师": [
+      "須菩提祖師",
+      "菩提祖師"
+    ],
+    "斜月三星洞": [
+      "斜月三星洞"
+    ],
+    "灵台方寸山": [
+      "靈臺方寸山"
+    ],
+    "花果山": [
+      "花果山"
+    ],
+    "傲来国": [
+      "傲來國",
+      "傲來小國"
+    ],
+    "东胜神洲": [
+      "東勝神洲"
+    ],
+    "项燕": [
+      "項燕"
+    ],
+    "王翦": [
+      "王翦"
+    ],
+    "张楚": [
+      "張楚"
+    ],
+    "陈胜": [
+      "陳勝",
+      "陳涉"
+    ],
+    "吴广": [
+      "吳廣",
+      "吳叔"
+    ],
+    "阳夏": [
+      "陽夏"
+    ]
+  },
+  "background_quote_by_domain": {
+    "literature": "L2-PBACKGROUND",
+    "history": "H1-PBACKGROUND"
+  }
+}

@@ -45,6 +45,7 @@ Thumbs.db
 /workspace/pages/
 /workspace/pages-preview/
 /workspace/explorer/failure.png
+/workspace/explorer/published_build_current.json
 
 # 本地任务与进度，说明见 [本地任务入口](TODO/README.md)，不得上传
 /TODO/
@@ -52,3 +53,5 @@ Thumbs.db
 # 本地去重前快照与审表备份不发布
 /workspace/pilot_literature_history_v0/pre_dedup_2026-10-07/
 /workspace/spreadsheet-review/
+/workspace/pilot_literature_history_v0/pre_original_restore_2026-10-07/
+/workspace/pilot_literature_history_v0/source_capture_2026-10-07/

@@ -205,6 +205,12 @@
       "slug": "specs/07",
       "group": "系统规格",
       "title": "07｜连线交互与线上系统"
+    },
+    {
+      "source": "data/pilot_literature_history_v0/原文恢复说明.md",
+      "slug": "data/original-restoration",
+      "group": "数据与构建",
+      "title": "古文原文恢复与白话文分组"
     }
   ],
   "files": [
@@ -259,6 +265,9 @@
     "explorer/web/testing-guide.html",
     "explorer/web/urls.js",
     "src/pilot_literature_history_v0/README.md",
-    "src/pilot_literature_history_v0/build_pilot.py"
+    "src/pilot_literature_history_v0/build_pilot.py",
+    "data/pilot_literature_history_v0/原文恢复说明.md",
+    "data/pilot_literature_history_v0/material_units.json",
+    "src/pilot_literature_history_v0/original_materials.py"
   ]
 }
