@@ -43,6 +43,8 @@ for name, expected in baseline['input_hashes'].items():
 guide = project / 'explorer/web/testing-guide.html'
 allowed_mentions = []
 for file in project.rglob('*'):
+    if file.is_relative_to(project/'workspace/pages') or file.is_relative_to(project/'workspace/pages-preview'):
+        continue
     if file.suffix not in ('.md', '.html', '.js', '.css', '.py', '.cjs', '.mjs') or not file.is_file():
         continue
     # Preserve the archived report as opaque bytes, never read it as research evidence.

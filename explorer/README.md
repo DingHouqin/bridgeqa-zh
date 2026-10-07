@@ -1,6 +1,6 @@
 # BridgeQA Explorer｜题目与证据审查系统
 
-本目录为本轮获准新建的一级目录。先完成 [规格系列](specs/README.md)，再实现本地只读系统。当前可选数据集为 [文学与历史首轮候选集](../data/pilot_literature_history_v0/README.md)。
+本目录为获准建立的一级目录，遵循 [规格系列](specs/README.md)。原生前端可在本地服务与GitHub Pages运行，当前数据集为 [文学与历史首轮候选集](../data/pilot_literature_history_v0/README.md)。[在线入口](https://dinghouqin.github.io/bridgeqa-zh/) 与 [在线文档](https://dinghouqin.github.io/bridgeqa-zh/#/docs/index) 使用同一套界面。
 
 ## 打开与运行
 
@@ -12,7 +12,7 @@
 python explorer/server.py --port 8765
 ~~~
 
-启动命令对应 [服务器](server.py)。Windows 也可双击 [启动脚本](start.cmd)，保持服务窗口打开，并访问上面的链接。默认仅监听本机；端口被占用时可改成另一个空闲端口，再访问对应本地地址。Ctrl+C 停止命令行服务。不需要npm安装、数据库或公网部署。
+启动命令对应 [服务器](server.py)。Windows也可双击 [启动脚本](start.cmd)。本地服务仅监听本机；端口被占用时选择空闲端口。Ctrl+C停止服务；本地与在线均不需要npm安装或数据库。
 
 页面读取原始数据，重新构建候选集后刷新即可更新；不覆盖或编辑样本。服务只允许登记数据集及指定文档的文本读取。应用显示标准答案和标注，供研究审查使用。
 
@@ -22,6 +22,17 @@ python explorer/server.py --port 8765
 2. **题目与证据**：全部128条主任务，分页、文本搜索、19个可筛选标签维度。每题全部实际场景直接显示，其余全部标签可展开查看并点击筛选；场景支持ANY/ALL，跨维度AND，维度内OR。筛选条件和页码在URL中保留。
 3. **逐题剖析**：题面、标准答案、全部标签、完整证明DAG、逐步支持与潜在偏离、当前完整材料、原文引文、改写前锚点、配对变化、实体映射与家族版本。可下载单题原始标注。
 4. **03 测试指引**：固定全项目使用说明，[网页入口](http://127.0.0.1:8765/#guide)；独立于数据集选择，新增数据集时在 [页面内容](web/testing-guide.html) 追加章节。
+5. **04 研究文档**：按 [文档清单](web/documents.json) 展示原始Markdown，提供侧栏、章内目录、内部跳转与原文入口；采用稳定的 `#/docs/<slug>` 路由。
+
+## 静态导出与发布
+
+从项目根目录运行 `python explorer/export_site.py`，对应 [静态导出器](export_site.py)。默认发布物生成到 [workspace目录](../workspace/) 下的pages子目录；只能覆盖本导出器标记的专用目录，不改原始数据。仅包含 [发布清单](web/documents.json) 内的资料，不复制实验日志或整个仓库。
+
+预览命令为 `python -m http.server 8766 --bind 127.0.0.1 --directory workspace`，然后打开 [子路径静态预览](http://127.0.0.1:8766/pages/)。导出后刷新即可；网站访问不运行Python。
+
+[Pages工作流](../.github/workflows/pages.yml) 在main相关更新或手动dispatch时验证、导出、上传并部署；PR只验证。仓库Pages的Source需选择GitHub Actions。新增数据集登记在 [服务器注册表](server.py)，新增章节登记在 [文档清单](web/documents.json)；清单也定义允许发布/下载的源文件。界面资源使用 [路径函数](web/urls.js)，Markdown使用 [阅读模块](web/documents.js) 和 [固定版本渲染器](web/vendor/README.md)。
+
+验证入口为 [静态导出测试](tests/static_test.py)、[文档浏览器检查](tests/docs_checks.cjs) 与既有 [浏览器回归](tests/ui_checks.cjs)。发布规则和验收见 [静态规格](specs/06_静态发布与文档.md)。在线含gold，是公开审阅界面。
 
 点击图节点查看对应操作；点击资料ID或引文编号跳转定位。多条证明可分别选择。长背景展开后保留全文。桌面双列，窄屏堆叠并可折叠筛选，宽图在自身画布内横向滚动。
 

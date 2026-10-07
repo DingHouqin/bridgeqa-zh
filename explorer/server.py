@@ -93,9 +93,11 @@ def allowed_file(urlpath):
         document_files = {(PROJECT / p).resolve() for p in (
             "README.md", "data/README.md", "docs/README.md", "explorer/README.md",
             "src/pilot_literature_history_v0/README.md")}
+        manifest = read_json(APP / "web/documents.json")
+        document_files.update((PROJECT / p).resolve() for p in manifest["files"])
         if candidate not in document_files and not any(candidate.is_relative_to(root) for root in roots):
             return None
-        if candidate.suffix.lower() not in (".md", ".json", ".jsonl"):
+        if candidate.suffix.lower() not in (".md", ".json", ".jsonl", ".py", ".js", ".css", ".html", ".cmd", ".txt"):
             return None
         return candidate
     if raw.startswith("/specs/"):
@@ -104,7 +106,7 @@ def allowed_file(urlpath):
             return candidate
         return None
     candidate = (APP / "web" / ("index.html" if raw == "/" else raw.lstrip("/"))).resolve()
-    if candidate.is_relative_to((APP / "web").resolve()) and candidate.suffix in (".html", ".css", ".js", ".svg"):
+    if candidate.is_relative_to((APP / "web").resolve()) and candidate.suffix in (".html", ".css", ".js", ".svg", ".json", ".txt"):
         return candidate
     return None
 
@@ -127,10 +129,11 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         path = urlsplit(self.path).path
-        if path == "/api/datasets":
+        if path in ("/api/datasets", "/api/datasets.json"):
             self.json_response(200, [{"id": key, "title": value["title"], "topic": value["topic"]} for key, value in REGISTRY.items()])
             return
-        if path.startswith("/api/datasets/") and path.endswith("/bundle"):
+        if path.startswith("/api/datasets/") and path.endswith(("/bundle", "/bundle.json")):
+            path = path.removesuffix(".json")
             dataset_id = unquote(path[len("/api/datasets/"):-len("/bundle")])
             try:
                 self.json_response(200, load_bundle(dataset_id))

@@ -52,7 +52,7 @@ class APITest(unittest.TestCase):
         for path in ["/testing-guide.html", "/files/README.md", "/files/docs/README.md",
                      "/files/src/pilot_literature_history_v0/README.md"]:
             self.assertEqual(self.request(path)[0],200,path)
-        self.assertEqual(self.request("/files/AGENTS.md")[0],404)
+        self.assertEqual(self.request("/files/AGENTS.md")[0],200)
         self.assertEqual(self.request("/specs/01_%E4%BA%A7%E5%93%81%E4%B8%8E%E4%BF%A1%E6%81%AF%E6%9E%B6%E6%9E%84.md")[0],200)
         self.assertIn("Content-Security-Policy",self.request("/")[1])
 

@@ -1,0 +1,237 @@
+{
+  "format_version": 1,
+  "repository_url": "https://github.com/DingHouqin/bridgeqa-zh",
+  "documents": [
+    {
+      "source": "README.md",
+      "slug": "index",
+      "group": "项目入口",
+      "title": "BridgeQA-ZH｜中文多跳问答对抗 benchmark"
+    },
+    {
+      "source": "docs/README.md",
+      "slug": "research",
+      "group": "研究设计",
+      "title": "研究文档"
+    },
+    {
+      "source": "data/README.md",
+      "slug": "data/index",
+      "group": "数据与构建",
+      "title": "数据入口"
+    },
+    {
+      "source": "data/pilot_literature_history_v0/README.md",
+      "slug": "data/pilot",
+      "group": "数据与构建",
+      "title": "文学与历史多跳对抗 benchmark｜首轮候选集"
+    },
+    {
+      "source": "src/pilot_literature_history_v0/README.md",
+      "slug": "data/build",
+      "group": "数据与构建",
+      "title": "首轮候选集构建器"
+    },
+    {
+      "source": "evaluation/README.md",
+      "slug": "evaluation/index",
+      "group": "评测方案",
+      "title": "评测实现"
+    },
+    {
+      "source": "evaluation/评分器可执行性评估.md",
+      "slug": "evaluation/readiness",
+      "group": "评测方案",
+      "title": "当前候选集是否足以构建完整评分器"
+    },
+    {
+      "source": "explorer/README.md",
+      "slug": "explorer/index",
+      "group": "系统与发布",
+      "title": "BridgeQA Explorer｜题目与证据审查系统"
+    },
+    {
+      "source": "docs/在线文档网站可行性评估.md",
+      "slug": "site/feasibility",
+      "group": "系统与发布",
+      "title": "在线文档网站可行性评估"
+    },
+    {
+      "source": "AGENTS.md",
+      "slug": "project/rules",
+      "group": "工作规范",
+      "title": "bridgeqa-zh 工作规范"
+    },
+    {
+      "source": "docs/report/README.md",
+      "slug": "archive/index",
+      "group": "报告归档",
+      "title": "报告归档"
+    },
+    {
+      "source": "docs/report/研究设计参考报告.md",
+      "slug": "archive/reference",
+      "group": "报告归档",
+      "title": "研究设计参考报告（仅供参考）"
+    },
+    {
+      "source": "docs/benchmark-survey/README.md",
+      "slug": "benchmark-survey/index",
+      "group": "调研系列",
+      "title": "多跳问答与对抗 benchmark 系列调研"
+    },
+    {
+      "source": "docs/benchmark-survey/00_范围与资料目录.md",
+      "slug": "benchmark-survey/00-scope",
+      "group": "调研系列",
+      "title": "00｜调研范围、资料目录与核验状态"
+    },
+    {
+      "source": "docs/benchmark-survey/01_基础题型与证据结构.md",
+      "slug": "benchmark-survey/01-foundations",
+      "group": "调研系列",
+      "title": "01｜基础题型与证据结构：问题怎样从事实变成多跳任务"
+    },
+    {
+      "source": "docs/benchmark-survey/02_冗余替代链与反事实陷阱.md",
+      "slug": "benchmark-survey/02-redundancy",
+      "group": "调研系列",
+      "title": "02｜冗余文本、替代推理链与反事实陷阱"
+    },
+    {
+      "source": "docs/benchmark-survey/03_长上下文与大规模干扰.md",
+      "slug": "benchmark-survey/03-long-context",
+      "group": "调研系列",
+      "title": "03｜长上下文与大规模干扰：增加什么，才能测出什么"
+    },
+    {
+      "source": "docs/benchmark-survey/04_歧义条件与时间场景.md",
+      "slug": "benchmark-survey/04-ambiguity",
+      "group": "调研系列",
+      "title": "04｜歧义、条件、时空限定与不可作答"
+    },
+    {
+      "source": "docs/benchmark-survey/05_反向规则与知识更新.md",
+      "slug": "benchmark-survey/05-reverse",
+      "group": "调研系列",
+      "title": "05｜反向推理、规则诊断与知识更新传播"
+    },
+    {
+      "source": "docs/benchmark-survey/06_检索领域与异构证据.md",
+      "slug": "benchmark-survey/06-retrieval",
+      "group": "调研系列",
+      "title": "06｜检索任务、知识熟悉度、领域与异构证据"
+    },
+    {
+      "source": "docs/benchmark-survey/07_场景总表与中文构题配方.md",
+      "slug": "benchmark-survey/07-scenes",
+      "group": "调研系列",
+      "title": "07｜场景总表与中文构题配方"
+    },
+    {
+      "source": "docs/benchmark-survey/08_评测指标与项目迁移.md",
+      "slug": "benchmark-survey/08-metrics",
+      "group": "调研系列",
+      "title": "08｜评测指标与项目迁移"
+    },
+    {
+      "source": "docs/benchmark-survey/09_多步骤评判与核心创新点回收.md",
+      "slug": "benchmark-survey/09-multi-step",
+      "group": "调研系列",
+      "title": "09｜多步骤评判流程与核心创新点回收"
+    },
+    {
+      "source": "explorer/specs/README.md",
+      "slug": "specs/index",
+      "group": "系统规格",
+      "title": "可视化系统规格"
+    },
+    {
+      "source": "explorer/specs/01_产品与信息架构.md",
+      "slug": "specs/01",
+      "group": "系统规格",
+      "title": "01｜产品与信息架构"
+    },
+    {
+      "source": "explorer/specs/02_标签筛选与交互.md",
+      "slug": "specs/02",
+      "group": "系统规格",
+      "title": "02｜标签筛选与交互"
+    },
+    {
+      "source": "explorer/specs/03_数据映射与干扰语义.md",
+      "slug": "specs/03",
+      "group": "系统规格",
+      "title": "03｜数据映射与干扰语义"
+    },
+    {
+      "source": "explorer/specs/04_技术与运行.md",
+      "slug": "specs/04",
+      "group": "系统规格",
+      "title": "04｜技术与运行"
+    },
+    {
+      "source": "explorer/specs/05_验收与测试.md",
+      "slug": "specs/05",
+      "group": "系统规格",
+      "title": "05｜验收与测试"
+    },
+    {
+      "source": "explorer/specs/06_静态发布与文档.md",
+      "slug": "specs/06",
+      "group": "系统规格",
+      "title": "06｜静态发布与文档"
+    }
+  ],
+  "files": [
+    "AGENTS.md",
+    "README.md",
+    "data/README.md",
+    "data/pilot_literature_history_v0/README.md",
+    "data/pilot_literature_history_v0/benchmark.jsonl",
+    "data/pilot_literature_history_v0/combinations.json",
+    "data/pilot_literature_history_v0/inputs.jsonl",
+    "data/pilot_literature_history_v0/oracle_gold.jsonl",
+    "data/pilot_literature_history_v0/oracle_inputs.jsonl",
+    "data/pilot_literature_history_v0/seeds.json",
+    "data/pilot_literature_history_v0/sources.json",
+    "data/pilot_literature_history_v0/题目审阅册.md",
+    "docs/README.md",
+    "docs/benchmark-survey/00_范围与资料目录.md",
+    "docs/benchmark-survey/01_基础题型与证据结构.md",
+    "docs/benchmark-survey/02_冗余替代链与反事实陷阱.md",
+    "docs/benchmark-survey/03_长上下文与大规模干扰.md",
+    "docs/benchmark-survey/04_歧义条件与时间场景.md",
+    "docs/benchmark-survey/05_反向规则与知识更新.md",
+    "docs/benchmark-survey/06_检索领域与异构证据.md",
+    "docs/benchmark-survey/07_场景总表与中文构题配方.md",
+    "docs/benchmark-survey/08_评测指标与项目迁移.md",
+    "docs/benchmark-survey/09_多步骤评判与核心创新点回收.md",
+    "docs/benchmark-survey/README.md",
+    "docs/report/README.md",
+    "docs/report/研究设计参考报告.md",
+    "docs/在线文档网站可行性评估.md",
+    "evaluation/README.md",
+    "evaluation/评分器可执行性评估.md",
+    "explorer/README.md",
+    "explorer/export_site.py",
+    "explorer/server.py",
+    "explorer/specs/01_产品与信息架构.md",
+    "explorer/specs/02_标签筛选与交互.md",
+    "explorer/specs/03_数据映射与干扰语义.md",
+    "explorer/specs/04_技术与运行.md",
+    "explorer/specs/05_验收与测试.md",
+    "explorer/specs/06_静态发布与文档.md",
+    "explorer/specs/README.md",
+    "explorer/start.cmd",
+    "explorer/web/app.js",
+    "explorer/web/documents.js",
+    "explorer/web/index.html",
+    "explorer/web/model.js",
+    "explorer/web/style.css",
+    "explorer/web/testing-guide.html",
+    "explorer/web/urls.js",
+    "src/pilot_literature_history_v0/README.md",
+    "src/pilot_literature_history_v0/build_pilot.py"
+  ]
+}

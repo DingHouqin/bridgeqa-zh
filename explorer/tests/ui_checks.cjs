@@ -168,8 +168,8 @@ const find=(c,v='challenge',d='history')=>rows.find(r=>r.combination_id===c&&r.v
           'benchmark.jsonl','inputs.jsonl','oracle_inputs.jsonl','oracle_gold.jsonl','题目审阅册.md']){
         assert.ok(content.includes(filename),filename);
       }
-      const links=await guide.locator('#testing-guide a[href^="/files/"]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href')));
-      for(const href of new Set(links))assert.equal((await guide.request.get(base+href)).status(),200,href);
+      const links=await guide.locator('#testing-guide a[href*="/files/"]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href')));
+      for(const href of new Set(links))assert.equal((await guide.request.get(new URL(href,base).href)).status(),200,href);
       await guide.goto(base+'/#guide?dataset=pilot_literature_history_v0');
       await guide.waitForSelector('#testing-guide');
       assert.equal(await guide.locator('#testing-guide').innerHTML(),content);
@@ -196,7 +196,7 @@ const find=(c,v='challenge',d='history')=>rows.find(r=>r.combination_id===c&&r.v
     // The intentionally invalid dataset yields an expected HTTP 404 console diagnostic.
     const unexpected=errors.filter(e=>!e.includes('404'));
     assert.deepEqual(unexpected,[]);
-    assert.deepEqual(failedRequests.filter(r=>r.url!==base+'/api/datasets/not_registered/bundle'),[]);
+    assert.deepEqual(failedRequests.filter(r=>r.url!==base+'/api/datasets/not_registered/bundle.json'),[]);
     fs.writeFileSync(path.join(out,'browser_checks.json'),JSON.stringify({
       status:'passed',base,checks,unexpected_browser_errors:unexpected,
       expected_error_route_test:true,failed_requests:failedRequests,viewports:['1440x1050','390x844'],

@@ -1,0 +1,55 @@
+# [Publishing contract](../../explorer/specs/06_静态发布与文档.md)
+name: Publish documentation and explorer
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'explorer/**'
+      - 'data/**'
+      - 'docs/**'
+      - 'evaluation/**'
+      - 'src/**'
+      - 'README.md'
+      - 'AGENTS.md'
+      - '.github/workflows/pages.yml'
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Validate static exporter
+        run: python -m unittest discover -s explorer/tests -p static_test.py
+      - name: Export site
+        run: python explorer/export_site.py
+      - name: Upload Pages artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: workspace/pages
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

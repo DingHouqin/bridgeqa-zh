@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "base": "http://127.0.0.1:8766/pages",
+  "checks": [
+    "nested hash, unknown dataset independence, reload, anchors and history",
+    "all 30 chapters render; 40 local file links resolve",
+    "source-relative Markdown links and missing chapter recovery",
+    "mobile documentation/guide and no bundle requests or browser errors"
+  ],
+  "chapters": 30,
+  "file_links": 40,
+  "errors": [],
+  "report_link": "[检查说明](README.md)"
+}

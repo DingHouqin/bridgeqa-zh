@@ -1,3 +1,5 @@
+import {siteURL,rewriteSiteLinks} from './urls.js';
+import {renderDocument} from './documents.js';
 // [Interaction spec](../specs/02_标签筛选与交互.md), [semantic spec](../specs/03_数据映射与干扰语义.md).
 import {FACETS,VARIANTS,STATUS,PROVENANCE,OPERATIONS,makeIndex,tagsFor,tagLabel,
   filterRows,facetCounts,evidenceRoles,candidatesFor,layoutProof,missingFacts} from './model.js';
@@ -13,10 +15,11 @@ let filterExpanded=window.innerWidth>760;
 let guideMarkup;
 const sortedRows=()=>[...bundle.records].sort((a,b)=>a.family_id.localeCompare(b.family_id)||a.id.localeCompare(b.id));
 function route(name,id='',state=listState,ds=dataset){
-  if(name==='guide') return '#guide';
+  if(name==='guide') return '#/guide';
+  if(name==='docs') return '#/docs/'+(id||'index');
   const params=new URLSearchParams({dataset:ds});
   if(name!=='overview') params.set('state',JSON.stringify(state));
-  return '#'+name+(id?'/'+id:'')+'?'+params;
+  return '#/'+name+(id?'/'+id:'')+'?'+params;
 }
 function navigate(name,id='',state=listState){
   // Keep rapid consecutive filter clicks consistent before the hashchange event is delivered.
@@ -54,14 +57,16 @@ function shell(content,active=pageName){
     '<a '+(active==='overview'?'aria-current="page"':'')+' href="'+route('overview')+'"><span>01</span>选题概览</a>'+
     '<a '+(active==='questions'||active==='question'?'aria-current="page"':'')+' href="'+route('questions')+'"><span>02</span>题目与证据</a>'+
     '<a '+(active==='guide'?'aria-current="page"':'')+' href="'+route('guide')+'"><span>03</span>测试指引</a>'+
-    '</nav><div class="side-note"><span class="signal"></span>本地 · 只读审查<p>看清每条关系，<br>以及偏离发生在哪里。</p>'+
-    '<a href="/specs/README.md" target="_blank" rel="noopener">查看设计规格 ↗</a></div></aside><div class="workspace">'+
-    '<header class="topbar"><span class="workbench-label">证据与推理工作台</span>'+(active==='guide'?
-    '<span class="global-page-label">全项目固定指引 · 新增数据集时增补</span>':'<label class="dataset-picker">数据集<select id="dataset" aria-label="选择数据集">'+
+    '<a '+(active==='docs'?'aria-current="page"':'')+' href="'+route('docs','index')+'"><span>04</span>研究文档</a>'+
+    '</nav><div class="side-note"><span class="signal"></span>只读 · 候选集审查<p>看清每条关系，<br>以及偏离发生在哪里。</p>'+
+    '<a href="#/docs/specs/index" target="_blank" rel="noopener">查看设计规格 ↗</a></div></aside><div class="workspace">'+
+    '<header class="topbar"><span class="workbench-label">证据与推理工作台</span>'+(['guide','docs'].includes(active)?
+    '<span class="global-page-label">全项目固定页面 · 按章节维护</span>':'<label class="dataset-picker">数据集<select id="dataset" aria-label="选择数据集">'+
     registry.map(d=>'<option value="'+h(d.id)+'" '+(d.id===dataset?'selected':'')+'>'+h(d.id)+'</option>').join('')+
     '</select></label><span class="version">'+h(bundle?.version||'')+'</span>')+'</header>'+
     '<main id="main" aria-live="polite">'+content+'</main><footer class="app-footer">BridgeQA · 候选数据审查'+
     '<span>干扰推定 ≠ 人工逐跳标注 ≠ 模型实测</span></footer></div></div>';
+  rewriteSiteLinks(app);
   if(focus&&document.getElementById(focus)){
     document.getElementById(focus).focus();
     if(selection!==null) document.getElementById(focus).setSelectionRange(selection,selection);
@@ -369,18 +374,28 @@ function renderDetail(){
 }
 async function onRoute(){
   const request=++token;
-  const [path,query='']=location.hash.slice(1).split('?');
+  const [path,query='']=location.hash.slice(1).replace(/^\//,'').split('?');
   const params=new URLSearchParams(query);
   const wanted=params.get('dataset')||registry[0]?.id||dataset;
   pageName=(path||'overview').split('/')[0];
-  currentId=(path||'').split('/')[1]||'';
-  if(!['overview','questions','question','guide'].includes(pageName)) pageName='overview';
-  if(pageName!=='guide') listState=normalizedState(params.get('state'));
+  currentId=decodeURIComponent((path||'').split('/').slice(1).join('/'))||'';
+  if(!['overview','questions','question','guide','docs'].includes(pageName)) pageName='overview';
+  if(!['guide','docs'].includes(pageName)) listState=normalizedState(params.get('state'));
   if(currentId!==lastDetail){proofIndex=0;selectedNode='';lastDetail=currentId;}
   try {
+    if(pageName==='docs'){
+      const doc=await renderDocument(currentId||'index');
+      if(request!==token)return;
+      shell(mainTitle('04 / DOCUMENTATION','研究文档','研究设计、数据与系统说明。')+doc.html,'docs');
+      document.title=doc.title+' · BridgeQA';
+      const section=params.get('section');
+      if(section)document.getElementById(section)?.scrollIntoView({block:'start'});
+      else scrollTo(0,0);
+      return;
+    }
     if(pageName==='guide'){
       if(!guideMarkup){
-        const response=await fetch('/testing-guide.html');
+        const response=await fetch(siteURL('testing-guide.html'));
         if(!response.ok) throw new Error('固定指引内容读取失败，请刷新或检查页面文件。');
         guideMarkup=await response.text();
       }
@@ -395,9 +410,9 @@ async function onRoute(){
     if(!bundle||dataset!==wanted){
       dataset=wanted;
       app.innerHTML='<main class="boot" aria-live="polite">正在读取数据集与证据索引…</main>';
-      const response=await fetch('/api/datasets/'+encodeURIComponent(wanted)+'/bundle');
+      const response=await fetch(siteURL('api/datasets/'+encodeURIComponent(wanted)+'/bundle.json'));
+      if(!response.ok)throw new Error('数据集加载失败，请返回已登记数据集。');
       const loaded=await response.json();
-      if(!response.ok) throw new Error(loaded.error||'数据集加载失败');
       if(request!==token) return;
       bundle=loaded;index=makeIndex(bundle);counts=facetCounts(bundle.records);
     }
@@ -409,7 +424,7 @@ async function onRoute(){
   }catch(error){
     if(request!==token) return;
     bundle=null;
-    app.innerHTML=pageName==='guide'?'<main class="boot"><h1>暂时无法打开测试指引</h1><p>'+h(error.message)+
+    app.innerHTML=['guide','docs'].includes(pageName)?'<main class="boot"><h1>暂时无法打开文档或指引</h1><p>'+h(error.message)+
       '</p><a href="#overview?dataset=pilot_literature_history_v0">返回概览</a></main>':
       '<main class="boot"><h1>暂时无法打开数据集</h1><p>'+h(error.message)+'</p><a href="#overview?dataset=pilot_literature_history_v0">返回已登记的数据集</a></main>';
   }
@@ -485,10 +500,10 @@ app.addEventListener('toggle',event=>{
 },true);
 window.addEventListener('hashchange',onRoute);
 try {
-  const response=await fetch('/api/datasets');
+  const response=await fetch(siteURL('api/datasets.json'));
   if(!response.ok) throw new Error('数据集登记读取失败');
   registry=await response.json();
   if(!location.hash) history.replaceState(null,'',route('overview'));
   await onRoute();
-}catch(error){app.innerHTML='<main class="boot"><h1>服务暂不可用</h1><p>'+h(error.message)+'</p><p>请确认本地服务仍在运行，然后刷新。</p></main>';}
+}catch(error){app.innerHTML='<main class="boot"><h1>服务暂不可用</h1><p>'+h(error.message)+'</p><p>请刷新页面，或检查站点文件是否完整发布。</p></main>';}
 

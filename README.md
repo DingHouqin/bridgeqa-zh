@@ -10,6 +10,7 @@
 - [场景单元与中文构题配方](docs/benchmark-survey/07_场景总表与中文构题配方.md)：32个非互斥候选单元。
 - [当前数据集说明](data/pilot_literature_history_v0/README.md) 与 [题目审阅册](data/pilot_literature_history_v0/题目审阅册.md)。
 - [可视化系统](explorer/README.md)：选题、筛选、正确证明和潜在干扰。
+- [在线网站](https://dinghouqin.github.io/bridgeqa-zh/) 与 [在线文档目录](https://dinghouqin.github.io/bridgeqa-zh/#/docs/index)：原生前端的静态发布版本，文档按章节URL访问。
 - [固定测试指引页](http://127.0.0.1:8765/#guide)：运行服务后查看各数据集文件的使用方法。
 - [项目工作规范](AGENTS.md)：目录授权、分支限制、材料引用与质量要求。
 
