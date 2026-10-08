@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "url": "https://dinghouqin.github.io/bridgeqa-zh/#/review",
+  "revision": "e7cf88e09e5eb55f6f3698a8d7f77935175e424e",
+  "checks": [
+    "two independent browser contexts connect to production shared database",
+    "four progress totals match across desktop and mobile",
+    "A catalog contains 22 assigned tasks",
+    "review detail shows per-step form and full data",
+    "05 specification renders online",
+    "production build matches pushed source",
+    "no browser exceptions or 390px overflow"
+  ],
+  "writes": "none"
+}

@@ -69,6 +69,8 @@
 
 初次线上浏览器复查发现Windows与Linux题库文件换行不同，原始字节散列不能用作跨平台审查轮次。[指纹回归测试](../../explorer/tests/review_fingerprint_test.py)验证文件LF/CRLF、JSON排版及键序不改变轮次，而题目文本变化会改变轮次；共享保存改用规范化题目内容SHA-256。原始文件散列继续保留用于溯源。
 
+修复后[前端版本e7cf88e](https://github.com/DingHouqin/bridgeqa-zh/commit/e7cf88e09e5eb55f6f3698a8d7f77935175e424e)及[Pages部署](https://github.com/DingHouqin/bridgeqa-zh/actions/runs/37773670610)成功，同步服务版本2成功部署。[线上只读验收](review_live_checks.json)与[核验脚本](review_live_check.cjs)确认两个独立浏览器上下文都能连接真实共享数据库、四人进度相同、A的任务库为22题、逐步表单和全量数据区可见、新规格可读、线上构建版本匹配，且390px页面无横向溢出、无脚本异常。线上核验没有写入测试评价。
+
 - [05首页 · 桌面](12-review-home-desktop.png)
 - [05逐题审查 · 桌面](13-review-detail-desktop.png)
 - [05首页 · 手机](14-review-home-mobile.png)
