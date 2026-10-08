@@ -1,7 +1,7 @@
-"""Literal source rendering; [design](../../data/pilot_literature_history_v0/原文恢复说明.md).
+"""Source translations; [design](../../data/pilot_literature_history_v0/现代文翻译说明.md).
 
 Units and aliases: [registry](../../data/pilot_literature_history_v0/material_units.json).
-No translation or invented classical prose is performed here.
+Fixed translations are separate from the unchanged source quotations.
 """
 import hashlib
 import json
@@ -12,6 +12,7 @@ DATA = Path(__file__).resolve().parents[2] / 'data/pilot_literature_history_v0'
 CONFIG = json.loads((DATA / 'material_units.json').read_text(encoding='utf-8'))
 SOURCES = json.loads((DATA / 'sources.json').read_text(encoding='utf-8'))['sources']
 QUOTES = {q['quote_id']: q for source in SOURCES for q in source['quotes']}
+TRANSLATIONS = {t['translation_id']: t for t in json.loads((DATA / 'modern_translations.json').read_text(encoding='utf-8'))['entries']}
 
 def identifier(family, unit):
     return 'D' + hashlib.sha256((family + unit).encode('utf-8')).hexdigest()[:8]
@@ -23,6 +24,18 @@ def source_text(segments):
         assert 0 <= segment['start'] < segment['end'] <= len(original)
         parts.append(original[segment['start']:segment['end']])
     return '\n'.join(parts)
+
+def translated_text(segments):
+    parts, ids = [], []
+    for segment in segments:
+        key = f"{segment['quote_id']}:{segment['start']}:{segment['end']}"
+        translation = TRANSLATIONS[key]
+        assert translation['source_text'] == source_text([segment])
+        assert hashlib.sha256(translation['source_text'].encode()).hexdigest() == translation['source_sha256']
+        assert hashlib.sha256(translation['modern_text'].encode()).hexdigest() == translation['modern_sha256']
+        parts.append(translation['modern_text'])
+        ids.append(key)
+    return '\n'.join(parts), ids
 
 def literal_replace(text, replacements):
     if not replacements:
@@ -50,12 +63,12 @@ def render_originals(seed, spec, mapping):
     docs, audits, primary, complete = [], {}, {}, {fid: [] for fid in active}
     replacements = {}
     for canonical, renamed in mapping.items():
-        for form in [canonical] + CONFIG['entity_forms'].get(canonical, []):
+        for form in [canonical] + CONFIG.get('modern_entity_forms', {}).get(canonical, []):
             assert form not in replacements or replacements[form] == renamed
             replacements[form] = renamed
     # Contextual phrases prevent a short name such as 原 from modifying ordinary
     # words. Name/surname/courtesy-name descriptions are treated as one span.
-    for form in CONFIG.get('entity_context_forms', []):
+    for form in CONFIG.get('modern_entity_context_forms', []):
         if form['canonical'] in mapping:
             replacements[form['before']] = form['replacement_template'].format(entity=mapping[form['canonical']])
     units = CONFIG['families'][family]
@@ -72,16 +85,16 @@ def render_originals(seed, spec, mapping):
         fids = [fid for fid in unit['fact_ids'] if fid in active]
         if not fids:
             continue
-        original = source_text(unit['segments'])
+        original, translation_ids = translated_text(unit['segments'])
         text, stages = original, []
         # Swap occupants, not the cave name inside a geographic clause. Otherwise
         # editing a cave also changes its mountain, contradicting the intended graph.
         if seed['combination_id'] == 'C08' and 'b' in unit['fact_ids'] and active['b']['object'] != baseline['b']['object']:
             before, after = baseline['b']['subject'], active['e']['subject']
             if seed['domain'] == 'history':
-                text, changes = literal_replace(text, {'梁父': after + '父'})
+                text, changes = literal_replace(text, {before + '的父亲': after + '的父亲'})
             else:
-                text, changes = literal_replace(text, {s: after for s in CONFIG['entity_forms'].get(before, [before])})
+                text, changes = literal_replace(text, {s: after for s in [before] + CONFIG.get('modern_entity_forms', {}).get(before, [])})
             assert len(changes) == 1
             stages.append({'kind': 'counterfactual_replace', 'fact_id': 'e', 'changes': changes})
             fids = ['e' if fid == 'b' else fid for fid in fids]
@@ -91,8 +104,8 @@ def render_originals(seed, spec, mapping):
             before, after = baseline[fid]['object'], active[fid]['object']
             if before == after:
                 continue
-            forms = CONFIG['entity_forms'].get(before, [before])
-            target = CONFIG['entity_forms'].get(after, [after])[0]
+            forms = [before] + CONFIG.get('modern_entity_forms', {}).get(before, [])
+            target = after
             text, changes = literal_replace(text, {s: target for s in forms})
             assert len(changes) == 1, (family, unit['unit_id'], fid, changes)
             stages.append({'kind': 'counterfactual_replace', 'fact_id': fid, 'changes': changes})
@@ -101,8 +114,9 @@ def render_originals(seed, spec, mapping):
             stages.append({'kind': 'entity_rename', 'changes': changes})
         docid = identifier(family, 'original-' + unit['unit_id'])
         docs.append({'id': docid, 'text': text})
-        audits[docid] = {'register': 'classical', 'origin': 'source_excerpt',
+        audits[docid] = {'register': 'vernacular', 'origin': 'source_translation',
                         'segments': unit['segments'], 'transformations': stages,
+                        'translation_ids': translation_ids,
                         'fragment_join': len(unit['segments']) > 1,
                         'annotated_fact_ids': fids}
         for fid in fids:
@@ -138,14 +152,16 @@ def render_originals(seed, spec, mapping):
     length = spec.get('noise_characters', 0)
     if length:
         qid = CONFIG['background_quote_by_domain'][seed['domain']]
-        original = QUOTES[qid]['text']
+        segment = {'quote_id': qid, 'start': 0, 'end': len(QUOTES[qid]['text'])}
+        original, translation_ids = translated_text([segment])
         added = []
         for i, size in enumerate((length // 2, length - length // 2)):
             text = (original * (size // len(original) + 1))[:size]
             docid = identifier(family, f'background{i}')
             added.append({'id': docid, 'text': text})
-            audits[docid] = {'register': 'classical', 'origin': 'repeated_source_background',
+            audits[docid] = {'register': 'vernacular', 'origin': 'repeated_translated_background',
                             'background_quote_id': qid, 'characters': size,
+                            'translation_ids': translation_ids,
                             'segments': [], 'transformations': [], 'annotated_fact_ids': []}
         # Do not manufacture a third support document when the original has only two.
         docs = [docs[0], added[0], *docs[1:-1], added[1], docs[-1]]
@@ -158,14 +174,17 @@ def validate_materials(row):
     assert set(audits) == {d['id'] for d in row['input']['documents']}
     for doc in row['input']['documents']:
         audit = audits[doc['id']]
-        if audit['origin'] == 'source_excerpt':
-            expected = source_text(audit['segments'])
+        if audit['origin'] == 'source_translation':
+            expected, translation_ids = translated_text(audit['segments'])
+            assert audit['translation_ids'] == translation_ids
             for stage in audit['transformations']:
                 expected = apply_stage(expected, stage)
             assert doc['text'] == expected, 'original text/transform mismatch'
-            assert audit['register'] == 'classical'
-        elif audit['origin'] == 'repeated_source_background':
-            original = QUOTES[audit['background_quote_id']]['text']
+            assert audit['register'] == 'vernacular'
+        elif audit['origin'] == 'repeated_translated_background':
+            qid = audit['background_quote_id']
+            original, translation_ids = translated_text([{'quote_id': qid, 'start': 0, 'end': len(QUOTES[qid]['text'])}])
+            assert audit['translation_ids'] == translation_ids
             size = audit['characters']
             assert doc['text'] == (original * (size // len(original) + 1))[:size]
         else:

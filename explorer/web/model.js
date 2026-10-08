@@ -51,7 +51,7 @@ export function tagLabel(key,value,index) {
   if (key==='scene') return value+' · '+(index.scenarios.get(value)?.title || '未登记单元');
   if (key==='combination') return value+' · '+(index.combinations.get(value)?.title || '');
   const dicts={
-    domain:{literature:'文学',history:'历史'}, language:{classical:'古文',vernacular:'白话文',mixed:'古文＋白话文'}, variant:VARIANTS,status:STATUS,provenance:PROVENANCE,
+    domain:{literature:'文学',history:'历史'}, language:{classical:'古文（历史标签）',vernacular:'现代文',mixed:'混合文体（历史标签）'}, variant:VARIANTS,status:STATUS,provenance:PROVENANCE,
     naming:{named:'自然/设定名称',anonymous:'匿名代号',unfamiliar:'陌生名称'},
     query:{walk:'串行关系',ambiguous:'多解释查询',compare:'桥接比较',sum_join:'表文筛选与聚合',
       entailment:'规则判断',abduction:'受限溯因'},

@@ -21,7 +21,7 @@ ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "data" / "pilot_literature_history_v0"
 TEMP = ROOT / "workspace" / "pilot_literature_history_v0"
 SEED = 20261007
-VERSION = "pilot-v0.4"
+VERSION = "pilot-v0.5"
 PRIMARY_VARIANTS = ("challenge", "anonymous_challenge", "unfamiliar_challenge")
 # One surface form per family; substantive interventions remain independent records.
 PRIMARY_BY_FAMILY = {
@@ -438,13 +438,13 @@ SCENE_NOTES = {
     "S05":"按完整成员名录筛选作者。",
     "S06":"遍历全部卷本及合格作者后聚合。",
     "S07":"已连接到页数后求和，单位为页。",
-    "S08":"追加古籍原文背景；记录字符数，未冒称模型长窗验证。",
+    "S08":"追加古籍现代译文背景；记录字符数，未冒称模型长窗验证。",
     "S09":"干扰分支共享实体，但使用非目标关系。",
     "S10":"同一事实有两处合法支持，接受任一完整证明。",
     "S12":"错用角色或正式/试行条件可形成另一条关联链。",
     "S13":"同类型人物可作错误中间节点，但关系不匹配。",
     "S15":"改写材料中的内部桥，不按现实记忆覆盖。",
-    "S16":"当前历史原文的完整支持分布在噪声前、中、后；同段多跳不假装独立文档。",
+    "S16":"当前历史译文的完整支持分布在噪声前、中、后；同段多跳不假装独立文档。",
     "S17":"背景重复；顺序变体只重排相同材料。",
     "S18":"同别名对应不同带角色身份，不能混成一人。",
     "S19":"沿事实的合法逆方向查前驱，非对称谓词。",
@@ -675,6 +675,21 @@ def render_documents(seed, spec):
 def empty_gold():
     return {"status":"insufficient","answers":[],"proofs":[],"interpretations":[]}
 
+def modern_question(text):
+    replacements = {
+        "该次引见的将领所拜认义父的弟弟是谁": "这次引见的将领所认作的义父的弟弟是谁",
+        "所拜见师父": "拜见的师父",
+        "因拘捕求书之人所写的那封信，其收信人任职官署位于哪里？": "因拘捕事宜请人写的那封信，收信人任职的官署位于哪里？",
+        "被王翦所杀者之子": "被王翦杀害的人的儿子",
+        "记载为哪位秦将所杀": "据记载是被哪位秦国将领杀害的",
+        "拘捕求书之人": "因拘捕事宜请来写信的人",
+        "狱掾官署所在地": "监狱属官任职的官署所在地",
+        "所任假王": "任命的代理王", "季父": "最小的叔叔", "拜认": "认作",
+    }
+    for before, after in replacements.items():
+        text = text.replace(before, after)
+    return text
+
 def build_record(seed, original, sources):
     spec=copy.deepcopy(original)
     mapping=identity_map(seed,spec["naming"]) if spec.get("naming") else {}
@@ -704,13 +719,13 @@ def build_record(seed, original, sources):
                 for d in docs}
     registers=sorted({a["register"] for a in audits.values()})
     if not registers:
-        registers=["classical","vernacular"] if seed["combination_id"] in ("C04","C08") else ["classical"] if seed["family_id"] in MATERIAL_CONFIG["families"] else ["vernacular"]
+        registers=["vernacular"]
     style="mixed" if len(registers)>1 else registers[0]
     for proof in gold["proofs"]:
         for node in proof:
             node["support_evidence_ids"]=list(dict.fromkeys(d for f in node["support_fact_ids"] for d in ftd_all[f]))
     itemid="Q"+digest(seed["family_id"]+original["name"])[:12]
-    payload={"id":itemid,"instruction":POLICY,"question":spec["question"],
+    payload={"id":itemid,"instruction":POLICY,"question":modern_question(spec["question"]),
              "documents":docs,"output_contract":CONTRACT}
     quoteids={q for f in spec["facts"] for q in f["quote_ids"]+f.get("parent_quote_ids",[])}
     sourcelinks=[s["source_link"] for s in sources if any(q["quote_id"] in quoteids for q in s["quotes"])]
@@ -728,7 +743,7 @@ def build_record(seed, original, sources):
             "material_label_scope":"prototype" if spec.get("no_context") else "current_input",
             "construction":{"random_seed":SEED,"naming":spec.get("naming","named"),
                             "noise_characters":spec.get("noise_characters",0),
-                            "material_rendering":"literal_source_units" if seed["family_id"] in MATERIAL_CONFIG["families"] else "synthetic_vernacular",
+                            "material_rendering":"translated_source_units" if seed["family_id"] in MATERIAL_CONFIG["families"] else "synthetic_vernacular",
                             "reverse_documents":spec.get("reverse_documents",False),
                             "changed_fact_ids":spec.get("changed_fact_ids",[]),
                             "comparison_reference":spec.get("comparison_reference",
@@ -846,6 +861,14 @@ def build_oracle(rows):
             upstream,relation=n["upstream"],n["relation"]
             question=(f"按材料，{upstream}的{relation}是什么？" if n["direction"]=="out"
                       else f"按材料，哪个对象的{relation}是{upstream}？")
+            question=modern_question(question)
+            if n["direction"] == "out":
+                if relation == "拘捕求书之人":
+                    question = f"按材料，{upstream}因拘捕事宜请谁写信？"
+                elif relation == "狱掾官署所在地":
+                    question = f"按材料，{upstream}作为监狱属官，任职官署位于哪里？"
+                elif relation == "所任假王":
+                    question = f"按材料，{upstream}任命谁担任代理王？"
             time=row["query"].get("time")
             if time is not None: question=f"在本题馆年{time}，"+question
             itemid="O"+digest(row["id"]+n["node_id"])[:12]
@@ -888,7 +911,7 @@ def self_test(rows,sources):
         except AssertionError:
             rejected.append(name)
     assert len(rejected) == 6
-    source_sample=next(r for r in rows if r["variant"]=="control" and r["material_style"]=="classical")
+    source_sample=next(r for r in rows if r["variant"]=="control" and r["construction"]["material_rendering"]=="translated_source_units")
     bad=copy.deepcopy(source_sample)
     bad["input"]["documents"][0]["text"]+="伪造的原文"
     try: validate_materials(bad)
@@ -919,8 +942,8 @@ def review_book(rows,combos):
                       "**组合问句**："+target["input"]["question"],"",
                       "**组合材料**（目录背景仅在机器输入保存全文）：",""])
         for d in target["input"]["documents"]:
-            if target["material_annotations"][d["id"]]["origin"]=="repeated_source_background":
-                lines.append(f"- {d['id']}：古籍原文重复背景，{len(d['text'])}字符；出处见模型输入的对应标注。")
+            if target["material_annotations"][d["id"]]["origin"]=="repeated_translated_background":
+                lines.append(f"- {d['id']}：古籍现代译文重复背景，{len(d['text'])}字符；出处见完整标注。")
             else:
                 lines.append(f"- {d['id']}："+d["text"].replace("\n"," / "))
         lines.extend(["","**合法参考证明**：",""])
@@ -1009,7 +1032,7 @@ def main():
     review_book(rows,combos)
     report["output_hashes"]={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in [DATA/f for f in
         ("seeds.json","benchmark.jsonl","inputs.jsonl","oracle_inputs.jsonl","oracle_gold.jsonl","题目审阅册.md")]}
-    report["input_hashes"]={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in [DATA/"sources.json",DATA/"combinations.json",DATA/"material_units.json",Path(__file__),Path(__file__).with_name("original_materials.py")]}
+    report["input_hashes"]={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in [DATA/"sources.json",DATA/"combinations.json",DATA/"material_units.json",DATA/"modern_translations.json",Path(__file__),Path(__file__).with_name("original_materials.py")]}
     report["file_links"]={"readme":"[检查说明](README.md)","dataset":"[数据说明](../../data/pilot_literature_history_v0/README.md)"}
     write_json(TEMP/"validation.json",report)
     print(json.dumps({k:v for k,v in report.items() if k not in ("output_hashes","input_hashes","variant_counts","file_links")},ensure_ascii=False,indent=2))

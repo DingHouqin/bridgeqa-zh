@@ -200,6 +200,12 @@ function proofGraphic(proof){
 }
   function materialLabel(row,doc){
     const a=row.material_annotations?.[doc.id];
+    if(a?.origin==='repeated_translated_background')return '现代文 · 古籍译文背景重复与裁切';
+    if(a?.origin==='source_translation'){
+      if(a.transformations.some(t=>t.kind==='counterfactual_replace'))return '现代文 · 译文反事实改写';
+      if(a.transformations.some(t=>t.kind==='entity_rename'))return '现代文 · 译文换名';
+      return '现代文 · 古籍译文'+(a.fragment_join?'（片段拼接）':'');
+    }
     if(!a||a.register==='vernacular')return a?.origin==='counterfactual_vernacular'?'白话文 · 反事实合成分支':'白话文 · 合成设定';
     if(a.origin==='repeated_source_background')return '古文 · 原文背景重复与裁切';
     if(a.transformations.some(t=>t.kind==='counterfactual_replace'))return '古文 · 反事实改写（不是未改原文）';
@@ -210,13 +216,13 @@ function proofGraphic(proof){
     const ids=new Set(facts.flatMap(f=>row.fact_to_evidence_all?.[f.fact_id]||[row.fact_to_evidence[f.fact_id]]).filter(Boolean));
   const docs=row.input.documents.filter(d=>ids.has(d.id));
     return '<div class="hop-original"><h4>'+h(label)+'</h4>'+docs.map(d=>'<article class="hop-document"><span class="mono">'+h(d.id)+'</span><p class="material-kind">'+h(materialLabel(row,d))+'</p>'+documentText(d.text)+'</article>').join('')+
-    (!docs.length?'<p class="caption">本操作没有独立原文材料；须依据题目条件或前置操作，不能另补事实。</p>':'')+'</div>';
+    (!docs.length?'<p class="caption">本操作没有独立题面材料；须依据题目条件或前置操作，不能另补事实。</p>':'')+'</div>';
 }
 function factQuotations(fact){
   return [...(fact.quote_ids||[]),...(fact.parent_quote_ids||[])].map(id=>{
     const q=index.quotes.get(id);if(!q)return '';
     const prior=fact.parent_quote_ids?.includes(id);
-    return '<details class="fact-quotation"><summary>'+h(id)+' · '+(prior?'改写前原文锚点':'来源原文')+'</summary><blockquote><p>'+h(q.text)+'</p><small>'+h(q.locator)+'</small></blockquote>'+
+    return '<details class="fact-quotation"><summary>'+h(id)+' · '+(prior?'改写前古文锚点 · 不提供模型':'溯源古文 · 不提供模型')+'</summary><blockquote><p>'+h(q.text)+'</p><small>'+h(q.locator)+'</small></blockquote>'+
       '<a href="'+h(external(q.source.revision_url))+'" target="_blank" rel="noopener">'+h(q.source.title)+' · 固定修订网页 ↗</a><p class="caption">'+h(q.source.author_attribution)+' · '+h(q.source.license_displayed)+(prior?'；只支撑改写前关系，不支撑当前新边。':'')+'</p></details>';
   }).join('');
 }
@@ -257,7 +263,7 @@ function nodeAnalysis(row,displayRow,proof,isPrototype){
     (potential.length?potential.map(c=>'<div class="potential-fact">'+rawFactMaterial(row,[c.fact])+'<h4>候选事实与偏离原因</h4>'+factView(c.fact)+'<p>'+h(c.reason)+'</p></div>').join(''):
       '<p class="caption">'+(isPrototype?'当前无完整证明，以上只说明原型。':'未找到符合结构规则的非支持分支，不表示不存在其他干扰。')+'</p>')+
       backgrounds.map(d=>'<div class="potential-fact background"><h4>'+h(materialLabel(row,d))+'</h4><span class="mono">'+h(d.id)+'</span>'+documentText(d.text)+'<p>这段重复背景可能分散注意或隔开支持材料，不提供当前跳所需关系。</p></div>').join('')+
-    (changed.length?'<div class="old-bridge"><h4>改接前旧关系 · 仅作记忆干扰对照</h4>'+rawFactMaterial(old,changed,'原文 · 基础版本材料')+changed.map(f=>factView(f)).join('')+'<p class="caption">旧关系不属于当前世界的有效桥。</p></div>':'')+
+    (changed.length?'<div class="old-bridge"><h4>改接前旧关系 · 仅作记忆干扰对照</h4>'+rawFactMaterial(old,changed,'题面材料 · 基础版本译文')+changed.map(f=>factView(f)).join('')+'<p class="caption">旧关系不属于当前世界的有效桥。</p></div>':'')+
     '<details class="operation-fields"><summary>查看操作完整标注</summary><pre>'+h(JSON.stringify(node,null,2))+'</pre></details></section>';
 }
 function documentText(text){

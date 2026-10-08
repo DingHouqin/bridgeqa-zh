@@ -58,3 +58,6 @@ Thumbs.db
 
 # 改名修复前的本地备份，见 [修复记录](data/pilot_literature_history_v0/改名修复与后续改进.md)
 /workspace/pilot-name-repair/
+
+# 现代文转换前的本地快照，见 [翻译说明](data/pilot_literature_history_v0/现代文翻译说明.md)
+/workspace/pilot-modern-translation/

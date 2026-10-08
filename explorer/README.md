@@ -1,11 +1,11 @@
 # BridgeQA Explorer｜线上题目与证据审查系统
 
-使用 [GitHub Pages网站](https://dinghouqin.github.io/bridgeqa-zh/)。当前pilot-v0.4 [86条候选题](../data/pilot_literature_history_v0/README.md) 的数据、标签和证明均由同一份原始标注生成。
+使用 [GitHub Pages网站](https://dinghouqin.github.io/bridgeqa-zh/)。当前pilot-v0.5 [86条候选题](../data/pilot_literature_history_v0/README.md) 的数据、标签和证明均由同一份原始标注生成。
 
 ## 使用
 
 - 01选题概览：主题、来源、组合、覆盖和数据规模。
-- 02题目与证据：搜索/筛选题目。进入详情后，图中n0为题目起点，点击连接查看这一跳的题面材料、结构化事实与出处，再看可能的偏离。干扰分支同样先显示题面材料，并明确古文原文或现代合成设定。节点本身不再是按钮。
+- 02题目与证据：搜索/筛选题目。进入详情后，图中n0为题目起点，点击连接查看这一跳的题面材料、结构化事实与出处，再看可能的偏离。干扰分支同样先显示题面材料，并明确古籍现代译文或现代合成设定。节点本身不再是按钮。
 - [03测试指引](https://dinghouqin.github.io/bridgeqa-zh/#/guide)：全项目固定使用说明，内容在 [指引页面](web/testing-guide.html) 维护。
 - [04研究文档](https://dinghouqin.github.io/bridgeqa-zh/#/docs/index)：章节、目录和原文跳转，登记见 [文档清单](web/documents.json)。
 
@@ -33,4 +33,4 @@
 
 先有 [设计规格](specs/README.md)，再实施；本轮连接交互与线上维护边界见 [规格07](specs/07_连线交互与线上系统.md)。逐步干扰是结构规则推定，非人工标注或模型实测；网页检查不能替代benchmark效度验证。
 
-材料已恢复为可溯源古籍摘录；原有现代合成题按用户选择保留，并可用“材料文体”筛选古文、白话文或混合。具体范围与变换记录见 [原文恢复说明](../data/pilot_literature_history_v0/原文恢复说明.md)。
+当前题面全部为现代文：古籍译文与合成设定分别标记，溯源古文折叠保存且不提供模型。翻译和各跳关系核对见 [翻译说明](../data/pilot_literature_history_v0/现代文翻译说明.md)。

@@ -47,7 +47,7 @@ const find=(c,v='challenge',d='history')=>rows.find(r=>r.combination_id===c&&r.d
       await page.locator('#search').fill('不存在的独立测试问题');await count(0);
       assert.ok(await page.locator('.empty-state').isVisible());
       await page.locator('.filter-heading [data-act=clear]').click();await count(86);
-      for(const [style,total] of [['classical',26],['vernacular',38],['mixed',22]]){
+      for(const [style,total] of [['vernacular',86]]){
         await page.locator('.facet-value[data-key=language][data-value='+style+']').click();await count(total);
         await page.locator('.filter-heading [data-act=clear]').click();await count(86);
       }
@@ -86,8 +86,8 @@ const find=(c,v='challenge',d='history')=>rows.find(r=>r.combination_id===c&&r.d
       await screenshot('03-chain-detail.png');
       await detail(find('C01','control'));
       await page.locator('.proof-connection[data-node=n3]').click();
-      assert.match(await page.locator('.hop-document').first().innerText(),/項梁嘗有櫟陽逮/);
-      assert.match(await page.locator('.material-kind').first().innerText(),/未经改写/);
+      assert.match(await page.locator('.hop-document').first().innerText(),/曹咎写信给在栎阳任监狱属官的司马欣/);
+      assert.match(await page.locator('.material-kind').first().innerText(),/现代文.*古籍译文/);
       assert.doesNotMatch(await page.locator('.hop-original').innerText(),/司马欣的狱掾官署所在地是/);
       await screenshot('11-original-history-detail.png');
     });

@@ -229,6 +229,18 @@
       "slug": "reports/pilot-hop-audit-details",
       "group": "报告归档",
       "title": "pilot 全量审核逐题附录｜2026-10-07"
+    },
+    {
+      "source": "data/pilot_literature_history_v0/现代文翻译说明.md",
+      "slug": "data/modern-translation",
+      "group": "数据与构建",
+      "title": "题面统一采用现代文｜2026-10-08"
+    },
+    {
+      "source": "docs/report/2026-10-08_现代文翻译对照.md",
+      "slug": "reports/modern-translation-2026-10-08",
+      "group": "报告归档",
+      "title": "古籍材料现代文翻译对照｜2026-10-08"
     }
   ],
   "files": [
@@ -290,6 +302,9 @@
     "data/pilot_literature_history_v0/改名修复与后续改进.md",
     "docs/report/2026-10-07_pilot全量逐跳语义审核.md",
     "docs/report/2026-10-07_pilot全量逐跳语义审核逐题附录.md",
-    "docs/report/2026-10-07_pilot全量逐跳语义审核记录.json"
+    "docs/report/2026-10-07_pilot全量逐跳语义审核记录.json",
+    "data/pilot_literature_history_v0/现代文翻译说明.md",
+    "docs/report/2026-10-08_现代文翻译对照.md",
+    "data/pilot_literature_history_v0/modern_translations.json"
   ]
 }

@@ -6,4 +6,4 @@
 
 检查记录见 [本轮验证说明](../../workspace/pilot_literature_history_v0/README.md)。
 
-古籍文字由 [原文渲染器](original_materials.py) 读取 [片段登记](../../data/pilot_literature_history_v0/material_units.json) 后逐字恢复，再按记录做换名与反事实替换；不生成仿古文。原有白话文合成题继续保留，分组规则见 [恢复说明](../../data/pilot_literature_history_v0/原文恢复说明.md)。
+古籍题面由 [渲染器](original_materials.py) 按 [片段登记](../../data/pilot_literature_history_v0/material_units.json) 读取 [固定现代译文](../../data/pilot_literature_history_v0/modern_translations.json)，然后执行换名与反事实替换；原文和译文分开保存。删证题只翻译剩余片段，现代合成题保持不变，详见 [翻译说明](../../data/pilot_literature_history_v0/现代文翻译说明.md)。

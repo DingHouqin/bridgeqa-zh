@@ -64,7 +64,7 @@
   },
   "context_character_range": [
     0,
-    12557
+    12642
   ],
   "proof_depths": {
     "3": 48,
@@ -76,7 +76,7 @@
   "sources": 4,
   "independent_human_review": false,
   "model_runs": 0,
-  "version": "pilot-v0.4",
+  "version": "pilot-v0.5",
   "deduplication": {
     "generated_records": 128,
     "removed_records": 42,
@@ -104,13 +104,10 @@
     }
   },
   "material_style_counts": {
-    "classical": 26,
-    "vernacular": 38,
-    "mixed": 22
+    "vernacular": 86
   },
   "material_document_counts": {
-    "classical": 92,
-    "vernacular": 234
+    "vernacular": 326
   },
   "oracle_tasks": 58,
   "negative_validation_tests": [
@@ -124,19 +121,20 @@
     "omitted_original_support"
   ],
   "output_hashes": {
-    "seeds.json": "85e33c2b9eb570d28588c4c83ed6dba928d83a8e503307285b1c288a1e4a87b8",
-    "benchmark.jsonl": "d145a9ac6f2382591e11a421135fa71a81d10973dce91d1e53a013fa5059fb63",
-    "inputs.jsonl": "fd0e40e6a4e15d28a4ffca9542e1332165d85639ea3e0562d4af14090aecabfb",
-    "oracle_inputs.jsonl": "771d64e909889c84c7fa7bfc4c9b5e36b1ed21f04b98569ab62ae703a5655629",
+    "seeds.json": "b84ea1f7675a740bc73f514758e46751dcf84d51930d467f51d02e89184aad9d",
+    "benchmark.jsonl": "09a8adabe69f948c432a9146fa80aa570f8a32945b36481ed48356bdf34836f3",
+    "inputs.jsonl": "21316a79c9c3eb7a57ef0e55783ace28ea175c21d8993d7d2c570e45abbbd457",
+    "oracle_inputs.jsonl": "4170c51bd30dd75161505f4c2a5d2cc862e343a9db3e42ff770a615a7537b026",
     "oracle_gold.jsonl": "04325f811a87193d151a469d701f41457df8058e8d77e4fff90d0050240dae22",
-    "题目审阅册.md": "5dbb485f70e954c0227e1c2a696202223eaf4dcebed6f24e3435a94f746ba057"
+    "题目审阅册.md": "91578b72a32bb19c36ec5e3ea41e83b322003ecd57491933edc1edeb921ebb6b"
   },
   "input_hashes": {
     "sources.json": "5f718d21b9663d09a2acece9a50fef54a5f283ef0a7c059ed500e2001fac5a0b",
     "combinations.json": "ce7dabb220187b91f78816b0c956d1415242088c75ba6eeb07a94110fec48aab",
-    "material_units.json": "3c54217d08cc1d827a5b7672f448d6093cf9975489087909956853876c31411d",
-    "build_pilot.py": "66eb200a4c06abeafce08efe69e75370b1664e0b3b733477b2e8c4a0510ad318",
-    "original_materials.py": "d09e18ea4936c347c5d894647b77e756b04fd0aee10f1c78c753a3a937fdc1c3"
+    "material_units.json": "9e9ff762114ae5d0317e5d9b7044c0fb3e9fd163e308d73c0d8aa518ac56bdd0",
+    "modern_translations.json": "e20022649303723a84d833c4b601a34a209f1354184746d9f045644890c5e857",
+    "build_pilot.py": "115a4dafb3fe0ea04ef55c4284b1cb7289e60f50d63721c9665c30c5c5ffcb50",
+    "original_materials.py": "abf68c85139bec02995b4ec91c0c77f94ef1502c3d7c7b8791608de1f4a532aa"
   },
   "file_links": {
     "readme": "[检查说明](README.md)",

@@ -1,5 +1,5 @@
 {
-  "version": "pilot-v0.4",
+  "version": "pilot-v0.5",
   "design_link": "[原文恢复说明](原文恢复说明.md)",
   "sources_link": "[引文原文](sources.json)",
   "families": {
@@ -510,5 +510,43 @@
     "复抄",
     "本题卷本表"
   ],
-  "naming_design_link": "[改名修复与后续改进](改名修复与后续改进.md)"
+  "naming_design_link": "[改名修复与后续改进](改名修复与后续改进.md)",
+  "modern_entity_forms": {
+    "吕布": [
+      "奉先",
+      "吕将军"
+    ],
+    "丁原": [
+      "丁建阳"
+    ],
+    "陈胜": [
+      "陈涉"
+    ],
+    "吴广": [
+      "吴叔"
+    ],
+    "须菩提祖师": [
+      "菩提祖师"
+    ],
+    "孙悟空": [
+      "美猴王",
+      "猴王"
+    ],
+    "傲来国": [
+      "傲来小国"
+    ]
+  },
+  "modern_entity_context_forms": [
+    {
+      "canonical": "吕布",
+      "before": "姓吕，名布，字奉先",
+      "replacement_template": "名叫{entity}"
+    },
+    {
+      "canonical": "吕布",
+      "before": "吕将军",
+      "replacement_template": "{entity}将军"
+    }
+  ],
+  "translation_design_link": "[现代文翻译说明](现代文翻译说明.md)"
 }
