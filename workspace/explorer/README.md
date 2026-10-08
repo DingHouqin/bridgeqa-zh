@@ -63,9 +63,11 @@
 
 按[规格08](../../explorer/specs/08_临时人工审查.md)，86题稳定分为A/B各22题、C/D各21题。05在[原网站](https://dinghouqin.github.io/bridgeqa-zh/#/review)内新增；共享数据保存在[Sites同步服务](../../explorer/review-service/README.md)的D1数据库，不在本机统计为团队进度。
 
-本次12项JavaScript逻辑测试、16项Python数据与导出检查、原有14组浏览器回归及12组审查/接口验收通过。审查检查使用实际Worker代码、两个独立浏览器上下文与内存SQLite，不写生产记录；覆盖任务分配、姓名同步、保存刷新、多证明/缺证、评论主题、完成门槛、草稿恢复、故障重试、并发冲突、导出及390px布局。[检查记录](review_checks.json)保留检查清单。旧界面回归输出位于忽略的临时目录，与历史截图分开。
+本次12项JavaScript逻辑测试、18项Python数据与导出检查、原有14组浏览器回归及12组审查/接口验收通过。审查检查使用实际Worker代码、两个独立浏览器上下文与内存SQLite，不写生产记录；覆盖任务分配、姓名同步、保存刷新、多证明/缺证、评论主题、完成门槛、草稿恢复、故障重试、并发冲突、导出及390px布局。[检查记录](review_checks.json)保留检查清单。旧界面回归输出位于忽略的临时目录，与历史截图分开。
 
 同步服务版本1部署成功，实际数据库存在DB绑定及review_entries表；从原网站Origin执行读取返回200，PUT预检返回204，数据版本匹配。生产记录在发布时为空，人工审查尚未开展；网页验收不代表benchmark已获得人工认可。
+
+初次线上浏览器复查发现Windows与Linux题库文件换行不同，原始字节散列不能用作跨平台审查轮次。[指纹回归测试](../../explorer/tests/review_fingerprint_test.py)验证文件LF/CRLF、JSON排版及键序不改变轮次，而题目文本变化会改变轮次；共享保存改用规范化题目内容SHA-256。原始文件散列继续保留用于溯源。
 
 - [05首页 · 桌面](12-review-home-desktop.png)
 - [05逐题审查 · 桌面](13-review-detail-desktop.png)

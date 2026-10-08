@@ -11,7 +11,7 @@ export function units(row){
     [{key:'boundary',proof:null,node:null,label:'材料不足：不可作答边界'}];
 }
 export function datasetKey(bundle){
-  return bundle.id+':'+bundle.version+':'+bundle.fingerprint;
+  return bundle.id+':'+bundle.version+':'+bundle.review_fingerprint;
 }
 export function blankReview(row,owner){
   return {owner,initials:'',status:'draft',steps:Object.fromEntries(units(row).map(u=>[u.key,{accuracy:'',comment:''}])),verdict:'',ratings:Object.fromEntries(Object.keys(TOPICS).map(k=>[k,''])),comment:''};

@@ -18,6 +18,11 @@ REGISTRY = {
 _cache = {}
 _lock = threading.Lock()
 
+def review_fingerprint(records):
+    """Content identity shared by Windows authoring and Linux publication."""
+    canonical = json.dumps(records, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+    return hashlib.sha256(canonical.encode('utf-8')).hexdigest()
+
 def file_url(path):
     return "/files/" + path.relative_to(PROJECT).as_posix()
 
@@ -68,6 +73,7 @@ def load_bundle(dataset_id):
                   "combinations": combinations, "scenarios": scenarios,
                   "version": records[0]["version"] if records else "unknown",
                   "fingerprint": hashlib.sha256(paths[0].read_bytes()).hexdigest(),
+                  "review_fingerprint": review_fingerprint(records),
                   "links": {"readme": file_url(directory / "README.md"),
                             "records": file_url(directory / "benchmark.jsonl"),
                             "sources": file_url(paths[1]), "combinations": file_url(paths[2]),
