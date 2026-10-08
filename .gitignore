@@ -61,3 +61,11 @@ Thumbs.db
 
 # 现代文转换前的本地快照，见 [翻译说明](data/pilot_literature_history_v0/现代文翻译说明.md)
 /workspace/pilot-modern-translation/
+
+# 临时审查服务的独立托管副本、安装缓存与检查产物，见 [同步服务](explorer/review-service/README.md)
+/workspace/human-review-site/
+/workspace/review-npm-cache/
+/workspace/review-service.tar.gz
+/workspace/explorer/review-downloads/
+/workspace/explorer/review-legacy-qa/
+/workspace/explorer/review-failure.png

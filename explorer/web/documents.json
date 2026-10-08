@@ -241,6 +241,12 @@
       "slug": "reports/modern-translation-2026-10-08",
       "group": "报告归档",
       "title": "古籍材料现代文翻译对照｜2026-10-08"
+    },
+    {
+      "source": "explorer/specs/08_临时人工审查.md",
+      "slug": "specs/08",
+      "group": "系统规格",
+      "title": "08｜临时人工审查与共享进度"
     }
   ],
   "files": [
@@ -305,6 +311,9 @@
     "docs/report/2026-10-07_pilot全量逐跳语义审核记录.json",
     "data/pilot_literature_history_v0/现代文翻译说明.md",
     "docs/report/2026-10-08_现代文翻译对照.md",
-    "data/pilot_literature_history_v0/modern_translations.json"
+    "data/pilot_literature_history_v0/modern_translations.json",
+    "explorer/specs/08_临时人工审查.md",
+    "explorer/web/review-model.js",
+    "explorer/web/review.js"
   ]
 }

@@ -8,6 +8,9 @@
 - 02题目与证据：搜索/筛选题目。进入详情后，图中n0为题目起点，点击连接查看这一跳的题面材料、结构化事实与出处，再看可能的偏离。干扰分支同样先显示题面材料，并明确古籍现代译文或现代合成设定。节点本身不再是按钮。
 - [03测试指引](https://dinghouqin.github.io/bridgeqa-zh/#/guide)：全项目固定使用说明，内容在 [指引页面](web/testing-guide.html) 维护。
 - [04研究文档](https://dinghouqin.github.io/bridgeqa-zh/#/docs/index)：章节、目录和原文跳转，登记见 [文档清单](web/documents.json)。
+- [05人工审查](https://dinghouqin.github.io/bridgeqa-zh/#/review)：86题固定分给A/B各22题、C/D各21题，首页填写姓名简写；复用02筛选、证明图和家族对照，并查看本题全部材料与事实、绿色参考支持、逐步准确性评论及整题评价。所有合法证明的步骤均需审查，材料不足题核对不可作答边界。完成本题才计入进度，修改完成评价后恢复草稿。
+
+05的简写、评价和进度通过[同步服务](review-service/README.md)共享保存，每5秒同步。访问范围按用户指定为持有链接即可使用。写入失败保留输入并可重试或导出，版本冲突须明确选择；原始benchmark数据不随评价修改。详细规则见[规格08](specs/08_临时人工审查.md)，字段逻辑见[审查模型](web/review-model.js)。
 
 缺证题只解释原型，不把原型当作当前可用材料。原文引文用于核验改写，反事实的旧出处不支撑新关系。多份合法证明分别切换，汇合操作保留全部必要依赖。已移除的家族版本灰显。
 
@@ -34,3 +37,5 @@
 先有 [设计规格](specs/README.md)，再实施；本轮连接交互与线上维护边界见 [规格07](specs/07_连线交互与线上系统.md)。逐步干扰是结构规则推定，非人工标注或模型实测；网页检查不能替代benchmark效度验证。
 
 当前题面全部为现代文：古籍译文与合成设定分别标记，溯源古文折叠保存且不提供模型。翻译和各跳关系核对见 [翻译说明](../data/pilot_literature_history_v0/现代文翻译说明.md)。
+
+人工审查另运行 `node --test explorer/tests/review.test.mjs` 与 `node explorer/tests/review_ui_checks.cjs`。后者使用本机已安装Playwright、两个独立浏览器上下文和实际Worker接口的内存SQLite；静态文件从导出目录拦截读取，不修改生产记录。记录见[审查验收](../workspace/explorer/review_checks.json)。

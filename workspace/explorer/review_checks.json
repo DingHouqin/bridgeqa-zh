@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "checks": [
+    "server rejects wrong version, unknown IDs, malformed evaluations and missing storage",
+    "server conditional writes reject a concurrent update without changing original",
+    "05 homepage shows complete 22/22/21/21 assignment and initials sync across browsers",
+    "review catalog scopes assignments, searches and returns with filters",
+    "all materials and facts visible, reference support highlighted, proof graph still interactive",
+    "incomplete review cannot finish, comments theme works, drafts survive reload",
+    "shared completed count updates and a changed completed record returns to draft",
+    "storage failure preserves input and explicit retry completes shared save",
+    "multi-proof tasks require every branch; insufficient tasks have only boundary review",
+    "same-task conflict keeps local input and permits choosing remote version",
+    "export yields structured shared records; 02 remains separate from 05",
+    "390px review home and detail have no page overflow"
+  ],
+  "unexpected_browser_errors": [],
+  "storage": "In-memory SQLite through actual Worker API; no production writes"
+}

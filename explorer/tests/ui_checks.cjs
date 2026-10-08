@@ -4,13 +4,24 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
 const root=path.resolve(__dirname,'../..');
-const out=path.join(root,'workspace/explorer');
+const out=process.env.BRIDGEQA_CHECK_DIR||path.join(root,'workspace/explorer');
 const base=process.env.BRIDGEQA_URL||'http://127.0.0.1:8766';
 const rows=fs.readFileSync(path.join(root,'data/pilot_literature_history_v0/benchmark.jsonl'),'utf8').trim().split(/\r?\n/).map(JSON.parse);
 const find=(c,v='challenge',d='history')=>rows.find(r=>r.combination_id===c&&r.domain===d&&(v==='challenge'?['challenge','anonymous_challenge','unfamiliar_challenge'].includes(r.variant):r.variant===v));
+const useStaticFiles=async page=>{
+  if(!process.env.BRIDGEQA_ASSET_DIR)return;
+  await page.route(base+'/**',async route=>{
+    const directory=path.resolve(process.env.BRIDGEQA_ASSET_DIR),relative=decodeURIComponent(new URL(route.request().url()).pathname).replace(/^\//,'')||'index.html';
+    const filename=path.resolve(directory,relative);
+    if(!filename.startsWith(directory+path.sep)||!fs.existsSync(filename))return route.fulfill({status:404,body:'Not found'});
+    const types={'.html':'text/html','.js':'text/javascript','.json':'application/json','.css':'text/css','.md':'text/plain'};
+    await route.fulfill({status:200,contentType:types[path.extname(filename)]||'application/octet-stream',body:fs.readFileSync(filename)});
+  });
+};
 (async()=>{
   const browser=await chromium.launch({headless:true});
   const page=await browser.newPage({viewport:{width:1440,height:1050},deviceScaleFactor:1});
+  await useStaticFiles(page);
   const errors=[],checks=[],failedRequests=[];
   page.on('pageerror',e=>errors.push(e.message));
   page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
@@ -172,6 +183,7 @@ const find=(c,v='challenge',d='history')=>rows.find(r=>r.combination_id===c&&r.d
     });
     await check('fixed testing guide is dataset-independent, linked and mobile-readable',async()=>{
       const guide=await browser.newPage({viewport:{width:1440,height:1050}});
+      await useStaticFiles(guide);
       const bundleRequests=[];
       guide.on('request',r=>{if(r.url().includes('/bundle'))bundleRequests.push(r.url());});
       guide.on('pageerror',e=>errors.push(e.message));
@@ -185,7 +197,10 @@ const find=(c,v='challenge',d='history')=>rows.find(r=>r.combination_id===c&&r.d
         assert.ok(content.includes(filename),filename);
       }
       const links=await guide.locator('#testing-guide a[href*="/files/"]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href')));
-      for(const href of new Set(links))assert.equal((await guide.request.get(new URL(href,base).href)).status(),200,href);
+      for(const href of new Set(links)){
+        if(process.env.BRIDGEQA_ASSET_DIR)assert.ok(fs.existsSync(path.join(process.env.BRIDGEQA_ASSET_DIR,decodeURIComponent(new URL(href,base).pathname))),href);
+        else assert.equal((await guide.request.get(new URL(href,base).href)).status(),200,href);
+      }
       await guide.goto(base+'/#guide?dataset=pilot_literature_history_v0');
       await guide.waitForSelector('#testing-guide');
       assert.equal(await guide.locator('#testing-guide').innerHTML(),content);

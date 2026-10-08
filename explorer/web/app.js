@@ -1,5 +1,8 @@
 import {siteURL,rewriteSiteLinks} from './urls.js';
 import {renderDocument} from './documents.js';
+import {PEOPLE,TOPICS,setupReview,reviewConnection,initialsFor,reviewFor,reviewOwner,reviewStatus,progressFor,
+  saveInitials,updateReview,finishReview,retrySaves,resolveConflict,exportReview,units} from './review.js';
+import {ACCURACY,VERDICTS} from './review-model.js';
 // [Interaction spec](../specs/02_标签筛选与交互.md), [semantic spec](../specs/03_数据映射与干扰语义.md).
 import {FACETS,VARIANTS,STATUS,PROVENANCE,OPERATIONS,makeIndex,tagsFor,tagLabel,
   filterRows,facetCounts,evidenceRoles,candidatesFor,layoutProof,proofWithStart,missingFacts} from './model.js';
@@ -13,8 +16,15 @@ let listState={filters:{},search:'',sceneMode:'any',page:1,size:12};
 let pageName='overview',currentId='',proofIndex=0,selectedNode='',selectedFrom='n0',lastDetail='';
 let filterExpanded=window.innerWidth>760;
 let guideMarkup;
+let lastReviewSignature='';
+const inReview=()=>pageName.startsWith('review');
+const catalogPage=()=>inReview()?'review-questions':'questions';
+const filteredRows=()=>filterRows(sortedRows(),listState.filters,listState.search,listState.sceneMode).filter(r=>
+  !inReview()||(!listState.person||reviewOwner(r.id)===listState.person)&&(!listState.reviewStatus||reviewStatus(r.id)===listState.reviewStatus));
 const sortedRows=()=>[...bundle.records].sort((a,b)=>a.family_id.localeCompare(b.family_id)||a.id.localeCompare(b.id));
-function route(name,id='',state=listState,ds=dataset){
+function route(name,id='',state=listState,ds=dataset,original=false){
+  if(!original&&inReview()&&name==='question')name='review-question';
+  if(!original&&inReview()&&name==='questions')name='review-questions';
   if(name==='guide') return '#/guide';
   if(name==='docs') return '#/docs/'+(id||'index');
   const params=new URLSearchParams({dataset:ds});
@@ -32,7 +42,8 @@ function normalizedState(raw){
     return {filters:Object.fromEntries(Object.entries(s.filters||{}).filter(([key,v])=>
       FACETS.some(([f])=>f===key)&&Array.isArray(v)).map(([k,v])=>[k,v.map(String)])),
       search:String(s.search||''),sceneMode:s.sceneMode==='all'?'all':'any',
-      page:Math.max(1,parseInt(s.page)||1),size:s.size===24?24:12};
+      page:Math.max(1,parseInt(s.page)||1),size:s.size===24?24:12,
+      person:PEOPLE.includes(s.person)?s.person:'',reviewStatus:['todo','draft','complete'].includes(s.reviewStatus)?s.reviewStatus:''};
   }catch{return {filters:{},search:'',sceneMode:'any',page:1,size:12};}
 }
 function tag(key,value,extra=''){
@@ -49,16 +60,17 @@ function mainTitle(kicker,title,desc=''){
 function shell(content,active=pageName){
   const focus=document.activeElement?.id;
   const selection=focus==='search'?document.activeElement.selectionStart:null;
-  const graphScroll=pageName==='question'&&document.title.startsWith(currentId)?
+  const graphScroll=['question','review-question'].includes(pageName)&&document.title.startsWith(currentId)?
     document.querySelector('.proof-canvas')?.scrollLeft:undefined;
   app.innerHTML='<div class="layout"><aside class="sidebar"><a class="brand" href="'+route('overview')+'">'+
     '<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M7 30V17Q20 1 33 17V30M7 21H33M20 9V30"/></svg>'+
     '<span>BridgeQA<small>中文多跳 · 研究审查</small></span></a><div class="nav-label">BENCHMARK ATLAS</div><nav aria-label="主导航">'+
     '<a '+(active==='overview'?'aria-current="page"':'')+' href="'+route('overview')+'"><span>01</span>选题概览</a>'+
-    '<a '+(active==='questions'||active==='question'?'aria-current="page"':'')+' href="'+route('questions')+'"><span>02</span>题目与证据</a>'+
+    '<a '+(active==='questions'||active==='question'?'aria-current="page"':'')+' href="'+route('questions','',listState,dataset,true)+'"><span>02</span>题目与证据</a>'+
     '<a '+(active==='guide'?'aria-current="page"':'')+' href="'+route('guide')+'"><span>03</span>测试指引</a>'+
     '<a '+(active==='docs'?'aria-current="page"':'')+' href="'+route('docs','index')+'"><span>04</span>研究文档</a>'+
-    '</nav><div class="side-note"><span class="signal"></span>只读 · 候选集审查<p>看清每条关系，<br>以及偏离发生在哪里。</p>'+
+    '<a '+(active.startsWith('review')?'aria-current="page"':'')+' href="'+route('review')+'"><span>05</span>人工审查</a>'+
+    '</nav><div class="side-note"><span class="signal"></span>'+(inReview()?'协作 · 人工审查':'只读 · 候选集审查')+'<p>看清每条关系，<br>以及偏离发生在哪里。</p>'+
     '<a href="#/docs/specs/index" target="_blank" rel="noopener">查看设计规格 ↗</a></div></aside><div class="workspace">'+
     '<header class="topbar"><span class="workbench-label">证据与推理工作台</span>'+(['guide','docs'].includes(active)?
     '<span class="global-page-label">全项目固定页面 · 按章节维护</span>':'<label class="dataset-picker">数据集<select id="dataset" aria-label="选择数据集">'+
@@ -146,6 +158,7 @@ function questionCard(row){
   const tags=tagsFor(row);
   const otherTags=Object.entries(tags).filter(([key])=>key!=='scene').flatMap(([key,values])=>values.map(v=>tag(key,v))).join('');
   return '<article class="question-card"><div class="card-top"><span class="mono">'+h(row.id)+'</span>'+statusBadge(row)+
+    (inReview()?'<span class="review-card-status">'+h(reviewOwner(row.id))+' · '+h(initialsFor(reviewOwner(row.id))||'未署名')+' · '+h({todo:'待审',draft:'草稿',complete:'已完成'}[reviewStatus(row.id)])+'</span>':'')+
     '</div><a class="question-link" href="'+route('question',row.id)+'">'+h(row.input.question)+'</a>'+
     '<div class="card-meta">'+h(row.family_id)+' <span>·</span> '+h(VARIANTS[row.variant]||row.variant)+' <span>·</span> '+h(tagLabel('language',row.material_style,index))+' <span>·</span> '+
     (row.domain==='history'?'历史':'文学')+' <span>·</span> '+(row.minimum_proof_depth?row.minimum_proof_depth+' 层依赖':'无完整证明')+'</div>'+
@@ -155,13 +168,69 @@ function questionCard(row){
     h(row.gold.answers.length?valueText(row.gold.answers):'材料不足，不补齐缺失关系')+'</strong>'+
     '<a href="'+route('question',row.id)+'">剖析证据 →</a></div></article>';
 }
+function reviewToolbar(){
+  const {connected,notice,conflict}=reviewConnection();
+  return '<section class="review-toolbar" id="review-toolbar"><p role="status" class="'+(connected?'':'review-alert')+'">'+h(notice)+'</p><div>'+
+    '<button data-act="review-retry">同步 / 重试保存</button><button data-act="review-export">导出审查记录</button></div>'+
+    (conflict?'<div class="review-conflict"><b>'+h(conflict.id)+' 保存冲突</b><button data-act="review-remote">采用其他设备的版本</button><button data-act="review-local">用我的输入替换共享版本</button></div>':'')+'</section>';
+}
+function reviewFilters(){return '<div class="review-filters"><label>负责人<select id="review-person"><option value="">全部负责人</option>'+PEOPLE.map(p=>'<option value="'+p+'" '+(listState.person===p?'selected':'')+'>'+p+' · '+h(initialsFor(p)||'未署名')+'</option>').join('')+'</select></label>'+
+  '<label>审查进度<select id="review-status"><option value="">全部状态</option>'+Object.entries({todo:'待审',draft:'草稿',complete:'已完成'}).map(([v,t])=>'<option value="'+v+'" '+(listState.reviewStatus===v?'selected':'')+'>'+t+'</option>').join('')+'</select></label></div>';}
+function renderReview(){
+  shell(mainTitle('05 / HUMAN REVIEW','临时人工审查','选择你的负责人编号，填写姓名简写，再进入分配的题目。全部86题已固定分配，评价和进度跨设备同步。')+
+    reviewToolbar()+'<section class="review-people" aria-label="四人审查进度">'+PEOPLE.map(p=>{
+      const progress=progressFor(bundle.records,p),percent=Math.round(progress.complete/progress.total*100);
+      return '<article class="review-person-card" data-person="'+p+'"><div class="review-person-heading"><h2>'+p+'</h2><span class="review-progress-text">'+progress.complete+' / '+progress.total+' 题 · '+percent+'%</span></div>'+
+        '<progress value="'+progress.complete+'" max="'+progress.total+'" aria-label="'+p+' 完成进度"></progress><label class="review-name-label" for="initials-'+p+'">'+p+' 的姓名首字母<input id="initials-'+p+'" data-person="'+p+'" value="'+h(initialsFor(p))+'" maxlength="12" placeholder="例如 abc" autocomplete="off" spellcheck="false"></label>'+
+        '<button data-act="review-name" data-person="'+p+'">保存简写</button><p class="caption">已完成 '+progress.complete+' · 草稿 '+progress.draft+' · 待审 '+(progress.total-progress.complete-progress.draft)+'</p>'+
+        '<a class="primary" href="'+route('review-questions','',{...normalizedState(),person:p})+'">进入 '+p+' 的任务</a></article>';
+    }).join('')+'</section><section class="panel review-instructions"><h2>审查方式</h2><p>先查看题面、全部材料和绿色参考支持，再逐步判断每个操作是否准确。绿色表示当前标注中的正确证据，仍需你核实；多解题的合法证明分别评价。</p><p>每个步骤可以附评论；标为不准确或待核实时须写原因。所有步骤与整题结论填写齐全后，点击“完成本题审查”计入进度。问题可读性、逻辑紧密性、关联复杂性等主题可辅助评价。</p><p class="caption">这是按编号和简写署名的临时协作页面。共享记录保存在数据库，原始题目标注不随评价自动修改。</p><a href="'+route('review-questions','',normalizedState())+'">查看全部审查任务</a></section>','review');
+}
+function reviewUpdate(){
+  if(!inReview()||!bundle)return;
+  const toolbar=document.querySelector('#review-toolbar');if(toolbar)toolbar.outerHTML=reviewToolbar();
+  const signature=reviewSignature();if(signature===lastReviewSignature)return;
+  if(document.activeElement?.matches('input,textarea,select'))return;
+  lastReviewSignature=signature;
+  if(pageName==='review')renderReview();
+  else if(pageName==='review-questions')renderQuestions();
+  else renderDetail();
+}
+function reviewSignature(){
+  if(pageName==='review-question'){
+    const row=index.rows.get(currentId);return JSON.stringify(row?{value:reviewFor(row),name:initialsFor(reviewOwner(row.id)),status:reviewStatus(row.id)}:{});
+  }
+  return JSON.stringify(PEOPLE.map(p=>[p,initialsFor(p),progressFor(bundle.records,p)]));
+}
+function reviewFullData(row,proof){
+  const currentFacts=new Set(proof.flatMap(n=>n.support_fact_ids)),allFacts=new Set(row.gold.proofs.flatMap(p=>p.flatMap(n=>n.support_fact_ids)));
+  const roles=evidenceRoles(row,proof);
+  return '<section class="panel review-full-data" id="review-all-data"><h2>本题全部数据 · 核对参考支持</h2><p>绿色为当前所选证明的参考正确证据；紫色为其他合法证明的支持。其余材料仍全部列出。材料不足题不把原型支持标为当前正确。</p>'+
+    '<details open><summary>全部题面材料 · '+row.input.documents.length+' 份</summary>'+row.input.documents.map(d=>'<article class="hop-document review-document '+roles[d.id]+'"><div class="document-heading"><b>'+h(d.id)+'</b><span>'+h({current:'✓ 当前证明的参考支持',alternative:'其他合法证明的参考支持',background:'背景材料',unreferenced:'未列为参考支持'}[roles[d.id]])+'</span></div><p class="material-kind">'+h(materialLabel(row,d))+'</p>'+documentText(d.text)+'</article>').join('')+
+    (!row.input.documents.length?'<p>当前题面无材料，不补回原型证据。</p>':'')+'</details><details open><summary>全部结构化事实 · '+row.facts.length+' 条</summary>'+row.facts.map(f=>'<article class="review-fact '+(currentFacts.has(f.fact_id)?'current':allFacts.has(f.fact_id)?'alternative':'')+'">'+(allFacts.has(f.fact_id)?'<b class="review-evidence-label">'+(currentFacts.has(f.fact_id)?'✓ 当前证明的参考正确事实':'其他合法证明的支持事实')+'</b>':'')+factView(f)+'</article>').join('')+'</details>'+
+    '<details><summary>本题完整原始标注 JSON（含所有字段）</summary><pre>'+h(JSON.stringify(row,null,2))+'</pre></details></section>';
+}
+function reviewForm(row){
+  const review=reviewFor(row),owner=reviewOwner(row.id);
+  const options=(dict,value)=>'<option value="">请选择</option>'+Object.entries(dict).map(([k,label])=>'<option value="'+k+'" '+(k===String(value)?'selected':'')+'>'+h(label)+'</option>').join('');
+  const topics=key=>'<div class="review-topic-buttons" aria-label="评论主题">'+Object.values(TOPICS).map(t=>'<button data-act="review-topic" data-unit="'+h(key)+'" data-topic="'+h(t)+'">'+h(t)+'</button>').join('')+'</div>';
+  return '<section class="panel review-form" id="review-form"><div class="section-heading"><h2>人工评价</h2><span class="badge">'+owner+' · '+h(initialsFor(owner)||'请先在首页填写简写')+' · '+(reviewStatus(row.id)==='complete'?'已完成':'草稿')+'</span></div><p>审查所有合法证明中的每个操作。更改已完成的评价后会恢复草稿，需再次点击完成。</p>'+
+    units(row).map((u,i)=>{const s=review.steps[u.key];return '<article class="review-step" id="review-unit-'+i+'"><h3>'+h(u.label)+' · '+h(u.node?OPERATIONS[u.node.operation]||u.node.operation:'核对缺失桥接与不可作答结论')+'</h3>'+
+      (u.node?'<p>参考结果：<b>'+h(valueText(u.node.expected_value))+'</b> · 必要依赖：'+h(u.node.dependencies.join('、')||'题目条件')+' · 支持材料：'+h(u.node.support_evidence_ids.join('、')||'前置操作 / 题目条件')+'</p>':'<p>当前没有完整证明。评价“材料不足”的标注是否成立，以及现有材料是否确实无法支持唯一答案；下方原型图只用于对照。</p>')+
+      '<label>本步准确性<select data-review-field="accuracy" data-unit="'+h(u.key)+'">'+options(ACCURACY,s.accuracy)+'</select></label>'+
+      '<label>本步评论<textarea data-review-field="step-comment" data-unit="'+h(u.key)+'" maxlength="10000" placeholder="指出需要核对的事实、依赖或措辞；不准确 / 待核实须填写原因">'+h(s.comment)+'</textarea></label>'+topics(u.key)+'</article>';}).join('')+
+    '<div class="review-overall"><h3>整题评价</h3><label>审查结论<select data-review-field="verdict">'+options(VERDICTS,review.verdict)+'</select></label><div class="review-ratings">'+Object.entries(TOPICS).map(([k,t])=>'<label>'+h(t)+'<select data-review-field="rating" data-topic="'+k+'"><option value="">暂不评分</option>'+[1,2,3,4,5].map(n=>'<option value="'+n+'" '+(review.ratings[k]===n?'selected':'')+'>'+n+'</option>').join('')+'</select></label>').join('')+'</div><p class="caption">关联复杂性：1低–5高；其他主题：1差–5好。主题评分可选，审查结论必填。</p>'+
+    '<label>综合意见<textarea data-review-field="comment" maxlength="10000" placeholder="对整题提出修改建议、总体判断或后续核验项">'+h(review.comment)+'</textarea></label>'+topics('overall')+'</div>'+
+    '<div class="review-actions"><button class="primary" data-act="review-complete">完成本题审查</button><button data-act="review-draft">保留为草稿</button><a href="'+route('review')+'">返回四人进度</a></div></section>';
+}
 function renderQuestions(){
-  const results=filterRows(sortedRows(),listState.filters,listState.search,listState.sceneMode);
+  const results=filteredRows();
   const pages=Math.max(1,Math.ceil(results.length/listState.size));
   listState.page=Math.min(listState.page,pages);
   const start=(listState.page-1)*listState.size;
   const active=Object.entries(listState.filters).flatMap(([key,values])=>values.map(value=>tag(key,value,'active-filter')));
-  shell(mainTitle('02 / QUESTIONS & EVIDENCE','题目与证据','按实际标签选题，沿正确依赖查证，也看见可能的偏离。')+
+  shell(mainTitle(inReview()?'05 / HUMAN REVIEW':'02 / QUESTIONS & EVIDENCE',inReview()?'人工审查 · 任务题库':'题目与证据','按实际标签选题，沿正确依赖查证，也看见可能的偏离。')+
+    (inReview()?'<a href="'+route('review')+'">← 四人进度首页</a>'+reviewToolbar()+reviewFilters():'')+
     '<div class="catalog-layout"><details class="filter-shell" '+(window.innerWidth>760||filterExpanded?'open':'')+'>'+
     '<summary class="filter-shell-title">标签筛选 · 点击展开 / 收起</summary>'+filterPanel()+'</details><section class="question-results"><div class="search-row">'+
     '<label class="search-box"><span>⌕</span><input id="search" value="'+h(listState.search)+'" placeholder="搜索问句、题号、家族或标准答案" aria-label="搜索题目"></label>'+
@@ -326,7 +395,7 @@ function renderDetail(){
   const incoming=layoutProof(visualProof).edges;
   if(!incoming.some(e=>e.from===selectedFrom&&e.to===selectedNode)){selectedNode=incoming[0]?.to||'';selectedFrom=incoming[0]?.from||'n0';}
   const missing=missingFacts(row,index);
-  const resultRows=filterRows(sortedRows(),listState.filters,listState.search,listState.sceneMode);
+  const resultRows=filteredRows();
   const position=resultRows.findIndex(r=>r.id===row.id);
   const operationCount=proof.length;
   const combo=index.combinations.get(row.combination_id);
@@ -341,7 +410,7 @@ function renderDetail(){
   shell('<div class="breadcrumbs"><a href="'+route('questions')+'">← 返回筛选结果</a><span>/</span><span>'+h(row.family_id)+'</span>'+
     '<div class="detail-prev-next">'+(position>0?'<a href="'+route('question',resultRows[position-1].id)+'">← 前一题</a>':'')+
     (position>=0&&position<resultRows.length-1?'<a href="'+route('question',resultRows[position+1].id)+'">后一题 →</a>':'')+'</div></div>'+
-    mainTitle('QUESTION ANATOMY / '+row.id,'逐题剖析')+
+    mainTitle('QUESTION ANATOMY / '+row.id,inReview()?'人工审查 · 逐题剖析':'逐题剖析')+(inReview()?reviewToolbar():'')+
     '<section class="question-intro"><div class="intro-labels">'+statusBadge(row)+'<span class="badge">'+h(VARIANTS[row.variant]||row.variant)+
     '</span><span class="mono">'+h(row.combination_id)+' · '+h(combo?.title)+'</span></div><h2>'+h(row.input.question)+'</h2>'+
     '<div class="answer-box"><span>当前标准答案</span><strong>'+h(row.gold.answers.length?valueText(row.gold.answers):'材料不足 · 不补事实')+
@@ -349,13 +418,14 @@ function renderDetail(){
     '<div class="intro-actions">'+
     '<button class="text-button" data-act="scroll" data-target="comparison">比较家族变体 ↓</button>'+
     '<button class="text-button" data-act="download">下载本题完整标注 ↧</button></div>'+
+    (inReview()?'<div class="intro-actions"><button data-act="scroll" data-target="review-form">填写人工评价</button><button data-act="scroll" data-target="review-all-data">查看本题全部数据</button></div>':'')+
     '<details><summary>统一作答指令与输出约定</summary><p>'+h(row.input.instruction)+'</p><pre>'+h(JSON.stringify(row.input.output_contract,null,2))+
     '</pre></details></section><div class="detail-grid"><div class="detail-main"><section class="panel proof-panel '+(isPrototype?'prototype':'')+'">'+
     '<div class="section-heading"><h2>'+(isPrototype?'原型链：当前无完整支持':'正确跳跃与操作依赖')+'</h2>'+proofControls+'</div>'+
     (isPrototype?'<div class="notice warning"><b>不可作答</b><span>下图来自基础原型，仅用于解释缺失；它不是当前题目的合法证明，不能据此回答。</span></div>':'')+
     '<p class="caption">材料文体：'+h(tagLabel('language',row.material_style,index))+(row.material_label_scope==='prototype'?'（母题类别；当前无材料）':'')+'</p><p class="caption">'+(isPrototype?'原型操作图':'当前完整证明')+' · '+operationCount+' 个操作 · 依赖深度 '+
     (isPrototype?displayRow.minimum_proof_depth:row.minimum_proof_depth)+' 层。点击连线查看这一跳的题面材料、出处与潜在偏离。n0为题目起点，不计入操作数。</p>'+
-    proofGraphic(visualProof)+nodeAnalysis(row,displayRow,proof,isPrototype)+'</section>'+
+    proofGraphic(visualProof)+nodeAnalysis(row,displayRow,proof,isPrototype)+'</section>'+(inReview()?reviewForm(row)+reviewFullData(row,isPrototype?[]:proof):'')+
     (missing.length?'<section class="panel missing-support"><h2>当前缺失的原型事实</h2><p class="caption">来自实际比较对象；以下内容不在当前材料中。</p>'+
       missing.map(f=>factView(f)).join('')+'</section>':'')+
     pairSection(row)+'</div>'+
@@ -381,7 +451,7 @@ async function onRoute(){
   const wanted=params.get('dataset')||registry[0]?.id||dataset;
   pageName=(path||'overview').split('/')[0];
   currentId=decodeURIComponent((path||'').split('/').slice(1).join('/'))||'';
-  if(!['overview','questions','question','guide','docs'].includes(pageName)) pageName='overview';
+  if(!['overview','questions','question','guide','docs','review','review-questions','review-question'].includes(pageName)) pageName='overview';
   if(!['guide','docs'].includes(pageName)) listState=normalizedState(params.get('state'));
   if(currentId!==lastDetail){proofIndex=0;selectedNode='';lastDetail=currentId;}
   try {
@@ -419,9 +489,12 @@ async function onRoute(){
       bundle=loaded;index=makeIndex(bundle);counts=facetCounts(bundle.records);
     }
     if(request!==token) return;
+    if(inReview())setupReview(bundle,reviewUpdate);
     if(pageName==='overview') renderOverview();
-    else if(pageName==='questions') renderQuestions();
+    else if(pageName==='review')renderReview();
+    else if(['questions','review-questions'].includes(pageName)) renderQuestions();
     else renderDetail();
+    if(inReview())lastReviewSignature=reviewSignature();
     document.title=(pageName==='overview'?'选题概览':pageName==='questions'?'题目与证据':currentId)+' · BridgeQA';
   }catch(error){
     if(request!==token) return;
@@ -437,7 +510,7 @@ function changeFilters(key,value,single=false){
   state.filters[key]=single?[value]:current.includes(value)?current.filter(v=>v!==value):[...current,value];
   if(!state.filters[key].length) delete state.filters[key];
   state.page=1;
-  navigate('questions','',state);
+  navigate(catalogPage(),'',state);
 }
 function jump(target){
   const el=document.getElementById(target);
@@ -456,10 +529,24 @@ app.addEventListener('click',event=>{
   else if(act==='open-domain') navigate('questions','',{...normalizedState(),filters:{domain:[el.dataset.value]}});
   else if(act==='open-combo') navigate('questions','',{...normalizedState(),filters:{combination:[el.dataset.value]}});
   else if(act==='open-scene') navigate('questions','',{...normalizedState(),filters:{scene:[el.dataset.value]}});
-  else if(act==='clear') navigate('questions','',normalizedState());
-  else if(act==='page') navigate('questions','',{...listState,page:Number(el.dataset.page)});
+  else if(act==='clear') navigate(catalogPage(),'',{...normalizedState(),person:listState.person,reviewStatus:listState.reviewStatus});
+  else if(act==='page') navigate(catalogPage(),'',{...listState,page:Number(el.dataset.page)});
   else if(act==='scroll') jump(el.dataset.target);
   else if(act==='edge'){const left=document.querySelector('.proof-canvas')?.scrollLeft||0;selectedNode=el.dataset.node;selectedFrom=el.dataset.from;renderDetail();document.querySelector('.proof-canvas').scrollLeft=left;}
+  else if(act==='review-name')saveInitials(el.dataset.person,document.getElementById('initials-'+el.dataset.person).value.trim());
+  else if(act==='review-retry')retrySaves();
+  else if(act==='review-local')resolveConflict(true);
+  else if(act==='review-remote')resolveConflict(false);
+  else if(act==='review-export'){
+    const url=URL.createObjectURL(new Blob([JSON.stringify(exportReview(),null,2)],{type:'application/json;charset=utf-8'}));
+    const a=document.createElement('a');a.href=url;a.download='bridgeqa-human-review-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  }
+  else if(act==='review-complete')finishReview(index.rows.get(currentId));
+  else if(act==='review-draft')updateReview(index.rows.get(currentId),()=>{});
+  else if(act==='review-topic'){
+    const textarea=[...document.querySelectorAll('textarea[data-review-field]')].find(t=>el.dataset.unit==='overall'?t.dataset.reviewField==='comment':t.dataset.unit===el.dataset.unit);
+    if(textarea){textarea.value+=(textarea.value?'\n':'')+el.dataset.topic+'：';textarea.focus();textarea.dispatchEvent(new Event('input',{bubbles:true}));}
+  }
   else if(act==='download'){
     const row=index.rows.get(currentId);
     const url=URL.createObjectURL(new Blob([JSON.stringify(row,null,2)],{type:'application/json;charset=utf-8'}));
@@ -475,10 +562,14 @@ app.addEventListener('keydown',event=>{
 });
 let searchTimer;
 app.addEventListener('input',event=>{
+  if(event.target.matches('textarea[data-review-field]')){
+    const {reviewField,unit}=event.target.dataset,value=event.target.value;
+    updateReview(index.rows.get(currentId),review=>{if(reviewField==='step-comment')review.steps[unit].comment=value;else review.comment=value;});return;
+  }
   if(event.target.id==='search'){
     clearTimeout(searchTimer);
     const search=event.target.value;
-    searchTimer=setTimeout(()=>navigate('questions','',{...listState,search,page:1}),250);
+    searchTimer=setTimeout(()=>navigate(catalogPage(),'',{...listState,search,page:1}),250);
   }else if(event.target.id==='facet-search'){
     const term=event.target.value.toLowerCase().trim();
     for(const button of document.querySelectorAll('.facet-value')){
@@ -491,10 +582,16 @@ app.addEventListener('input',event=>{
   }
 });
 app.addEventListener('change',event=>{
+  if(event.target.matches('select[data-review-field]')){
+    const {reviewField,unit,topic}=event.target.dataset,value=event.target.value;
+    updateReview(index.rows.get(currentId),review=>{if(reviewField==='accuracy')review.steps[unit].accuracy=value;else if(reviewField==='rating')review.ratings[topic]=value===''?'':Number(value);else review.verdict=value;});return;
+  }
   if(event.target.id==='dataset'){
     bundle=null;location.hash=route('overview','',normalizedState(),event.target.value);
-  }else if(event.target.id==='scene-mode') navigate('questions','',{...listState,sceneMode:event.target.value,page:1});
-  else if(event.target.id==='page-size') navigate('questions','',{...listState,size:Number(event.target.value),page:1});
+  }else if(event.target.id==='scene-mode') navigate(catalogPage(),'',{...listState,sceneMode:event.target.value,page:1});
+  else if(event.target.id==='page-size') navigate(catalogPage(),'',{...listState,size:Number(event.target.value),page:1});
+  else if(event.target.id==='review-person')navigate('review-questions','',{...listState,person:event.target.value,page:1});
+  else if(event.target.id==='review-status')navigate('review-questions','',{...listState,reviewStatus:event.target.value,page:1});
   else if(event.target.id==='proof-choice'){proofIndex=Number(event.target.value);selectedNode='';renderDetail();}
 });
 app.addEventListener('toggle',event=>{
