@@ -5,7 +5,8 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
 const {pathToFileURL}=require('node:url');
-const root=path.resolve(__dirname,'../..'),out=path.join(root,'workspace/explorer');
+const root=path.resolve(__dirname,'../..'),out=path.resolve(root,process.env.BRIDGEQA_CHECK_DIR||'workspace/explorer');
+fs.mkdirSync(out,{recursive:true});
 const base=process.env.BRIDGEQA_URL||'http://127.0.0.1:8766';
 const db=new DatabaseSync(':memory:');
 db.exec('CREATE TABLE review_entries (round TEXT NOT NULL,kind TEXT NOT NULL,id TEXT NOT NULL,value TEXT NOT NULL,revision INTEGER NOT NULL,updated_at TEXT NOT NULL,PRIMARY KEY(round,kind,id))');
@@ -56,14 +57,31 @@ const checks=[],errors=[];
       const results=await Promise.all(requests.map(r=>worker.fetch(r,{DB})));assert.deepEqual(results.map(r=>r.status).sort(),[200,409]);
       db.prepare('DELETE FROM review_entries').run();
     });
-    await check('05 homepage shows complete 22/22/21/21 assignment and initials sync across browsers',async()=>{
-      await home(p1);await home(p2);assert.deepEqual(await p1.locator('.review-progress-text').allTextContents(),['0 / 22 题 · 0%','0 / 22 题 · 0%','0 / 21 题 · 0%','0 / 21 题 · 0%']);
-      await saveMember(p1,'A','abc');await p2.waitForFunction(()=>document.querySelector('#initials-A')?.value==='abc');
+    await check('four-person records retain comments, status, signatures and revisions under two-person allocation',async()=>{
+      const sorted=[...rows].sort((a,b)=>a.family_id.localeCompare(b.family_id,'en')||a.id.localeCompare(b.id,'en'));
+      const insert=db.prepare('INSERT INTO review_entries VALUES (?,?,?,?,?,?)');
+      for(let i=0;i<4;i++){
+        const value=model.blankReview(sorted[i],['A','B','C','D'][i]);value.initials='old';value.comment='旧评价'+i;
+        for(const step of Object.values(value.steps))step.accuracy='correct';value.verdict='accept';value.status=i%2?'draft':'complete';
+        insert.run(ROUND,'records',sorted[i].id,JSON.stringify(value),7,'2026-10-08');
+      }
+      insert.run(ROUND,'members','C',JSON.stringify({initials:'oldname'}),2,'2026-10-08');
+      const get=()=>worker.fetch(new Request('https://service.test/api/review?round='+encodeURIComponent(ROUND)),{DB}).then(r=>r.json());
+      let data=await get();assert.equal(data.members.A.value.initials,'oldname');
+      for(let i=0;i<4;i++){const r=data.records[sorted[i].id];assert.equal(r.value.owner,i%2?'B':'A');assert.equal(r.value.comment,'旧评价'+i);assert.equal(r.value.initials,'old');assert.equal(r.revision,7);assert.equal(r.value.status,i%2?'draft':'complete');}
+      const put=await worker.fetch(new Request('https://service.test/api/review/members/A?round='+encodeURIComponent(ROUND),{method:'PUT',body:JSON.stringify({expectedRevision:0,value:{initials:'newname'}})}),{DB});assert.equal(put.status,200);
+      data=await get();assert.equal(data.members.A.value.initials,'newname');assert.equal(db.prepare("SELECT value FROM review_entries WHERE kind='members' AND id='C'").get().value,JSON.stringify({initials:'oldname'}));
+      const old=data.records[sorted[2].id];const save=await worker.fetch(new Request('https://service.test/api/review/records/'+sorted[2].id+'?round='+encodeURIComponent(ROUND),{method:'PUT',body:JSON.stringify({expectedRevision:7,value:old.value})}),{DB});assert.equal(save.status,200);
+      db.prepare('DELETE FROM review_entries').run();
+    });
+    await check('05 homepage shows complete 43/43 assignment and initials sync across browsers',async()=>{
+      await home(p1);await home(p2);assert.deepEqual(await p1.locator('.review-progress-text').allTextContents(),['0 / 43 题 · 0%','0 / 43 题 · 0%']);
+      await saveMember(p1,'B','abc');await p2.waitForFunction(()=>document.querySelector('#initials-B')?.value==='abc');
       await p1.screenshot({path:path.join(out,'12-review-home-desktop.png'),fullPage:true});
     });
     const row=rows.find(r=>PLAN[r.id].owner==='A'&&r.gold.proofs.length===1);
     await check('review catalog scopes assignments, searches and returns with filters',async()=>{
-      await p1.locator('.review-person-card[data-person=A] .primary').click();await p1.waitForSelector('#result-count');assert.equal(await p1.locator('#result-count b').innerText(),'22');
+      await p1.locator('.review-person-card[data-person=A] .primary').click();await p1.waitForSelector('#result-count');assert.equal(await p1.locator('#result-count b').innerText(),'43');
       await p1.locator('#search').fill(row.id);await p1.waitForFunction(()=>document.querySelector('#result-count b')?.innerText==='1');
       await p1.locator('.question-link').click();await p1.waitForSelector('.review-form');
       await p1.getByRole('link',{name:'← 返回筛选结果',exact:true}).click();await p1.waitForSelector('#result-count');assert.equal(await p1.locator('#result-count b').innerText(),'1');
@@ -75,25 +93,43 @@ const checks=[],errors=[];
       await p1.screenshot({path:path.join(out,'13-review-detail-desktop.png'),fullPage:true});
     });
     await check('incomplete review cannot finish, comments theme works, drafts survive reload',async()=>{
-      await p1.locator('[data-act=review-complete]').click();assert.match(await p1.locator('#review-toolbar').innerText(),/尚未评价|请选择/);
-      await unitSelect(p1).first().selectOption('incorrect');await p1.locator('.review-topic-buttons button').first().click();
+      await p1.locator('[data-act=review-complete]').click();assert.match(await p1.locator('#review-feedback').innerText(),/尚未评价|请选择/);await p1.waitForTimeout(5200);assert.match(await p1.locator('#review-feedback').innerText(),/尚未评价|请选择/);
+      await unitSelect(p1).first().selectOption('incorrect');await p1.locator('[data-act=review-complete]').click();
+      await p1.waitForTimeout(900);assert.match(await p1.locator('#review-feedback').innerText(),/需要填写原因/);
+      await p1.locator('.review-topic-buttons button').first().click();
       assert.match(await p1.locator('textarea[data-review-field=step-comment]').first().inputValue(),/问题的可读性/);
-      await p1.locator('textarea[data-review-field=step-comment]').first().fill('需核对该跳的证据');await p1.locator('h1').click();
+      await p1.locator('textarea[data-review-field=step-comment]').first().fill('需核对该跳的证据');await p1.locator('[data-act=review-draft]').click();await p1.waitForFunction(()=>document.querySelector('#review-feedback')?.innerText.includes('草稿已保存'));
       await p1.waitForFunction(()=>document.querySelector('#review-toolbar')?.innerText.includes('已保存'));
       await p1.reload();await p1.waitForFunction(()=>document.querySelector('textarea[data-review-field=step-comment]')?.value==='需核对该跳的证据');
     });
     await check('shared completed count updates and a changed completed record returns to draft',async()=>{
       for(const select of await unitSelect(p1).all())await select.selectOption('correct');await p1.locator('select[data-review-field=verdict]').selectOption('accept');
+      assert.equal(await p1.locator('.review-form .badge').innerText().then(t=>t.includes('未署名')),true);
+      assert.equal(await p1.locator('.review-rating-guide li').count(),25);
       await p1.locator('[data-act=review-complete]').click();await p1.waitForFunction(()=>document.querySelector('.review-form .badge')?.innerText.includes('已完成'));
-      await p2.waitForFunction(()=>document.querySelector('.review-person-card[data-person=A] .review-progress-text')?.innerText.includes('1 / 22'));
-      await p1.locator('textarea[data-review-field=comment]').fill('追加意见');await p1.locator('h1').click();await p1.waitForFunction(()=>document.querySelector('#review-toolbar')?.innerText.includes('已保存'));
-      await p2.waitForFunction(()=>document.querySelector('.review-person-card[data-person=A] .review-progress-text')?.innerText.includes('0 / 22'));
+      await p1.waitForFunction(()=>document.querySelector('#review-feedback')?.innerText.includes('审查已完成'));await p1.waitForTimeout(5200);assert.match(await p1.locator('#review-feedback').innerText(),/审查已完成/);
+      await p1.reload();await p1.waitForFunction(()=>document.querySelector('.review-form .badge')?.innerText.includes('已完成'));
+      await p2.waitForFunction(()=>document.querySelector('.review-person-card[data-person=A] .review-progress-text')?.innerText.includes('1 / 43'));
+      await p1.locator('[data-act=review-draft]').click();await p1.waitForFunction(()=>document.querySelector('#review-feedback')?.innerText.includes('草稿已保存'));await p1.reload();await p1.waitForFunction(()=>document.querySelector('.review-form .badge')?.innerText.includes('草稿'));
+      await p2.waitForFunction(()=>document.querySelector('.review-person-card[data-person=A] .review-progress-text')?.innerText.includes('0 / 43'));
     });
     await check('storage failure preserves input and explicit retry completes shared save',async()=>{
       failSave=true;await p1.locator('textarea[data-review-field=comment]').fill('保存故障仍保留此意见');
       await p1.waitForFunction(()=>document.querySelector('#review-toolbar')?.innerText.includes('保存失败'));
-      assert.equal(await p1.locator('textarea[data-review-field=comment]').inputValue(),'保存故障仍保留此意见');await p1.locator('[data-act=review-retry]').click();
+      assert.equal(await p1.locator('textarea[data-review-field=comment]').inputValue(),'保存故障仍保留此意见');assert.match(await p1.locator('#review-feedback').innerText(),/保存失败/);await p1.locator('#review-feedback [data-act=review-retry]').click();
       await p1.waitForFunction(()=>document.querySelector('#review-toolbar')?.innerText.includes('已同步'));
+    });
+    await check('failed complete and draft actions show local errors, retry persists intended status',async()=>{
+      failSave=true;await p1.locator('[data-act=review-complete]').click();
+      await p1.waitForFunction(()=>document.querySelector('#review-feedback')?.innerText.includes('保存失败'));
+      assert.match(await p1.locator('.review-form .badge').innerText(),/草稿/);
+      await p1.locator('#review-feedback [data-act=review-retry]').click();
+      await p1.waitForFunction(()=>document.querySelector('.review-form .badge')?.innerText.includes('已完成'));
+      failSave=true;await p1.locator('[data-act=review-draft]').click();
+      await p1.waitForFunction(()=>document.querySelector('#review-feedback')?.innerText.includes('保存失败'));
+      await p1.locator('#review-feedback [data-act=review-retry]').click();
+      await p1.waitForFunction(()=>document.querySelector('#review-feedback')?.innerText.includes('草稿已保存'));
+      await p1.reload();await p1.waitForFunction(()=>document.querySelector('.review-form .badge')?.innerText.includes('草稿'));
     });
     await check('multi-proof tasks require every branch; insufficient tasks have only boundary review',async()=>{
       const multiple=rows.find(r=>r.gold.proofs.length>1);await detail(p1,multiple);assert.equal(await unitSelect(p1).count(),model.units(multiple).length);
@@ -104,7 +140,7 @@ const checks=[],errors=[];
       await detail(p1,row);await detail(p2,row);await p1.waitForTimeout(400);await p2.waitForTimeout(400);
       await p1.locator('textarea[data-review-field=comment]').fill('设备一的版本');await p2.locator('textarea[data-review-field=comment]').fill('设备二的版本');
       await Promise.race([p1.waitForSelector('.review-conflict'),p2.waitForSelector('.review-conflict')]);
-      const loser=await p1.locator('.review-conflict').count()?p1:p2;await loser.locator('[data-act=review-remote]').click();await loser.waitForFunction(()=>!document.querySelector('.review-conflict'));
+      const loser=await p1.locator('.review-conflict').count()?p1:p2;await loser.locator('#review-feedback [data-act=review-remote]').click();await loser.waitForFunction(()=>!document.querySelector('.review-conflict'));
     });
     await check('export yields structured shared records; 02 remains separate from 05',async()=>{
       const download=await Promise.all([p1.waitForEvent('download'),p1.locator('[data-act=review-export]').click()]);const file=await download[0].path();const result=JSON.parse(fs.readFileSync(file,'utf8'));

@@ -31,10 +31,11 @@
 | [docs/benchmark-survey/](docs/benchmark-survey/README.md) | benchmark系列调研、场景目录与评测方案。 |
 | [docs/report/](docs/report/README.md) | 既有报告归档；参考报告只作参考，不用于决策。 |
 | [src/](src/) | 数据构建和校验代码；当前 [构建器说明](src/pilot_literature_history_v0/README.md)。 |
-| [evaluation/](evaluation/README.md) | 评测配置、评分与错误归因位置；当前尚无正式评分器，[可执行性评估](docs/report/2026-10-07_评分器可执行性评估.md) 列出实现缺口。 |
+| [evaluation/](evaluation/README.md) | 一人负责评分器制作：判分规则、程序和人工核对例子。 |
+| [model-testing/](model-testing/README.md) | 一人负责模型实测、错误分析和难度整理。 |
 | [artifacts/](artifacts/) | 保留的正式实验输出和分析产物；不等同临时检查。 |
 | [workspace/](workspace/) | 临时检查、日志和截图；[数据检查](workspace/pilot_literature_history_v0/README.md)、[系统检查](workspace/explorer/README.md)。 |
-| [explorer/](explorer/README.md) | 本地只读可视化系统、[设计规格](explorer/specs/README.md)及接口/浏览器测试。 |
+| [explorer/](explorer/README.md) | 线上题目与证据系统，含两人各43题的人工核查、[设计规格](explorer/specs/README.md)及接口/浏览器测试。 |
 | [.github/](.github/) | 已有仓库协作配置，不属于模型题面材料。 |
 
 ## 网站维护与数据构建
@@ -47,7 +48,7 @@
 python src/pilot_literature_history_v0/build_pilot.py --self-test
 ~~~
 
-对应 [构建器](src/pilot_literature_history_v0/build_pilot.py)。该命令会重写候选集的可再生成文件；正式模型运行前应先保存数据版本与散列快照，运行期间不重建。
+对应 [构建器](src/pilot_literature_history_v0/build_pilot.py)。该命令会重写候选集的可再生成文件；正式模型运行期间不重建正在使用的题库。
 
 ## 资料与工作边界
 

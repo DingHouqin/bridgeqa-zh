@@ -108,7 +108,8 @@
 | [docs/](docs/) | 研究设计、文献调研、标注规范与方案记录；系列调研从 [调研 README](docs/benchmark-survey/README.md) 进入。 |
 | [data/](data/) | 原始数据、证据、处理中间数据和版本化数据集。 |
 | [src/](src/) | 数据采集、清洗、样本构建、对抗生成及质量校验代码。 |
-| [evaluation/](evaluation/) | 评测配置、模型调用、评分与错误归因实现。 |
+| [evaluation/](evaluation/README.md) | 评分器、判分规则与人工确认的测试例子，由一人负责。 |
+| [model-testing/](model-testing/README.md) | 模型实测、错误分析与难度整理，由一人负责；用户已明确要求独立目录。 |
 | [artifacts/](artifacts/) | 需要保留的正式实验输出、图表和分析产物。 |
 | [workspace/](workspace/) | 工作过程中的临时输出、检索摘录、检查记录和可重新生成的中间产物。 |
 | [explorer/](explorer/README.md) | 可视化审查系统的网页源码与静态导出；目前只维护 [线上网站](https://dinghouqin.github.io/bridgeqa-zh/)，先写 [规格](explorer/specs/README.md)，再实现选题、标签筛选与证据/干扰查看。 |
@@ -117,4 +118,4 @@
 
 ## 当前目录授权状态
 
-上述七个一级目录已经获准；其中更深层目录可按需创建。新增其他一级目录仍须用户明确要求或许可，本文中任何其他规划不构成授权。
+上述八个一级目录已经获准；其中更深层目录可按需创建。新增其他一级目录仍须用户明确要求或许可，本文中任何其他规划不构成授权。

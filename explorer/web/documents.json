@@ -48,7 +48,7 @@
       "source": "evaluation/README.md",
       "slug": "evaluation/index",
       "group": "评测方案",
-      "title": "评测实现"
+      "title": "评分器制作分工"
     },
     {
       "source": "docs/report/2026-10-07_评分器可执行性评估.md",
@@ -247,6 +247,12 @@
       "slug": "specs/08",
       "group": "系统规格",
       "title": "08｜临时人工审查与共享进度"
+    },
+    {
+      "source": "model-testing/README.md",
+      "slug": "model-testing/index",
+      "group": "评测与实验",
+      "title": "模型实测与难度整理分工"
     }
   ],
   "files": [
@@ -314,6 +320,7 @@
     "data/pilot_literature_history_v0/modern_translations.json",
     "explorer/specs/08_临时人工审查.md",
     "explorer/web/review-model.js",
-    "explorer/web/review.js"
+    "explorer/web/review.js",
+    "model-testing/README.md"
   ]
 }

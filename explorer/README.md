@@ -8,7 +8,7 @@
 - 02题目与证据：搜索/筛选题目。进入详情后，图中n0为题目起点，点击连接查看这一跳的题面材料、结构化事实与出处，再看可能的偏离。干扰分支同样先显示题面材料，并明确古籍现代译文或现代合成设定。节点本身不再是按钮。
 - [03测试指引](https://dinghouqin.github.io/bridgeqa-zh/#/guide)：全项目固定使用说明，内容在 [指引页面](web/testing-guide.html) 维护。
 - [04研究文档](https://dinghouqin.github.io/bridgeqa-zh/#/docs/index)：章节、目录和原文跳转，登记见 [文档清单](web/documents.json)。
-- [05人工审查](https://dinghouqin.github.io/bridgeqa-zh/#/review)：86题固定分给A/B各22题、C/D各21题，首页填写姓名简写；复用02筛选、证明图和家族对照，并查看本题全部材料与事实、绿色参考支持、逐步准确性评论及整题评价。所有合法证明的步骤均需审查，材料不足题核对不可作答边界。完成本题才计入进度，修改完成评价后恢复草稿。
+- [05人工审查](https://dinghouqin.github.io/bridgeqa-zh/#/review)：86题固定分给A/B各43题（原A+C、原B+D），首页可选填姓名简写；复用02筛选、证明图和家族对照，并查看本题全部材料与事实、绿色参考支持、逐步准确性评论及整题评价。所有合法证明的步骤均需审查，材料不足题核对不可作答边界。五个整题评分主题各有1–5分的具体参考。完成本题才计入进度，修改完成评价后恢复草稿；完成、草稿保存结果和缺项原因直接显示在按钮下方。
 
 05的简写、评价和进度通过[同步服务](review-service/README.md)共享保存，每5秒同步。访问范围按用户指定为持有链接即可使用。写入失败保留输入并可重试或导出，版本冲突须明确选择；原始benchmark数据不随评价修改。详细规则见[规格08](specs/08_临时人工审查.md)，字段逻辑见[审查模型](web/review-model.js)。
 
@@ -26,7 +26,7 @@
 | [静态导出](export_site.py) | 输出网站需要的HTML、静态JSON和允许公开的文档。 |
 | [发布工作流](../.github/workflows/pages.yml) | main更新后验证、导出并部署到GitHub Pages。 |
 
-导出命令为 `python explorer/export_site.py`。输出写入 [工作区](../workspace/) 的专用pages目录；只有 [发布清单](web/documents.json) 中的文件会复制，TODO、旧数据快照和实验日志不会进入网站。
+导出命令为 `python explorer/export_site.py`。输出写入 [工作区](../workspace/) 的专用pages目录；只有 [发布清单](web/documents.json) 中的文件会复制，旧数据快照和实验日志不会进入网站。
 
 维护时可以临时预览导出文件，但不需要专用服务器。示例：`python -m http.server 8766 --bind 127.0.0.1 --directory workspace/pages`，只用于本机测试。用户日常入口为线上网站。
 

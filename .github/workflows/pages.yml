@@ -8,6 +8,7 @@ on:
       - 'data/**'
       - 'docs/**'
       - 'evaluation/**'
+      - 'model-testing/**'
       - 'src/**'
       - 'README.md'
       - 'AGENTS.md'

@@ -1,10 +1,18 @@
 // [Human review contract](../specs/08_临时人工审查.md).
-export const PEOPLE=['A','B','C','D'];
+export const PEOPLE=['A','B'];
 export const TOPICS={readability:'问题的可读性',logic:'逻辑的紧密性',complexity:'关联的复杂性',evidence:'证据的充分性',distraction:'干扰的合理性'};
+export const RATING_GUIDES={
+  readability:['难以理解题意，条件或指代不清','需较大改写才能理解，有多处歧义','基本可理解，个别措辞或指代需澄清','题意清楚，仅需少量润色','条件、指代与作答要求清楚，阅读顺畅'],
+  logic:['推理链不成立，无法推出标注答案','缺少关键依赖，需补证据或重构步骤','主要链条成立，部分条件或衔接需说明','依赖完整，只有少量隐含条件需写明','每步依赖清楚，结论严密，未发现绕过必要步骤的捷径'],
+  complexity:['直接查找即可，关系连接很少','少量串联关系，条件简单','多步连接，或需额外处理一个条件','需汇合多条线索，结合时间、筛选或表格信息','多分支与多个条件交织，需综合规则或聚合判断'],
+  evidence:['材料不支持或直接反驳标注结论','缺少关键证据，现有材料不足以支撑结论','主要判断有依据，部分证据定位或适用条件需核实','关键判断均有可追溯支持，个别引用可更精确','各步证据准确且易定位，充分支持相应结论或不可作答边界'],
+  distraction:['干扰破坏可作答性，或设置明显不成立','干扰牵强，几乎无需判断就能排除','干扰有一定可信度，可按题目条件排除','相近线索容易混淆，需要核对正确关系或条件','干扰自然且可信，仍能依据材料公平地区分正确与错误路径']
+};
 export const ACCURACY={correct:'准确',incorrect:'不准确',uncertain:'待核实'};
 export const VERDICTS={accept:'可保留',revise:'需修改',reject:'不宜使用',uncertain:'待核实'};
 export function assignment(rows){
-  return Object.fromEntries([...rows].sort((a,b)=>a.family_id.localeCompare(b.family_id,'en')||a.id.localeCompare(b.id,'en')).map((r,i)=>[r.id,PEOPLE[i%4]]));
+  // New A combines old A+C; new B combines old B+D, 43 tasks each.
+  return Object.fromEntries([...rows].sort((a,b)=>a.family_id.localeCompare(b.family_id,'en')||a.id.localeCompare(b.id,'en')).map((r,i)=>[r.id,PEOPLE[i%2]]));
 }
 export function units(row){
   return row.gold.proofs.length?row.gold.proofs.flatMap((proof,p)=>proof.map(n=>({key:`p${p}:${n.node_id}`,proof:p,node:n,label:`证明 ${p+1} · ${n.node_id}`}))):
@@ -18,7 +26,6 @@ export function blankReview(row,owner){
 }
 export function completionErrors(review,unitKeys){
   const errors=[];
-  if(!/^[a-zA-Z]{1,12}$/.test(review.initials||''))errors.push('请在负责人后填写1–12位姓名首字母');
   for(const key of unitKeys){const step=review.steps?.[key];
     if(!Object.hasOwn(ACCURACY,step?.accuracy||''))errors.push(key+' 尚未评价准确性');
     else if(step.accuracy!=='correct'&&!step.comment?.trim())errors.push(key+' 需要填写原因');

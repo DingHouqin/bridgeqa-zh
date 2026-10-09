@@ -4,10 +4,13 @@ export {PEOPLE,TOPICS,assignment,units};
 const API='https://bridgeqa-human-review.spryox2.chatgpt.site/api/review';
 let plan={},round='',records={},members={},connected=false,notice='正在连接共享审查记录…',listener=()=>{},pending=new Map(),conflict=null;
 const timers=new Map();
+const feedback=new Map();
+export const reviewFeedback=id=>feedback.get(id)||{state:'idle',message:'填写评价后可完成审查；也可随时保存为草稿。'};
+const report=(id,state,message)=>{feedback.set(id,{state,message});listener();};
 export function setupReview(bundle,onUpdate){
   const next=datasetKey(bundle);listener=onUpdate;
   if(round===next)return;
-  plan=assignment(bundle.records);round=next;records={};members={};connected=false;
+  plan=assignment(bundle.records);round=next;records={};members={};connected=false;feedback.clear();
   refreshReview();
 }
 async function request(path='',options={}){
@@ -36,34 +39,38 @@ export async function saveInitials(person,initials){
   catch(e){await refreshReview();notice=e.conflict?'姓名简写刚被其他设备修改，已刷新，请核对后重新填写':e.message;listener();return false;}
 }
 export function updateReview(row,mutate){
-  const review=structuredClone(reviewFor(row));mutate(review);review.initials=initialsFor(plan[row.id]);review.status='draft';
+  const review=structuredClone(reviewFor(row));mutate(review);review.initials=initialsFor(plan[row.id])||review.initials;review.status='draft';
   const revision=records[row.id]?.revision||0;records[row.id]={value:review,revision};pending.set(row.id,{row,value:review});
-  notice='正在保存草稿…';clearTimeout(timers.get(row.id));timers.set(row.id,setTimeout(()=>flushReview(row.id),650));
+  notice='正在保存草稿…';feedback.set(row.id,{state:'saving',message:'正在保存草稿…'});clearTimeout(timers.get(row.id));timers.set(row.id,setTimeout(()=>flushReview(row.id),650));
   listener();
 }
 const saving=new Map();
 export async function flushReview(id){
   clearTimeout(timers.get(id));
-  if(saving.has(id)){await saving.get(id);if(pending.has(id)&&!conflict)return flushReview(id);return false;}
+  if(saving.has(id)){const ok=await saving.get(id);if(!ok)return false;if(pending.has(id)&&!conflict)return flushReview(id);return !pending.has(id);}
   const item=pending.get(id);if(!item)return true;if(conflict?.id===id)return false;
   const value=structuredClone(item.value),revision=records[id]?.revision||0;
+  if(reviewFeedback(id).state!=='invalid')report(id,'saving',value.status==='complete'?'正在提交本题审查…':'正在保存草稿…');
   const operation=(async()=>{
     try{const entry=await request('/records/'+encodeURIComponent(id),{method:'PUT',body:JSON.stringify({expectedRevision:revision,value})});
       if(pending.get(id)?.value===item.value){records[id]=entry;pending.delete(id);}else records[id].revision=entry.revision;
-      connected=true;notice=pending.size?'仍有草稿等待保存…':'已保存到共享数据库';return true;
+      connected=true;notice=pending.size?'仍有草稿等待保存…':'已保存到共享数据库';
+      if(!pending.has(id)&&reviewFeedback(id).state!=='invalid')feedback.set(id,{state:'success',message:value.status==='complete'?'本题审查已完成，已保存并计入共享进度。':'草稿已保存到共享数据库，可刷新或稍后继续。'});
+      return true;
     }catch(e){notice=e.conflict?'该题已被其他设备修改；你的输入已保留，请选择保留哪份':('保存失败：'+e.message+'；输入已保留，可重试或导出');
-      if(e.conflict)conflict={id,remote:e.current};else connected=false;return false;
+      feedback.set(id,{state:'error',message:notice});if(e.conflict)conflict={id,remote:e.current};else connected=false;return false;
     }finally{saving.delete(id);listener();}
   })();saving.set(id,operation);return operation;
 }
 export async function finishReview(row){
-  const value=structuredClone(reviewFor(row));value.initials=initialsFor(plan[row.id]);
+  const value=structuredClone(reviewFor(row));value.initials=initialsFor(plan[row.id])||value.initials;
   const errors=completionErrors(value,units(row).map(u=>u.key));
-  if(errors.length){notice=errors.join('；');listener();return false;}
-  value.status='complete';records[row.id]={value,revision:records[row.id]?.revision||0};pending.set(row.id,{row,value});return flushReview(row.id);
+  if(errors.length){notice=errors.map(error=>{for(const u of units(row))error=error.replace(u.key,u.label);return error;}).join('；');report(row.id,'invalid',notice);return false;}
+  value.status='complete';feedback.delete(row.id);records[row.id]={value,revision:records[row.id]?.revision||0};pending.set(row.id,{row,value});return flushReview(row.id);
 }
+export async function saveDraft(row){updateReview(row,()=>{});return flushReview(row.id);}
 export async function retrySaves(){for(const id of pending.keys())await flushReview(id);await refreshReview();}
 export async function resolveConflict(useLocal){if(!conflict)return;const {id,remote}=conflict;conflict=null;
-  if(useLocal){records[id].revision=remote?.revision||0;await flushReview(id);}else{pending.delete(id);if(remote)records[id]=remote;else delete records[id];notice='已采用其他设备保存的版本';listener();}}
+  if(useLocal){records[id].revision=remote?.revision||0;await flushReview(id);}else{pending.delete(id);if(remote)records[id]=remote;else delete records[id];notice='已采用其他设备保存的版本';report(id,'success',notice);}}
 export function exportReview(){return {format:'bridgeqa-human-review-v1',round,assignments:plan,members,records,unsaved:[...pending.keys()],exportedAt:new Date().toISOString()};}
 window.addEventListener('beforeunload',e=>{if(pending.size){e.preventDefault();e.returnValue='';}});

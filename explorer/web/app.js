@@ -1,8 +1,8 @@
 import {siteURL,rewriteSiteLinks} from './urls.js';
 import {renderDocument} from './documents.js';
 import {PEOPLE,TOPICS,setupReview,reviewConnection,initialsFor,reviewFor,reviewOwner,reviewStatus,progressFor,
-  saveInitials,updateReview,finishReview,retrySaves,resolveConflict,exportReview,units} from './review.js';
-import {ACCURACY,VERDICTS} from './review-model.js';
+  saveInitials,updateReview,finishReview,saveDraft,reviewFeedback,retrySaves,resolveConflict,exportReview,units} from './review.js';
+import {ACCURACY,VERDICTS,RATING_GUIDES} from './review-model.js';
 // [Interaction spec](../specs/02_标签筛选与交互.md), [semantic spec](../specs/03_数据映射与干扰语义.md).
 import {FACETS,VARIANTS,STATUS,PROVENANCE,OPERATIONS,makeIndex,tagsFor,tagLabel,
   filterRows,facetCounts,evidenceRoles,candidatesFor,layoutProof,proofWithStart,missingFacts} from './model.js';
@@ -177,11 +177,11 @@ function reviewToolbar(){
 function reviewFilters(){return '<div class="review-filters"><label>负责人<select id="review-person"><option value="">全部负责人</option>'+PEOPLE.map(p=>'<option value="'+p+'" '+(listState.person===p?'selected':'')+'>'+p+' · '+h(initialsFor(p)||'未署名')+'</option>').join('')+'</select></label>'+
   '<label>审查进度<select id="review-status"><option value="">全部状态</option>'+Object.entries({todo:'待审',draft:'草稿',complete:'已完成'}).map(([v,t])=>'<option value="'+v+'" '+(listState.reviewStatus===v?'selected':'')+'>'+t+'</option>').join('')+'</select></label></div>';}
 function renderReview(){
-  shell(mainTitle('05 / HUMAN REVIEW','临时人工审查','选择你的负责人编号，填写姓名简写，再进入分配的题目。全部86题已固定分配，评价和进度跨设备同步。')+
-    reviewToolbar()+'<section class="review-people" aria-label="四人审查进度">'+PEOPLE.map(p=>{
+  shell(mainTitle('05 / HUMAN REVIEW','临时人工审查','两位核查人分别选择 A 或 B，每人43题。姓名简写可选填，评价和进度跨设备同步。')+
+    reviewToolbar()+'<section class="review-people" aria-label="两人审查进度">'+PEOPLE.map(p=>{
       const progress=progressFor(bundle.records,p),percent=Math.round(progress.complete/progress.total*100);
       return '<article class="review-person-card" data-person="'+p+'"><div class="review-person-heading"><h2>'+p+'</h2><span class="review-progress-text">'+progress.complete+' / '+progress.total+' 题 · '+percent+'%</span></div>'+
-        '<progress value="'+progress.complete+'" max="'+progress.total+'" aria-label="'+p+' 完成进度"></progress><label class="review-name-label" for="initials-'+p+'">'+p+' 的姓名首字母<input id="initials-'+p+'" data-person="'+p+'" value="'+h(initialsFor(p))+'" maxlength="12" placeholder="例如 abc" autocomplete="off" spellcheck="false"></label>'+
+        '<progress value="'+progress.complete+'" max="'+progress.total+'" aria-label="'+p+' 完成进度"></progress><label class="review-name-label" for="initials-'+p+'">'+p+' 的姓名首字母（选填）<input id="initials-'+p+'" data-person="'+p+'" value="'+h(initialsFor(p))+'" maxlength="12" placeholder="例如 abc" autocomplete="off" spellcheck="false"></label>'+
         '<button data-act="review-name" data-person="'+p+'">保存简写</button><p class="caption">已完成 '+progress.complete+' · 草稿 '+progress.draft+' · 待审 '+(progress.total-progress.complete-progress.draft)+'</p>'+
         '<a class="primary" href="'+route('review-questions','',{...normalizedState(),person:p})+'">进入 '+p+' 的任务</a></article>';
     }).join('')+'</section><section class="panel review-instructions"><h2>审查方式</h2><p>先查看题面、全部材料和绿色参考支持，再逐步判断每个操作是否准确。绿色表示当前标注中的正确证据，仍需你核实；多解题的合法证明分别评价。</p><p>每个步骤可以附评论；标为不准确或待核实时须写原因。所有步骤与整题结论填写齐全后，点击“完成本题审查”计入进度。问题可读性、逻辑紧密性、关联复杂性等主题可辅助评价。</p><p class="caption">这是按编号和简写署名的临时协作页面。共享记录保存在数据库，原始题目标注不随评价自动修改。</p><a href="'+route('review-questions','',normalizedState())+'">查看全部审查任务</a></section>','review');
@@ -189,6 +189,7 @@ function renderReview(){
 function reviewUpdate(){
   if(!inReview()||!bundle)return;
   const toolbar=document.querySelector('#review-toolbar');if(toolbar)toolbar.outerHTML=reviewToolbar();
+  const feedback=document.querySelector('#review-feedback');if(feedback)feedback.outerHTML=reviewActionFeedback(currentId);
   const signature=reviewSignature();if(signature===lastReviewSignature)return;
   if(document.activeElement?.matches('input,textarea,select'))return;
   lastReviewSignature=signature;
@@ -210,18 +211,23 @@ function reviewFullData(row,proof){
     (!row.input.documents.length?'<p>当前题面无材料，不补回原型证据。</p>':'')+'</details><details open><summary>全部结构化事实 · '+row.facts.length+' 条</summary>'+row.facts.map(f=>'<article class="review-fact '+(currentFacts.has(f.fact_id)?'current':allFacts.has(f.fact_id)?'alternative':'')+'">'+(allFacts.has(f.fact_id)?'<b class="review-evidence-label">'+(currentFacts.has(f.fact_id)?'✓ 当前证明的参考正确事实':'其他合法证明的支持事实')+'</b>':'')+factView(f)+'</article>').join('')+'</details>'+
     '<details><summary>本题完整原始标注 JSON（含所有字段）</summary><pre>'+h(JSON.stringify(row,null,2))+'</pre></details></section>';
 }
+function reviewActionFeedback(id){
+  const {state,message}=reviewFeedback(id),conflict=reviewConnection().conflict;
+  return '<div id="review-feedback" class="review-feedback '+h(state)+'" role="status" aria-live="polite"><p>'+h(message)+'</p>'+
+    (conflict?.id===id?'<div class="review-inline-conflict"><button data-act="review-remote">采用其他设备的版本</button><button data-act="review-local">用我的输入替换共享版本</button></div>':state==='error'?'<button data-act="review-retry">重试保存</button>':'')+'</div>';
+}
 function reviewForm(row){
   const review=reviewFor(row),owner=reviewOwner(row.id);
   const options=(dict,value)=>'<option value="">请选择</option>'+Object.entries(dict).map(([k,label])=>'<option value="'+k+'" '+(k===String(value)?'selected':'')+'>'+h(label)+'</option>').join('');
   const topics=key=>'<div class="review-topic-buttons" aria-label="评论主题">'+Object.values(TOPICS).map(t=>'<button data-act="review-topic" data-unit="'+h(key)+'" data-topic="'+h(t)+'">'+h(t)+'</button>').join('')+'</div>';
-  return '<section class="panel review-form" id="review-form"><div class="section-heading"><h2>人工评价</h2><span class="badge">'+owner+' · '+h(initialsFor(owner)||'请先在首页填写简写')+' · '+(reviewStatus(row.id)==='complete'?'已完成':'草稿')+'</span></div><p>审查所有合法证明中的每个操作。更改已完成的评价后会恢复草稿，需再次点击完成。</p>'+
+  return '<section class="panel review-form" id="review-form"><div class="section-heading"><h2>人工评价</h2><span class="badge">'+owner+' · '+h(initialsFor(owner)||'未署名')+' · '+(reviewStatus(row.id)==='complete'?'已完成':'草稿')+'</span></div><p>审查所有合法证明中的每个操作。更改已完成的评价后会恢复草稿，需再次点击完成。</p>'+
     units(row).map((u,i)=>{const s=review.steps[u.key];return '<article class="review-step" id="review-unit-'+i+'"><h3>'+h(u.label)+' · '+h(u.node?OPERATIONS[u.node.operation]||u.node.operation:'核对缺失桥接与不可作答结论')+'</h3>'+
       (u.node?'<p>参考结果：<b>'+h(valueText(u.node.expected_value))+'</b> · 必要依赖：'+h(u.node.dependencies.join('、')||'题目条件')+' · 支持材料：'+h(u.node.support_evidence_ids.join('、')||'前置操作 / 题目条件')+'</p>':'<p>当前没有完整证明。评价“材料不足”的标注是否成立，以及现有材料是否确实无法支持唯一答案；下方原型图只用于对照。</p>')+
       '<label>本步准确性<select data-review-field="accuracy" data-unit="'+h(u.key)+'">'+options(ACCURACY,s.accuracy)+'</select></label>'+
       '<label>本步评论<textarea data-review-field="step-comment" data-unit="'+h(u.key)+'" maxlength="10000" placeholder="指出需要核对的事实、依赖或措辞；不准确 / 待核实须填写原因">'+h(s.comment)+'</textarea></label>'+topics(u.key)+'</article>';}).join('')+
-    '<div class="review-overall"><h3>整题评价</h3><label>审查结论<select data-review-field="verdict">'+options(VERDICTS,review.verdict)+'</select></label><div class="review-ratings">'+Object.entries(TOPICS).map(([k,t])=>'<label>'+h(t)+'<select data-review-field="rating" data-topic="'+k+'"><option value="">暂不评分</option>'+[1,2,3,4,5].map(n=>'<option value="'+n+'" '+(review.ratings[k]===n?'selected':'')+'>'+n+'</option>').join('')+'</select></label>').join('')+'</div><p class="caption">关联复杂性：1低–5高；其他主题：1差–5好。主题评分可选，审查结论必填。</p>'+
+    '<div class="review-overall"><h3>整题评价</h3><label>审查结论<select data-review-field="verdict">'+options(VERDICTS,review.verdict)+'</select></label><div class="review-ratings">'+Object.entries(TOPICS).map(([k,t])=>'<label>'+h(t)+'<select data-review-field="rating" data-topic="'+k+'"><option value="">暂不评分</option>'+[1,2,3,4,5].map(n=>'<option value="'+n+'" '+(review.ratings[k]===n?'selected':'')+'>'+n+' 分 · '+h(RATING_GUIDES[k][n-1])+'</option>').join('')+'</select></label>').join('')+'</div>'+Object.entries(TOPICS).map(([k,t])=>'<details class="review-rating-guide" open><summary>'+h(t)+' · 分数参考</summary><ol>'+RATING_GUIDES[k].map((text,i)=>'<li><b>'+(i+1)+' 分：</b>'+h(text)+'</li>').join('')+'</ol></details>').join('')+'<p class="caption">关联复杂性：1低–5高；其他主题：1差–5好。主题评分可选，审查结论必填。</p>'+
     '<label>综合意见<textarea data-review-field="comment" maxlength="10000" placeholder="对整题提出修改建议、总体判断或后续核验项">'+h(review.comment)+'</textarea></label>'+topics('overall')+'</div>'+
-    '<div class="review-actions"><button class="primary" data-act="review-complete">完成本题审查</button><button data-act="review-draft">保留为草稿</button><a href="'+route('review')+'">返回四人进度</a></div></section>';
+    '<div class="review-actions"><button class="primary" data-act="review-complete">完成本题审查</button><button data-act="review-draft">保留为草稿</button><a href="'+route('review')+'">返回两人进度</a></div>'+reviewActionFeedback(row.id)+'</section>';
 }
 function renderQuestions(){
   const results=filteredRows();
@@ -230,7 +236,7 @@ function renderQuestions(){
   const start=(listState.page-1)*listState.size;
   const active=Object.entries(listState.filters).flatMap(([key,values])=>values.map(value=>tag(key,value,'active-filter')));
   shell(mainTitle(inReview()?'05 / HUMAN REVIEW':'02 / QUESTIONS & EVIDENCE',inReview()?'人工审查 · 任务题库':'题目与证据','按实际标签选题，沿正确依赖查证，也看见可能的偏离。')+
-    (inReview()?'<a href="'+route('review')+'">← 四人进度首页</a>'+reviewToolbar()+reviewFilters():'')+
+    (inReview()?'<a href="'+route('review')+'">← 两人进度首页</a>'+reviewToolbar()+reviewFilters():'')+
     '<div class="catalog-layout"><details class="filter-shell" '+(window.innerWidth>760||filterExpanded?'open':'')+'>'+
     '<summary class="filter-shell-title">标签筛选 · 点击展开 / 收起</summary>'+filterPanel()+'</details><section class="question-results"><div class="search-row">'+
     '<label class="search-box"><span>⌕</span><input id="search" value="'+h(listState.search)+'" placeholder="搜索问句、题号、家族或标准答案" aria-label="搜索题目"></label>'+
@@ -542,7 +548,7 @@ app.addEventListener('click',event=>{
     const a=document.createElement('a');a.href=url;a.download='bridgeqa-human-review-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
   }
   else if(act==='review-complete')finishReview(index.rows.get(currentId));
-  else if(act==='review-draft')updateReview(index.rows.get(currentId),()=>{});
+  else if(act==='review-draft')saveDraft(index.rows.get(currentId));
   else if(act==='review-topic'){
     const textarea=[...document.querySelectorAll('textarea[data-review-field]')].find(t=>el.dataset.unit==='overall'?t.dataset.reviewField==='comment':t.dataset.unit===el.dataset.unit);
     if(textarea){textarea.value+=(textarea.value?'\n':'')+el.dataset.topic+'：';textarea.focus();textarea.dispatchEvent(new Event('input',{bubbles:true}));}
