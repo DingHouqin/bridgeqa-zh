@@ -31,7 +31,7 @@
 | [docs/benchmark-survey/](docs/benchmark-survey/README.md) | benchmark系列调研、场景目录与评测方案。 |
 | [docs/report/](docs/report/README.md) | 既有报告归档；参考报告只作参考，不用于决策。 |
 | [src/](src/) | 数据构建和校验代码；当前 [构建器说明](src/pilot_literature_history_v0/README.md)。 |
-| [evaluation/](evaluation/README.md) | 一人负责评分器制作：判分规则、程序和人工核对例子。 |
+| [evaluation/](evaluation/README.md) | 一人负责评分器制作：判分规则和可运行程序。 |
 | [model-testing/](model-testing/README.md) | 一人负责模型实测、错误分析和难度整理。 |
 | [artifacts/](artifacts/) | 保留的正式实验输出和分析产物；不等同临时检查。 |
 | [workspace/](workspace/) | 临时检查、日志和截图；[数据检查](workspace/pilot_literature_history_v0/README.md)、[系统检查](workspace/explorer/README.md)。 |
