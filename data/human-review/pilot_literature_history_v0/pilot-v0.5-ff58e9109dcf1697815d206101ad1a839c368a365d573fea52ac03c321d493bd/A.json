@@ -165,8 +165,8 @@
     "Q9a4def3a6879": {
       "value": {
         "owner": "A",
-        "initials": "",
-        "status": "draft",
+        "initials": "M",
+        "status": "complete",
         "steps": {
           "p0:Ln1": {
             "accuracy": "correct",
@@ -199,8 +199,8 @@
         },
         "comment": ""
       },
-      "revision": 15,
-      "updatedAt": "2026-10-09T09:04:46.677Z"
+      "revision": 16,
+      "updatedAt": "2026-10-19T11:03:13.580Z"
     },
     "Qc56c963f4264": {
       "value": {
