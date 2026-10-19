@@ -841,6 +841,38 @@
       },
       "revision": 1,
       "updatedAt": "2026-10-19T11:06:16.910Z"
+    },
+    "Qce4f9650ce25": {
+      "value": {
+        "owner": "A",
+        "initials": "",
+        "status": "complete",
+        "steps": {
+          "p0:n1": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:n2": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:n3": {
+            "accuracy": "correct",
+            "comment": ""
+          }
+        },
+        "verdict": "revise",
+        "ratings": {
+          "readability": 3,
+          "logic": 4,
+          "complexity": 3,
+          "evidence": 4,
+          "distraction": 2
+        },
+        "comment": "材料 De9c906fe 与 Dd78bc81b 各由同一段文字重复 4 次构成（各 500 字），属无信息填充。答案链正确（陈胜→吴广→阳夏）；建议去重。"
+      },
+      "revision": 1,
+      "updatedAt": "2026-10-19T11:06:19.694Z"
     }
   }
 }
