@@ -1145,6 +1145,38 @@
       },
       "revision": 1,
       "updatedAt": "2026-10-19T11:06:46.736Z"
+    },
+    "Q01bed80ee24a": {
+      "value": {
+        "owner": "A",
+        "initials": "",
+        "status": "complete",
+        "steps": {
+          "p0:n1": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:assume": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:derive": {
+            "accuracy": "correct",
+            "comment": ""
+          }
+        },
+        "verdict": "accept",
+        "ratings": {
+          "readability": 4,
+          "logic": 4,
+          "complexity": 3,
+          "evidence": 4,
+          "distraction": 3
+        },
+        "comment": ""
+      },
+      "revision": 1,
+      "updatedAt": "2026-10-19T11:06:49.348Z"
     }
   }
 }
