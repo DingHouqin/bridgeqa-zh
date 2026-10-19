@@ -66,3 +66,6 @@ Thumbs.db
 /workspace/explorer/review-downloads/
 /workspace/explorer/review-legacy-qa/
 /workspace/explorer/review-failure.png
+
+# 人工审查恢复备份含实际评价，仅保存在本机
+/workspace/review-recovery/

@@ -18,9 +18,10 @@ const checks=[],errors=[];
   const model=await import(pathToFileURL(path.join(root,'explorer/web/review-model.js')).href);
   const rows=fs.readFileSync(path.join(root,'data/pilot_literature_history_v0/benchmark.jsonl'),'utf8').trim().split(/\r?\n/).map(JSON.parse);
   const browser=await chromium.launch({headless:true,downloadsPath:path.join(out,'review-downloads')});
-  let failSave=false;
+  let failSave=false,denyService=false;
   const mock=async route=>{
     const r=route.request();
+    if(denyService)return route.fulfill({status:403,headers:{'Content-Type':'text/html','Access-Control-Allow-Origin':base},body:'<html>Cloudflare blocked</html>'});
     if(failSave&&r.method()==='PUT'&&r.url().includes('/records/')){failSave=false;return route.fulfill({status:503,headers:{'Content-Type':'application/json','Access-Control-Allow-Origin':base},body:JSON.stringify({error:'模拟存储故障'})});}
     const response=await worker.fetch(new Request(r.url(),{method:r.method(),headers:r.headers(),...(r.postData()?{body:r.postData()}: {})}),{DB});
     await route.fulfill({status:response.status,headers:Object.fromEntries(response.headers),body:await response.text()});
@@ -146,6 +147,50 @@ const checks=[],errors=[];
       const download=await Promise.all([p1.waitForEvent('download'),p1.locator('[data-act=review-export]').click()]);const file=await download[0].path();const result=JSON.parse(fs.readFileSync(file,'utf8'));
       assert.equal(result.format,'bridgeqa-human-review-v1');assert.equal(Object.keys(result.assignments).length,86);assert.equal(result.round,ROUND);
       await p1.getByRole('link',{name:'02题目与证据'}).click();await p1.waitForSelector('#result-count');assert.equal(await p1.locator('.review-form').count(),0);assert.equal(await p1.locator('#review-toolbar').count(),0);
+    });
+    await check('403 without a snapshot shows unknown progress and refuses an empty backup',async()=>{
+      denyService=true;
+      const fresh=await browser.newContext();await fresh.route(base+'/**',staticFiles);
+      await fresh.route('https://bridgeqa-human-review.spryox2.chatgpt.site/api/review**',mock);
+      const page=await fresh.newPage();await page.goto(base+'/#/review');
+      await page.waitForFunction(()=>document.querySelector('#review-toolbar')?.innerText.includes('HTTP 403'));
+      assert.deepEqual(await page.locator('.review-progress-text').allTextContents(),['进度未读取 / 43 题','进度未读取 / 43 题']);
+      await page.locator('[data-act=review-export]').click();assert.match(await page.locator('#review-toolbar').innerText(),/空文件不能作为备份/);
+      await fresh.close();denyService=false;
+    });
+    await check('offline cache retains progress, immediate input survives reload, restored review uploads on reconnect',async()=>{
+      await home(p1);const progress=await p1.locator('.review-progress-text').allTextContents();
+      denyService=true;await p1.reload();await p1.waitForFunction(()=>document.querySelector('#review-toolbar')?.innerText.includes('本机备份'));
+      assert.deepEqual(await p1.locator('.review-progress-text').allTextContents(),progress);
+      const fresh=await browser.newContext();await fresh.route(base+'/**',staticFiles);await fresh.route('https://bridgeqa-human-review.spryox2.chatgpt.site/api/review**',mock);
+      const page=await fresh.newPage();page.on('dialog',d=>d.accept());
+      const offlineRow=rows.find(r=>PLAN[r.id].owner==='A'&&!db.prepare("SELECT id FROM review_entries WHERE kind='records' AND id=?").get(r.id));
+      await detail(page,offlineRow);await page.locator('textarea[data-review-field=comment]').fill('650ms之前立即刷新仍能恢复');
+      await page.reload();await page.waitForFunction(()=>document.querySelector('textarea[data-review-field=comment]')?.value==='650ms之前立即刷新仍能恢复');
+      for(const select of await unitSelect(page).all())await select.selectOption('correct');await page.locator('select[data-review-field=verdict]').selectOption('accept');
+      await page.locator('[data-act=review-complete]').click();await page.waitForFunction(()=>document.querySelector('#review-feedback')?.innerText.includes('HTTP 403'));
+      assert.match(await page.locator('#review-feedback').innerText(),/已保留在本机/);
+      const [download]=await Promise.all([page.waitForEvent('download'),page.locator('[data-act=review-export]').click()]);
+      const snapshot=JSON.parse(fs.readFileSync(await download.path(),'utf8'));assert.ok(snapshot.unsaved.includes(offlineRow.id));assert.equal(snapshot.records[offlineRow.id].value.status,'complete');
+      assert.equal(db.prepare("SELECT id FROM review_entries WHERE kind='records' AND id=?").get(offlineRow.id),undefined);
+      denyService=false;await page.reload();await page.waitForFunction(()=>document.querySelector('.review-form .badge')?.innerText.includes('已完成'));
+      assert.equal(JSON.parse(db.prepare("SELECT value FROM review_entries WHERE kind='records' AND id=?").get(offlineRow.id).value).comment,'650ms之前立即刷新仍能恢复');
+      await fresh.close();
+    });
+    await check('restored stale draft never overwrites a newer server review',async()=>{
+      const context=await browser.newContext();await context.route(base+'/**',staticFiles);await context.route('https://bridgeqa-human-review.spryox2.chatgpt.site/api/review**',mock);
+      const page=await context.newPage();page.on('dialog',d=>d.accept());await detail(page,row);
+      await page.waitForFunction(()=>document.querySelector('#review-toolbar')?.innerText.includes('已同步'));
+      denyService=true;await page.locator('textarea[data-review-field=comment]').fill('本机未上传的旧草稿');
+      await page.waitForFunction(()=>document.querySelector('#review-feedback')?.innerText.includes('HTTP 403'));
+      const current=db.prepare("SELECT value,revision FROM review_entries WHERE kind='records' AND id=?").get(row.id);
+      const remote={...JSON.parse(current.value),comment:'其他设备更新的评价'};
+      const response=await worker.fetch(new Request('https://service.test/api/review/records/'+row.id+'?round='+encodeURIComponent(ROUND),{method:'PUT',body:JSON.stringify({expectedRevision:current.revision,value:remote})}),{DB});assert.equal(response.status,200);
+      denyService=false;await page.reload();await page.waitForSelector('.review-inline-conflict');
+      assert.equal(await page.locator('textarea[data-review-field=comment]').inputValue(),'本机未上传的旧草稿');
+      assert.equal(JSON.parse(db.prepare("SELECT value FROM review_entries WHERE kind='records' AND id=?").get(row.id).value).comment,'其他设备更新的评价');
+      await page.locator('#review-feedback [data-act=review-remote]').click();await page.reload();
+      await page.waitForFunction(()=>document.querySelector('textarea[data-review-field=comment]')?.value==='其他设备更新的评价');await context.close();
     });
     await check('390px review home and detail have no page overflow',async()=>{
       await p1.setViewportSize({width:390,height:844});await home(p1);assert.ok(await p1.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await p1.screenshot({path:path.join(out,'14-review-home-mobile.png'),fullPage:true});

@@ -158,7 +158,7 @@ function questionCard(row){
   const tags=tagsFor(row);
   const otherTags=Object.entries(tags).filter(([key])=>key!=='scene').flatMap(([key,values])=>values.map(v=>tag(key,v))).join('');
   return '<article class="question-card"><div class="card-top"><span class="mono">'+h(row.id)+'</span>'+statusBadge(row)+
-    (inReview()?'<span class="review-card-status">'+h(reviewOwner(row.id))+' · '+h(initialsFor(reviewOwner(row.id))||'未署名')+' · '+h({todo:'待审',draft:'草稿',complete:'已完成'}[reviewStatus(row.id)])+'</span>':'')+
+    (inReview()?'<span class="review-card-status">'+h(reviewOwner(row.id))+' · '+h(initialsFor(reviewOwner(row.id))||'未署名')+' · '+h({todo:'待审',draft:'草稿',complete:'已完成',unknown:'记录未读取'}[reviewStatus(row.id)])+'</span>':'')+
     '</div><a class="question-link" href="'+route('question',row.id)+'">'+h(row.input.question)+'</a>'+
     '<div class="card-meta">'+h(row.family_id)+' <span>·</span> '+h(VARIANTS[row.variant]||row.variant)+' <span>·</span> '+h(tagLabel('language',row.material_style,index))+' <span>·</span> '+
     (row.domain==='history'?'历史':'文学')+' <span>·</span> '+(row.minimum_proof_depth?row.minimum_proof_depth+' 层依赖':'无完整证明')+'</div>'+
@@ -169,9 +169,11 @@ function questionCard(row){
     '<a href="'+route('question',row.id)+'">剖析证据 →</a></div></article>';
 }
 function reviewToolbar(){
-  const {connected,notice,conflict}=reviewConnection();
+  const {connected,notice,conflict,lastSyncedAt,pending}=reviewConnection();
   return '<section class="review-toolbar" id="review-toolbar"><p role="status" class="'+(connected?'':'review-alert')+'">'+h(notice)+'</p><div>'+
     '<button data-act="review-retry">同步 / 重试保存</button><button data-act="review-export">导出审查记录</button></div>'+
+    (lastSyncedAt?'<p class="review-sync-time">最近读取共享记录：'+h(new Date(lastSyncedAt).toLocaleString('zh-CN'))+(connected?'':' · 当前离线，显示本机备份')+'</p>':'')+
+    (pending?'<p class="review-alert">'+pending+' 题尚未上传，请保持本机备份或导出。</p>':'')+
     (conflict?'<div class="review-conflict"><b>'+h(conflict.id)+' 保存冲突</b><button data-act="review-remote">采用其他设备的版本</button><button data-act="review-local">用我的输入替换共享版本</button></div>':'')+'</section>';
 }
 function reviewFilters(){return '<div class="review-filters"><label>负责人<select id="review-person"><option value="">全部负责人</option>'+PEOPLE.map(p=>'<option value="'+p+'" '+(listState.person===p?'selected':'')+'>'+p+' · '+h(initialsFor(p)||'未署名')+'</option>').join('')+'</select></label>'+
@@ -180,9 +182,9 @@ function renderReview(){
   shell(mainTitle('05 / HUMAN REVIEW','临时人工审查','两位核查人分别选择 A 或 B，每人43题。姓名简写可选填，评价和进度跨设备同步。')+
     reviewToolbar()+'<section class="review-people" aria-label="两人审查进度">'+PEOPLE.map(p=>{
       const progress=progressFor(bundle.records,p),percent=Math.round(progress.complete/progress.total*100);
-      return '<article class="review-person-card" data-person="'+p+'"><div class="review-person-heading"><h2>'+p+'</h2><span class="review-progress-text">'+progress.complete+' / '+progress.total+' 题 · '+percent+'%</span></div>'+
-        '<progress value="'+progress.complete+'" max="'+progress.total+'" aria-label="'+p+' 完成进度"></progress><label class="review-name-label" for="initials-'+p+'">'+p+' 的姓名首字母（选填）<input id="initials-'+p+'" data-person="'+p+'" value="'+h(initialsFor(p))+'" maxlength="12" placeholder="例如 abc" autocomplete="off" spellcheck="false"></label>'+
-        '<button data-act="review-name" data-person="'+p+'">保存简写</button><p class="caption">已完成 '+progress.complete+' · 草稿 '+progress.draft+' · 待审 '+(progress.total-progress.complete-progress.draft)+'</p>'+
+      return '<article class="review-person-card" data-person="'+p+'"><div class="review-person-heading"><h2>'+p+'</h2><span class="review-progress-text">'+(progress.known?progress.complete+' / '+progress.total+' 题 · '+percent+'%':'进度未读取 / '+progress.total+' 题')+'</span></div>'+
+        '<progress '+(progress.known?'value="'+progress.complete+'" ':'')+'max="'+progress.total+'" aria-label="'+p+' 完成进度"></progress><label class="review-name-label" for="initials-'+p+'">'+p+' 的姓名首字母（选填）<input id="initials-'+p+'" data-person="'+p+'" value="'+h(initialsFor(p))+'" maxlength="12" placeholder="例如 abc" autocomplete="off" spellcheck="false"></label>'+
+        '<button data-act="review-name" data-person="'+p+'">保存简写</button><p class="caption">'+(progress.known?'已完成 '+progress.complete+' · 草稿 '+progress.draft+' · 待审 '+(progress.total-progress.complete-progress.draft):'共享记录尚未读取，无法判断已完成数量')+'</p>'+
         '<a class="primary" href="'+route('review-questions','',{...normalizedState(),person:p})+'">进入 '+p+' 的任务</a></article>';
     }).join('')+'</section><section class="panel review-instructions"><h2>审查方式</h2><p>先查看题面、全部材料和绿色参考支持，再逐步判断每个操作是否准确。绿色表示当前标注中的正确证据，仍需你核实；多解题的合法证明分别评价。</p><p>每个步骤可以附评论；标为不准确或待核实时须写原因。所有步骤与整题结论填写齐全后，点击“完成本题审查”计入进度。问题可读性、逻辑紧密性、关联复杂性等主题可辅助评价。</p><p class="caption">这是按编号和简写署名的临时协作页面。共享记录保存在数据库，原始题目标注不随评价自动修改。</p><a href="'+route('review-questions','',normalizedState())+'">查看全部审查任务</a></section>','review');
 }
@@ -220,7 +222,7 @@ function reviewForm(row){
   const review=reviewFor(row),owner=reviewOwner(row.id);
   const options=(dict,value)=>'<option value="">请选择</option>'+Object.entries(dict).map(([k,label])=>'<option value="'+k+'" '+(k===String(value)?'selected':'')+'>'+h(label)+'</option>').join('');
   const topics=key=>'<div class="review-topic-buttons" aria-label="评论主题">'+Object.values(TOPICS).map(t=>'<button data-act="review-topic" data-unit="'+h(key)+'" data-topic="'+h(t)+'">'+h(t)+'</button>').join('')+'</div>';
-  return '<section class="panel review-form" id="review-form"><div class="section-heading"><h2>人工评价</h2><span class="badge">'+owner+' · '+h(initialsFor(owner)||'未署名')+' · '+(reviewStatus(row.id)==='complete'?'已完成':'草稿')+'</span></div><p>审查所有合法证明中的每个操作。更改已完成的评价后会恢复草稿，需再次点击完成。</p>'+
+  return '<section class="panel review-form" id="review-form"><div class="section-heading"><h2>人工评价</h2><span class="badge">'+owner+' · '+h(initialsFor(owner)||'未署名')+' · '+({complete:'已完成',draft:'草稿',todo:'待审',unknown:'记录未读取'}[reviewStatus(row.id)])+'</span></div><p>审查所有合法证明中的每个操作。更改已完成的评价后会恢复草稿，需再次点击完成。</p>'+
     units(row).map((u,i)=>{const s=review.steps[u.key];return '<article class="review-step" id="review-unit-'+i+'"><h3>'+h(u.label)+' · '+h(u.node?OPERATIONS[u.node.operation]||u.node.operation:'核对缺失桥接与不可作答结论')+'</h3>'+
       (u.node?'<p>参考结果：<b>'+h(valueText(u.node.expected_value))+'</b> · 必要依赖：'+h(u.node.dependencies.join('、')||'题目条件')+' · 支持材料：'+h(u.node.support_evidence_ids.join('、')||'前置操作 / 题目条件')+'</p>':'<p>当前没有完整证明。评价“材料不足”的标注是否成立，以及现有材料是否确实无法支持唯一答案；下方原型图只用于对照。</p>')+
       '<label>本步准确性<select data-review-field="accuracy" data-unit="'+h(u.key)+'">'+options(ACCURACY,s.accuracy)+'</select></label>'+
@@ -544,7 +546,8 @@ app.addEventListener('click',event=>{
   else if(act==='review-local')resolveConflict(true);
   else if(act==='review-remote')resolveConflict(false);
   else if(act==='review-export'){
-    const url=URL.createObjectURL(new Blob([JSON.stringify(exportReview(),null,2)],{type:'application/json;charset=utf-8'}));
+    const snapshot=exportReview();if(!snapshot)return;
+    const url=URL.createObjectURL(new Blob([JSON.stringify(snapshot,null,2)],{type:'application/json;charset=utf-8'}));
     const a=document.createElement('a');a.href=url;a.download='bridgeqa-human-review-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
   }
   else if(act==='review-complete')finishReview(index.rows.get(currentId));
