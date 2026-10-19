@@ -289,6 +289,30 @@
       },
       "revision": 1,
       "updatedAt": "2026-10-19T11:05:36.861Z"
+    },
+    "Qb278aaaddef5": {
+      "value": {
+        "owner": "A",
+        "initials": "",
+        "status": "complete",
+        "steps": {
+          "boundary": {
+            "accuracy": "correct",
+            "comment": ""
+          }
+        },
+        "verdict": "revise",
+        "ratings": {
+          "readability": 2,
+          "logic": 2,
+          "complexity": 1,
+          "evidence": 2,
+          "distraction": 1
+        },
+        "comment": "无材料且使用匿名实体，仍要求“给出可能的身份解释”，无法仅凭材料回答，且容易诱导外部记忆。材料不足判断成立；建议统一改为“是否可作答”式提问，或补充候选身份材料。"
+      },
+      "revision": 1,
+      "updatedAt": "2026-10-19T11:05:39.551Z"
     }
   }
 }
