@@ -257,6 +257,38 @@
       },
       "revision": 1,
       "updatedAt": "2026-10-19T11:05:02.854Z"
+    },
+    "Q77713ba09858": {
+      "value": {
+        "owner": "A",
+        "initials": "",
+        "status": "complete",
+        "steps": {
+          "p0:n1": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:n2": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:n3": {
+            "accuracy": "correct",
+            "comment": ""
+          }
+        },
+        "verdict": "accept",
+        "ratings": {
+          "readability": 4,
+          "logic": 4,
+          "complexity": 3,
+          "evidence": 5,
+          "distraction": 5
+        },
+        "comment": ""
+      },
+      "revision": 1,
+      "updatedAt": "2026-10-19T11:05:36.861Z"
     }
   }
 }
