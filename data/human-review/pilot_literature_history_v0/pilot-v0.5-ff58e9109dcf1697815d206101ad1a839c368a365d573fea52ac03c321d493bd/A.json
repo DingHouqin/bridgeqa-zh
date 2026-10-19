@@ -873,6 +873,38 @@
       },
       "revision": 1,
       "updatedAt": "2026-10-19T11:06:19.694Z"
+    },
+    "Q7e1af4d674b8": {
+      "value": {
+        "owner": "A",
+        "initials": "",
+        "status": "complete",
+        "steps": {
+          "p0:n1": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:n2": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:n3": {
+            "accuracy": "correct",
+            "comment": ""
+          }
+        },
+        "verdict": "revise",
+        "ratings": {
+          "readability": 3,
+          "logic": 4,
+          "complexity": 3,
+          "evidence": 5,
+          "distraction": 2
+        },
+        "comment": "材料 D53b389d0 与 D2b9ad974 各由同一段开篇文字重复 4 次构成（各 2000 字），与问题无关且明显不自然。答案链正确（花果山→傲来国→东胜神洲）；建议把长背景换成不重复的原文。"
+      },
+      "revision": 1,
+      "updatedAt": "2026-10-19T11:06:22.760Z"
     }
   }
 }
