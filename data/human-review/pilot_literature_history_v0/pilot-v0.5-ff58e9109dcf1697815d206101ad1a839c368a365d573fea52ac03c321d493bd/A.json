@@ -201,6 +201,38 @@
       },
       "revision": 15,
       "updatedAt": "2026-10-09T09:04:46.677Z"
+    },
+    "Qc56c963f4264": {
+      "value": {
+        "owner": "A",
+        "initials": "M",
+        "status": "draft",
+        "steps": {
+          "p0:n1": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:n2": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:n3": {
+            "accuracy": "correct",
+            "comment": ""
+          }
+        },
+        "verdict": "accept",
+        "ratings": {
+          "readability": 5,
+          "logic": 5,
+          "complexity": 5,
+          "evidence": 5,
+          "distraction": 5
+        },
+        "comment": ""
+      },
+      "revision": 1,
+      "updatedAt": "2026-10-19T11:00:12.873Z"
     }
   }
 }
