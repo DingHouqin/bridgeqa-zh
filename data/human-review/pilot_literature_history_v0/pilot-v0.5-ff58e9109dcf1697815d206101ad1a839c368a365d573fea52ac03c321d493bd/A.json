@@ -38,7 +38,7 @@
       "value": {
         "owner": "A",
         "initials": "M",
-        "status": "draft",
+        "status": "complete",
         "steps": {
           "p0:n1": {
             "accuracy": "correct",
@@ -63,8 +63,8 @@
         },
         "comment": "题目表达较为混乱，逻辑比较简单，证据较为充分，没有看到相关干扰项"
       },
-      "revision": 40,
-      "updatedAt": "2026-10-19T11:00:58.724Z"
+      "revision": 41,
+      "updatedAt": "2026-10-19T11:01:02.213Z"
     },
     "Q3542e9f4abe3": {
       "value": {
