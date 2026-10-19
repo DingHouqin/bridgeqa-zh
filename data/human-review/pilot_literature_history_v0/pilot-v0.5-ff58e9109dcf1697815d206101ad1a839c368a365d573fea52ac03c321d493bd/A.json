@@ -657,6 +657,70 @@
       },
       "revision": 1,
       "updatedAt": "2026-10-19T11:06:05.619Z"
+    },
+    "Qdabbceeb15ad": {
+      "value": {
+        "owner": "A",
+        "initials": "",
+        "status": "complete",
+        "steps": {
+          "p0:scope": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:roster": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:author0": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:filter0": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:pages0": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:author1": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:filter1": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:pages1": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:author2": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:filter2": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:sum": {
+            "accuracy": "correct",
+            "comment": ""
+          }
+        },
+        "verdict": "accept",
+        "ratings": {
+          "readability": 5,
+          "logic": 5,
+          "complexity": 5,
+          "evidence": 5,
+          "distraction": 5
+        },
+        "comment": ""
+      },
+      "revision": 1,
+      "updatedAt": "2026-10-19T11:06:08.217Z"
     }
   }
 }
