@@ -13,6 +13,7 @@ export default {async fetch(request,env){
   if(request.method==='OPTIONS')return new Response(null,{status:204,headers:cors(request)});
   if(request.method==='POST'&&request.headers.has('Origin')&&!ORIGINS.has(request.headers.get('Origin')))return json(request,{error:'请从原网站05人工审查提交评价'},403);
   if(url.searchParams.get('round')!==ROUND)return json(request,{error:'题库版本不一致，请刷新网页；旧审查记录不会覆盖新题库'},409);
+  if(env.REVIEWS_READ_ONLY==='1'&&['POST','PUT'].includes(request.method))return json(request,{error:'审查记录已迁移到GitHub，请导出未上传评价并强制刷新原网站05页面'},410);
   try{
     if(!env.DB)throw new Error('Missing DB binding');
     if(request.method==='GET'&&url.pathname==='/api/review'){

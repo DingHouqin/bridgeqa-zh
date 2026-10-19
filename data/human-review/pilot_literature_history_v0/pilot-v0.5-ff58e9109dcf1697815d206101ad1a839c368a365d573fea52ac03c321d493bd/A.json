@@ -1,0 +1,206 @@
+{
+  "format": "bridgeqa-github-review-v1",
+  "round": "pilot_literature_history_v0:pilot-v0.5:ff58e9109dcf1697815d206101ad1a839c368a365d573fea52ac03c321d493bd",
+  "person": "A",
+  "member": {
+    "value": {
+      "initials": "M"
+    },
+    "revision": 1,
+    "updatedAt": "2026-10-10T06:23:35.419Z"
+  },
+  "records": {
+    "Q1bd6712b75ee": {
+      "value": {
+        "owner": "A",
+        "initials": "M",
+        "status": "complete",
+        "steps": {
+          "boundary": {
+            "accuracy": "correct",
+            "comment": ""
+          }
+        },
+        "verdict": "accept",
+        "ratings": {
+          "readability": 5,
+          "logic": "",
+          "complexity": "",
+          "evidence": "",
+          "distraction": ""
+        },
+        "comment": ""
+      },
+      "revision": 4,
+      "updatedAt": "2026-10-11T06:13:12.989Z"
+    },
+    "Q1e7d33f27419": {
+      "value": {
+        "owner": "A",
+        "initials": "M",
+        "status": "complete",
+        "steps": {
+          "p0:n1": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:n2": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:n3": {
+            "accuracy": "correct",
+            "comment": "干扰的合理性："
+          }
+        },
+        "verdict": "accept",
+        "ratings": {
+          "readability": 4,
+          "logic": 5,
+          "complexity": 2,
+          "evidence": 5,
+          "distraction": 1
+        },
+        "comment": "题目表达较为混乱，逻辑比较简单，证据较为充分，没有看到相关干扰项"
+      },
+      "revision": 39,
+      "updatedAt": "2026-10-10T06:32:09.118Z"
+    },
+    "Q3542e9f4abe3": {
+      "value": {
+        "owner": "A",
+        "initials": "M",
+        "status": "complete",
+        "steps": {
+          "p0:n1": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:n2": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:n3": {
+            "accuracy": "correct",
+            "comment": ""
+          }
+        },
+        "verdict": "accept",
+        "ratings": {
+          "readability": 4,
+          "logic": 5,
+          "complexity": 2,
+          "evidence": 5,
+          "distraction": 4
+        },
+        "comment": ""
+      },
+      "revision": 14,
+      "updatedAt": "2026-10-11T06:02:40.044Z"
+    },
+    "Q6895a41726b5": {
+      "value": {
+        "owner": "A",
+        "initials": "M",
+        "status": "complete",
+        "steps": {
+          "boundary": {
+            "accuracy": "correct",
+            "comment": ""
+          }
+        },
+        "verdict": "accept",
+        "ratings": {
+          "readability": 5,
+          "logic": "",
+          "complexity": "",
+          "evidence": "",
+          "distraction": ""
+        },
+        "comment": ""
+      },
+      "revision": 4,
+      "updatedAt": "2026-10-11T06:09:36.903Z"
+    },
+    "Q711fe20a672d": {
+      "value": {
+        "owner": "A",
+        "initials": "M",
+        "status": "draft",
+        "steps": {
+          "p0:Ln1": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:Ln2": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:Rn1": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:Rn2": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:compare": {
+            "accuracy": "correct",
+            "comment": ""
+          }
+        },
+        "verdict": "accept",
+        "ratings": {
+          "readability": 5,
+          "logic": 5,
+          "complexity": 5,
+          "evidence": 5,
+          "distraction": ""
+        },
+        "comment": ""
+      },
+      "revision": 10,
+      "updatedAt": "2026-10-11T06:17:52.446Z"
+    },
+    "Q9a4def3a6879": {
+      "value": {
+        "owner": "A",
+        "initials": "",
+        "status": "draft",
+        "steps": {
+          "p0:Ln1": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:Ln2": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:Rn1": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:Rn2": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:compare": {
+            "accuracy": "correct",
+            "comment": ""
+          }
+        },
+        "verdict": "accept",
+        "ratings": {
+          "readability": 5,
+          "logic": 5,
+          "complexity": 1,
+          "evidence": 5,
+          "distraction": 5
+        },
+        "comment": ""
+      },
+      "revision": 15,
+      "updatedAt": "2026-10-09T09:04:46.677Z"
+    }
+  }
+}

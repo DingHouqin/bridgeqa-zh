@@ -253,6 +253,12 @@
       "slug": "model-testing/index",
       "group": "评测与实验",
       "title": "模型实测与难度整理分工"
+    },
+    {
+      "source": "data/human-review/README.md",
+      "slug": "review/github",
+      "group": "数据与构建",
+      "title": "GitHub人工审查保存与授权"
     }
   ],
   "files": [
@@ -321,6 +327,8 @@
     "explorer/specs/08_临时人工审查.md",
     "explorer/web/review-model.js",
     "explorer/web/review.js",
-    "model-testing/README.md"
+    "model-testing/README.md",
+    "data/human-review/README.md",
+    "explorer/web/github-review-store.js"
   ]
 }

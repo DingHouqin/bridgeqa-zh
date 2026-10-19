@@ -1,0 +1,46 @@
+{
+  "format": "bridgeqa-github-review-v1",
+  "round": "pilot_literature_history_v0:pilot-v0.5:ff58e9109dcf1697815d206101ad1a839c368a365d573fea52ac03c321d493bd",
+  "person": "B",
+  "member": {
+    "value": {
+      "initials": "dhq"
+    },
+    "revision": 1,
+    "updatedAt": "2026-10-09T11:56:18.908Z"
+  },
+  "records": {
+    "Q63ae9bf08b31": {
+      "value": {
+        "owner": "B",
+        "initials": "dhq",
+        "status": "complete",
+        "steps": {
+          "p0:n1": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:n2": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:n3": {
+            "accuracy": "correct",
+            "comment": ""
+          }
+        },
+        "verdict": "accept",
+        "ratings": {
+          "readability": 3,
+          "logic": 4,
+          "complexity": 2,
+          "evidence": 5,
+          "distraction": 2
+        },
+        "comment": "问题文本的顺序不够好，可以调整一下。"
+      },
+      "revision": 27,
+      "updatedAt": "2026-10-19T10:24:25.927Z"
+    }
+  }
+}

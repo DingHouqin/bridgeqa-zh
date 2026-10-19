@@ -6,6 +6,7 @@ on:
     paths:
       - 'explorer/**'
       - 'data/**'
+      - '!data/human-review/**'
       - 'docs/**'
       - 'evaluation/**'
       - 'model-testing/**'

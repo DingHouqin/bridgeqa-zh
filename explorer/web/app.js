@@ -1,7 +1,7 @@
 import {siteURL,rewriteSiteLinks} from './urls.js';
 import {renderDocument} from './documents.js';
 import {PEOPLE,TOPICS,setupReview,reviewConnection,initialsFor,reviewFor,reviewOwner,reviewStatus,progressFor,
-  saveInitials,updateReview,finishReview,saveDraft,reviewFeedback,retrySaves,resolveConflict,exportReview,units} from './review.js';
+  saveInitials,updateReview,finishReview,saveDraft,reviewFeedback,retrySaves,resolveConflict,exportReview,importReview,connectGithub,disconnectGithub,REPOSITORY_URL,units} from './review.js';
 import {ACCURACY,VERDICTS,RATING_GUIDES} from './review-model.js';
 // [Interaction spec](../specs/02_标签筛选与交互.md), [semantic spec](../specs/03_数据映射与干扰语义.md).
 import {FACETS,VARIANTS,STATUS,PROVENANCE,OPERATIONS,makeIndex,tagsFor,tagLabel,
@@ -169,9 +169,12 @@ function questionCard(row){
     '<a href="'+route('question',row.id)+'">剖析证据 →</a></div></article>';
 }
 function reviewToolbar(){
-  const {connected,notice,conflict,lastSyncedAt,pending}=reviewConnection();
+  const {connected,notice,conflict,lastSyncedAt,pending,githubLogin}=reviewConnection();
   return '<section class="review-toolbar" id="review-toolbar"><p role="status" class="'+(connected?'':'review-alert')+'">'+h(notice)+'</p><div>'+
-    '<button data-act="review-retry">同步 / 重试保存</button><button data-act="review-export">导出审查记录</button></div>'+
+    '<button data-act="review-retry">同步 / 重试保存</button><button data-act="review-export">导出审查记录</button><button data-act="review-import">导入审查JSON</button><input type="file" id="review-import-file" accept="application/json,.json" hidden><a href="'+REPOSITORY_URL+'/tree/main/data/human-review" target="_blank" rel="noopener">查看GitHub记录 ↗</a></div>'+
+    '<details class="github-auth"><summary>GitHub保存授权 · '+h(githubLogin||'未连接（可浏览）')+'</summary>'+
+    (githubLogin?'<p>已连接 '+h(githubLogin)+'，保存会提交到GitHub。授权仅本页有效，刷新后需重新连接。</p><button data-act="github-disconnect">断开授权</button>':
+    '<p>使用你自己的GitHub账号授权。协作者创建Token（classic），只勾选 public_repo，设置短期有效；仓库所有者也可用仅限本仓库、Contents读写权限的细粒度Token。</p><p>public_repo权限覆盖你有写入权限的公开仓库，请仅自己使用。Token只发送给GitHub，不写入仓库、备份或浏览器存储。</p><p><a href="https://github.com/settings/tokens/new?scopes=public_repo&amp;description=BridgeQA-review" target="_blank" rel="noopener">创建GitHub Token ↗</a> · <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens" target="_blank" rel="noopener">授权说明 ↗</a></p><label for="github-token">个人Token<input type="password" id="github-token" autocomplete="off" spellcheck="false" placeholder="仅在本页使用"></label><button data-act="github-connect">连接GitHub并上传草稿</button>')+'</details>'+
     (lastSyncedAt?'<p class="review-sync-time">最近读取共享记录：'+h(new Date(lastSyncedAt).toLocaleString('zh-CN'))+(connected?'':' · 当前离线，显示本机备份')+'</p>':'')+
     (pending?'<p class="review-alert">'+pending+' 题尚未上传，请保持本机备份或导出。</p>':'')+
     (conflict?'<div class="review-conflict"><b>'+h(conflict.id)+' 保存冲突</b><button data-act="review-remote">采用其他设备的版本</button><button data-act="review-local">用我的输入替换共享版本</button></div>':'')+'</section>';
@@ -186,11 +189,11 @@ function renderReview(){
         '<progress '+(progress.known?'value="'+progress.complete+'" ':'')+'max="'+progress.total+'" aria-label="'+p+' 完成进度"></progress><label class="review-name-label" for="initials-'+p+'">'+p+' 的姓名首字母（选填）<input id="initials-'+p+'" data-person="'+p+'" value="'+h(initialsFor(p))+'" maxlength="12" placeholder="例如 abc" autocomplete="off" spellcheck="false"></label>'+
         '<button data-act="review-name" data-person="'+p+'">保存简写</button><p class="caption">'+(progress.known?'已完成 '+progress.complete+' · 草稿 '+progress.draft+' · 待审 '+(progress.total-progress.complete-progress.draft):'共享记录尚未读取，无法判断已完成数量')+'</p>'+
         '<a class="primary" href="'+route('review-questions','',{...normalizedState(),person:p})+'">进入 '+p+' 的任务</a></article>';
-    }).join('')+'</section><section class="panel review-instructions"><h2>审查方式</h2><p>先查看题面、全部材料和绿色参考支持，再逐步判断每个操作是否准确。绿色表示当前标注中的正确证据，仍需你核实；多解题的合法证明分别评价。</p><p>每个步骤可以附评论；标为不准确或待核实时须写原因。所有步骤与整题结论填写齐全后，点击“完成本题审查”计入进度。问题可读性、逻辑紧密性、关联复杂性等主题可辅助评价。</p><p class="caption">这是按编号和简写署名的临时协作页面。共享记录保存在数据库，原始题目标注不随评价自动修改。</p><a href="'+route('review-questions','',normalizedState())+'">查看全部审查任务</a></section>','review');
+    }).join('')+'</section><section class="panel review-instructions"><h2>审查方式</h2><p>先查看题面、全部材料和绿色参考支持，再逐步判断每个操作是否准确。绿色表示当前标注中的正确证据，仍需你核实；多解题的合法证明分别评价。</p><p>每个步骤可以附评论；标为不准确或待核实时须写原因。所有步骤与整题结论填写齐全后，点击“完成本题审查”计入进度。问题可读性、逻辑紧密性、关联复杂性等主题可辅助评价。</p><p class="caption">这是按编号和简写署名的临时协作页面。共享记录保存在当前GitHub仓库，原始题目标注不随评价自动修改。</p><a href="'+route('review-questions','',normalizedState())+'">查看全部审查任务</a></section>','review');
 }
 function reviewUpdate(){
   if(!inReview()||!bundle)return;
-  const toolbar=document.querySelector('#review-toolbar');if(toolbar)toolbar.outerHTML=reviewToolbar();
+  const toolbar=document.querySelector('#review-toolbar');if(toolbar&&document.activeElement?.id!=='github-token')toolbar.outerHTML=reviewToolbar();
   const feedback=document.querySelector('#review-feedback');if(feedback)feedback.outerHTML=reviewActionFeedback(currentId);
   const signature=reviewSignature();if(signature===lastReviewSignature)return;
   if(document.activeElement?.matches('input,textarea,select'))return;
@@ -543,6 +546,9 @@ app.addEventListener('click',event=>{
   else if(act==='edge'){const left=document.querySelector('.proof-canvas')?.scrollLeft||0;selectedNode=el.dataset.node;selectedFrom=el.dataset.from;renderDetail();document.querySelector('.proof-canvas').scrollLeft=left;}
   else if(act==='review-name')saveInitials(el.dataset.person,document.getElementById('initials-'+el.dataset.person).value.trim());
   else if(act==='review-retry')retrySaves();
+  else if(act==='github-connect'){const input=document.getElementById('github-token'),value=input.value;input.value='';connectGithub(value);}
+  else if(act==='github-disconnect')disconnectGithub();
+  else if(act==='review-import')document.getElementById('review-import-file').click();
   else if(act==='review-local')resolveConflict(true);
   else if(act==='review-remote')resolveConflict(false);
   else if(act==='review-export'){
@@ -590,7 +596,12 @@ app.addEventListener('input',event=>{
     }
   }
 });
-app.addEventListener('change',event=>{
+app.addEventListener('change',async event=>{
+  if(event.target.id==='review-import-file'){
+    const file=event.target.files[0];if(!file)return;
+    try{const result=await importReview(JSON.parse(await file.text()));alert('导入 '+result.added+' 题到本机。'+(result.skipped.length?'有 '+result.skipped.length+' 题与已有评价不同，未覆盖：'+result.skipped.join('、'):'')+'连接GitHub后点击“同步 / 重试保存”上传。');}
+    catch(e){alert('导入未完成：'+e.message);}return;
+  }
   if(event.target.matches('select[data-review-field]')){
     const {reviewField,unit,topic}=event.target.dataset,value=event.target.value;
     updateReview(index.rows.get(currentId),review=>{if(reviewField==='accuracy')review.steps[unit].accuracy=value;else if(reviewField==='rating')review.ratings[topic]=value===''?'':Number(value);else review.verdict=value;});return;
