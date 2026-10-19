@@ -905,6 +905,38 @@
       },
       "revision": 1,
       "updatedAt": "2026-10-19T11:06:22.760Z"
+    },
+    "Qa5138e7eda71": {
+      "value": {
+        "owner": "A",
+        "initials": "",
+        "status": "complete",
+        "steps": {
+          "p0:n1": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:n2": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:n3": {
+            "accuracy": "correct",
+            "comment": ""
+          }
+        },
+        "verdict": "revise",
+        "ratings": {
+          "readability": 3,
+          "logic": 4,
+          "complexity": 3,
+          "evidence": 5,
+          "distraction": 2
+        },
+        "comment": "与同族 H 版相同，D2b9ad974 与 D53b389d0 各为同一段文字重复 4 次（各 2000 字），属无信息填充。答案链正确（花果山→傲来国→东胜神洲）；建议去重。"
+      },
+      "revision": 1,
+      "updatedAt": "2026-10-19T11:06:25.944Z"
     }
   }
 }
