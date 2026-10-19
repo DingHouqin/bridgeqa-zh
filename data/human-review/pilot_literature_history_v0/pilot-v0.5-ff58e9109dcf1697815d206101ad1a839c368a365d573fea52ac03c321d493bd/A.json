@@ -809,6 +809,38 @@
       },
       "revision": 1,
       "updatedAt": "2026-10-19T11:06:14.240Z"
+    },
+    "Q87346a0d5da7": {
+      "value": {
+        "owner": "A",
+        "initials": "",
+        "status": "complete",
+        "steps": {
+          "p0:n1": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:n2": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:n3": {
+            "accuracy": "correct",
+            "comment": ""
+          }
+        },
+        "verdict": "revise",
+        "ratings": {
+          "readability": 2,
+          "logic": 4,
+          "complexity": 3,
+          "evidence": 4,
+          "distraction": 2
+        },
+        "comment": "材料 De9c906fe 与 Dd78bc81b 均为同一段约 140 字的文字重复约 14 次（各 2000 字），属于无信息填充，明显偏离真实档案文本。答案链本身正确（陈胜→吴广→阳夏）；建议去重或替换为自然长文后再入库。"
+      },
+      "revision": 1,
+      "updatedAt": "2026-10-19T11:06:16.910Z"
     }
   }
 }
