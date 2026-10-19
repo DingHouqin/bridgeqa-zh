@@ -1293,6 +1293,58 @@
       },
       "revision": 1,
       "updatedAt": "2026-10-19T11:07:00.366Z"
+    },
+    "Q869f389e8996": {
+      "value": {
+        "owner": "A",
+        "initials": "",
+        "status": "complete",
+        "steps": {
+          "p0:n1": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:n2": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:n3": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p0:n4": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p1:n1": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p1:n2": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p1:n3": {
+            "accuracy": "correct",
+            "comment": ""
+          },
+          "p1:n4": {
+            "accuracy": "correct",
+            "comment": ""
+          }
+        },
+        "verdict": "accept",
+        "ratings": {
+          "readability": 4,
+          "logic": 5,
+          "complexity": 4,
+          "evidence": 5,
+          "distraction": 4
+        },
+        "comment": ""
+      },
+      "revision": 1,
+      "updatedAt": "2026-10-19T11:07:03.075Z"
     }
   }
 }
