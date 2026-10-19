@@ -126,7 +126,7 @@
       "value": {
         "owner": "A",
         "initials": "M",
-        "status": "draft",
+        "status": "complete",
         "steps": {
           "p0:Ln1": {
             "accuracy": "correct",
@@ -159,8 +159,8 @@
         },
         "comment": ""
       },
-      "revision": 10,
-      "updatedAt": "2026-10-11T06:17:52.446Z"
+      "revision": 11,
+      "updatedAt": "2026-10-19T11:04:30.597Z"
     },
     "Q9a4def3a6879": {
       "value": {
