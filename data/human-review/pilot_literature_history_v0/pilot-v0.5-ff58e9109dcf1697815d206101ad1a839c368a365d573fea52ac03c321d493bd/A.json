@@ -233,6 +233,30 @@
       },
       "revision": 1,
       "updatedAt": "2026-10-19T11:00:12.873Z"
+    },
+    "Q52b58dc11743": {
+      "value": {
+        "owner": "A",
+        "initials": "M",
+        "status": "complete",
+        "steps": {
+          "boundary": {
+            "accuracy": "correct",
+            "comment": ""
+          }
+        },
+        "verdict": "revise",
+        "ratings": {
+          "readability": 3,
+          "logic": 2,
+          "complexity": 1,
+          "evidence": 2,
+          "distraction": 1
+        },
+        "comment": "该题无任何材料，却要求“给出可能的身份解释”，容易诱导模型用外部记忆补人物身份，与“只依据本题材料”的指令冲突。材料不足的判断成立；建议改为直接询问是否可作答，或提供候选身份材料。"
+      },
+      "revision": 1,
+      "updatedAt": "2026-10-19T11:05:02.854Z"
     }
   }
 }
