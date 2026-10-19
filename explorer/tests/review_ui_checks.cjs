@@ -18,11 +18,12 @@ const checks=[],errors=[];
   const model=await import(pathToFileURL(path.join(root,'explorer/web/review-model.js')).href);
   const rows=fs.readFileSync(path.join(root,'data/pilot_literature_history_v0/benchmark.jsonl'),'utf8').trim().split(/\r?\n/).map(JSON.parse);
   const browser=await chromium.launch({headless:true,downloadsPath:path.join(out,'review-downloads')});
-  let failSave=false,denyService=false;
+  let failSave=false,denyService=false;const requests=[];
   const mock=async route=>{
     const r=route.request();
+    requests.push({method:r.method(),type:r.headers()['content-type']});
     if(denyService)return route.fulfill({status:403,headers:{'Content-Type':'text/html','Access-Control-Allow-Origin':base},body:'<html>Cloudflare blocked</html>'});
-    if(failSave&&r.method()==='PUT'&&r.url().includes('/records/')){failSave=false;return route.fulfill({status:503,headers:{'Content-Type':'application/json','Access-Control-Allow-Origin':base},body:JSON.stringify({error:'模拟存储故障'})});}
+    if(failSave&&['POST','PUT'].includes(r.method())&&r.url().includes('/records/')){failSave=false;return route.fulfill({status:503,headers:{'Content-Type':'application/json','Access-Control-Allow-Origin':base},body:JSON.stringify({error:'模拟存储故障'})});}
     const response=await worker.fetch(new Request(r.url(),{method:r.method(),headers:r.headers(),...(r.postData()?{body:r.postData()}: {})}),{DB});
     await route.fulfill({status:response.status,headers:Object.fromEntries(response.headers),body:await response.text()});
   };
@@ -195,6 +196,12 @@ const checks=[],errors=[];
     await check('390px review home and detail have no page overflow',async()=>{
       await p1.setViewportSize({width:390,height:844});await home(p1);assert.ok(await p1.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await p1.screenshot({path:path.join(out,'14-review-home-mobile.png'),fullPage:true});
       await detail(p1,row);assert.ok(await p1.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await p1.screenshot({path:path.join(out,'15-review-detail-mobile.png'),fullPage:true});
+    });
+    await check('browser uses simple GET and text POST; server keeps legacy PUT and rejects unapproved browser origins',async()=>{
+      assert.ok(requests.some(r=>r.method==='POST'));assert.ok(!requests.some(r=>r.method==='PUT'));
+      assert.ok(requests.filter(r=>r.method==='GET').every(r=>!r.type));
+      assert.ok(requests.filter(r=>r.method==='POST').every(r=>r.type?.startsWith('text/plain')));
+      const response=await worker.fetch(new Request('https://service.test/api/review/members/A?round='+encodeURIComponent(ROUND),{method:'POST',headers:{Origin:'https://not-approved.example','Content-Type':'text/plain'},body:JSON.stringify({expectedRevision:0,value:{initials:'abc'}})}),{DB});assert.equal(response.status,403);
     });
     assert.deepEqual(errors,[]);fs.writeFileSync(path.join(out,'review_checks.json'),JSON.stringify({status:'passed',checks,unexpected_browser_errors:errors,storage:'In-memory SQLite through actual Worker API; no production writes'},null,2)+'\n');
     console.log('ALL '+checks.length+' review checks passed');

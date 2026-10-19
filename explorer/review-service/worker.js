@@ -3,7 +3,7 @@ import {PEOPLE,validateReview} from './review-model.js';
 import {ROUND,PLAN} from './plan.js';
 const ORIGINS=new Set(['https://dinghouqin.github.io','http://127.0.0.1:8766','http://localhost:8766']);
 const cors=request=>({...(ORIGINS.has(request.headers.get('Origin'))?{'Access-Control-Allow-Origin':request.headers.get('Origin'),'Vary':'Origin'}:{}),
-  'Access-Control-Allow-Methods':'GET,PUT,OPTIONS','Access-Control-Allow-Headers':'Content-Type','Cache-Control':'no-store'});
+  'Access-Control-Allow-Methods':'GET,POST,PUT,OPTIONS','Access-Control-Allow-Headers':'Content-Type','Cache-Control':'no-store'});
 const json=(request,value,status=200)=>Response.json(value,{status,headers:cors(request)});
 const entry=(row,id)=>{if(!row)return null;const value=JSON.parse(row.value);if(PLAN[id]&&Object.hasOwn(value,'owner'))value.owner=PLAN[id].owner;return {value,revision:row.revision,updatedAt:row.updated_at};};
 async function read(db,kind,id){return entry(await db.prepare('SELECT value,revision,updated_at FROM review_entries WHERE round=? AND kind=? AND id=?').bind(ROUND,kind,id).first(),id);}
@@ -11,6 +11,7 @@ export default {async fetch(request,env){
   const url=new URL(request.url);
   if(!url.pathname.startsWith('/api/review'))return new Response('<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>BridgeQA 审查同步服务</title><body><p>此服务为现有网站的05人工审查提供共享记录。</p><a href="https://dinghouqin.github.io/bridgeqa-zh/#/review">进入05人工审查</a></body></html>',{headers:{'Content-Type':'text/html;charset=utf-8'}});
   if(request.method==='OPTIONS')return new Response(null,{status:204,headers:cors(request)});
+  if(request.method==='POST'&&request.headers.has('Origin')&&!ORIGINS.has(request.headers.get('Origin')))return json(request,{error:'请从原网站05人工审查提交评价'},403);
   if(url.searchParams.get('round')!==ROUND)return json(request,{error:'题库版本不一致，请刷新网页；旧审查记录不会覆盖新题库'},409);
   try{
     if(!env.DB)throw new Error('Missing DB binding');
@@ -29,7 +30,7 @@ export default {async fetch(request,env){
       return json(request,{round:ROUND,members,records});
     }
     const match=url.pathname.match(/^\/api\/review\/(members|records)\/([^/]+)$/);
-    if(!match||request.method!=='PUT')return json(request,{error:'接口不存在'},404);
+    if(!match||!['POST','PUT'].includes(request.method))return json(request,{error:'接口不存在'},404);
     const [,endpoint,rawId]=match,id=decodeURIComponent(rawId),kind=endpoint==='members'?'reviewers':'records';
     if(kind==='reviewers'?!PEOPLE.includes(id):!Object.hasOwn(PLAN,id))return json(request,{error:'负责人或题号未登记'},400);
     if(Number(request.headers.get('Content-Length'))>150000)return json(request,{error:'评价内容过长'},413);

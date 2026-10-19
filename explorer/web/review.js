@@ -35,7 +35,9 @@ export function setupReview(bundle,onUpdate){
   refreshReview();
 }
 async function request(path='',options={}){
-  const response=await fetch(API+path+(path.includes('?')?'&':'?')+'round='+encodeURIComponent(round),{...options,cache:'no-store',headers:{'Content-Type':'application/json',...options.headers},signal:AbortSignal.timeout(15000)});
+  // Simple CORS requests avoid relying on an extra OPTIONS request.
+  const write=Boolean(options.body);
+  const response=await fetch(API+path+(path.includes('?')?'&':'?')+'round='+encodeURIComponent(round),{...options,method:write?'POST':'GET',cache:'no-store',headers:write?{'Content-Type':'text/plain;charset=UTF-8'}:{},signal:AbortSignal.timeout(15000)});
   let data;try{data=await response.json();}catch{throw new Error(response.ok?'共享服务返回了无法识别的内容':'共享服务无法访问（HTTP '+response.status+'）');}
   if(!response.ok){const error=new Error(data.error||'共享存储暂时不可用');error.status=response.status;error.current=data.current;error.conflict=response.status===409&&Object.hasOwn(data,'current');throw error;}
   return data;
