@@ -1,0 +1,3 @@
+- insert:
+    - id: bridgeqa-tools
+      name: './index.js'

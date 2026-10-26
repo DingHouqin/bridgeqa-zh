@@ -1,0 +1,91 @@
+{
+  "reviewer": "GPT in the current Codex session",
+  "review_type": "source-to-translation comparison and dispute adjudication",
+  "human_review": "not_run",
+  "reviewed_snapshots": [
+    {
+      "packet": "P01",
+      "unit_id": "hlm-ia120-a8caa27dc09c-C002-U0013",
+      "source_sha256": "a8caa27dc09c71620bf656a481a0ae1c1209039fcc5f58446ba4bca5469db48d",
+      "original_sha256": "44c1a46ab5890ecaeb7d573c82aeb90573f905ea22a693ecfea5e3df18569ada",
+      "modern_sha256": "ec263003aedd1d5015d125aa282cc5df83af226c8747543d7a63947a302677c1",
+      "source_span": [
+        13923,
+        14585
+      ]
+    },
+    {
+      "packet": "P01",
+      "unit_id": "hlm-ia120-a8caa27dc09c-C002-U0014",
+      "source_sha256": "a8caa27dc09c71620bf656a481a0ae1c1209039fcc5f58446ba4bca5469db48d",
+      "original_sha256": "b9740bae095e8b478937ccca517f93e31ed24467a949f233b69aa83a9c6aa3a2",
+      "modern_sha256": "1b20067325b896328f00c312a6041ecc6ba083c8b5ab4048b3684e0ae458cae7",
+      "source_span": [
+        14589,
+        15159
+      ]
+    },
+    {
+      "packet": "P02",
+      "unit_id": "hlm-ia120-a8caa27dc09c-C004-U0019",
+      "source_sha256": "a8caa27dc09c71620bf656a481a0ae1c1209039fcc5f58446ba4bca5469db48d",
+      "original_sha256": "36a7843475901db6a5ce2e1b94ba781f1292323bbba4abd919b1ae68119b834c",
+      "modern_sha256": "43c9ea628b875ff77d0c8f341eff881ff1553176a7e1de639e4c14a12a7ef1ba",
+      "source_span": [
+        30571,
+        31288
+      ]
+    },
+    {
+      "packet": "P02",
+      "unit_id": "hlm-ia120-a8caa27dc09c-C004-U0020",
+      "source_sha256": "a8caa27dc09c71620bf656a481a0ae1c1209039fcc5f58446ba4bca5469db48d",
+      "original_sha256": "baba7c7a86fc5b629ce69b68883fcdd596cb6c394583f185e0065dc23846f392",
+      "modern_sha256": "d538a8b2e2a16afadda3fb8c382f19668484f8aedaf6fe9c098ebd09793f25de",
+      "source_span": [
+        31292,
+        31790
+      ]
+    }
+  ],
+  "decision": "material_checks_passed_pending_human_dispute_review",
+  "decisions": [
+    {
+      "issue": "原欲以科甲出身的主语",
+      "resolution": "不在译文补出让他或指定祖父，保留省略：原本的打算是通过科举入仕"
+    },
+    {
+      "issue": "贵同宗",
+      "resolution": "贵按敬辞处理，去掉额外的显贵解释"
+    },
+    {
+      "issue": "进学",
+      "resolution": "核验科举语义后译为考取生员资格；词义来源见术语核验记录"
+    },
+    {
+      "issue": "两个额外右引号",
+      "resolution": "删除句群拼接误加的右引号，恢复母亲连续发言；整段引号结构检查通过"
+    },
+    {
+      "issue": "心中暗喜道",
+      "resolution": "明确为内心想着，避免被理解为出声说话"
+    },
+    {
+      "issue": "我和你姨娘，姊妹们",
+      "resolution": "依原句同位结构及同包前文明确的姐妹关系，译为我和你姨娘姐妹俩；不引入派生亲属称谓"
+    },
+    {
+      "issue": "未必不苦留",
+      "resolution": "保留未必不会这一否定结构；不采纳可能改变含义的审查建议"
+    },
+    {
+      "issue": "译写员提出的7条术语提示",
+      "resolution": "保留历史提示，作为下游抽取限制：不基于内囊程度、承局职名、亲名达部执行方式、能著的细义构造首轮答案；普通人物关系、年龄及明确事件仍需Origin独立核验"
+    }
+  ],
+  "human_disputes": [
+    "初轮Flash误放行及重要修订是否充分消除问题",
+    "原句省略、术语和断句的译写裁定"
+  ],
+  "release_ready": false
+}

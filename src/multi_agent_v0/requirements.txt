@@ -1,0 +1,4 @@
+deepseek-harness-sdk==0.2.1rc2
+deepseek-harness-runtime-bin==0.2.1rc2
+jsonschema==4.26.0
+PyYAML==6.0.3

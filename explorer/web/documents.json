@@ -271,6 +271,24 @@
       "slug": "specs/dataset-v2",
       "group": "数据与系统",
       "title": "第二版数据集发布规范"
+    },
+    {
+      "source": "QA_Generator/README.md",
+      "slug": "generator/index",
+      "group": "多智能体系统",
+      "title": "多智能体系统｜状态与工作流"
+    },
+    {
+      "source": "QA_Generator/START_HERE.md",
+      "slug": "generator/start",
+      "group": "多智能体系统",
+      "title": "多智能体系统｜安装与使用"
+    },
+    {
+      "source": "QA_Generator/architecture.md",
+      "slug": "generator/architecture",
+      "group": "多智能体系统",
+      "title": "多智能体系统｜五角色架构"
     }
   ],
   "files": [
@@ -351,6 +369,9 @@
     "data/multi_agent_hongloumeng_v2/combinations.json",
     "data/multi_agent_hongloumeng_v2/blind-audit.json",
     "data/multi_agent_hongloumeng_v2/publication.json",
-    "explorer/specs/09_第二版数据集发布.md"
+    "explorer/specs/09_第二版数据集发布.md",
+    "QA_Generator/README.md",
+    "QA_Generator/START_HERE.md",
+    "QA_Generator/architecture.md"
   ]
 }

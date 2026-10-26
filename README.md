@@ -58,3 +58,11 @@ python src/pilot_literature_history_v0/build_pilot.py --self-test
 
 
 当前完成状态见 [项目进展报告](docs/report/2026-10-07_项目进展报告.md)；后续任务与验收见 [用户与AI主导的工作计划](docs/工作计划.md)。
+
+## 多智能体系统与第二版题集
+
+- [在线第二版题集](https://dinghouqin.github.io/bridgeqa-zh/#/overview?dataset=multi_agent_hongloumeng_v2)：10个来源家族、57题；右上角可切回86题第一版。开发验证展示，保留需人工／强智能体复核状态。
+- [系统使用入口](QA_Generator/START_HERE.md)：安装、种子准备、离线测试、deepseek-flash五角色运行及独立复核门禁的边界。
+- [当前架构与状态](QA_Generator/README.md)、[第二版清洁输入及标注](data/multi_agent_hongloumeng_v2/README.md)。
+
+源码、技能、规范和最小启动材料已上传；历史完整会话与本地运行环境不在此源码发布中。正式benchmark验收及扩大自动放行仍未通过。

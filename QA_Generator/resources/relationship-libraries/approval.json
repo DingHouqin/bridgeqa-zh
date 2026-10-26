@@ -1,0 +1,62 @@
+{
+  "version": "relationship-library-approval-v0.2",
+  "date": "2026-10-21",
+  "user_approval": "approved",
+  "generator_integration_enabled": true,
+  "solver_access_allowed": false,
+  "gold_enrichment_allowed": false,
+  "license_status": "not_established_for_all_candidates",
+  "candidates": [
+    {
+      "id": "C01",
+      "repository": "lemonhhh/-Dream-of-the-Red-Chamber-Knowledge",
+      "commit": "c78453ed53bed482f63191ea67f6c2a80c6a3106",
+      "approval": "approved",
+      "proposed_scope": "candidate_match_omission_and_conflict_hints_only",
+      "enabled": true,
+      "approved_scope": "candidate_match_omission_and_conflict_hints_only",
+      "approved_file": "lemon_kg/files/红楼梦人物关系.csv",
+      "approved_sha256": "9a5af3a856d6f50ccd653eea86c8a7ff54e954aa3e849af162dc0647c0d56dc3"
+    },
+    {
+      "id": "C02",
+      "repository": "chizhu/KGQA_HLM",
+      "commit": "8f772c491c65e70904dc0feaaa8479ff2df2faa3",
+      "approval": "approved",
+      "proposed_scope": "additional_conflict_hints_only_with_known_errors_flagged",
+      "enabled": true,
+      "approved_scope": "additional_conflict_hints_only_with_known_errors_flagged",
+      "approved_file": "kgqa_hlm/files/raw_data/relation.txt",
+      "approved_sha256": "d080a1ef4c2569bec51c760f3d0354468cefa7b26e1254ba86d7bfdd4a726df6"
+    },
+    {
+      "id": "C03",
+      "repository": "Liuoodh/honglou_graph",
+      "commit": "78fc9ec6b30a47de12d6665e526f7b80e05e684f",
+      "approval": "pending",
+      "proposed_scope": "do_not_integrate_predicted_triples_as_validation_truth",
+      "enabled": false
+    },
+    {
+      "id": "C04",
+      "repository": "wangfangye/kg-hongloumeng",
+      "commit": "7d8e15ec8d24320624faa2a3d1283290245d415b",
+      "approval": "pending",
+      "proposed_scope": "defer_duplicate_triples_and_exclude_random_age_sex_fields",
+      "enabled": false
+    },
+    {
+      "id": "C05",
+      "repository": "PrimerLi/red_chamber_dream_network",
+      "commit": "205ad92707ed4d64c7b9192b7f2610699230cfb3",
+      "approval": "pending",
+      "proposed_scope": "not_semantic_relation_validation_possible_future_retrieval_only",
+      "enabled": false
+    }
+  ],
+  "confirmation": {
+    "date": "2026-10-21",
+    "user_text": "按建议批准：C01候选比对＋C02冲突提示",
+    "scope": "C01 candidate/omission/conflict hints; C02 conflict hints only; no gold enrichment or solver access"
+  }
+}

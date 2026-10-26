@@ -1,0 +1,8 @@
+{
+  "source": "2026-10-21 reviewed modernization seed",
+  "sha256": {
+    "P01.modern.json": "8fac521afa5eeb472daacd4f6db24b9b780f2fbef63da129b924faf0dc17599e",
+    "P02.modern.json": "358ce920d9327e6497dc4b06c67a831a3b351e6ada7f74d2c81c80fa653b513b",
+    "gpt_review.json": "14c3dc152df54e234c1647c2aefacdc5731a239ea40056dd975528fa885d7794"
+  }
+}

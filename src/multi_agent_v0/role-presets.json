@@ -1,0 +1,8 @@
+{
+  "schema_version": "bridgeqa-role-presets-v0.1",
+  "origin": {"skill": "skills/bridgeqa-origin/SKILL.md", "profile": "sdk-minimal", "tool_policy": "builder"},
+  "composer": {"skill": "skills/bridgeqa-composer/SKILL.md", "profile": "sdk-minimal", "tool_policy": "builder"},
+  "difficult": {"skill": "skills/bridgeqa-difficult/SKILL.md", "profile": "sdk-minimal", "tool_policy": "builder"},
+  "supervisor": {"skill": "skills/bridgeqa-supervisor/SKILL.md", "profile": "sdk-minimal", "tool_policy": "builder"},
+  "blind-solver": {"skill": "skills/bridgeqa-blind-solver/SKILL.md", "profile": "sdk-minimal", "tool_policy": "solver-no-tools"}
+}
