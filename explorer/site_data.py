@@ -10,9 +10,15 @@ APP = Path(__file__).resolve().parent
 PROJECT = APP.parent
 REGISTRY = {
     "pilot_literature_history_v0": {
-        "title": "文学与历史 · 首轮对抗候选集",
+        "title": "第一版 · 文学与历史对抗候选集（86题）",
         "topic": "以文学叙事与史书记载为取材，观察证据链如何受到角色、关系、时间与背景知识干扰。",
         "directory": PROJECT / "data" / "pilot_literature_history_v0",
+    },
+    "multi_agent_hongloumeng_v2": {
+        "default": True,
+        "title": "第二版 · 多智能体《红楼梦》题集（57题）",
+        "topic": "10个来源家族、57个成员：两跳亲属查询，配对干扰与删证对照。开发验证展示版，支持登记完整性仍需人工／强智能体复核。",
+        "directory": PROJECT / "data" / "multi_agent_hongloumeng_v2",
     }
 }
 _cache = {}
@@ -37,6 +43,9 @@ def load_bundle(dataset_id):
     paths = [directory / n for n in ("benchmark.jsonl", "sources.json", "combinations.json", "oracle_inputs.jsonl")]
     catalog = PROJECT / "docs" / "benchmark-survey" / "07_场景总表与中文构题配方.md"
     paths.append(catalog)
+    publication = directory / "publication.json"
+    if publication.exists():
+        paths.append(publication)
     signature = tuple((p.stat().st_mtime_ns, p.stat().st_size) for p in paths)
     with _lock:
         if dataset_id in _cache and _cache[dataset_id][0] == signature:
@@ -68,6 +77,8 @@ def load_bundle(dataset_id):
             "human_reviewed": sum(r["review"]["independent_human_review"] for r in records),
             "model_run": sum(r["review"]["model_run"] for r in records),
         }
+        summary['statuses'] = {key: summary['statuses'].get(key, 0) for key in ('answerable','ambiguous','insufficient')}
+        summary['domains'] = {key: summary['domains'].get(key, 0) for key in ('literature','history')}
         bundle = {"id": dataset_id, "title": entry["title"], "topic": entry["topic"],
                   "summary": summary, "records": records, "sources": sources,
                   "combinations": combinations, "scenarios": scenarios,
@@ -79,5 +90,10 @@ def load_bundle(dataset_id):
                             "sources": file_url(paths[1]), "combinations": file_url(paths[2]),
                             "catalog": file_url(catalog),
                             "protocol": file_url(PROJECT / "docs/benchmark-survey/09_多步骤评判与核心创新点回收.md")}}
+        if publication.exists():
+            bundle['publication'] = read_json(publication)
+            bundle['links']['inputs'] = file_url(directory / 'inputs.jsonl')
+            bundle['links']['diagnostics'] = file_url(directory / 'no_material_inputs.jsonl')
+            bundle['links']['audit'] = file_url(directory / 'blind-audit.json')
         _cache[dataset_id] = (signature, bundle)
         return bundle

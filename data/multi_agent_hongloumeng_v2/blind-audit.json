@@ -1,0 +1,3453 @@
+[
+  {
+    "job": {
+      "family_id": "HLM-V2-02",
+      "variant_index": 4
+    },
+    "condition": "irrelevant_deleted",
+    "result_sha256": "f86b7189abc1ae6e89c61b2bc7c861b68c6e25b1dcbdb7056a56df6f23978315",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "贾代善"
+    ],
+    "observed_steps": [
+      {
+        "from": "贾琏",
+        "relation": "father",
+        "to": "贾赦",
+        "evidence": [
+          {
+            "context_id": "P15514b48ed",
+            "quote": "大舅贾赦的儿子贾琏"
+          }
+        ]
+      },
+      {
+        "from": "贾赦",
+        "relation": "father",
+        "to": "贾代善",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "自荣公死后，长子贾代善袭了官，娶的也是金陵世勋史侯家的小姐为妻，生了两个儿子"
+          },
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "长子贾赦，次子贾政"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [
+      "引用了自然文本中另一处合法支持／短关系句，未与登记参考片段重叠或未覆盖全部宽引文组；不能据此判证明语义错误"
+    ],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持贾琏→贾赦→贾代善，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-06",
+      "variant_index": null
+    },
+    "condition": "no_material_diagnostic",
+    "result_sha256": "f83f0df179cb7832d888e058453dacae9ee035bd6fef29a29eae2aea33372921",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "insufficient_evidence",
+    "observed_status": "insufficient_evidence",
+    "observed_answers": [],
+    "observed_steps": [],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "无材料输入；明确拒绝凭作品记忆补齐，空答案和空步骤符合协议。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-02",
+      "variant_index": null
+    },
+    "condition": "no_material_diagnostic",
+    "result_sha256": "9e4a3cdfcdce2e41bfaae719633f043b4415e1b88a3bed28c96d114575170bb3",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "insufficient_evidence",
+    "observed_status": "insufficient_evidence",
+    "observed_answers": [],
+    "observed_steps": [],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "无材料输入；明确拒绝凭作品记忆补齐，空答案和空步骤符合协议。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-05",
+      "variant_index": 1
+    },
+    "condition": "main_distractor",
+    "result_sha256": "ce34f5af0bdc7f87973782d7a949f55a9816c1a8141b3f1238a95d0776b479e0",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "贾母（史氏太君）"
+    ],
+    "observed_steps": [
+      {
+        "from": "元春",
+        "relation": "father",
+        "to": "贾政",
+        "evidence": [
+          {
+            "context_id": "Pb1c4fec7a6",
+            "quote": "政老爹的长女，名叫元春"
+          }
+        ]
+      },
+      {
+        "from": "贾政",
+        "relation": "mother",
+        "to": "史氏太君（贾母）",
+        "evidence": [
+          {
+            "context_id": "P5980118c1d",
+            "quote": "这就是冷子兴所说的史氏太君，贾赦贾政的母亲。"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": false,
+      "path_matches_permitted_proof": false,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [
+      "合法别称组合被精确字符串答案匹配误拦",
+      "步骤中的合法别称组合被精确路径匹配误拦",
+      "引用了自然文本中另一处合法支持／短关系句，未与登记参考片段重叠或未覆盖全部宽引文组；不能据此判证明语义错误"
+    ],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持元春→贾政→贾母，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-05",
+      "variant_index": 4
+    },
+    "condition": "irrelevant_deleted",
+    "result_sha256": "d781568dc346a756f617ed062212fd5c436aca8ba0ec6e2d9072ee835748b9d1",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "贾母（史氏太君）"
+    ],
+    "observed_steps": [
+      {
+        "from": "元春",
+        "relation": "father",
+        "to": "贾政",
+        "evidence": [
+          {
+            "context_id": "Pb1c4fec7a6",
+            "quote": "政老爹的长女，名叫元春，现因贤孝才德，选入宫中作女史去了"
+          }
+        ]
+      },
+      {
+        "from": "贾政",
+        "relation": "mother",
+        "to": "史氏太君",
+        "evidence": [
+          {
+            "context_id": "P5980118c1d",
+            "quote": "这就是冷子兴所说的史氏太君，贾赦贾政的母亲"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": false,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [
+      "合法别称组合被精确字符串答案匹配误拦",
+      "引用了自然文本中另一处合法支持／短关系句，未与登记参考片段重叠或未覆盖全部宽引文组；不能据此判证明语义错误"
+    ],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持元春→贾政→贾母，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-02",
+      "variant_index": 2
+    },
+    "condition": "irrelevant_addition",
+    "result_sha256": "d9d9d51c4657bf9470b3e02cd0c5666cc1504f15bfb7625dd100d84ea8cfd5c1",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "insufficient_evidence",
+    "observed_answers": [],
+    "observed_steps": [],
+    "status_correct": false,
+    "final_answer_semantically_correct": false,
+    "proof_supported_by_actual_member": false,
+    "all_quotes_located": true,
+    "semantic_task_success": false,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": false,
+      "path_matches_permitted_proof": false,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "错误拒答。其brief_reason自己复述贾代善生长子贾赦，却称不支持贾赦父亲为代善；给定材料的两步链完整。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-05",
+      "variant_index": 5
+    },
+    "condition": "name_absent_deleted",
+    "result_sha256": "806c6fcc190dfd9fae4935d3bdccf923b731fb8eb5d522ae7148d536409f2bf6",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "insufficient_evidence",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "史氏太君"
+    ],
+    "observed_steps": [
+      {
+        "from": "元春",
+        "relation": "father",
+        "to": "贾政",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "这政老爹的夫人王氏，头胎生的公子，名叫贾珠，十四岁就取得了生员资格，不到二十岁就娶了妻生了子，一病死了。第二胎生了一位小姐，生在大年初一，这就奇了"
+          }
+        ]
+      },
+      {
+        "from": "贾政",
+        "relation": "mother",
+        "to": "史氏太君",
+        "evidence": [
+          {
+            "context_id": "P5980118c1d",
+            "quote": "这就是冷子兴所说的史氏太君，贾赦贾政的母亲。"
+          }
+        ]
+      }
+    ],
+    "status_correct": false,
+    "final_answer_semantically_correct": false,
+    "proof_supported_by_actual_member": false,
+    "all_quotes_located": true,
+    "semantic_task_success": false,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": false,
+      "path_matches_permitted_proof": false,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "错误作答。该成员已经删去元春具名父女关系及元春名称保留句；剩余王氏第二胎小姐没有姓名，不能借作品知识认作元春，也不能仅由夫人所生补为丈夫亲生。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-03",
+      "variant_index": 2
+    },
+    "condition": "irrelevant_addition",
+    "result_sha256": "e7a1b93196403f5aa0405da643b0c8ea2cf7192dfb7a2b0a729434f953948d0c",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "史氏太君（贾母）"
+    ],
+    "observed_steps": [
+      {
+        "from": "贾琏",
+        "relation": "father",
+        "to": "贾赦",
+        "evidence": [
+          {
+            "context_id": "P15514b48ed",
+            "quote": "大舅贾赦的儿子贾琏"
+          }
+        ]
+      },
+      {
+        "from": "贾赦",
+        "relation": "mother",
+        "to": "史氏太君（贾母）",
+        "evidence": [
+          {
+            "context_id": "P5980118c1d",
+            "quote": "这就是冷子兴所说的史氏太君，贾赦贾政的母亲。"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": false,
+      "path_matches_permitted_proof": false,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [
+      "合法别称组合被精确字符串答案匹配误拦",
+      "步骤中的合法别称组合被精确路径匹配误拦",
+      "引用了自然文本中另一处合法支持／短关系句，未与登记参考片段重叠或未覆盖全部宽引文组；不能据此判证明语义错误"
+    ],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持贾琏→贾赦→贾母，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-04",
+      "variant_index": 4
+    },
+    "condition": "irrelevant_deleted",
+    "result_sha256": "46765749e0f9c61641a7ded7707030cec9bbefbce2f9dafcb0423386e4886f08",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "贾代善"
+    ],
+    "observed_steps": [
+      {
+        "from": "元春",
+        "relation": "father",
+        "to": "贾政",
+        "evidence": [
+          {
+            "context_id": "Pb1c4fec7a6",
+            "quote": "政老爹的长女，名叫元春，现因贤孝才德，选入宫中作女史去了。"
+          }
+        ]
+      },
+      {
+        "from": "贾政",
+        "relation": "father",
+        "to": "贾代善",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "长子贾代善袭了官，娶的也是金陵世勋史侯家的小姐为妻，生了两个儿子：长子贾赦，次子贾政。"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [
+      "引用了自然文本中另一处合法支持／短关系句，未与登记参考片段重叠或未覆盖全部宽引文组；不能据此判证明语义错误"
+    ],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持元春→贾政→贾代善，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-04",
+      "variant_index": null
+    },
+    "condition": "no_material_diagnostic",
+    "result_sha256": "027bf036182f3092d08032626e206af6d644c64d2b63d10ce112c09155947809",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "insufficient_evidence",
+    "observed_status": "insufficient_evidence",
+    "observed_answers": [],
+    "observed_steps": [],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "无材料输入；明确拒绝凭作品记忆补齐，空答案和空步骤符合协议。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-10",
+      "variant_index": 3
+    },
+    "condition": "necessary_support_deleted_name_retained",
+    "result_sha256": "64b472d3b586772ed1c1f2c05c7b487f87e5bcd87a25bd648390b494582a127b",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "insufficient_evidence",
+    "observed_status": "insufficient_evidence",
+    "observed_answers": [],
+    "observed_steps": [],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "仅用本成员材料复核：必要链已断，空答案与空步骤的证据不足处置正确。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-07",
+      "variant_index": 4
+    },
+    "condition": "irrelevant_deleted",
+    "result_sha256": "905fa30804ffebcc16f3554eecc0d0ad22b4d6ca8baa9f42e5c4ca6b21ec54ae",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "史氏太君（贾母）"
+    ],
+    "observed_steps": [
+      {
+        "from": "探春",
+        "relation": "father",
+        "to": "贾政",
+        "evidence": [
+          {
+            "context_id": "Pb1c4fec7a6",
+            "quote": "三小姐是政老爹的妾生的女儿，名叫探春"
+          }
+        ]
+      },
+      {
+        "from": "贾政",
+        "relation": "mother",
+        "to": "史氏太君（贾母）",
+        "evidence": [
+          {
+            "context_id": "P5980118c1d",
+            "quote": "——这就是冷子兴所说的史氏太君，贾赦贾政的母亲。"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": false,
+      "path_matches_permitted_proof": false,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [
+      "合法别称组合被精确字符串答案匹配误拦",
+      "步骤中的合法别称组合被精确路径匹配误拦",
+      "引用了自然文本中另一处合法支持／短关系句，未与登记参考片段重叠或未覆盖全部宽引文组；不能据此判证明语义错误"
+    ],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持探春→贾政→贾母，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-11",
+      "variant_index": 1
+    },
+    "condition": "main_distractor",
+    "result_sha256": "b9403b3d83f3a0b08dc0fc9c2684cea309edab48a8e4621831e1dbb9b04fd760",
+    "response_attempt": 1,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "贾代善"
+    ],
+    "observed_steps": [
+      {
+        "from": "贾政",
+        "relation": "father",
+        "to": "贾代善",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "长子贾代善袭了官，娶的也是金陵世勋史侯家的小姐为妻，生了两个儿子：长子贾赦，次子贾政。"
+          }
+        ]
+      },
+      {
+        "from": "贾代善",
+        "relation": "father",
+        "to": "荣国公",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "自荣公死后，长子贾代善袭了官"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": false,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": false,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": false,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "完整材料包含代善为荣公长子的明确关系；顶层answers却填写中间人物贾代善，最终答案错误。",
+      "两步steps已正确到达荣公／荣国公，须与错误最终答案分开记录，不据局部证明救回答案。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-02",
+      "variant_index": 3
+    },
+    "condition": "necessary_support_deleted_name_retained",
+    "result_sha256": "aaf9de67175c6e2519c5bf1d9b48fbb80ec32d2a2a40d8d0dc5f34478e93cd52",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "insufficient_evidence",
+    "observed_status": "insufficient_evidence",
+    "observed_answers": [],
+    "observed_steps": [],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "仅用本成员材料复核：必要链已断，空答案与空步骤的证据不足处置正确。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-07",
+      "variant_index": null
+    },
+    "condition": "no_material_diagnostic",
+    "result_sha256": "68f7d013b2c48d484384a7a485f9f04f50570506f46106589721e8ef78a41f5a",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "insufficient_evidence",
+    "observed_status": "insufficient_evidence",
+    "observed_answers": [],
+    "observed_steps": [],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "无材料输入；明确拒绝凭作品记忆补齐，空答案和空步骤符合协议。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-10",
+      "variant_index": 0
+    },
+    "condition": "base",
+    "result_sha256": "1cc4a24cf043636202cd5c843e0d0145ef7e242ab6e30c6c830dba9c68568908",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "贾代善"
+    ],
+    "observed_steps": [
+      {
+        "from": "贾赦",
+        "relation": "father",
+        "to": "贾代善",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "生了两个儿子：长子贾赦，次子贾政"
+          }
+        ]
+      },
+      {
+        "from": "贾代善",
+        "relation": "father",
+        "to": "荣公",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "自荣公死后，长子贾代善袭了官"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": false,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": false,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": false,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "完整材料包含代善为荣公长子的明确关系；顶层answers却填写中间人物贾代善，最终答案错误。",
+      "两步steps已正确到达荣公／荣国公，须与错误最终答案分开记录，不据局部证明救回答案。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-10",
+      "variant_index": null
+    },
+    "condition": "no_material_diagnostic",
+    "result_sha256": "03fd3004c73e164832929324e76d14f9c56ba8037a61ea052e051f3250db8679",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "insufficient_evidence",
+    "observed_status": "insufficient_evidence",
+    "observed_answers": [],
+    "observed_steps": [],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "无材料输入；明确拒绝凭作品记忆补齐，空答案和空步骤符合协议。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-07",
+      "variant_index": 0
+    },
+    "condition": "base",
+    "result_sha256": "6dd1d032c3c95c0238746a6c06ca8fa04a439e4cb0caf41eaa62526a4875a7ae",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "贾母（史氏太君）"
+    ],
+    "observed_steps": [
+      {
+        "from": "探春",
+        "relation": "father",
+        "to": "贾政",
+        "evidence": [
+          {
+            "context_id": "Pb1c4fec7a6",
+            "quote": "三小姐是政老爹的妾生的女儿，名叫探春"
+          }
+        ]
+      },
+      {
+        "from": "贾政",
+        "relation": "mother",
+        "to": "史氏太君",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "娶的也是金陵世勋史侯家的小姐为妻，生了两个儿子：长子贾赦，次子贾政。"
+          },
+          {
+            "context_id": "P5980118c1d",
+            "quote": "这就是冷子兴所说的史氏太君，贾赦贾政的母亲。"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": false,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [
+      "合法别称组合被精确字符串答案匹配误拦",
+      "引用了自然文本中另一处合法支持／短关系句，未与登记参考片段重叠或未覆盖全部宽引文组；不能据此判证明语义错误"
+    ],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持探春→贾政→贾母，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-12",
+      "variant_index": 1
+    },
+    "condition": "main_distractor",
+    "result_sha256": "7dd77329e435911790a549ac0012d8d8d20f4a09b0448f648bba6f478148c07f",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "王夫人"
+    ],
+    "observed_steps": [
+      {
+        "from": "贾兰",
+        "relation": "father",
+        "to": "贾珠",
+        "evidence": [
+          {
+            "context_id": "P4696b41408",
+            "quote": "原来这李氏就是贾珠的妻子。贾珠虽然年轻早亡，幸好留下一个儿子，取名贾兰，如今才五岁，已经上学读书。"
+          }
+        ]
+      },
+      {
+        "from": "贾珠",
+        "relation": "mother",
+        "to": "王氏",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "这政老爹的夫人王氏，头胎生的公子，名叫贾珠，十四岁就取得了生员资格，不到二十岁就娶了妻生了子，一病死了。"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持贾兰→贾珠→王氏，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-02",
+      "variant_index": 0
+    },
+    "condition": "base",
+    "result_sha256": "5fe5a443d53a52f4d34c449cb21892ac77d9632c3035fe362b90ce0e5848e4d5",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "贾代善"
+    ],
+    "observed_steps": [
+      {
+        "from": "贾琏",
+        "relation": "father",
+        "to": "贾赦",
+        "evidence": [
+          {
+            "context_id": "P15514b48ed",
+            "quote": "大舅贾赦的儿子贾琏"
+          }
+        ]
+      },
+      {
+        "from": "贾赦",
+        "relation": "father",
+        "to": "贾代善",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "生了两个儿子：长子贾赦，次子贾政。"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [
+      "引用了自然文本中另一处合法支持／短关系句，未与登记参考片段重叠或未覆盖全部宽引文组；不能据此判证明语义错误"
+    ],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持贾琏→贾赦→贾代善，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-03",
+      "variant_index": 5
+    },
+    "condition": "name_absent_deleted",
+    "result_sha256": "40a50281536564c0a0a1c8ae37369ceeb1587b989d1f8f419d393bcc9fd0b252",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "insufficient_evidence",
+    "observed_status": "insufficient_evidence",
+    "observed_answers": [],
+    "observed_steps": [],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "仅用本成员材料复核：必要链已断，空答案与空步骤的证据不足处置正确。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-04",
+      "variant_index": 1
+    },
+    "condition": "main_distractor",
+    "result_sha256": "b38c2167c4929a65ca4993f74669f6b6306e7e7cebac542b814e4592e76f2fdc",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "贾代善"
+    ],
+    "observed_steps": [
+      {
+        "from": "元春",
+        "relation": "father",
+        "to": "贾政",
+        "evidence": [
+          {
+            "context_id": "Pb1c4fec7a6",
+            "quote": "政老爹的长女，名叫元春，现因贤孝才德，选入宫中作女史去了。"
+          }
+        ]
+      },
+      {
+        "from": "贾政",
+        "relation": "father",
+        "to": "贾代善",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "长子贾代善袭了官，娶的也是金陵世勋史侯家的小姐为妻，生了两个儿子：长子贾赦，次子贾政。"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [
+      "引用了自然文本中另一处合法支持／短关系句，未与登记参考片段重叠或未覆盖全部宽引文组；不能据此判证明语义错误"
+    ],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持元春→贾政→贾代善，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-12",
+      "variant_index": 3
+    },
+    "condition": "necessary_support_deleted_name_retained",
+    "result_sha256": "0053365c2cb041f947565fedd77c67a1c3deb06f64cb67228bb73065924125d0",
+    "response_attempt": 1,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "insufficient_evidence",
+    "observed_status": "insufficient_evidence",
+    "observed_answers": [],
+    "observed_steps": [],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "仅用本成员材料复核：必要链已断，空答案与空步骤的证据不足处置正确。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-11",
+      "variant_index": 2
+    },
+    "condition": "irrelevant_addition",
+    "result_sha256": "69b4ba8e27699b4710593c44a8e99f9ecdf186c03e6f9d486ba7dd3d305a2138",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "贾代善"
+    ],
+    "observed_steps": [
+      {
+        "from": "贾政",
+        "relation": "father",
+        "to": "贾代善",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "生了两个儿子：长子贾赦，次子贾政。"
+          }
+        ]
+      },
+      {
+        "from": "贾代善",
+        "relation": "father",
+        "to": "贾代善的父亲",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "长子贾代善袭了官"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": false,
+    "proof_supported_by_actual_member": false,
+    "all_quotes_located": true,
+    "semantic_task_success": false,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": false,
+      "path_matches_permitted_proof": false,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "完整材料包含代善为荣公长子的明确关系；顶层answers却填写中间人物贾代善，最终答案错误。",
+      "第二步为祖父／父亲占位描述或仅一步；没有给出问题要求的具名最终目标。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-07",
+      "variant_index": 3
+    },
+    "condition": "necessary_support_deleted_name_retained",
+    "result_sha256": "765d5d43357f46d10c354c7518606fbf1084cf12fa73d6ab634934b529667f13",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "insufficient_evidence",
+    "observed_status": "insufficient_evidence",
+    "observed_answers": [],
+    "observed_steps": [],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "仅用本成员材料复核：必要链已断，空答案与空步骤的证据不足处置正确。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-12",
+      "variant_index": 2
+    },
+    "condition": "irrelevant_addition",
+    "result_sha256": "4126ebb07ea84c65a77d1021941a691d4bd4770907ee04904607b66452e04ed5",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "王氏"
+    ],
+    "observed_steps": [
+      {
+        "from": "贾兰",
+        "relation": "father",
+        "to": "贾珠",
+        "evidence": [
+          {
+            "context_id": "P4696b41408",
+            "quote": "原来这李氏就是贾珠的妻子。贾珠虽然年轻早亡，幸好留下一个儿子，取名贾兰，如今才五岁，已经上学读书。"
+          }
+        ]
+      },
+      {
+        "from": "贾珠",
+        "relation": "mother",
+        "to": "王氏",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "这政老爹的夫人王氏，头胎生的公子，名叫贾珠，十四岁就取得了生员资格，不到二十岁就娶了妻生了子，一病死了。"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持贾兰→贾珠→王氏，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-05",
+      "variant_index": null
+    },
+    "condition": "no_material_diagnostic",
+    "result_sha256": "921320783d526f84f873aac98422d22e1ff6a115858fe46f2a9ed1498bcdf4a0",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "insufficient_evidence",
+    "observed_status": "insufficient_evidence",
+    "observed_answers": [],
+    "observed_steps": [],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "无材料输入；明确拒绝凭作品记忆补齐，空答案和空步骤符合协议。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-12",
+      "variant_index": null
+    },
+    "condition": "no_material_diagnostic",
+    "result_sha256": "f5c04dc853e8b46234de02c0559f5f2cca2108b2f0a6573bb2cf12edd49a74b5",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "insufficient_evidence",
+    "observed_status": "insufficient_evidence",
+    "observed_answers": [],
+    "observed_steps": [],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "无材料输入；明确拒绝凭作品记忆补齐，空答案和空步骤符合协议。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-12",
+      "variant_index": 0
+    },
+    "condition": "base",
+    "result_sha256": "11d5cca806533106a0769386e32e7d96b5d1e8e1c51f021c9fe84bc08443c9db",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "王氏"
+    ],
+    "observed_steps": [
+      {
+        "from": "贾兰",
+        "relation": "father",
+        "to": "贾珠",
+        "evidence": [
+          {
+            "context_id": "P4696b41408",
+            "quote": "贾珠虽然年轻早亡，幸好留下一个儿子，取名贾兰，如今才五岁，已经上学读书。"
+          }
+        ]
+      },
+      {
+        "from": "贾珠",
+        "relation": "mother",
+        "to": "王氏",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "这政老爹的夫人王氏，头胎生的公子，名叫贾珠，十四岁就取得了生员资格，不到二十岁就娶了妻生了子，一病死了。"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持贾兰→贾珠→王氏，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-04",
+      "variant_index": 2
+    },
+    "condition": "irrelevant_addition",
+    "result_sha256": "6e09efa27856d35d99bc53b328d935f0b91404abb36ad323dd029e35bee7ea89",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "贾代善"
+    ],
+    "observed_steps": [
+      {
+        "from": "元春",
+        "relation": "father",
+        "to": "贾政",
+        "evidence": [
+          {
+            "context_id": "Pb1c4fec7a6",
+            "quote": "政老爹的长女，名叫元春，现因贤孝才德，选入宫中作女史去了。"
+          }
+        ]
+      },
+      {
+        "from": "贾政",
+        "relation": "father",
+        "to": "贾代善",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "长子贾代善袭了官，娶的也是金陵世勋史侯家的小姐为妻，生了两个儿子：长子贾赦，次子贾政。"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [
+      "引用了自然文本中另一处合法支持／短关系句，未与登记参考片段重叠或未覆盖全部宽引文组；不能据此判证明语义错误"
+    ],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持元春→贾政→贾代善，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-01",
+      "variant_index": 2
+    },
+    "condition": "irrelevant_addition",
+    "result_sha256": "2c25138489bd73e4bbe1e9eb3504797f0ea9f929bb23ae322c871228ffd43d40",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "贾代化"
+    ],
+    "observed_steps": [
+      {
+        "from": "贾珍",
+        "relation": "father",
+        "to": "贾敬",
+        "evidence": [
+          {
+            "context_id": "P347bba90a2",
+            "quote": "幸而早年留下一个儿子，名叫贾珍"
+          }
+        ]
+      },
+      {
+        "from": "贾敬",
+        "relation": "father",
+        "to": "贾代化",
+        "evidence": [
+          {
+            "context_id": "P347bba90a2",
+            "quote": "只剩下次子贾敬袭了官"
+          },
+          {
+            "context_id": "P347bba90a2",
+            "quote": "宁公死后，贾代化袭了官，也养了两个儿子"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持贾珍→贾敬→贾代化，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-06",
+      "variant_index": 2
+    },
+    "condition": "irrelevant_addition",
+    "result_sha256": "a411e9b70d688ef2c8bdc68f1042319a5e9ff233333080469c52782ba925e4c1",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "贾代善"
+    ],
+    "observed_steps": [
+      {
+        "from": "探春",
+        "relation": "father",
+        "to": "贾政",
+        "evidence": [
+          {
+            "context_id": "Pb1c4fec7a6",
+            "quote": "三小姐是政老爹的妾生的女儿，名叫探春"
+          }
+        ]
+      },
+      {
+        "from": "贾政",
+        "relation": "father",
+        "to": "贾代善",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "生了两个儿子：长子贾赦，次子贾政。"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [
+      "引用了自然文本中另一处合法支持／短关系句，未与登记参考片段重叠或未覆盖全部宽引文组；不能据此判证明语义错误"
+    ],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持探春→贾政→贾代善，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-11",
+      "variant_index": 0
+    },
+    "condition": "base",
+    "result_sha256": "3d362b88ca3280a35bb169b87d554fb50e05f6d15b653bb7b79384ccb94d049c",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "贾代善"
+    ],
+    "observed_steps": [
+      {
+        "from": "贾政",
+        "relation": "father",
+        "to": "贾代善",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "生了两个儿子：长子贾赦，次子贾政。"
+          }
+        ]
+      },
+      {
+        "from": "贾代善",
+        "relation": "father",
+        "to": "荣公",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "自荣公死后，长子贾代善袭了官"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": false,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": false,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": false,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "完整材料包含代善为荣公长子的明确关系；顶层answers却填写中间人物贾代善，最终答案错误。",
+      "两步steps已正确到达荣公／荣国公，须与错误最终答案分开记录，不据局部证明救回答案。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-07",
+      "variant_index": 5
+    },
+    "condition": "name_absent_deleted",
+    "result_sha256": "f9539d48496dc7109a958445c541d60625b39a2071ce22060b2b828eba7888e2",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "insufficient_evidence",
+    "observed_status": "insufficient_evidence",
+    "observed_answers": [],
+    "observed_steps": [],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [
+      "拒答结论正确；结尾王夫人／贾母括号混列使关系角色表述含混，不作为额外证据。"
+    ],
+    "rationale": [
+      "仅用本成员材料复核：必要链已断，空答案与空步骤的证据不足处置正确。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-01",
+      "variant_index": null
+    },
+    "condition": "no_material_diagnostic",
+    "result_sha256": "83aa8a8d09d18866108d16c17d6d2cfa44e9a18fa6da15e3bed0970e240b3f5c",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "insufficient_evidence",
+    "observed_status": "insufficient_evidence",
+    "observed_answers": [],
+    "observed_steps": [],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "无材料输入；明确拒绝凭作品记忆补齐，空答案和空步骤符合协议。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-07",
+      "variant_index": 1
+    },
+    "condition": "main_distractor",
+    "result_sha256": "b97e27ed692e99fa9433b53044d5759f644b5e38b77fcff34671eff677af91a8",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "史氏太君"
+    ],
+    "observed_steps": [
+      {
+        "from": "探春",
+        "relation": "father",
+        "to": "政老爹",
+        "evidence": [
+          {
+            "context_id": "Pb1c4fec7a6",
+            "quote": "三小姐是政老爹的妾生的女儿，名叫探春"
+          }
+        ]
+      },
+      {
+        "from": "政老爹",
+        "relation": "mother",
+        "to": "史氏太君",
+        "evidence": [
+          {
+            "context_id": "P5980118c1d",
+            "quote": "这就是冷子兴所说的史氏太君，贾赦贾政的母亲。"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [
+      "引用了自然文本中另一处合法支持／短关系句，未与登记参考片段重叠或未覆盖全部宽引文组；不能据此判证明语义错误"
+    ],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持探春→贾政→贾母，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-02",
+      "variant_index": 5
+    },
+    "condition": "name_absent_deleted",
+    "result_sha256": "da1c6e76e9b9a2b709f7d2e3aebf754e8f843c61bb64aeec9802282d7e5203bf",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "insufficient_evidence",
+    "observed_status": "insufficient_evidence",
+    "observed_answers": [],
+    "observed_steps": [],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "仅用本成员材料复核：必要链已断，空答案与空步骤的证据不足处置正确。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-03",
+      "variant_index": 4
+    },
+    "condition": "irrelevant_deleted",
+    "result_sha256": "b769eca504d7522090db1c2449e44f7c886d7af2c4abfc2253d9a7879796d71e",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "史氏太君"
+    ],
+    "observed_steps": [
+      {
+        "from": "贾琏",
+        "relation": "father",
+        "to": "贾赦",
+        "evidence": [
+          {
+            "context_id": "P15514b48ed",
+            "quote": "大舅贾赦的儿子贾琏"
+          }
+        ]
+      },
+      {
+        "from": "贾赦",
+        "relation": "mother",
+        "to": "史氏太君",
+        "evidence": [
+          {
+            "context_id": "P5980118c1d",
+            "quote": "这就是冷子兴所说的史氏太君，贾赦贾政的母亲。"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持贾琏→贾赦→贾母，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-06",
+      "variant_index": 3
+    },
+    "condition": "necessary_support_deleted_name_retained",
+    "result_sha256": "3dcf697727972955e1041f8d82c5e9826eece5ff2987270a268f3779a980ed6f",
+    "response_attempt": 1,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "insufficient_evidence",
+    "observed_status": "insufficient_evidence",
+    "observed_answers": [],
+    "observed_steps": [],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "仅用本成员材料复核：必要链已断，空答案与空步骤的证据不足处置正确。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-03",
+      "variant_index": 0
+    },
+    "condition": "base",
+    "result_sha256": "0226d18c8e7a25de4a43fce9db4df4ad5226bfc90aba7dec6396ade4a50c3f83",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "史氏太君（贾母）"
+    ],
+    "observed_steps": [
+      {
+        "from": "贾琏",
+        "relation": "father",
+        "to": "贾赦",
+        "evidence": [
+          {
+            "context_id": "P15514b48ed",
+            "quote": "大舅贾赦的儿子贾琏"
+          }
+        ]
+      },
+      {
+        "from": "贾赦",
+        "relation": "mother",
+        "to": "史氏太君",
+        "evidence": [
+          {
+            "context_id": "P5980118c1d",
+            "quote": "这就是冷子兴所说的史氏太君，贾赦贾政的母亲"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": false,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [
+      "合法别称组合被精确字符串答案匹配误拦"
+    ],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持贾琏→贾赦→贾母，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-12",
+      "variant_index": 5
+    },
+    "condition": "name_absent_deleted",
+    "result_sha256": "a82bf6ccc568637cdca882abf3e1047e00d26eb522e9284983bedb6246156f0c",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "insufficient_evidence",
+    "observed_status": "insufficient_evidence",
+    "observed_answers": [],
+    "observed_steps": [],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "仅用本成员材料复核：必要链已断，空答案与空步骤的证据不足处置正确。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-11",
+      "variant_index": 3
+    },
+    "condition": "necessary_support_deleted_name_retained",
+    "result_sha256": "6a6338bb9e4a1c52691c941f0a3bc2ac4d154d58c2b233b1b0dd7f033caf49e3",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "insufficient_evidence",
+    "observed_status": "insufficient_evidence",
+    "observed_answers": [],
+    "observed_steps": [],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "仅用本成员材料复核：必要链已断，空答案与空步骤的证据不足处置正确。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-05",
+      "variant_index": 0
+    },
+    "condition": "base",
+    "result_sha256": "430078b81287f93d14217d12ea2a6810c4259a644336bfc27630f526b5f3d63b",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "史氏太君（贾母）"
+    ],
+    "observed_steps": [
+      {
+        "from": "元春",
+        "relation": "father",
+        "to": "贾政",
+        "evidence": [
+          {
+            "context_id": "Pb1c4fec7a6",
+            "quote": "政老爹的长女，名叫元春，现因贤孝才德，选入宫中作女史去了。"
+          }
+        ]
+      },
+      {
+        "from": "贾政",
+        "relation": "mother",
+        "to": "史氏太君（贾母）",
+        "evidence": [
+          {
+            "context_id": "P5980118c1d",
+            "quote": "这就是冷子兴所说的史氏太君，贾赦贾政的母亲。"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": false,
+      "path_matches_permitted_proof": false,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [
+      "合法别称组合被精确字符串答案匹配误拦",
+      "步骤中的合法别称组合被精确路径匹配误拦",
+      "引用了自然文本中另一处合法支持／短关系句，未与登记参考片段重叠或未覆盖全部宽引文组；不能据此判证明语义错误"
+    ],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持元春→贾政→贾母，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-10",
+      "variant_index": 1
+    },
+    "condition": "main_distractor",
+    "result_sha256": "9faaf749fbeb56dc0eb13d49657995b99f5e08d6575628d7379ace63330c7cf5",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "贾代善"
+    ],
+    "observed_steps": [
+      {
+        "from": "贾赦",
+        "relation": "father",
+        "to": "贾代善",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "长子贾代善袭了官，娶的也是金陵世勋史侯家的小姐为妻，生了两个儿子：长子贾赦，次子贾政。"
+          }
+        ]
+      },
+      {
+        "from": "贾代善",
+        "relation": "father",
+        "to": "贾赦的祖父",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "长子贾赦袭着官，次子贾政，自幼酷爱读书，祖父最疼他"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": false,
+    "proof_supported_by_actual_member": false,
+    "all_quotes_located": true,
+    "semantic_task_success": false,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": false,
+      "path_matches_permitted_proof": false,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "完整材料包含代善为荣公长子的明确关系；顶层answers却填写中间人物贾代善，最终答案错误。",
+      "第二步为祖父／父亲占位描述或仅一步；没有给出问题要求的具名最终目标。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-03",
+      "variant_index": 1
+    },
+    "condition": "main_distractor",
+    "result_sha256": "d81a84993152f2e3c09a303d14505bb7793a08d54cfb32844082daacd2362148",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "史氏太君（贾母）"
+    ],
+    "observed_steps": [
+      {
+        "from": "贾琏",
+        "relation": "father",
+        "to": "贾赦",
+        "evidence": [
+          {
+            "context_id": "P15514b48ed",
+            "quote": "大舅贾赦的儿子贾琏"
+          }
+        ]
+      },
+      {
+        "from": "贾赦",
+        "relation": "mother",
+        "to": "史氏太君",
+        "evidence": [
+          {
+            "context_id": "P5980118c1d",
+            "quote": "这就是冷子兴所说的史氏太君，贾赦贾政的母亲。"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": false,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [
+      "合法别称组合被精确字符串答案匹配误拦"
+    ],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持贾琏→贾赦→贾母，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-06",
+      "variant_index": 5
+    },
+    "condition": "name_absent_deleted",
+    "result_sha256": "ea599c0d8f77e736527176533073176c67052fa7e15408b858fcacfbac3ae3d2",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "insufficient_evidence",
+    "observed_status": "insufficient_evidence",
+    "observed_answers": [],
+    "observed_steps": [],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [
+      "拒答结论正确，但解释将王氏第二胎小姐括称探春；材料未如此命名，该附带陈述不支持。"
+    ],
+    "rationale": [
+      "仅用本成员材料复核：必要链已断，空答案与空步骤的证据不足处置正确。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-07",
+      "variant_index": 2
+    },
+    "condition": "irrelevant_addition",
+    "result_sha256": "6b5ba6757debe66ff9c08241528a82351f807bf0592f4b5a6fd3346e8c377c04",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "贾母（史氏太君）"
+    ],
+    "observed_steps": [
+      {
+        "from": "探春",
+        "relation": "father",
+        "to": "贾政",
+        "evidence": [
+          {
+            "context_id": "Pb1c4fec7a6",
+            "quote": "三小姐是政老爹的妾生的女儿，名叫探春"
+          }
+        ]
+      },
+      {
+        "from": "贾政",
+        "relation": "mother",
+        "to": "史氏太君（贾母）",
+        "evidence": [
+          {
+            "context_id": "P5980118c1d",
+            "quote": "这就是冷子兴所说的史氏太君，贾赦贾政的母亲。"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": false,
+      "path_matches_permitted_proof": false,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [
+      "合法别称组合被精确字符串答案匹配误拦",
+      "步骤中的合法别称组合被精确路径匹配误拦",
+      "引用了自然文本中另一处合法支持／短关系句，未与登记参考片段重叠或未覆盖全部宽引文组；不能据此判证明语义错误"
+    ],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持探春→贾政→贾母，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-03",
+      "variant_index": null
+    },
+    "condition": "no_material_diagnostic",
+    "result_sha256": "d00b3aec8d2559f0ec4d07af8078da6b4b7f6cee4d11973f327da8a6624471f7",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "insufficient_evidence",
+    "observed_status": "insufficient_evidence",
+    "observed_answers": [],
+    "observed_steps": [],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "无材料输入；明确拒绝凭作品记忆补齐，空答案和空步骤符合协议。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-11",
+      "variant_index": 4
+    },
+    "condition": "irrelevant_deleted",
+    "result_sha256": "c19a6e8f30b3e6d7107c38a3b5f2fac2224a058c069cc64fbfa5cc7d50143646",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "贾代善"
+    ],
+    "observed_steps": [
+      {
+        "from": "贾政",
+        "relation": "father",
+        "to": "贾代善",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "生了两个儿子：长子贾赦，次子贾政。"
+          }
+        ]
+      },
+      {
+        "from": "贾代善",
+        "relation": "father",
+        "to": "荣公",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "自荣公死后，长子贾代善袭了官"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": false,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": false,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": false,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "完整材料包含代善为荣公长子的明确关系；顶层answers却填写中间人物贾代善，最终答案错误。",
+      "两步steps已正确到达荣公／荣国公，须与错误最终答案分开记录，不据局部证明救回答案。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-05",
+      "variant_index": 3
+    },
+    "condition": "necessary_support_deleted_name_retained",
+    "result_sha256": "ea4e1bee9b61eef29c003eb94a4f1ff3a586179069c287e75869232740fe1bac",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "insufficient_evidence",
+    "observed_status": "insufficient_evidence",
+    "observed_answers": [],
+    "observed_steps": [],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "仅用本成员材料复核：必要链已断，空答案与空步骤的证据不足处置正确。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-01",
+      "variant_index": 4
+    },
+    "condition": "irrelevant_deleted",
+    "result_sha256": "d00874bc3a5401b4c3922aa0d86184513950cf4f099a3328922234743dc2aa8f",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "贾代化"
+    ],
+    "observed_steps": [
+      {
+        "from": "贾珍",
+        "relation": "father",
+        "to": "贾敬",
+        "evidence": [
+          {
+            "context_id": "P347bba90a2",
+            "quote": "幸而早年留下一个儿子，名叫贾珍，因他父亲一心想作神仙，倒把官让他袭了。"
+          }
+        ]
+      },
+      {
+        "from": "贾敬",
+        "relation": "father",
+        "to": "贾代化",
+        "evidence": [
+          {
+            "context_id": "P347bba90a2",
+            "quote": "只剩下次子贾敬袭了官"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持贾珍→贾敬→贾代化，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-01",
+      "variant_index": 3
+    },
+    "condition": "necessary_support_deleted_name_retained",
+    "result_sha256": "c8677ad1ebb853fe3560b612ac16bf06f94e6c655f0c80b235a70c410d137163",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "insufficient_evidence",
+    "observed_status": "insufficient_evidence",
+    "observed_answers": [],
+    "observed_steps": [],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "仅用本成员材料复核：必要链已断，空答案与空步骤的证据不足处置正确。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-01",
+      "variant_index": 1
+    },
+    "condition": "main_distractor",
+    "result_sha256": "9fd93049b2f29d196b4e5f158c790f56147755a04eccd88fe436fa9066722a25",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "贾代化"
+    ],
+    "observed_steps": [
+      {
+        "from": "贾珍",
+        "relation": "father",
+        "to": "贾敬",
+        "evidence": [
+          {
+            "context_id": "P347bba90a2",
+            "quote": "幸而早年留下一个儿子，名叫贾珍"
+          }
+        ]
+      },
+      {
+        "from": "贾敬",
+        "relation": "father",
+        "to": "贾代化",
+        "evidence": [
+          {
+            "context_id": "P347bba90a2",
+            "quote": "宁公死后，贾代化袭了官，也养了两个儿子：长子名叫贾敷，到八九岁上便死了，只剩下次子贾敬袭了官"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持贾珍→贾敬→贾代化，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-01",
+      "variant_index": 0
+    },
+    "condition": "base",
+    "result_sha256": "f4754c0e58ebb26cd598aa97cd43614050d22eb192ebb312374d3bdfa1297c5d",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "贾代化"
+    ],
+    "observed_steps": [
+      {
+        "from": "贾珍",
+        "relation": "father",
+        "to": "贾敬",
+        "evidence": [
+          {
+            "context_id": "P347bba90a2",
+            "quote": "幸而早年留下一个儿子，名叫贾珍"
+          }
+        ]
+      },
+      {
+        "from": "贾敬",
+        "relation": "father",
+        "to": "贾代化",
+        "evidence": [
+          {
+            "context_id": "P347bba90a2",
+            "quote": "只剩下次子贾敬袭了官"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持贾珍→贾敬→贾代化，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-06",
+      "variant_index": 4
+    },
+    "condition": "irrelevant_deleted",
+    "result_sha256": "ed48c0cd9cd6ac9651d3e1094328da20c24df415b31005933f9f30ef1d70e80d",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "贾代善"
+    ],
+    "observed_steps": [
+      {
+        "from": "探春",
+        "relation": "father",
+        "to": "贾政",
+        "evidence": [
+          {
+            "context_id": "Pb1c4fec7a6",
+            "quote": "三小姐是政老爹的妾生的女儿，名叫探春"
+          }
+        ]
+      },
+      {
+        "from": "贾政",
+        "relation": "father",
+        "to": "贾代善",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "长子贾代善袭了官，娶的也是金陵世勋史侯家的小姐为妻，生了两个儿子：长子贾赦，次子贾政。"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [
+      "引用了自然文本中另一处合法支持／短关系句，未与登记参考片段重叠或未覆盖全部宽引文组；不能据此判证明语义错误"
+    ],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持探春→贾政→贾代善，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-11",
+      "variant_index": null
+    },
+    "condition": "no_material_diagnostic",
+    "result_sha256": "c8f25e36b1ad72583ff5fd2708e415002343765e82c13d31b331e90cc6032656",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "insufficient_evidence",
+    "observed_status": "insufficient_evidence",
+    "observed_answers": [],
+    "observed_steps": [],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "无材料输入；明确拒绝凭作品记忆补齐，空答案和空步骤符合协议。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-02",
+      "variant_index": 1
+    },
+    "condition": "main_distractor",
+    "result_sha256": "cdbb8eefa2fd58e415b02b2f8605080b3434d52ce06777270933621a70a52f29",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "贾代善"
+    ],
+    "observed_steps": [
+      {
+        "from": "贾琏",
+        "relation": "father",
+        "to": "贾赦",
+        "evidence": [
+          {
+            "context_id": "P15514b48ed",
+            "quote": "大舅贾赦的儿子贾琏"
+          }
+        ]
+      },
+      {
+        "from": "贾赦",
+        "relation": "father",
+        "to": "贾代善",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "长子贾赦，次子贾政"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [
+      "引用了自然文本中另一处合法支持／短关系句，未与登记参考片段重叠或未覆盖全部宽引文组；不能据此判证明语义错误"
+    ],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持贾琏→贾赦→贾代善，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-10",
+      "variant_index": 2
+    },
+    "condition": "irrelevant_addition",
+    "result_sha256": "1ddc0ff3f0111f7af29623aee3ab73270ae044654210a516fefcd072f38ac535",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "贾代善"
+    ],
+    "observed_steps": [
+      {
+        "from": "贾赦",
+        "relation": "father",
+        "to": "贾代善",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "长子贾代善袭了官，娶的也是金陵世勋史侯家的小姐为妻，生了两个儿子：长子贾赦，次子贾政。"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": false,
+    "proof_supported_by_actual_member": false,
+    "all_quotes_located": true,
+    "semantic_task_success": false,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": false,
+      "path_matches_permitted_proof": false,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "完整材料包含代善为荣公长子的明确关系；顶层answers却填写中间人物贾代善，最终答案错误。",
+      "第二步为祖父／父亲占位描述或仅一步；没有给出问题要求的具名最终目标。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-04",
+      "variant_index": 3
+    },
+    "condition": "necessary_support_deleted_name_retained",
+    "result_sha256": "a298b3c85121993068915840c3db058642af5e5edc80abed585bba00a16b9ced",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "insufficient_evidence",
+    "observed_status": "insufficient_evidence",
+    "observed_answers": [],
+    "observed_steps": [],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [
+      "拒答结论正确，但解释额外称可由宝玉姐姐推知元春；本成员没有这一命名依据，不采用该推测。"
+    ],
+    "rationale": [
+      "仅用本成员材料复核：必要链已断，空答案与空步骤的证据不足处置正确。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-04",
+      "variant_index": 0
+    },
+    "condition": "base",
+    "result_sha256": "ab41bc9637576ce8bd45e066f8fae90b75ad4841f703718358fc518472810d0f",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "贾代善"
+    ],
+    "observed_steps": [
+      {
+        "from": "元春",
+        "relation": "father",
+        "to": "政老爹",
+        "evidence": [
+          {
+            "context_id": "Pb1c4fec7a6",
+            "quote": "政老爹的长女，名叫元春"
+          }
+        ]
+      },
+      {
+        "from": "政老爹",
+        "relation": "father",
+        "to": "贾代善",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "次子贾政"
+          },
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "自荣公死后，长子贾代善袭了官"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [
+      "引用了自然文本中另一处合法支持／短关系句，未与登记参考片段重叠或未覆盖全部宽引文组；不能据此判证明语义错误"
+    ],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持元春→贾政→贾代善，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-04",
+      "variant_index": 5
+    },
+    "condition": "name_absent_deleted",
+    "result_sha256": "63ea5461613bfe6c024ef8d0c3771737bea5071ef9c4ab06942c66150a0154e4",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "insufficient_evidence",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "贾代善"
+    ],
+    "observed_steps": [
+      {
+        "from": "元春",
+        "relation": "father",
+        "to": "贾政",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "第二胎生了一位小姐，生在大年初一，这就奇了"
+          },
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "这政老爹的夫人王氏，头胎生的公子，名叫贾珠，十四岁就取得了生员资格，不到二十岁就娶了妻生了子，一病死了。"
+          }
+        ]
+      },
+      {
+        "from": "贾政",
+        "relation": "father",
+        "to": "贾代善",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "长子贾代善袭了官，娶的也是金陵世勋史侯家的小姐为妻，生了两个儿子：长子贾赦，次子贾政。"
+          }
+        ]
+      }
+    ],
+    "status_correct": false,
+    "final_answer_semantically_correct": false,
+    "proof_supported_by_actual_member": false,
+    "all_quotes_located": true,
+    "semantic_task_success": false,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": false,
+      "path_matches_permitted_proof": false,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "错误作答。该成员已经删去元春具名父女关系及元春名称保留句；剩余王氏第二胎小姐没有姓名，不能借作品知识认作元春，也不能仅由夫人所生补为丈夫亲生。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-12",
+      "variant_index": 4
+    },
+    "condition": "irrelevant_deleted",
+    "result_sha256": "179d843afda8665e8efed569cc95712b358508c03f854b54d4052cda863bea58",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "王夫人"
+    ],
+    "observed_steps": [
+      {
+        "from": "贾兰",
+        "relation": "father",
+        "to": "贾珠",
+        "evidence": [
+          {
+            "context_id": "P4696b41408",
+            "quote": "原来这李氏就是贾珠的妻子。贾珠虽然年轻早亡，幸好留下一个儿子，取名贾兰，如今才五岁，已经上学读书。"
+          }
+        ]
+      },
+      {
+        "from": "贾珠",
+        "relation": "mother",
+        "to": "王夫人",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "这政老爹的夫人王氏，头胎生的公子，名叫贾珠，十四岁就取得了生员资格，不到二十岁就娶了妻生了子，一病死了。"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持贾兰→贾珠→王氏，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-06",
+      "variant_index": 1
+    },
+    "condition": "main_distractor",
+    "result_sha256": "6793d477c13af31b487022c4765cbfa44b1b792a60eb0ac2d11374dab97cbcc6",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "贾代善"
+    ],
+    "observed_steps": [
+      {
+        "from": "探春",
+        "relation": "father",
+        "to": "贾政",
+        "evidence": [
+          {
+            "context_id": "Pb1c4fec7a6",
+            "quote": "三小姐是政老爹的妾生的女儿，名叫探春"
+          }
+        ]
+      },
+      {
+        "from": "贾政",
+        "relation": "father",
+        "to": "贾代善",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "自荣公死后，长子贾代善袭了官，娶的也是金陵世勋史侯家的小姐为妻，生了两个儿子：长子贾赦，次子贾政。"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [
+      "引用了自然文本中另一处合法支持／短关系句，未与登记参考片段重叠或未覆盖全部宽引文组；不能据此判证明语义错误"
+    ],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持探春→贾政→贾代善，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-05",
+      "variant_index": 2
+    },
+    "condition": "irrelevant_addition",
+    "result_sha256": "357a633da0b0b416d06cf06243f3e1be979067586d34750d103a6038d7a01eee",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "史氏太君（贾母）"
+    ],
+    "observed_steps": [
+      {
+        "from": "元春",
+        "relation": "father",
+        "to": "贾政",
+        "evidence": [
+          {
+            "context_id": "Pb1c4fec7a6",
+            "quote": "政老爹的长女，名叫元春，现因贤孝才德，选入宫中作女史去了。"
+          }
+        ]
+      },
+      {
+        "from": "贾政",
+        "relation": "mother",
+        "to": "史氏太君（贾母）",
+        "evidence": [
+          {
+            "context_id": "P5980118c1d",
+            "quote": "这就是冷子兴所说的史氏太君，贾赦贾政的母亲。"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": false,
+      "path_matches_permitted_proof": false,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [
+      "合法别称组合被精确字符串答案匹配误拦",
+      "步骤中的合法别称组合被精确路径匹配误拦",
+      "引用了自然文本中另一处合法支持／短关系句，未与登记参考片段重叠或未覆盖全部宽引文组；不能据此判证明语义错误"
+    ],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持元春→贾政→贾母，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-03",
+      "variant_index": 3
+    },
+    "condition": "necessary_support_deleted_name_retained",
+    "result_sha256": "606514eaf010634b8d1f207c55636dbd8c1dc53c22d5cc0204f6116330d3f8e0",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "insufficient_evidence",
+    "observed_status": "insufficient_evidence",
+    "observed_answers": [],
+    "observed_steps": [],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": true,
+      "strict_structural_success": true,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "仅用本成员材料复核：必要链已断，空答案与空步骤的证据不足处置正确。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-10",
+      "variant_index": 4
+    },
+    "condition": "irrelevant_deleted",
+    "result_sha256": "7a66f72536a88adc2c63d4a245bdc80289f6b8ae94b5dd3ecf74c385af373f90",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "贾代善"
+    ],
+    "observed_steps": [
+      {
+        "from": "贾赦",
+        "relation": "father",
+        "to": "贾代善",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "生了两个儿子：长子贾赦，次子贾政。"
+          }
+        ]
+      },
+      {
+        "from": "贾代善",
+        "relation": "father",
+        "to": "贾赦的祖父",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "长子贾代善袭了官"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": false,
+    "proof_supported_by_actual_member": false,
+    "all_quotes_located": true,
+    "semantic_task_success": false,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": false,
+      "path_matches_permitted_proof": false,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [],
+    "reason_caveats": [],
+    "rationale": [
+      "完整材料包含代善为荣公长子的明确关系；顶层answers却填写中间人物贾代善，最终答案错误。",
+      "第二步为祖父／父亲占位描述或仅一步；没有给出问题要求的具名最终目标。"
+    ],
+    "unresolved_dispute": false
+  },
+  {
+    "job": {
+      "family_id": "HLM-V2-06",
+      "variant_index": 0
+    },
+    "condition": "base",
+    "result_sha256": "23176885a21c8c0ce45cbbfd5f289f26409c09e2aa4b9ed1c4ce3b7e7a078f75",
+    "response_attempt": 0,
+    "reviewer_kind": "independent_gpt_subagent",
+    "reference_state": "GPT独立审核",
+    "human_review": "not_run",
+    "expected_status": "answerable",
+    "observed_status": "answerable",
+    "observed_answers": [
+      "贾代善"
+    ],
+    "observed_steps": [
+      {
+        "from": "探春",
+        "relation": "father",
+        "to": "贾政",
+        "evidence": [
+          {
+            "context_id": "Pb1c4fec7a6",
+            "quote": "三小姐是政老爹的妾生的女儿，名叫探春"
+          }
+        ]
+      },
+      {
+        "from": "贾政",
+        "relation": "father",
+        "to": "贾代善",
+        "evidence": [
+          {
+            "context_id": "P7ccc809ea4",
+            "quote": "长子贾代善袭了官，娶的也是金陵世勋史侯家的小姐为妻，生了两个儿子：长子贾赦，次子贾政。"
+          }
+        ]
+      }
+    ],
+    "status_correct": true,
+    "final_answer_semantically_correct": true,
+    "proof_supported_by_actual_member": true,
+    "all_quotes_located": true,
+    "semantic_task_success": true,
+    "machine_checks_unchanged": {
+      "answer_and_status_correct": true,
+      "path_matches_permitted_proof": true,
+      "evidence_quotes_located": true,
+      "evidence_overlaps_reference_spans": false,
+      "strict_structural_success": false,
+      "limit": "Quote location and graph-path agreement do not independently establish natural-language entailment."
+    },
+    "machine_scoring_discrepancies": [
+      "引用了自然文本中另一处合法支持／短关系句，未与登记参考片段重叠或未覆盖全部宽引文组；不能据此判证明语义错误"
+    ],
+    "reason_caveats": [],
+    "rationale": [
+      "给定成员材料共同支持探春→贾政→贾代善，父／母操作次序与问题一致；引用的关系句或同一单元可消解的指代支持该链。"
+    ],
+    "unresolved_dispute": false
+  }
+]

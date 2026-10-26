@@ -39,7 +39,7 @@ def export(destination):
     for doc in manifest['documents']:
         if doc['source'] not in hashes:
             raise ValueError('文档不在发布清单：'+doc['source'])
-    json_write(destination/'api/datasets.json',[{'id':key,'title':entry['title'],'topic':entry['topic']} for key,entry in REGISTRY.items()])
+    json_write(destination/'api/datasets.json',[{'id':key,'title':entry['title'],'topic':entry['topic'],'default':entry.get('default',False)} for key,entry in REGISTRY.items()])
     for key in REGISTRY:
         json_write(destination/'api/datasets'/key/'bundle.json',load_bundle(key))
     (destination/'.nojekyll').touch()

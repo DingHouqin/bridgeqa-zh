@@ -1,7 +1,8 @@
+import {REVIEW_RETIRED,reviewRetiredMarkup} from './review-retired.js';
 import {siteURL,rewriteSiteLinks} from './urls.js';
 import {renderDocument} from './documents.js';
 import {PEOPLE,TOPICS,setupReview,reviewConnection,initialsFor,reviewFor,reviewOwner,reviewStatus,progressFor,
-  saveInitials,updateReview,finishReview,saveDraft,reviewFeedback,retrySaves,resolveConflict,exportReview,importReview,connectGithub,disconnectGithub,REPOSITORY_URL,units} from './review.js';
+  saveInitials,updateReview,finishReview,saveDraft,reviewFeedback,retrySaves,resolveConflict,exportReview,importReview,units} from './review.js';
 import {ACCURACY,VERDICTS,RATING_GUIDES} from './review-model.js';
 // [Interaction spec](../specs/02_标签筛选与交互.md), [semantic spec](../specs/03_数据映射与干扰语义.md).
 import {FACETS,VARIANTS,STATUS,PROVENANCE,OPERATIONS,makeIndex,tagsFor,tagLabel,
@@ -17,7 +18,7 @@ let pageName='overview',currentId='',proofIndex=0,selectedNode='',selectedFrom='
 let filterExpanded=window.innerWidth>760;
 let guideMarkup;
 let lastReviewSignature='';
-const inReview=()=>pageName.startsWith('review');
+const inReview=()=>!REVIEW_RETIRED&&pageName.startsWith('review');
 const catalogPage=()=>inReview()?'review-questions':'questions';
 const filteredRows=()=>filterRows(sortedRows(),listState.filters,listState.search,listState.sceneMode).filter(r=>
   !inReview()||(!listState.person||reviewOwner(r.id)===listState.person)&&(!listState.reviewStatus||reviewStatus(r.id)===listState.reviewStatus));
@@ -69,12 +70,11 @@ function shell(content,active=pageName){
     '<a '+(active==='questions'||active==='question'?'aria-current="page"':'')+' href="'+route('questions','',listState,dataset,true)+'"><span>02</span>题目与证据</a>'+
     '<a '+(active==='guide'?'aria-current="page"':'')+' href="'+route('guide')+'"><span>03</span>测试指引</a>'+
     '<a '+(active==='docs'?'aria-current="page"':'')+' href="'+route('docs','index')+'"><span>04</span>研究文档</a>'+
-    '<a '+(active.startsWith('review')?'aria-current="page"':'')+' href="'+route('review')+'"><span>05</span>人工审查</a>'+
     '</nav><div class="side-note"><span class="signal"></span>'+(inReview()?'协作 · 人工审查':'只读 · 候选集审查')+'<p>看清每条关系，<br>以及偏离发生在哪里。</p>'+
     '<a href="#/docs/specs/index" target="_blank" rel="noopener">查看设计规格 ↗</a></div></aside><div class="workspace">'+
     '<header class="topbar"><span class="workbench-label">证据与推理工作台</span>'+(['guide','docs'].includes(active)?
     '<span class="global-page-label">全项目固定页面 · 按章节维护</span>':'<label class="dataset-picker">数据集<select id="dataset" aria-label="选择数据集">'+
-    registry.map(d=>'<option value="'+h(d.id)+'" '+(d.id===dataset?'selected':'')+'>'+h(d.id)+'</option>').join('')+
+    registry.map(d=>'<option value="'+h(d.id)+'" '+(d.id===dataset?'selected':'')+'>'+h(d.title||d.id)+'</option>').join('')+
     '</select></label><span class="version">'+h(bundle?.version||'')+'</span>')+'</header>'+
     '<main id="main" aria-live="polite">'+content+'</main><footer class="app-footer">BridgeQA · 候选数据审查'+
     '<span>干扰推定 ≠ 人工逐跳标注 ≠ 模型实测</span></footer></div></div>';
@@ -90,13 +90,26 @@ function shell(content,active=pageName){
 function stat(n,label,sub){return '<div class="stat"><strong>'+h(n)+'</strong><span>'+h(label)+'</span><small>'+h(sub)+'</small></div>';}
 function statusBadge(row){return '<span class="status '+h(row.gold.status)+'">'+h(STATUS[row.gold.status])+
   (row.gold.logical_truth==='unknown'?' · 逻辑未知':'')+'</span>';}
+function publicationNotice(){
+  const p=bundle.publication;
+  if(!p)return '';
+  return '<section class="notice warning" id="publication-status"><b>开发展示版 · 需人工／强智能体复核</b><span>57题的自然语言支持登记尚未按新版合同重新认证，正式benchmark验收未通过。历史 deepseek-flash 实跑：独立GPT语义任务成功 '+h(p.semantic_task_success)+' / '+h(p.semantic_task_total)+'；历史机器严格评分另存，未在本次重跑。</span><a href="'+h(bundle.links.inputs)+'" download>下载清洁输入 ↧</a> · <a href="'+h(bundle.links.diagnostics)+'" download>10条无材料诊断 ↧</a> · <a href="'+h(bundle.links.readme)+'">使用说明 ↗</a></section>';
+}
+function currentMaterials(row){
+  return '<section class="panel current-materials" id="current-materials"><div class="section-heading"><h2>当前题面的全部材料</h2><small>'+row.input.documents.length+' 段 · 仅此处为本题材料</small></div><p class="caption">下方只列当前题面；原型参考图及已删除事实不属于当前输入。</p>'+row.input.documents.map(d=>'<article class="hop-document"><span class="mono">'+h(d.id)+'</span><p class="material-kind">'+h(materialLabel(row,d))+'</p>'+documentText(d.text)+'</article>').join('')+'</section>';
+}
+function modelObservation(row){
+  const a=row.model_observation;
+  if(!a)return '';
+  return '<section class="rail-card model-observation"><h3>历史模型实测 · deepseek-flash</h3><p>独立GPT语义任务：'+(a.semantic_task_success?'成功':'失败')+'<br>旧机器严格判分：'+(a.machine_checks_unchanged.strict_structural_success?'通过':'未通过')+'</p><p>模型状态：'+h(a.observed_status)+'<br>模型答案：'+h(valueText(a.observed_answers)||'无答案')+'</p><p class="caption">来自2026-10-22冻结实跑；两种口径分别保留，未按新版评分器重跑。新版支持合同复核状态单列。</p><details><summary>查看原模型回答步骤及审核摘要</summary><pre>'+h(JSON.stringify(a,null,2))+'</pre></details></section>';
+}
 function renderOverview(){
   const s=bundle.summary;
-  const sourceCards=['literature','history'].map(domain=>{
+  const sourceCards=['literature','history'].filter(domain=>s.domains[domain]>0).map(domain=>{
     const srcs=bundle.sources.filter(src=>src.domain===domain);
     return '<article class="topic-card"><p class="eyebrow">'+(domain==='literature'?'LITERATURE / 文学叙事':'HISTORY / 史书记载')+
       '</p><h2>'+(domain==='literature'?'人物、叙事与文学目录':'家系、官署与历史档案')+'</h2><p>'+
-      (domain==='literature'?'从熟悉故事中抽取关系，再用匿名、改接和目录规则检查证据依赖。':
+      (domain==='literature'?(bundle.publication?'从现代化选段抽取父／母关系，对照干扰添加、必要支持删除与无关删除。':'从熟悉故事中抽取关系，再用匿名、改接和目录规则检查证据依赖。'):
         '按所给记载连接人物、时间与机构，区分史料锚点和合成实验设定。')+'</p><div class="source-pills">'+
       srcs.map(src=>'<a href="'+h(external(src.revision_url))+'" target="_blank" rel="noopener">'+h(src.title)+' ↗</a>').join('')+
       '</div><button class="text-button" data-act="open-domain" data-value="'+domain+'">查看'+
@@ -117,7 +130,7 @@ function renderOverview(){
       '<div class="scene-cell inactive"><b>'+h(sce.id)+'</b><span>'+h(sce.title)+'</span><small>本批未单列</small></div>';
   }).join('');
   shell(mainTitle('01 / TOPIC & DESIGN','文学与历史，作为推理的试验场',bundle.topic)+
-    '<section class="hero"><div><span class="hero-badge">首轮候选 · '+h(bundle.version)+'</span><h2>从问题出发，<br>把每一次跳跃摊开。</h2>'+
+    '<section class="hero"><div><span class="hero-badge">'+h(bundle.publication?.label||'第一版候选')+' · '+h(bundle.version)+'</span><h2>从问题出发，<br>把每一次跳跃摊开。</h2>'+
     '<p>一条相似线索是否接得上？一个熟悉答案是否真的有证据？在这里逐题审查。</p>'+
     '<a class="primary" href="'+route('questions')+'">进入题目库 <span>→</span></a></div><div class="hero-map" aria-label="结构示意">'+
     '<span class="map-start">问题起点</span><div class="map-line"></div><span class="map-mid">必要桥接</span>'+
@@ -125,8 +138,8 @@ function renderOverview(){
     '<small>相似不代表关系成立</small></div></section>'+
     '<section class="stats" aria-label="数据规模">'+stat(s.records,'主任务记录',s.families+' 个题目家族，含配对变体')+
     stat(s.scenarios,'实际场景单元',s.catalog_scenarios+' 个候选单元中的本批覆盖')+
-    stat(s.combinations,'设计组合','每组文学、历史各一母题')+stat(s.sources,'原文资料页',s.oracle_tasks+' 条 Oracle 诊断另列')+'</section>'+
-    '<div class="section-heading"><h2>选题与取材</h2><a href="'+h(bundle.links.readme)+'" target="_blank" rel="noopener">数据设计说明 ↗</a></div>'+
+    stat(s.combinations,'设计组合',bundle.publication?'两跳亲属查询与六种实际条件':'每组文学、历史各一母题')+stat(s.sources,'原文资料页',bundle.publication?bundle.publication.no_material_diagnostics+' 条无材料诊断另列':s.oracle_tasks+' 条 Oracle 诊断另列')+'</section>'+
+    publicationNotice()+'<div class="section-heading"><h2>选题与取材</h2><a href="'+h(bundle.links.readme)+'" target="_blank" rel="noopener">数据设计说明 ↗</a></div>'+
     '<section class="topic-grid">'+sourceCards+'</section><section class="notice"><b>本批口径</b><span>'+
     s.statuses.answerable+' 条可答 · '+s.statuses.ambiguous+' 条歧义 · '+s.statuses.insufficient+' 条材料不足。'+
     '独立人工复核 '+s.human_reviewed+' 条，模型实跑 '+s.model_run+' 条；多个家族共享来源与模板。</span></section>'+
@@ -135,7 +148,7 @@ function renderOverview(){
     combinationRows+'</tbody></table></div><p class="caption">这里列计划配方；每条题目使用自己的实际标签，删桥/换年等变体并不套用整组标签。</p>'+
     '<div class="section-heading"><h2>场景覆盖图</h2><small>标签非互斥，点击进入对应题目</small></div><section class="scene-grid">'+sceneGrid+'</section>'+
     '<section class="protocol-strip"><div><p class="eyebrow">KNOWLEDGE & PROTOCOL</p><h2>背景知识干扰，靠对照检查</h2><p>'+
-    '自然名 / 匿名 / 陌生名 / 无材料 · 保度数改接 · 删一处与删全部 · 换起点 · 同答案不同证明</p></div>'+
+    (bundle.publication?'基础题 / 主干扰 / 无关添加 / 必要删证保留名称 / 无关删除 / 可选名称消失删证':'自然名 / 匿名 / 陌生名 / 无材料 · 保度数改接 · 删一处与删全部 · 换起点 · 同答案不同证明')+'</p></div>'+
     '<a href="'+h(bundle.links.protocol)+'" target="_blank" rel="noopener">多步骤评判设计 ↗</a></section>');
 }
 function filterPanel(){
@@ -169,15 +182,13 @@ function questionCard(row){
     '<a href="'+route('question',row.id)+'">剖析证据 →</a></div></article>';
 }
 function reviewToolbar(){
-  const {connected,notice,conflict,lastSyncedAt,pending,githubLogin}=reviewConnection();
+  const {connected,notice,conflict,lastSyncedAt,pending}=reviewConnection();
   return '<section class="review-toolbar" id="review-toolbar"><p role="status" class="'+(connected?'':'review-alert')+'">'+h(notice)+'</p><div>'+
-    '<button data-act="review-retry">同步 / 重试保存</button><button data-act="review-export">导出审查记录</button><button data-act="review-import">导入审查JSON</button><input type="file" id="review-import-file" accept="application/json,.json" hidden><a href="'+REPOSITORY_URL+'/tree/main/data/human-review" target="_blank" rel="noopener">查看GitHub记录 ↗</a></div>'+
-    '<details class="github-auth"><summary>GitHub保存授权 · '+h(githubLogin||'未连接（可浏览）')+'</summary>'+
-    (githubLogin?'<p>已连接 '+h(githubLogin)+'，保存会提交到GitHub。授权仅本页有效，刷新后需重新连接。</p><button data-act="github-disconnect">断开授权</button>':
-    '<p>使用你自己的GitHub账号授权。协作者创建Token（classic），只勾选 public_repo，设置短期有效；仓库所有者也可用仅限本仓库、Contents读写权限的细粒度Token。</p><p>public_repo权限覆盖你有写入权限的公开仓库，请仅自己使用。Token只发送给GitHub，不写入仓库、备份或浏览器存储。</p><p><a href="https://github.com/settings/tokens/new?scopes=public_repo&amp;description=BridgeQA-review" target="_blank" rel="noopener">创建GitHub Token ↗</a> · <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens" target="_blank" rel="noopener">授权说明 ↗</a></p><label for="github-token">个人Token<input type="password" id="github-token" autocomplete="off" spellcheck="false" placeholder="仅在本页使用"></label><button data-act="github-connect">连接GitHub并上传草稿</button>')+'</details>'+
+    '<button data-act="review-retry">同步 / 重试保存</button><button data-act="review-export">导出审查记录</button><button data-act="review-import">导入审查JSON</button><input type="file" id="review-import-file" accept="application/json,.json" hidden></div>'+
+    '<p>无需GitHub授权。评价自动保存到共享数据库，并备份在本机；可导出文件留存。</p>'+
     (lastSyncedAt?'<p class="review-sync-time">最近读取共享记录：'+h(new Date(lastSyncedAt).toLocaleString('zh-CN'))+(connected?'':' · 当前离线，显示本机备份')+'</p>':'')+
-    (pending?'<p class="review-alert">'+pending+' 题尚未上传，请保持本机备份或导出。</p>':'')+
-    (conflict?'<div class="review-conflict"><b>'+h(conflict.id)+' 保存冲突</b><button data-act="review-remote">采用其他设备的版本</button><button data-act="review-local">用我的输入替换共享版本</button></div>':'')+'</section>';
+    (pending?'<p class="review-alert">'+pending+' 题等待保存，请保留页面或导出备份。</p>':'')+
+    (conflict?'<div class="review-conflict"><b>'+h(conflict.id)+' 保存冲突</b><button data-act="review-remote">采用另一设备版本</button><button data-act="review-local">用我的输入替换共享版本</button></div>':'')+'</section>';
 }
 function reviewFilters(){return '<div class="review-filters"><label>负责人<select id="review-person"><option value="">全部负责人</option>'+PEOPLE.map(p=>'<option value="'+p+'" '+(listState.person===p?'selected':'')+'>'+p+' · '+h(initialsFor(p)||'未署名')+'</option>').join('')+'</select></label>'+
   '<label>审查进度<select id="review-status"><option value="">全部状态</option>'+Object.entries({todo:'待审',draft:'草稿',complete:'已完成'}).map(([v,t])=>'<option value="'+v+'" '+(listState.reviewStatus===v?'selected':'')+'>'+t+'</option>').join('')+'</select></label></div>';}
@@ -189,11 +200,11 @@ function renderReview(){
         '<progress '+(progress.known?'value="'+progress.complete+'" ':'')+'max="'+progress.total+'" aria-label="'+p+' 完成进度"></progress><label class="review-name-label" for="initials-'+p+'">'+p+' 的姓名首字母（选填）<input id="initials-'+p+'" data-person="'+p+'" value="'+h(initialsFor(p))+'" maxlength="12" placeholder="例如 abc" autocomplete="off" spellcheck="false"></label>'+
         '<button data-act="review-name" data-person="'+p+'">保存简写</button><p class="caption">'+(progress.known?'已完成 '+progress.complete+' · 草稿 '+progress.draft+' · 待审 '+(progress.total-progress.complete-progress.draft):'共享记录尚未读取，无法判断已完成数量')+'</p>'+
         '<a class="primary" href="'+route('review-questions','',{...normalizedState(),person:p})+'">进入 '+p+' 的任务</a></article>';
-    }).join('')+'</section><section class="panel review-instructions"><h2>审查方式</h2><p>先查看题面、全部材料和绿色参考支持，再逐步判断每个操作是否准确。绿色表示当前标注中的正确证据，仍需你核实；多解题的合法证明分别评价。</p><p>每个步骤可以附评论；标为不准确或待核实时须写原因。所有步骤与整题结论填写齐全后，点击“完成本题审查”计入进度。问题可读性、逻辑紧密性、关联复杂性等主题可辅助评价。</p><p class="caption">这是按编号和简写署名的临时协作页面。共享记录保存在当前GitHub仓库，原始题目标注不随评价自动修改。</p><a href="'+route('review-questions','',normalizedState())+'">查看全部审查任务</a></section>','review');
+    }).join('')+'</section><section class="panel review-instructions"><h2>审查方式</h2><p>先查看题面、全部材料和绿色参考支持，再逐步判断每个操作是否准确。绿色表示当前标注中的正确证据，仍需你核实；多解题的合法证明分别评价。</p><p>每个步骤可以附评论；标为不准确或待核实时须写原因。所有步骤与整题结论填写齐全后，点击“完成本题审查”计入进度。问题可读性、逻辑紧密性、关联复杂性等主题可辅助评价。</p><p class="caption">这是按编号和简写署名的临时协作页面。共享记录保存在数据库，无需账号授权，原始题目标注不随评价自动修改。</p><a href="'+route('review-questions','',normalizedState())+'">查看全部审查任务</a></section>','review');
 }
 function reviewUpdate(){
   if(!inReview()||!bundle)return;
-  const toolbar=document.querySelector('#review-toolbar');if(toolbar&&document.activeElement?.id!=='github-token')toolbar.outerHTML=reviewToolbar();
+  const toolbar=document.querySelector('#review-toolbar');if(toolbar)toolbar.outerHTML=reviewToolbar();
   const feedback=document.querySelector('#review-feedback');if(feedback)feedback.outerHTML=reviewActionFeedback(currentId);
   const signature=reviewSignature();if(signature===lastReviewSignature)return;
   if(document.activeElement?.matches('input,textarea,select'))return;
@@ -225,7 +236,7 @@ function reviewForm(row){
   const review=reviewFor(row),owner=reviewOwner(row.id);
   const options=(dict,value)=>'<option value="">请选择</option>'+Object.entries(dict).map(([k,label])=>'<option value="'+k+'" '+(k===String(value)?'selected':'')+'>'+h(label)+'</option>').join('');
   const topics=key=>'<div class="review-topic-buttons" aria-label="评论主题">'+Object.values(TOPICS).map(t=>'<button data-act="review-topic" data-unit="'+h(key)+'" data-topic="'+h(t)+'">'+h(t)+'</button>').join('')+'</div>';
-  return '<section class="panel review-form" id="review-form"><div class="section-heading"><h2>人工评价</h2><span class="badge">'+owner+' · '+h(initialsFor(owner)||'未署名')+' · '+({complete:'已完成',draft:'草稿',todo:'待审',unknown:'记录未读取'}[reviewStatus(row.id)])+'</span></div><p>审查所有合法证明中的每个操作。更改已完成的评价后会恢复草稿，需再次点击完成。</p>'+
+  return '<section class="panel review-form" id="review-form"><div class="section-heading"><h2>人工评价</h2><span class="badge">'+owner+' · '+h(initialsFor(owner)||'未署名')+' · '+({complete:'已完成',draft:'草稿',todo:'待审',unknown:'记录未读取'}[reviewStatus(row.id)])+'</span></div><p>审查所有合法证明中的每个操作。更改已完成的评价后会恢复草稿，需再次点击完成。</p>'+(reviewOwner(row.id)==='B'&&review.status==='draft'?'<p class="caption">B组未完成题目的选项由独立子智能体预填，均为草稿建议。请核对选项并填写评论，再完成审查。</p>':'')+''+
     units(row).map((u,i)=>{const s=review.steps[u.key];return '<article class="review-step" id="review-unit-'+i+'"><h3>'+h(u.label)+' · '+h(u.node?OPERATIONS[u.node.operation]||u.node.operation:'核对缺失桥接与不可作答结论')+'</h3>'+
       (u.node?'<p>参考结果：<b>'+h(valueText(u.node.expected_value))+'</b> · 必要依赖：'+h(u.node.dependencies.join('、')||'题目条件')+' · 支持材料：'+h(u.node.support_evidence_ids.join('、')||'前置操作 / 题目条件')+'</p>':'<p>当前没有完整证明。评价“材料不足”的标注是否成立，以及现有材料是否确实无法支持唯一答案；下方原型图只用于对照。</p>')+
       '<label>本步准确性<select data-review-field="accuracy" data-unit="'+h(u.key)+'">'+options(ACCURACY,s.accuracy)+'</select></label>'+
@@ -364,7 +375,7 @@ function pairSection(row){
   const parent=index.rows.get(row.paired_changes?.parent_id);
   const family=sortedRows().filter(r=>r.family_id===row.family_id);
   const hasOther=family.some(r=>r.id!==row.id);
-  const variants=[...new Set(['control','challenge','anonymous_challenge','unfamiliar_challenge','no_context',...family.map(r=>r.variant)])];
+  const variants=bundle.publication?[...new Set(family.map(r=>r.variant))]:[...new Set(['control','challenge','anonymous_challenge','unfamiliar_challenge','no_context',...family.map(r=>r.variant)])];
   let comparison='<p class="caption">这是基础对照。其他条件的变换从本家族的实际配对记录追溯。</p>';
   if(parent){
     const dif=row.paired_changes;
@@ -373,7 +384,7 @@ function pairSection(row){
       ...dif.removed_fact_ids.map(id=>({title:'删除',before:parent.facts.find(f=>f.fact_id===id)})),
       ...dif.rewritten_fact_ids.map(id=>({title:'改写',before:parent.facts.find(f=>f.fact_id===id),after:row.facts.find(f=>f.fact_id===id)}))
     ];
-    comparison='<p>比较对象：<a href="'+route('question',parent.id)+'">'+h(VARIANTS[parent.variant])+' · '+h(parent.id)+'</a></p>'+
+    comparison='<p>比较对象：<a href="'+route('question',parent.id)+'">'+h(VARIANTS[parent.variant]||parent.variant)+' · '+h(parent.id)+'</a></p>'+
       '<div class="pair-summary"><div><small>比较对象答案</small><b>'+h(valueText(parent.gold.answers)||'材料不足')+'</b></div>'+
       '<span>→</span><div><small>当前答案</small><b>'+h(valueText(row.gold.answers)||'材料不足')+'</b></div></div>'+
       '<p class="caption">问题 '+(dif.question_changed?'变化':'保持')+' · 答案 '+(dif.answer_changed?'变化':'保持')+
@@ -431,7 +442,7 @@ function renderDetail(){
     '<button class="text-button" data-act="download">下载本题完整标注 ↧</button></div>'+
     (inReview()?'<div class="intro-actions"><button data-act="scroll" data-target="review-form">填写人工评价</button><button data-act="scroll" data-target="review-all-data">查看本题全部数据</button></div>':'')+
     '<details><summary>统一作答指令与输出约定</summary><p>'+h(row.input.instruction)+'</p><pre>'+h(JSON.stringify(row.input.output_contract,null,2))+
-    '</pre></details></section><div class="detail-grid"><div class="detail-main"><section class="panel proof-panel '+(isPrototype?'prototype':'')+'">'+
+    '</pre></details></section>'+currentMaterials(row)+'<div class="detail-grid"><div class="detail-main"><section class="panel proof-panel '+(isPrototype?'prototype':'')+'">'+
     '<div class="section-heading"><h2>'+(isPrototype?'原型链：当前无完整支持':'正确跳跃与操作依赖')+'</h2>'+proofControls+'</div>'+
     (isPrototype?'<div class="notice warning"><b>不可作答</b><span>下图来自基础原型，仅用于解释缺失；它不是当前题目的合法证明，不能据此回答。</span></div>':'')+
     '<p class="caption">材料文体：'+h(tagLabel('language',row.material_style,index))+(row.material_label_scope==='prototype'?'（母题类别；当前无材料）':'')+'</p><p class="caption">'+(isPrototype?'原型操作图':'当前完整证明')+' · '+operationCount+' 个操作 · 依赖深度 '+
@@ -446,26 +457,31 @@ function renderDetail(){
     '<section class="rail-card"><h3>预设错误候选</h3><p class="wrong-values">'+h(valueText(row.expected_wrong_answers)||'未单独指定')+
     '</p><small>仅供审查假设。当前答案可能被错误路径碰巧得到，应同时查证明。</small></section>'+
     '<section class="rail-card"><h3>知识与材料边界</h3>'+row.knowledge_risks.map(r=>'<p class="risk-line">'+h(r)+'</p>').join('')+
-    '<p class="caption">匿名化不自动消除剧情、关系或分词差异。没有人工逐跳干扰标注或模型实测。</p>'+
+    '<p class="caption">'+(row.model_observation?'已进行历史模型实测及独立GPT语义审核；未进行独立人工复核。':'匿名化不自动消除剧情、关系或分词差异。没有人工逐跳干扰标注或模型实测。')+'</p>'+
     (row.construction.degree_preserving_claim?'<span class="badge">双边改接 · 保持逐关系入出度</span>':'')+'</section>'+
     '<section class="rail-card"><h3>实际场景说明</h3>'+Object.entries(row.scenario_annotations).map(([id,desc])=>'<div class="scene-note"><b>'+
     h(id)+' · '+h(index.scenarios.get(id)?.title)+'</b><p>'+h(desc)+'</p></div>').join('')+
     '<a href="'+h(bundle.links.catalog)+'" target="_blank" rel="noopener">打开场景定义 ↗</a></section>'+
-    '<section class="rail-card"><h3>审查状态</h3><p>候选数据 · 开发划分</p><p>独立人工复核：'+
-    (row.review.independent_human_review?'是':'否')+'<br>模型实跑：'+(row.review.model_run?'是':'否')+'</p>'+
+    modelObservation(row)+'<section class="rail-card"><h3>审查状态</h3><p>'+h(tagLabel('review',row.review.status,index))+' · 开发划分</p><p>独立人工复核：'+
+    (row.review.independent_human_review?'是':'否')+'<br>模型实跑：'+(row.review.model_run?'是':'否')+'</p>'+(row.review.gate_reason?'<p>'+h(row.review.gate_reason)+'</p>':'')+
     '<a href="'+h(bundle.links.readme)+'" target="_blank" rel="noopener">数据说明 ↗</a></section></aside></div>');
 }
 async function onRoute(){
   const request=++token;
   const [path,query='']=location.hash.slice(1).replace(/^\//,'').split('?');
   const params=new URLSearchParams(query);
-  const wanted=params.get('dataset')||registry[0]?.id||dataset;
+  const wanted=params.get('dataset')||registry.find(d=>d.default)?.id||registry[0]?.id||dataset;
   pageName=(path||'overview').split('/')[0];
   currentId=decodeURIComponent((path||'').split('/').slice(1).join('/'))||'';
   if(!['overview','questions','question','guide','docs','review','review-questions','review-question'].includes(pageName)) pageName='overview';
   if(!['guide','docs'].includes(pageName)) listState=normalizedState(params.get('state'));
   if(currentId!==lastDetail){proofIndex=0;selectedNode='';lastDetail=currentId;}
   try {
+    if(REVIEW_RETIRED&&pageName.startsWith('review')){
+      shell(mainTitle('ARCHIVED / 2026-10-21','人工审查已停用')+reviewRetiredMarkup(),'archive');
+      document.title='审查已归档 · BridgeQA';
+      return;
+    }
     if(pageName==='docs'){
       const doc=await renderDocument(currentId||'index');
       if(request!==token)return;
@@ -546,8 +562,6 @@ app.addEventListener('click',event=>{
   else if(act==='edge'){const left=document.querySelector('.proof-canvas')?.scrollLeft||0;selectedNode=el.dataset.node;selectedFrom=el.dataset.from;renderDetail();document.querySelector('.proof-canvas').scrollLeft=left;}
   else if(act==='review-name')saveInitials(el.dataset.person,document.getElementById('initials-'+el.dataset.person).value.trim());
   else if(act==='review-retry')retrySaves();
-  else if(act==='github-connect'){const input=document.getElementById('github-token'),value=input.value;input.value='';connectGithub(value);}
-  else if(act==='github-disconnect')disconnectGithub();
   else if(act==='review-import')document.getElementById('review-import-file').click();
   else if(act==='review-local')resolveConflict(true);
   else if(act==='review-remote')resolveConflict(false);
@@ -599,7 +613,7 @@ app.addEventListener('input',event=>{
 app.addEventListener('change',async event=>{
   if(event.target.id==='review-import-file'){
     const file=event.target.files[0];if(!file)return;
-    try{const result=await importReview(JSON.parse(await file.text()));alert('导入 '+result.added+' 题到本机。'+(result.skipped.length?'有 '+result.skipped.length+' 题与已有评价不同，未覆盖：'+result.skipped.join('、'):'')+'连接GitHub后点击“同步 / 重试保存”上传。');}
+    try{const result=await importReview(JSON.parse(await file.text()));alert('导入 '+result.added+' 题到本机。'+(result.skipped.length?'有 '+result.skipped.length+' 题与已有评价不同，未覆盖：'+result.skipped.join('、'):'')+'点击“同步 / 重试保存”即可保存到共享数据库。');}
     catch(e){alert('导入未完成：'+e.message);}return;
   }
   if(event.target.matches('select[data-review-field]')){
@@ -622,6 +636,7 @@ try {
   const response=await fetch(siteURL('api/datasets.json'));
   if(!response.ok) throw new Error('数据集登记读取失败');
   registry=await response.json();
+  dataset=registry.find(d=>d.default)?.id||registry[0]?.id||dataset;
   if(!location.hash) history.replaceState(null,'',route('overview'));
   await onRoute();
 }catch(error){app.innerHTML='<main class="boot"><h1>服务暂不可用</h1><p>'+h(error.message)+'</p><p>请刷新页面，或检查站点文件是否完整发布。</p></main>';}

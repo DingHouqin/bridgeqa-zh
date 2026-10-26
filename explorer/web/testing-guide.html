@@ -3,11 +3,11 @@
   <section class="guide-intro">
     <div><p class="eyebrow">使用对象 / B 组模型测试</p><h2>从正确的输入开始，再分别核验答案与依据。</h2>
       <p>这页集中说明 B 组如何使用已交付的 benchmark。它不随顶部数据集选择变更；每次新增数据集，在本页追加一章并保留既有章节。其他页面继续服务于题目设计与审查，不按测试组的工作方式改造。</p></div>
-    <span class="hero-badge">当前收录 1 个数据集</span>
+    <span class="hero-badge">当前收录 2 个数据集</span>
   </section>
   <nav class="guide-toc" aria-label="测试指引目录">
     <a href="#guide?section=guide-folders">目录用途</a>
-    <a href="#guide?section=guide-pilot">pilot 文件使用</a>
+    <a href="#guide?section=guide-pilot">第一版文件使用</a><a href="#guide?section=guide-v2">第二版文件使用</a>
     <a href="#guide?section=guide-main-run">主任务测试</a>
     <a href="#guide?section=guide-oracle">节点诊断</a>
     <a href="#guide?section=guide-scoring">评分口径</a>
@@ -132,9 +132,18 @@ control_id、challenge_id、paired_changes、entity_mapping 等；
     </ul>
   </section>
 
+  <section class="panel" id="guide-v2">
+    <div class="section-heading"><h2>第二版 · 多智能体《红楼梦》题集</h2><span class="badge">10家族 · 57题 · 开发展示版</span></div>
+    <p>40题可答、17题材料不足；每家族包含基础、主干扰、无关添加、必要删证保留名称、无关删除，7个家族另有名称消失删证。10条无材料诊断单独记账，无Oracle节点任务。</p>
+    <p>主任务只使用<a href="/files/data/multi_agent_hongloumeng_v2/inputs.jsonl">清洁输入</a>的question、contexts与output_contract，id用于结果关联。各题分别运行，不能把同一家族的基础材料带入删证题。诊断只使用<a href="/files/data/multi_agent_hongloumeng_v2/no_material_inputs.jsonl">无材料输入</a>，contexts保持为空。</p>
+    <p><a href="/files/data/multi_agent_hongloumeng_v2/benchmark.jsonl">完整标注</a>、<a href="/files/data/multi_agent_hongloumeng_v2/families.frozen.json">冻结家族</a>和网页API含gold及条件标签，不能送给被测模型。<a href="/files/data/multi_agent_hongloumeng_v2/sources.json">来源登记</a>只供溯源；<a href="/files/data/multi_agent_hongloumeng_v2/combinations.json">组合说明</a>解释设计。</p>
+    <p>输出status（answerable／insufficient_evidence／ambiguous）、answers、带context_id与逐字连续quote的evidence、简短steps（from／relation／to／evidence）及reason。答案、路径、当前材料支持分别核验；可接受合法替代引文，不能只以登记引文覆盖率决定语义正确。跨句／指代／重复支持等无法确定时标为“需人工／强智能体复核”。</p>
+    <p>57题均未通过新版支持登记完整性认证，待复核不计作通过。历史deepseek-flash实跑的<a href="/files/data/multi_agent_hongloumeng_v2/blind-audit.json">逐条结果</a>分别保留机器严格判分和独立GPT语义审核；46/57是旧批次语义任务成功数，不是新版门禁通过数。独立人工复核未运行。本次上线未重跑模型。</p>
+    <p>使用家族为配对单位，原题正确才纳入对应攻击成功率分母；共享作品与模板，不能当作正式独立测试集。下载、来源哈希、复现和限制见<a href="/files/data/multi_agent_hongloumeng_v2/README.md">第二版使用说明</a>及<a href="/files/data/multi_agent_hongloumeng_v2/publication.json">发布清单</a>。清洁输入采用文字输出约定，历史运行使用的完整JSON schema不在此冒称重现。</p>
+  </section>
   <section class="protocol-strip guide-maintenance">
     <div><p class="eyebrow">本页维护</p><h2>新增数据集时，新增一章</h2>
-      <p>目前只收录 pilot_literature_history_v0，说明日期为2026-10-07。新增数据集须补目录、版本/规模、逐文件用途、合法输入、标注关联、特殊状态、评分与结果口径，并检查链接。保留已有章节，不依据当前选择器自动替换内容。</p></div>
+      <p>目前收录第一版 pilot_literature_history_v0 和第二版 multi_agent_hongloumeng_v2，更新日期为2026-10-26。新增数据集须补目录、版本/规模、逐文件用途、合法输入、标注关联、特殊状态、评分与结果口径，并检查链接。保留已有章节，不依据当前选择器自动替换内容。</p></div>
     <a href="/files/data/pilot_literature_history_v0/README.md" target="_blank" rel="noopener">核对当前数据说明 ↗</a>
   </section>
 </article>

@@ -1,0 +1,15 @@
+{
+  "version": "dataset-v2.0-development",
+  "combinations": [
+    {
+      "combination_id": "V2-PARENT",
+      "title": "来源亲属两跳 · 干扰与删证对照",
+      "planned_scene_ids": [
+        "S01",
+        "S28"
+      ],
+      "material_plan": "10个来源家族；每家族5个共同条件及适用的名称消失删证。",
+      "validation_goal": "完整证据链与缺证拒答分开；支持登记完整性待新版合同复核。"
+    }
+  ]
+}

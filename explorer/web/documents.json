@@ -259,6 +259,18 @@
       "slug": "review/github",
       "group": "数据与构建",
       "title": "GitHub人工审查保存与授权"
+    },
+    {
+      "source": "data/multi_agent_hongloumeng_v2/README.md",
+      "slug": "data/multi-agent-v2",
+      "group": "数据与系统",
+      "title": "第二版｜多智能体红楼梦题集"
+    },
+    {
+      "source": "explorer/specs/09_第二版数据集发布.md",
+      "slug": "specs/dataset-v2",
+      "group": "数据与系统",
+      "title": "第二版数据集发布规范"
     }
   ],
   "files": [
@@ -329,6 +341,16 @@
     "explorer/web/review.js",
     "model-testing/README.md",
     "data/human-review/README.md",
-    "explorer/web/github-review-store.js"
+    "explorer/web/github-review-store.js",
+    "data/multi_agent_hongloumeng_v2/README.md",
+    "data/multi_agent_hongloumeng_v2/benchmark.jsonl",
+    "data/multi_agent_hongloumeng_v2/inputs.jsonl",
+    "data/multi_agent_hongloumeng_v2/no_material_inputs.jsonl",
+    "data/multi_agent_hongloumeng_v2/families.frozen.json",
+    "data/multi_agent_hongloumeng_v2/sources.json",
+    "data/multi_agent_hongloumeng_v2/combinations.json",
+    "data/multi_agent_hongloumeng_v2/blind-audit.json",
+    "data/multi_agent_hongloumeng_v2/publication.json",
+    "explorer/specs/09_第二版数据集发布.md"
   ]
 }

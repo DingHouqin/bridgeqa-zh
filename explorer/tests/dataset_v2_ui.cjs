@@ -1,0 +1,80 @@
+// [Dataset V2 acceptance](../specs/09_第二版数据集发布.md).
+const {chromium}=require('playwright');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const root=path.resolve(__dirname,'../..');
+const out=process.env.BRIDGEQA_CHECK_DIR||path.join(root,'workspace/dataset-v2-publication/qa');
+const base=(process.env.BRIDGEQA_URL||'http://127.0.0.1:8766').replace(/\/$/,'');
+const rows=fs.readFileSync(path.join(root,'data/multi_agent_hongloumeng_v2/benchmark.jsonl'),'utf8').trim().split(/\r?\n/).map(JSON.parse);
+(async()=>{
+  fs.mkdirSync(out,{recursive:true});
+  const browser=await chromium.launch({headless:true,...(process.env.BRIDGEQA_BROWSER?{executablePath:process.env.BRIDGEQA_BROWSER}:{})});
+  const page=await browser.newPage({viewport:{width:1440,height:1050}});
+  if(process.env.BRIDGEQA_ASSET_DIR){
+    const assets=path.resolve(process.env.BRIDGEQA_ASSET_DIR);
+    await page.route(base+'/**',async route=>{
+      const suffix=decodeURIComponent(new URL(route.request().url()).pathname).slice(new URL(base).pathname.replace(/\/$/,'').length).replace(/^\//,'')||'index.html';
+      const file=path.resolve(assets,suffix);
+      if(!file.startsWith(assets+path.sep)||!fs.existsSync(file))return route.fulfill({status:404,body:'Not found'});
+      const types={'.html':'text/html','.js':'text/javascript','.json':'application/json','.css':'text/css','.md':'text/plain','.jsonl':'text/plain'};
+      await route.fulfill({status:200,contentType:types[path.extname(file)]||'application/octet-stream',body:fs.readFileSync(file)});
+    });
+  }
+  const errors=[],failed=[];
+  page.on('pageerror',e=>errors.push(e.message));
+  page.on('response',r=>{if(r.status()>=400)failed.push([r.status(),r.url()]);});
+  await page.goto(base+'/');
+  await page.locator('#dataset').waitFor();
+  assert.equal(await page.locator('#dataset').inputValue(),'multi_agent_hongloumeng_v2');
+  assert.equal(await page.locator('#dataset option').count(),2);
+  assert.match(await page.locator('#publication-status').innerText(),/需人工／强智能体复核/);
+  assert.match(await page.locator('.stats').innerText(),/57/);
+  await page.screenshot({path:path.join(out,'v2-overview-desktop.png'),fullPage:true});
+  await page.selectOption('#dataset','pilot_literature_history_v0');
+  await page.waitForFunction(()=>document.querySelector('.stats')?.innerText.includes('86'));
+  assert.equal(await page.locator('#publication-status').count(),0);
+  await page.selectOption('#dataset','multi_agent_hongloumeng_v2');
+  await page.locator('#publication-status').waitFor();
+  await page.click('a.primary[href*="/questions"]');
+  await page.locator('#result-count').waitFor();
+  assert.match(await page.locator('#result-count').innerText(),/57/);
+  await page.locator('.facet-group:has([data-key="variant"]) > summary').click();
+  await page.locator('.facet-group [data-key="variant"][data-value="necessary_support_deleted_name_retained"]').click();
+  await page.waitForFunction(()=>document.querySelector('#result-count')?.innerText.startsWith('10 条记录'));
+  assert.match(await page.locator('#result-count').innerText(),/10 条记录/);
+  await page.screenshot({path:path.join(out,'v2-filter.png'),fullPage:true});
+  for(const row of rows){
+    await page.goto(base+'/#/question/'+row.id+'?dataset=multi_agent_hongloumeng_v2');
+    await page.waitForFunction(id=>document.title.startsWith(id),row.id);
+    assert.equal(await page.locator('.question-intro h2').innerText(),row.input.question);
+    const texts=await page.locator('#current-materials .hop-document').allTextContents();
+    assert.equal(texts.length,row.input.documents.length);
+    for(let i=0;i<texts.length;i++)assert.ok(texts[i].includes(row.input.documents[i].text),row.id+' current material '+i);
+    assert.match(await page.locator('.analysis-rail').innerText(),/需人工／强智能体复核/);
+    assert.match(await page.locator('.model-observation').innerText(),/deepseek-flash/);
+    if(row.gold.status==='insufficient')assert.match(await page.locator('.proof-panel .notice').innerText(),/不是当前题目的合法证明/);
+    if(row.id==='HLM-V2-01-03')await page.screenshot({path:path.join(out,'v2-deleted-detail.png'),fullPage:true});
+    assert.equal(await page.locator('.family-links .unavailable').count(),0);
+  }
+  await page.goto(base+'/#/guide?section=guide-v2');
+  await page.locator('#guide-v2').waitFor();
+  assert.match(await page.locator('#guide-v2').innerText(),/57题/);
+  const download=await page.evaluate(async url=>{const r=await fetch(url);return {status:r.status,text:await r.text()};},base+'/files/data/multi_agent_hongloumeng_v2/inputs.jsonl');
+  assert.equal(download.status,200);
+  assert.equal(download.text.trim().split('\n').length,57);
+  await page.setViewportSize({width:390,height:844});
+  await page.goto(base+'/#/overview?dataset=multi_agent_hongloumeng_v2');
+  await page.locator('#publication-status').waitFor();
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);
+  await page.screenshot({path:path.join(out,'v2-overview-mobile.png'),fullPage:true});
+  await page.goto(base+'/#/question/HLM-V2-02-05?dataset=multi_agent_hongloumeng_v2');
+  await page.locator('.model-observation').waitFor();
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);
+  await page.screenshot({path:path.join(out,'v2-detail-mobile.png'),fullPage:true});
+  assert.deepEqual(errors,[]);
+  assert.deepEqual(failed,[]);
+  fs.writeFileSync(path.join(out,'acceptance.json'),JSON.stringify({base,details_checked:rows.length,dataset_switch:true,filter:true,downloads:true,mobile:true,errors,failed},null,2));
+  await browser.close();
+  console.log('V2 UI acceptance passed: 57 details, both datasets, filters, clean download and mobile.');
+})().catch(e=>{console.error(e);process.exit(1);});

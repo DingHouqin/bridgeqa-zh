@@ -9,6 +9,8 @@ export const FACETS = [
   ['truth', '规则真值']
 ];
 export const VARIANTS = {
+  base:'基础题',main_distractor:'主要干扰',irrelevant_addition:'无关添加',
+  necessary_support_deleted_name_retained:'必要删证 · 名称保留',irrelevant_deleted:'无关删除',name_absent_deleted:'名称消失删证',
   control:'基础对照', challenge:'组合挑战', anonymous_challenge:'匿名挑战',
   unfamiliar_challenge:'陌生名挑战', no_context:'无材料诊断',
   clarify_second:'消歧：另一身份', delete_one_support:'删除一处支持',
@@ -55,7 +57,7 @@ export function tagLabel(key,value,index) {
     naming:{named:'自然/设定名称',anonymous:'匿名代号',unfamiliar:'陌生名称'},
     query:{walk:'串行关系',ambiguous:'多解释查询',compare:'桥接比较',sum_join:'表文筛选与聚合',
       entailment:'规则判断',abduction:'受限溯因'},
-    review:{candidate:'候选 · 待复核'}, split:{pilot_development_only:'开发候选集'},
+    review:{candidate:'候选 · 待复核',requires_strong_review:'需人工／强智能体复核'}, split:{pilot_development_only:'开发候选集'},
     truth:{not_applicable:'未设规则真值',unknown:'逻辑未知',true:'逻辑可证真',false:'逻辑可证假'}
   };
   if (dicts[key]) return dicts[key][value] || value;

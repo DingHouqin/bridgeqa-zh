@@ -72,3 +72,6 @@ main{padding:34px 38px 42px;max-width:1630px;margin:auto}.page-heading{display:f
 @media(max-width:760px){.review-people{grid-template-columns:1fr}.review-person-card{padding:18px}.review-ratings{grid-template-columns:repeat(2,minmax(0,1fr))}.review-toolbar>p{min-width:0;flex-basis:100%}.review-name-label{flex-wrap:wrap}.review-full-data .fact-line{flex-wrap:wrap}.review-card-status{width:100%}.review-filters{flex-wrap:wrap}.review-filters label{min-width:135px}.review-form,.review-full-data{overflow-wrap:anywhere}}
 
 .github-auth{width:100%;font-size:14px}.github-auth summary{cursor:pointer}.github-auth p{margin:12px 0;line-height:1.8}.github-auth label{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.github-auth input{min-width:0;max-width:100%;width:320px}.github-auth button{margin-top:10px}
+
+/* [Dataset V2 publication](../specs/09_第二版数据集发布.md). */
+#publication-status{flex-wrap:wrap;gap:12px}#publication-status span{flex-basis:65%}#publication-status a{white-space:nowrap}.model-observation pre{white-space:pre-wrap;overflow-wrap:anywhere;max-width:100%;font-size:12px;max-height:420px;overflow:auto}.current-materials{margin-bottom:24px}.current-materials .hop-document{margin-top:16px}@media(max-width:760px){#publication-status span{flex-basis:100%}}

@@ -1,0 +1,17 @@
+{
+  "version": "dataset-v2.0-development",
+  "label": "第二版 · 多智能体红楼梦题集",
+  "published_for": "development_browsing",
+  "formal_release": false,
+  "requires_review": 57,
+  "families": 10,
+  "records": 57,
+  "no_material_diagnostics": 10,
+  "model": "deepseek-flash",
+  "semantic_task_success": 46,
+  "semantic_task_total": 57,
+  "scoring_note": "历史机器严格评分与独立GPT语义审核分别保留，未用新版评分器重跑。",
+  "frozen_family_sha256": "7b1f50135b9a908118d5ca4cb6697dfbd5cd0c195d2fe5bf86a44dec40773af5",
+  "original_audit_sha256": "25fe49f7f276727045ee3d03c64735776919c807dcd2f1a10dc32c9935ed4946",
+  "projection_note": "题面、答案和条件保持冻结值；网页结构字段是投影，支持登记并非完整性认证。"
+}
