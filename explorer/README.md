@@ -1,12 +1,12 @@
 # BridgeQA Explorer｜线上题目与证据审查系统
 
-## 最新页面（2026-10-27）
+## 最新页面（2026-10-28）
 
-- [01 全部题目](https://dinghouqin.github.io/bridgeqa-zh/#/overview)：502条输入记录，覆盖七批历史与当前题目，支持全文、批次、类型、结构、条件筛选和完整材料。
+- [01 全部题目](https://dinghouqin.github.io/bridgeqa-zh/#/overview)：570条输入记录，覆盖七批历史与当前题目，支持全文、批次、类型、结构、条件筛选和完整材料。
 - [05 模型实测](https://dinghouqin.github.io/bridgeqa-zh/#/results)：默认最新嵌套／换名Luna24槽，23答复、1技术缺失；[历史Luna／Sol504首答](https://dinghouqin.github.io/bridgeqa-zh/#/results?cohort=v18)单独保留。
 - 原05最新开发题库及07评分器导航移除，旧06编号改05。旧题库证据图仍由02访问，评分资料在04文档中保留。
 
-502是输入记录数，含变体及诊断，跨批复用母题，不能当成独立母题数。最新v24为8新增母题＋16部分换名变体。公开投影不含独立金标、关系凭证或私有换名映射。见[全量发布规格](specs/11_全量题库与最新关系题发布.md)及[公开投影](publication_v25/README.md)。以下为历史记录。
+570是输入记录数，含变体及诊断，跨批复用母题，不能当成独立母题数。最新v24为8新增母题＋16部分换名变体。公开投影不含独立金标、关系凭证或私有换名映射。见[全量发布规格](specs/11_全量题库与最新关系题发布.md)及[公开投影](publication_v25/README.md)。以下为历史记录。
 
 **当前状态（2026-10-21）**：[本轮审查已归档](../data/human-review/archive/2026-10-21-pilot-v0.5/README.md)，暂无待审内容；05人工审查入口及服务写入停用，01—04题库、证据、指引与文档保留。旧审查链接显示停用说明，可进入[只读查阅](https://bridgeqa-human-review.spryox2.chatgpt.site/archives/2026-10-21/read-only.html)。下面的审查、预填、保存与GitHub授权说明仅为历史记录。
 

@@ -14,6 +14,8 @@ class CatalogTest(unittest.TestCase):
         self.r=json.loads((OUT/'luna.json').read_text(encoding='utf-8'))
     def test_counts_and_semantic_uncertainty(self):
         verify(self.c,self.r)
+        self.assertEqual(sum(q['kind']=='oracle' for q in self.c['cases']),58)
+        self.assertEqual(sum(q['cohort']=='v2' and q['kind']=='diagnostic' for q in self.c['cases']),10)
         expected={'v20':(9,9),'v21':(3,13),'v23':(1,18),'v24':(8,16)}
         for cohort,(mothers,variants) in expected.items():
             kinds=Counter(q['kind'] for q in self.c['cases'] if q['cohort']==cohort)

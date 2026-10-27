@@ -30,14 +30,17 @@ def build():
         {'id':'v21','title':'自然目标与材料控跳','count':16,'new_mothers':3,'variants':13,'note':'3个新增母题原题＋13变体；覆盖5个语义母题组，部分复用既有母题。'},
         {'id':'v20','title':'来源关系图与多种结构','count':18,'new_mothers':9,'variants':9,'note':'9个新增母题、9个来源干扰／重排变体。'},
         {'id':'v18','title':'多领域合成开发题库','count':252,'note':'142主任务、48节点、12状态对照；另16修订、30新算子、4边界。历史结构声明不等于必要跳数认证。'},
-        {'id':'v2','title':'第二版 · 红楼梦','count':57,'note':'10个来源家族、57个成员。支持合同需复核的开发展示版。'},
-        {'id':'v0','title':'第一版 · 文学与历史','count':86,'note':'历史文学／历史对抗候选集；家族数量不作为独立母题数。'},
+        {'id':'v2','title':'第二版 · 红楼梦','count':67,'note':'10个来源家族、57个成员，另10条无材料诊断。支持合同需复核的开发展示版。'},
+        {'id':'v0','title':'第一版 · 文学与历史','count':144,'note':'86条历史候选成员，另58条Oracle支持单跳诊断；家族数量不作为独立母题数。'},
     ]
     def add(cohort,identity,inp,**meta):
         cases.append(dict(key=cohort+':'+identity,case_id=identity,cohort=cohort,input=inp,input_sha256=digest(inp),**meta))
     for cohort,ds in [('v0','pilot_literature_history_v0'),('v2','multi_agent_hongloumeng_v2')]:
         for r in load_bundle(ds)['records']:
             add(cohort,r['id'],r['input'],kind='historical',mother=r['family_id'],condition=r['variant'],structure='historical',domain=r['domain'],legacy_dataset=ds)
+    for cohort,source,kind in [('v0','data/pilot_literature_history_v0/oracle_inputs.jsonl','oracle'),('v2','data/multi_agent_hongloumeng_v2/no_material_inputs.jsonl','diagnostic')]:
+        for r in lines(source):
+            add(cohort,r['id'],r,kind=kind,mother=r['id'].replace('-no-material','') if cohort=='v2' else '',condition='no_context' if cohort=='v2' else 'oracle_support_only',structure='oracle_probe' if cohort=='v0' else 'no_material_diagnostic',domain='历史诊断')
     for q in read('explorer/publication_v18/questions.public.json')['cases']:
         add('v18',q['question_key'],q['input'],kind=q['partition'],mother=q['metadata']['family_id'],condition=q['metadata'].get('condition',''),structure='synthetic',domain=q['metadata']['domain'],legacy_key=q['question_key'],phase=q['phase'],relation_dependencies=q['metadata'].get('declared_hops'))
     refs={r['case_id']:r for r in lines('data/graph_pilot_v20/final-r1/references.jsonl')}
@@ -64,7 +67,7 @@ def build():
         r=by_id[s['case_id']]
         raw=None if s['status']!='completed' else read(s['response']['path'])['final_response']
         results.append({'key':'v24:'+s['case_id'],'case_id':s['case_id'],'model':'gpt-6-luna','status':s['status'],'raw_response':raw,'raw_text_sha256':hashlib.sha256(raw.encode()).hexdigest() if raw is not None else None,'endpoint_success':r['endpoint_success'],'rationale':r['endpoint_rationale'],'progress':r['observed_progress'],'contract':r['contract_diagnostics'],'proof_diagnostics':r['proof_diagnostics']})
-    catalog={'format_version':1,'date':'2026-10-27','cohorts':cohorts,'cases':cases,'counting_note':'502条历史与当前输入记录，含变体和诊断；不代表502个独立母题。批次间母题共享，全库独立母题总数未认证。'}
+    catalog={'format_version':1,'date':'2026-10-28','cohorts':cohorts,'cases':cases,'counting_note':'570条历史与当前输入记录，含变体和诊断；不代表570个独立母题。批次间母题共享，全库独立母题总数未认证。'}
     result={'format_version':1,'records':results,'counts':{'planned':24,'completed':23,'correct':17,'incorrect':4,'semantic_unknown':2,'technical_missing':1}}
     verify(catalog,result)
     save('catalog.json',catalog);save('luna.json',result)
@@ -72,8 +75,8 @@ def build():
     print(json.dumps({'records':len(cases),'cohorts':{c['id']:c['count'] for c in cohorts},'luna':result['counts']},ensure_ascii=False))
 
 def verify(catalog,result):
-    cases=catalog['cases']; assert len(cases)==502
-    assert len({q['key'] for q in cases})==502
+    cases=catalog['cases']; assert len(cases)==570
+    assert len({q['key'] for q in cases})==570
     allowed={'key','case_id','cohort','input','input_sha256','kind','mother','condition','structure','domain','legacy_dataset','legacy_key','phase','relation_dependencies','serial_depth','axes'}
     for q in cases:
         assert set(q)<=allowed and digest(q['input'])==q['input_sha256']
@@ -94,5 +97,5 @@ if __name__=='__main__':
     ap=argparse.ArgumentParser();ap.add_argument('--verify-existing',action='store_true');args=ap.parse_args()
     if args.verify_existing:
         verify(json.loads((OUT/'catalog.json').read_text(encoding='utf-8')),json.loads((OUT/'luna.json').read_text(encoding='utf-8')))
-        print('502 public inputs and 24 Luna slots verified')
+        print('570 public inputs and 24 Luna slots verified')
     else:build()

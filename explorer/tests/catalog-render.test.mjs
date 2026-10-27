@@ -12,7 +12,7 @@ const catalog=JSON.parse(await readFile(path.join(root,'explorer/publication_v25
 const results=JSON.parse(await readFile(path.join(root,'explorer/publication_v25/luna.json'),'utf8'));
 const escape=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const home=await renderCatalog('overview','',new URLSearchParams());
-assert.match(home.html,/502/);assert.equal(home.title,'全部题目');
+assert.match(home.html,/570/);assert.equal(home.title,'全部题目');
 let materialBlocks=0;
 for(const q of catalog.cases){
  const v=await renderCatalog('overview',q.key,new URLSearchParams());
@@ -34,4 +34,4 @@ for(const r of results.records){
 for(const [verdict,count] of [['正确',17],['错误',4],['语义未决',2],['技术缺失',1]]){
  const v=await renderCatalog('results','',new URLSearchParams({verdict}));assert.ok(v.html.includes(`<b>${count}</b> / 24`));
 }
-console.log(JSON.stringify({status:'pass',all_details:502,complete_material_blocks:materialBlocks,exact_model_answers:23,explicit_missing:1,cohorts:7}));
+console.log(JSON.stringify({status:'pass',all_details:570,complete_material_blocks:materialBlocks,exact_model_answers:23,explicit_missing:1,cohorts:7}));
