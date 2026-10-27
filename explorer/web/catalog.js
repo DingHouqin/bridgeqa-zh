@@ -1,0 +1,66 @@
+// [Full catalog contract](../specs/11_全量题库与最新关系题发布.md).
+import {siteURL} from './urls.js';
+const h=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const j=v=>JSON.stringify(v,null,2);
+const kinds={mother:'新增母题原题',variant:'变体',diagnostic:'歧义／反向诊断',local:'独立正确上游单跳',primary:'历史主任务',node:'节点诊断',control:'状态对照',historical:'历史版本成员'};
+const shapes={disambiguated_referent_control_DAG:'指代消歧对照',event_identity_then_kinship_chain:'实际事件听者与亲属链',invalid_converse_logic_control:'逆命题无效对照',missing_event_identity_diagnostic:'缺少事件身份诊断',ordered_stage_comparison_DAG:'阶段与先后比较',parallel_stage_comparison:'并行阶段比较',referent_ambiguity_diagnostic:'多指代歧义诊断',reverse_complete_candidate_path_existence_DAG:'反向候选路径检验',reverse_fanout_complete_set_DAG:'反向展开与完整集合',two_edges_join:'两条关系汇合',accused_event_role_then_paternal_aunt_spouse:'学塾事件角色与姑父',event_role_then_affinal_relation:'改名事件与姻亲组合',naming_event_then_son_in_law_father_serial:'命名事件与逆向亲属',rival_marriage_branches_kinship_office_comparison:'双分支婚约角色',two_branch_identity_comparison:'双角色同人比较',two_object_transfer_provenance_join:'双分支物品来源',serial_kinship_nested_endpoint:'嵌套亲属 · 串行',two_event_roles_join_spousal_relation:'两个事件角色汇合',event_to_sibling_spouse_relation:'改名事件与姻亲组合',parallel_identity_comparison:'双角色同人比较',naming_event_to_son_in_law_father:'命名事件与逆向亲属',parallel_item_provenance:'双分支物品来源',parallel_event_role_lookup:'双分支婚约角色',event_role_to_kinship_chain:'事件角色与亲属链',chain:'串行关系链',dag:'多分支汇合',serial:'串行关系链',natural_goal:'自然目标与材料控跳',synthetic:'多领域合成结构',historical:'历史关系与证明'};
+const conds={original:'原名',rename_A:'一致换名 A',rename_B:'一致换名 B',base:'基础材料',baseline:'基础材料',branch:'加入旁支',decoy:'来源干扰',reorder:'材料重排'};
+const phaseNames={current_r2:'现有题库',novel_r1:'新算子',revised_r1:'修订题',bounds_r1:'部分信息边界'};
+const context=q=>q.input.documents||q.input.contexts||q.input.materials||[];
+const url=(page,key='',params=new URLSearchParams())=>'#/'+page+(key?'/'+encodeURIComponent(key):'')+(params.size?'?'+params:'');
+let catalogPromise,lunaPromise;
+async function get(name){const r=await fetch(siteURL('files/explorer/publication_v25/'+name+'.json'));if(!r.ok)throw Error('全量题库读取失败：'+name);return r.json();}
+const data=()=>catalogPromise??=get('catalog');
+const luna=()=>lunaPromise??=get('luna');
+const heading=(tag,title,desc)=>`<div class="page-heading"><div><p class="eyebrow">${h(tag)}</p><h1 id="page-title" tabindex="-1">${h(title)}</h1><p class="lead">${h(desc)}</p></div></div>`;
+const statistic=(n,label,desc)=>`<div class="stat"><strong>${h(n)}</strong><span>${h(label)}</span><small>${h(desc)}</small></div>`;
+function facts(q){return `<div class="task-meta"><span>${h(q.cohort.toUpperCase())}</span><span>${h(kinds[q.kind]||q.kind)}</span><span>${h(shapes[q.structure]||q.structure)}</span><span>${h(conds[q.condition]||q.condition)}</span>${q.mother?`<span>${h(q.mother)}</span>`:''}</div>`;}
+function material(q){return `<section class="panel"><h2>问题</h2><p class="latest-question">${h(q.input.question)}</p>${q.input.instruction?`<p>${h(q.input.instruction)}</p>`:''}${q.input.answer_policy?`<p>${h(q.input.answer_policy)}</p>`:''}<h3>当前题目的全部材料 · ${context(q).length} 段</h3>${context(q).map((c,i)=>`<article class="latest-context"><b>${h(c.id||c.context_id||c.material_id||'材料 '+(i+1))}</b><p>${h(typeof c==='string'?c:c.text??j(c))}</p></article>`).join('')}<details><summary>完整实际输入与作答协议</summary><pre>${h(j(q.input))}</pre></details><p class="caption">输入 SHA256：<span class="mono">${h(q.input_sha256)}</span>。此处保留冻结题面，审阅标签不属于模型输入。</p><button data-catalog-download="${h(q.key)}">下载本题完整清洁输入</button></section>`;}
+function latestDesign(){return `<details class="panel catalog-design" open><summary>最新设计 · 8个母题与16个部分换名变体</summary><p>从短问题选择目标，再由材料承载关系。覆盖侄媳妇的兄弟、改名者的姻亲、命名者女婿的父亲、两个事件角色之间的关系、祖父与塾师的同人比较、汗巾两端来源、婚约双方角色、学塾事件中的亲属链。</p><p>四个母题为串行结构，其余是汇合、比较或双分支。总关系依赖数与最长串行深度分别标注，双分支各2步不写成串行4跳。</p><p>原名、换名A、换名B同步处理题面、材料、别名和称呼；同一套映射跨母题一致。涉及取名与避讳的必要字词保留，因此属于部分换名。每题单独新会话，尚不能据此宣称稳定的换名效应。</p><p>前一轮还包含大量冗余文本、虚假中间线索、误导性关联、歧义提问及反向推理对照。诊断题与主任务分开登记；无依据和多解不被当成唯一可答的难题。</p><div class="latest-links"><a href="#/overview?cohort=v24">查看最新24条</a><a href="#/overview?cohort=v23">查看五类对抗49条</a><a href="#/results">查看最新Luna实测</a></div></details>`;}
+function options(items,value){return '<option value="">全部</option>'+items.map(([v,l])=>`<option value="${h(v)}" ${v===value?'selected':''}>${h(l)}</option>`).join('');}
+function filterForm(catalog,params){
+ const scope=catalog.cases.filter(q=>!params.get('cohort')||q.cohort===params.get('cohort'));
+ const unique=key=>[...new Set(scope.map(q=>q[key]).filter(Boolean))].sort();
+ return `<form class="latest-filters" data-catalog-filter><label class="latest-search">搜索题号、母题组、问题或材料<input aria-label="搜索" name="search" value="${h(params.get('search')||'')}" placeholder="例如 惜春、汗巾、太爷爷"></label><label>批次<select aria-label="批次" name="cohort">${options(catalog.cohorts.map(c=>[c.id,c.title+' · '+c.count]),params.get('cohort'))}</select></label><label>记录类型<select aria-label="记录类型" name="kind">${options(Object.entries(kinds),params.get('kind'))}</select></label><label>关系结构<select aria-label="关系结构" name="structure">${options(unique('structure').map(s=>[s,shapes[s]||s]),params.get('structure'))}</select></label><label>材料条件<select aria-label="材料条件" name="condition">${options(unique('condition').map(c=>[c,conds[c]||c]),params.get('condition'))}</select></label><button type="submit">应用筛选</button><a href="#/overview">重置全部</a></form>`;
+}
+export function filterCatalog(cases,params){
+ const term=(params.get('search')||'').toLowerCase();
+ return cases.filter(q=>['cohort','kind','structure','condition','mother'].every(k=>!params.get(k)||q[k]===params.get(k))&&(!term||[q.case_id,q.input.id,q.mother,q.input.question,j(context(q))].join(' ').toLowerCase().includes(term)));
+}
+function pager(page,params,total,size=12){
+ const max=Math.max(1,Math.ceil(total/size)),current=Math.max(1,Math.min(max,parseInt(params.get('page'))||1));
+ const link=n=>{const p=new URLSearchParams(params);p.set('page',String(n));return url(page,'',p);};
+ return {start:(current-1)*size,html:`<nav class="pagination" aria-label="结果分页">${current>1?`<a href="${link(current-1)}">上一页</a>`:''}<span>第 ${current} / ${max} 页</span>${current<max?`<a href="${link(current+1)}">下一页</a>`:''}</nav>`};
+}
+function endpoint(r){return r.status==='technical_failure'?'技术缺失':r.endpoint_success===true?'正确':r.endpoint_success===false?'错误':'语义未决';}
+function resultCard(r,compact=false){return `<article class="model-result"><h3>gpt-6-luna · ${h(endpoint(r))}</h3><p>${h(r.rationale)}</p>${compact?'':`<p class="caption">${r.status==='technical_failure'?'本地初始化失败，没有模型答复；原槽保留且未重试。':'实际首次答复，未修复格式或重采。JSON '+(r.contract.direct_json_valid?'有效':'无效')+'。'}</p>${r.raw_response===null?'':`<details class="raw-answer" open><summary>实际模型原答 · 逐字保留</summary><pre>${h(r.raw_response)}</pre></details>`}<details><summary>可见进度与独立诊断</summary><pre>${h(j({progress:r.progress,contract:r.contract,proof_diagnostics:r.proof_diagnostics}))}</pre></details><p class="caption">原答文本 SHA256：${h(r.raw_text_sha256||'无模型答复')}</p>`}</article>`;}
+function resultsTabs(){return '<p class="latest-links"><a class="primary" href="#/results">最新 · 嵌套／换名 Luna</a><a href="#/results?cohort=v18">历史 · 多领域 Luna／Sol 504份原答</a><a href="#/overview">返回全部题目</a></p>';}
+export async function renderCatalog(page,key,params){
+ const c=await data(),cohortMap=new Map(c.cohorts.map(x=>[x.id,x]));
+ if(key){
+  const q=c.cases.find(q=>q.key===key);
+  if(!q)return {title:'未找到题目',html:heading('CATALOG','未找到题目','该输入未登记或已被撤销。')+'<a href="#/overview">返回全部题目</a>'};
+  const siblings=c.cases.filter(s=>s.cohort===q.cohort&&s.mother===q.mother&&s.key!==q.key);
+  const r=q.cohort==='v24'?(await luna()).records.find(r=>r.key===q.key):null;
+  return {title:q.case_id,html:heading(page==='results'?'05 / OBSERVATION':'01 / TASK',q.case_id,cohortMap.get(q.cohort).title)+`<p class="latest-links"><a href="#/overview?cohort=${q.cohort}">返回本批题目</a>${q.legacy_dataset?`<a href="#/question/${encodeURIComponent(q.case_id)}?dataset=${q.legacy_dataset}">打开02证据图与配对</a>`:''}${q.legacy_key?`<a href="#/results/${encodeURIComponent(q.legacy_key)}?cohort=v18">历史两模型原答与裁决</a>`:''}${r?`<a href="#/results/${encodeURIComponent(q.key)}">查看Luna原答</a>`:''}</p>${facts(q)}<p class="caption">${q.relation_dependencies!=null?'登记关系依赖／结构段数：'+h(q.relation_dependencies)+'。':''}${q.serial_depth!=null?'最长串行深度：'+h(q.serial_depth)+'。':''} 数值只表示各批登记范围，不能跨批当作统一的最短跳数认证。</p>${siblings.length?`<details class="panel"><summary>同批母题组的其他记录 · ${siblings.length}</summary><div class="latest-links">${siblings.map(s=>`<a href="${url('overview',s.key)}">${h(conds[s.condition]||s.condition)} · ${h(s.case_id)}</a>`).join('')}</div></details>`:''}${material(q)}${r?'<h2 id="current-model-result">最新独立Luna首答</h2>'+resultCard(r):''}`};
+ }
+ if(page==='results'){
+  const d=await luna(),term=(params.get('search')||'').toLowerCase();
+  const records=d.records.filter(r=>!params.get('verdict')||endpoint(r)===params.get('verdict')).filter(r=>!term||[r.case_id,c.cases.find(q=>q.key===r.key)?.input.question,r.raw_response].join(' ').toLowerCase().includes(term));
+  const pg=pager('results',params,records.length);
+  return {title:'Luna实测',html:heading('05 / MODEL OBSERVATIONS','Luna 实测','最新嵌套关系与部分换名题：独立Luna，每题首次答复。历史Luna／Sol保留独立入口。')+resultsTabs()+`<section class="stats">${statistic(24,'计划输入','8个母题 × 3种条件')}${statistic(23,'实际答复','另1条本地技术缺失，未重试')}${statistic(17,'确定正确','4错误 · 2语义未决')}${statistic('17/24—20/24','终点结果上下界','包含技术缺失的固定分母；非置信区间')}</section><section class="notice warning"><b>开发集与协议边界</b><span>修订后的N02替换旧歧义题；旧结果已排除。部分换名，单次样本不能证明稳定效应。pass@1独立单跳未运行；pass@5读取串行题可见连续进度；pass^5看终点，5沿用名称。双分支按操作分别诊断。历史v18协议单独保留。</span></section><form class="latest-filters" data-catalog-results><label class="latest-search">搜索题号、问题或原答<input aria-label="搜索" name="search" value="${h(params.get('search')||'')}"></label><label>结果<select aria-label="结果" name="verdict">${options(['正确','错误','语义未决','技术缺失'].map(v=>[v,v]),params.get('verdict'))}</select></label><button type="submit">应用筛选</button><a href="#/results">重置</a></form><p id="catalog-result-count">匹配 <b>${records.length}</b> / 24 条计划输入</p><section class="latest-task-list">${records.slice(pg.start,pg.start+12).map(r=>{const q=c.cases.find(q=>q.key===r.key);return `<article class="panel">${facts(q)}<h2><a href="${url('results',q.key)}">${h(q.case_id)}</a></h2><p>${h(q.input.question)}</p>${resultCard(r,true)}<a href="${url('results',q.key)}">完整材料、模型原答及诊断 →</a></article>`;}).join('')||'<p>没有匹配结果。</p>'}</section>${pg.html}<p class="latest-links"><a href="${siteURL('files/explorer/publication_v25/luna.json')}" download>下载24槽原答与裁决 JSON</a></p>`};
+ }
+ const order=new Map(c.cohorts.map((x,i)=>[x.id,i]));
+ const matched=filterCatalog(c.cases,params).sort((a,b)=>order.get(a.cohort)-order.get(b.cohort)||String(a.mother||'').localeCompare(String(b.mother||''))||({'original':0,'base':0,'baseline':0,'rename_A':1,'rename_B':2}[a.condition]??3)-({'original':0,'base':0,'baseline':0,'rename_A':1,'rename_B':2}[b.condition]??3)||a.case_id.localeCompare(b.case_id)),pg=pager('overview',params,matched.length);
+ return {title:'全部题目',html:heading('01 / ALL TASKS','全部题目','统一浏览历史题库与最新关系题。按批次查看原题、变体和诊断，不遗漏当前已验收输入。')+`<section class="stats">${statistic(502,'输入记录','历史与当前7个批次，含变体／诊断')}${statistic(8,'最新新增母题','v24独立验收登记')}${statistic(16,'最新换名变体','原名之外的A／B两套一致映射')}${statistic(7,'批次入口','母题跨批复用，不能直接相加')}</section><p class="caption">${h(c.counting_note)}</p>${latestDesign()}<section class="catalog-cohorts" aria-label="题库批次"><a class="${!params.get('cohort')?'selected':''}" href="#/overview"><strong>全部批次</strong><span>502条输入记录</span></a>${c.cohorts.map(b=>`<a class="${params.get('cohort')===b.id?'selected':''}" href="#/overview?cohort=${b.id}"><strong>${h(b.title)}</strong><span>${b.count}条${b.new_mothers!=null?' · 新母题'+b.new_mothers+'／变体'+b.variants:''}</span><small>${h(b.note)}</small></a>`).join('')}</section>${filterForm(c,params)}<p id="catalog-count">匹配 <b>${matched.length}</b> / 502 条输入记录</p><section class="latest-task-list">${matched.slice(pg.start,pg.start+12).map(q=>`<article class="panel">${facts(q)}<h2><a href="${url('overview',q.key)}">${h(q.case_id)}</a></h2><p class="latest-question">${h(q.input.question)}</p><p class="caption">${context(q).length}段材料${q.phase?' · '+h(phaseNames[q.phase]||q.phase):''}</p><a href="${url('overview',q.key)}">问题、完整材料与同组变体 →</a></article>`).join('')||'<p>没有匹配题目，请调整筛选。</p>'}</section>${pg.html}`};
+}
+document.addEventListener('submit',e=>{
+ const f=e.target.closest('[data-catalog-filter],[data-catalog-results]');if(!f)return;e.preventDefault();
+ const p=new URLSearchParams();for(const [k,v] of new FormData(f))if(String(v).trim())p.set(k,String(v).trim());
+ location.hash=url(f.hasAttribute('data-catalog-results')?'results':'overview','',p);
+});
+document.addEventListener('click',async e=>{
+ const button=e.target.closest('[data-catalog-download]');if(!button)return;
+ const q=(await data()).cases.find(q=>q.key===button.dataset.catalogDownload);if(!q)return;
+ const blob=new Blob([j(q.input)+'\n'],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=q.case_id.replace(/[^\w.-]/g,'_')+'.input.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000);
+});

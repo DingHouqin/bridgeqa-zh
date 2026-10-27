@@ -319,6 +319,12 @@
       "slug": "specs/latest-publication",
       "group": "系统规格",
       "title": "最新题库与逐题实测发布规范"
+    },
+    {
+      "source": "explorer/specs/11_全量题库与最新关系题发布.md",
+      "slug": "specs/full-catalog",
+      "group": "系统规格",
+      "title": "全量题库与最新关系题发布"
     }
   ],
   "files": [
@@ -424,7 +430,15 @@
     "evaluation/pass_metrics_v15/test_scorer.py",
     "src/luna_sol_v16/analyze_delivery.py",
     "src/luna_sol_v16/finalize_grades.py",
-    "explorer/tests/latest_ui.cjs"
+    "explorer/tests/latest_ui.cjs",
+    "explorer/web/catalog.js",
+    "explorer/web/catalog.css",
+    "explorer/build_catalog.py",
+    "explorer/specs/11_全量题库与最新关系题发布.md",
+    "explorer/publication_v25/catalog.json",
+    "explorer/publication_v25/luna.json",
+    "explorer/publication_v25/manifest.json",
+    "explorer/publication_v25/README.md"
   ],
   "repository_files": [
     ".gitattributes",
@@ -738,6 +752,14 @@
     "workspace/hop-audit-v15/metric-scorer-pre-sampling-gate-3fdb923.py",
     "workspace/pilot_literature_history_v0/README.md",
     "workspace/pilot_literature_history_v0/delivery_checks.json",
-    "workspace/pilot_literature_history_v0/validation.json"
+    "workspace/pilot_literature_history_v0/validation.json",
+    "explorer/web/catalog.js",
+    "explorer/web/catalog.css",
+    "explorer/build_catalog.py",
+    "explorer/specs/11_全量题库与最新关系题发布.md",
+    "explorer/publication_v25/catalog.json",
+    "explorer/publication_v25/luna.json",
+    "explorer/publication_v25/manifest.json",
+    "explorer/publication_v25/README.md"
   ]
 }

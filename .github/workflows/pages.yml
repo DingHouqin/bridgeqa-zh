@@ -33,6 +33,8 @@ jobs:
           python-version: '3.12'
       - name: Validate dataset loading and static exporter
         run: python -m unittest discover -s explorer/tests -p '*_test.py'
+      - name: Validate complete catalog rendering
+        run: node explorer/tests/catalog-render.test.mjs
       - name: Export site
         run: python explorer/export_site.py
       - name: Upload Pages artifact

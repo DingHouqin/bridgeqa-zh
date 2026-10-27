@@ -14,7 +14,8 @@ async function get(name){
   return cache.get(name);
 }
 function link(page,key='',params=new URLSearchParams()){
-  return '#/'+page+(key?'/'+encodeURIComponent(key):'')+(params.size?'?'+params:'');
+  const p=new URLSearchParams(params);if(page==='results')p.set('cohort','v18');
+  return '#/'+page+(key?'/'+encodeURIComponent(key):'')+(p.size?'?'+p:'');
 }
 function heading(k,t,d){return `<div class="page-heading"><div><p class="eyebrow">${esc(k)}</p><h1 id="page-title" tabindex="-1">${esc(t)}</h1><p class="lead">${esc(d)}</p></div></div>`;}
 function badge(v){return `<span class="verdict verdict-${esc(v)}">${esc(v)} ${esc({P:'通过',F:'失败',U:'需复核'}[v]||'未登记')}</span>`;}
@@ -55,7 +56,7 @@ async function detail(page,key,cases,records){
   const q=cases.find(q=>q.question_key===key);
   if(!q)return heading('未找到任务','该题号未在本次发布中登记','请返回题库选择已登记任务。')+`<a href="${link('latest')}">返回最新题库</a>`;
   const paired=records.filter(r=>r.question_key===key).sort((a,b)=>models.indexOf(a.model)-models.indexOf(b.model));
-  return heading(page==='latest'?'05 / LATEST TASK':'06 / PER-QUESTION RESULTS',q.case_id,'同一公共输入的两模型首次作答。先看当前材料，再查看资格边界与逐维裁决。')+policy()+
+  return heading(page==='latest'?'05 / LATEST TASK':'05 / HISTORICAL RESULTS',q.case_id,'同一公共输入的两模型首次作答。先看当前材料，再查看资格边界与逐维裁决。')+policy()+
     `<p class="latest-links"><a href="${link('latest')}">返回题库</a><a href="${link('results')}">返回全部实测</a><a href="${link(page==='latest'?'results':'latest',key)}">${page==='latest'?'查看本题原答对照':'查看本题清洁输入'}</a><button data-latest-jump="latest-model-comparison">跳到两模型原答</button><button data-latest-download="${esc(key)}">下载本题清洁输入</button></p><div class="task-meta">${taskFacts(q)}</div><section class="panel"><h2>问题</h2><p class="latest-question">${esc(q.input.question)}</p>${q.input.instruction?`<p>${esc(q.input.instruction)}</p>`:''}<h3>当前题面全部材料</h3>${(q.input.contexts||[]).map(c=>`<article class="latest-context"><b>${esc(c.context_id||c.id||c.document_id||'材料')}</b><p>${esc(typeof c==='string'?c:c.text??json(c))}</p></article>`).join('')}<details><summary>完整清洁输入及作答合同</summary><pre>${esc(json(q.input))}</pre></details><details><summary>本题资格与跳数边界</summary><pre>${esc(json({metadata:q.metadata,qualification:q.qualification}))}</pre></details></section>`+
     `<details class="panel reference-review"><summary>题意与资格边界</summary><p class="caption">本次不公开独立标准答案与证明包。下方只说明本题的资格状态；模型原答及已验收裁决理由单列。</p>${q.qualification.target_ambiguity?'<section class="notice warning"><b>题意需复核</b><span>此旧题对目标集合存在不同自然读法，两模型答案维度均保留U，不以历史参考指定唯一正确答案。</span></section>':''}<pre>${esc(json(q.qualification))}</pre></details>`+
     `<h2 class="comparison-title" id="latest-model-comparison" tabindex="-1">两模型逐题表现</h2><div class="model-comparison">${paired.map(r=>observation(r)).join('')}</div>`;
@@ -82,7 +83,7 @@ export async function renderLatest(page,key,params){
   const selected=new Set(matched.map(q=>q.question_key));
   const shown=records.filter(r=>selected.has(r.question_key)&&(!params.get('model')||r.model===params.get('model'))&&Object.keys(dimensions).every(d=>!params.get(d)||r.labels[d]===params.get(d)));
   const pg=pager(page,params,shown.length);
-  return {title:'Luna / Sol逐题实测',html:heading('06 / LUNA & SOL','Luna / Sol逐题实测','504份真实首次作答，技术失败0。两模型每题公共输入一致，无工具、无重采和格式修复。20份非法JSON原样保留。')+policy()+downloadLinks+`<details class="panel" open><summary>按阶段与任务分区查看汇总</summary>${summaryTable(records,cases)}<p class="caption">此汇总固定展示全量分层口径，不随下方逐槽筛选变化。有U时，正式点值留空。</p></details>`+filters(page,params,cases)+`<p class="result-count" id="latest-count">匹配 <b>${shown.length}</b> / ${records.length} 份原答</p><section class="latest-task-list">${shown.slice(pg.start,pg.start+12).map(r=>{const q=qmap.get(r.question_key);return `<article class="panel latest-task"><div class="task-meta">${taskFacts(q)}</div><h2><a href="${link('results',r.question_key)}">${esc(r.case_id)}</a></h2><p>${esc(q.input.question)}</p>${observation(r,true)}<a href="${link('results',r.question_key)}">查看两模型完整原答、材料及哈希</a></article>`;}).join('')||'<p>没有匹配原答。请调整筛选。</p>'}</section>`+pg.html};
+  return {title:'Luna / Sol逐题实测',html:'<p class="latest-links"><a href="#/results">返回最新嵌套／换名Luna实测</a><a href="#/overview?cohort=v18">本批全部题目</a></p>'+heading('05 / HISTORICAL LUNA & SOL','Luna / Sol逐题实测','504份真实首次作答，技术失败0。两模型每题公共输入一致，无工具、无重采和格式修复。20份非法JSON原样保留。')+policy()+downloadLinks+`<details class="panel" open><summary>按阶段与任务分区查看汇总</summary>${summaryTable(records,cases)}<p class="caption">此汇总固定展示全量分层口径，不随下方逐槽筛选变化。有U时，正式点值留空。</p></details>`+filters(page,params,cases)+`<p class="result-count" id="latest-count">匹配 <b>${shown.length}</b> / ${records.length} 份原答</p><section class="latest-task-list">${shown.slice(pg.start,pg.start+12).map(r=>{const q=qmap.get(r.question_key);return `<article class="panel latest-task"><div class="task-meta">${taskFacts(q)}</div><h2><a href="${link('results',r.question_key)}">${esc(r.case_id)}</a></h2><p>${esc(q.input.question)}</p>${observation(r,true)}<a href="${link('results',r.question_key)}">查看两模型完整原答、材料及哈希</a></article>`;}).join('')||'<p>没有匹配原答。请调整筛选。</p>'}</section>`+pg.html};
 }
 export async function downloadLatestInput(key){
   const q=(await get('questions.public')).cases.find(q=>q.question_key===key);if(!q)return;
