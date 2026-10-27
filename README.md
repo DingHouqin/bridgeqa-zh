@@ -1,12 +1,24 @@
 # BridgeQA-ZH｜中文多跳问答对抗 benchmark
 
-以文学与历史为取材主题，构建多场景、多步骤的中文问答对抗测试数据，检查模型在角色、关系、条件、时间、噪声及背景知识干扰下的证据依赖与鲁棒性。
+## 最新交付：题库、逐题实测与评分器（2026-10-27）
+
+- [最新252项开发任务](https://dinghouqin.github.io/bridgeqa-zh/#/latest)：现有142主任务、48节点诊断、12状态对照，另有50条适应性合成开发扩展。支持阶段与领域筛选、完整材料和清洁输入下载。
+- [Luna／Sol的504份首次作答](https://dinghouqin.github.io/bridgeqa-zh/#/results)：逐题并排原答、A／L／C的P／F／U、实际裁决理由及哈希。20份非法JSON保留，无重采或格式修复。[详细说明](model-testing/luna_sol_v18_publication.md)区分各阶段和任务分母。
+- [评分器与过程评价](https://dinghouqin.github.io/bridgeqa-zh/#/scoring)：[指标与实现详解](evaluation/SCORING_GUIDE.md)、[冻结聚合器源码](evaluation/pass_metrics_v15/scorer.py)及[测试](evaluation/pass_metrics_v15/test_scorer.py)。语义由独立审查和主智能体验收，程序负责证据绑定、门禁与精确统计。
+- [公开数据投影](explorer/publication_v18/README.md)：清洁输入、审阅索引和原答分开，独立标准答案与证明包本轮不公开。盲解仅发送单题清洁输入，不携带审阅元数据或另一模型作答。
+
+每题每模型仅n=1，pass@5和pass^5为空。有U时保留原分母、报告标签界并关闭正式点值。新扩展是开发回归，全局无捷径认证为0，不能据此宣称正式独立benchmark已经完成。以下保留既有版本与历史工作入口。
+
+2026-10-21已[归档本轮86条审查记录](data/human-review/archive/2026-10-21-pilot-v0.5/README.md)，当前无待审任务；现用人工审查页面及写入已停用，题库与证据浏览保留。归档区分既有评价与智能体辅助提交。
+
+从文学与历史起步，现已扩展合成多领域、多步骤的中文问答对抗开发数据，检查模型在角色、关系、条件、时间、噪声及背景知识干扰下的证据依赖与鲁棒性。
 
 当前已完成文献调研、首轮候选集和可视化审查系统。主研究方向是完整合法证明、依赖传播、正确上游节点诊断及跨条件一致性；不是模型训练或优化项目。研究定义见 [核心评判与创新点](docs/benchmark-survey/09_多步骤评判与核心创新点回收.md)。
 
 ## 从这里开始
 
 - [文献与场景调研](docs/benchmark-survey/README.md)：相关 benchmark、构题机制与评测口径。
+- [正式多智能体构题机制](QA_Generator/README.md)：五角色架构、执行规范、实现与验证入口；当前已完成一个四成员开发家族，人工审阅未完成，尚未正式发布。
 - [场景单元与中文构题配方](docs/benchmark-survey/07_场景总表与中文构题配方.md)：32个非互斥候选单元。
 - [当前数据集说明](data/pilot_literature_history_v0/README.md) 与 [题目审阅册](data/pilot_literature_history_v0/题目审阅册.md)。
 - [可视化系统](explorer/README.md)：选题、筛选、正确证明和潜在干扰。
@@ -14,7 +26,7 @@
 - [固定测试指引页](https://dinghouqin.github.io/bridgeqa-zh/#/guide)：在线查看各数据集文件的使用方法。
 - [项目工作规范](AGENTS.md)：目录授权、分支限制、材料引用与质量要求。
 
-## 当前数据集
+## 首轮数据集（历史范围）
 
 | 数据集 | 范围 | 状态 |
 | --- | --- | --- |
@@ -28,6 +40,7 @@
 | --- | --- |
 | [data/](data/README.md) | 版本化数据、引文快照、家族种子、模型输入与评测标注；目前仅首轮候选集。 |
 | [docs/](docs/README.md) | 文献调研、研究协议与报告归档。 |
+| [QA_Generator/](QA_Generator/README.md) | 正式多智能体构题机制：[架构图](QA_Generator/architecture.md)、执行规范、设计记录、实现及验证索引。 |
 | [docs/benchmark-survey/](docs/benchmark-survey/README.md) | benchmark系列调研、场景目录与评测方案。 |
 | [docs/report/](docs/report/README.md) | 既有报告归档；参考报告只作参考，不用于决策。 |
 | [src/](src/) | 数据构建和校验代码；当前 [构建器说明](src/pilot_literature_history_v0/README.md)。 |

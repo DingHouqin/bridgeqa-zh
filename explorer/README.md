@@ -1,5 +1,17 @@
 # BridgeQA Explorer｜线上题目与证据审查系统
 
+## 最新页面（2026-10-27）
+
+- [05 最新开发题库](https://dinghouqin.github.io/bridgeqa-zh/#/latest)：252项任务，可筛选阶段、分区、领域、声明关系段数及搜索材料，逐题查看完整输入和资格边界。
+- [06 Luna／Sol实测](https://dinghouqin.github.io/bridgeqa-zh/#/results)：504份首次原答、三维P／F／U、实际裁决理由、逐题对照及CSV／JSON下载。
+- [07 评分器](https://dinghouqin.github.io/bridgeqa-zh/#/scoring)：详细指标、未决处理、过程评价实现与源码入口。
+
+最新页单独适配多领域合成任务，不沿用旧文学/历史证明图或57题Flash成绩。旧01—04与两版题库深链接继续保留。清洁输入、审阅索引和原答分别下载，盲解只发送单题清洁输入；独立标准答案与证明包本轮不公开。边界及验收见[最新发布规格](specs/10_最新题库与模型评测发布.md)和[数据投影说明](publication_v18/README.md)。以下为历史版本说明，不能当作最新模型或题库状态。
+
+**当前状态（2026-10-21）**：[本轮审查已归档](../data/human-review/archive/2026-10-21-pilot-v0.5/README.md)，暂无待审内容；05人工审查入口及服务写入停用，01—04题库、证据、指引与文档保留。旧审查链接显示停用说明，可进入[只读查阅](https://bridgeqa-human-review.spryox2.chatgpt.site/archives/2026-10-21/read-only.html)。下面的审查、预填、保存与GitHub授权说明仅为历史记录。
+
+2026-10-20起，[免GitHub授权审查入口](https://bridgeqa-human-review.spryox2.chatgpt.site/#/review)直接使用共享数据库保存，完整保留题面、图谱与评价功能。B组未完成42题的步骤、整题结论和五项评分预填为草稿建议，文本由用户填写；已完成评价不重置。GitHub Token不再是保存前提。以下旧GitHub保存说明仅作迁移历史；新口径及验收见[规格08](specs/08_临时人工审查.md)及[免授权测试](tests/noauth-review.test.mjs)。
+
 使用 [GitHub Pages网站](https://dinghouqin.github.io/bridgeqa-zh/)。当前pilot-v0.5 [86条候选题](../data/pilot_literature_history_v0/README.md) 的数据、标签和证明均由同一份原始标注生成。
 
 ## 使用

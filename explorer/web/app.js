@@ -1,6 +1,7 @@
 import {REVIEW_RETIRED,reviewRetiredMarkup} from './review-retired.js';
 import {siteURL,rewriteSiteLinks} from './urls.js';
 import {renderDocument} from './documents.js';
+import {renderLatest} from './latest.js';
 import {PEOPLE,TOPICS,setupReview,reviewConnection,initialsFor,reviewFor,reviewOwner,reviewStatus,progressFor,
   saveInitials,updateReview,finishReview,saveDraft,reviewFeedback,retrySaves,resolveConflict,exportReview,importReview,units} from './review.js';
 import {ACCURACY,VERDICTS,RATING_GUIDES} from './review-model.js';
@@ -70,9 +71,12 @@ function shell(content,active=pageName){
     '<a '+(active==='questions'||active==='question'?'aria-current="page"':'')+' href="'+route('questions','',listState,dataset,true)+'"><span>02</span>题目与证据</a>'+
     '<a '+(active==='guide'?'aria-current="page"':'')+' href="'+route('guide')+'"><span>03</span>测试指引</a>'+
     '<a '+(active==='docs'?'aria-current="page"':'')+' href="'+route('docs','index')+'"><span>04</span>研究文档</a>'+
+    '<a '+(active==='latest'?'aria-current="page"':'')+' href="#/latest"><span>05</span>最新开发题库</a>'+
+    '<a '+(active==='results'?'aria-current="page"':'')+' href="#/results"><span>06</span>Luna / Sol实测</a>'+
+    '<a '+(active==='scoring'?'aria-current="page"':'')+' href="#/scoring"><span>07</span>评分器</a>'+
     '</nav><div class="side-note"><span class="signal"></span>'+(inReview()?'协作 · 人工审查':'只读 · 候选集审查')+'<p>看清每条关系，<br>以及偏离发生在哪里。</p>'+
     '<a href="#/docs/specs/index" target="_blank" rel="noopener">查看设计规格 ↗</a></div></aside><div class="workspace">'+
-    '<header class="topbar"><span class="workbench-label">证据与推理工作台</span>'+(['guide','docs'].includes(active)?
+    '<header class="topbar"><span class="workbench-label">证据与推理工作台</span>'+(['guide','docs','latest','results','scoring'].includes(active)?
     '<span class="global-page-label">全项目固定页面 · 按章节维护</span>':'<label class="dataset-picker">数据集<select id="dataset" aria-label="选择数据集">'+
     registry.map(d=>'<option value="'+h(d.id)+'" '+(d.id===dataset?'selected':'')+'>'+h(d.title||d.id)+'</option>').join('')+
     '</select></label><span class="version">'+h(bundle?.version||'')+'</span>')+'</header>'+
@@ -473,10 +477,18 @@ async function onRoute(){
   const wanted=params.get('dataset')||registry.find(d=>d.default)?.id||registry[0]?.id||dataset;
   pageName=(path||'overview').split('/')[0];
   currentId=decodeURIComponent((path||'').split('/').slice(1).join('/'))||'';
-  if(!['overview','questions','question','guide','docs','review','review-questions','review-question'].includes(pageName)) pageName='overview';
+  if(!['overview','questions','question','guide','docs','review','review-questions','review-question','latest','results','scoring'].includes(pageName)) pageName='overview';
   if(!['guide','docs'].includes(pageName)) listState=normalizedState(params.get('state'));
   if(currentId!==lastDetail){proofIndex=0;selectedNode='';lastDetail=currentId;}
   try {
+    if(['latest','results','scoring'].includes(pageName)){
+      const view=await renderLatest(pageName,currentId,params);
+      if(request!==token)return;
+      shell(view.html,pageName);
+      document.title=view.title+' · BridgeQA';
+      scrollTo(0,0);
+      return;
+    }
     if(REVIEW_RETIRED&&pageName.startsWith('review')){
       shell(mainTitle('ARCHIVED / 2026-10-21','人工审查已停用')+reviewRetiredMarkup(),'archive');
       document.title='审查已归档 · BridgeQA';
@@ -637,7 +649,7 @@ try {
   if(!response.ok) throw new Error('数据集登记读取失败');
   registry=await response.json();
   dataset=registry.find(d=>d.default)?.id||registry[0]?.id||dataset;
-  if(!location.hash) history.replaceState(null,'',route('overview'));
+  if(!location.hash) history.replaceState(null,'','#/latest');
   await onRoute();
 }catch(error){app.innerHTML='<main class="boot"><h1>服务暂不可用</h1><p>'+h(error.message)+'</p><p>请刷新页面，或检查站点文件是否完整发布。</p></main>';}
 

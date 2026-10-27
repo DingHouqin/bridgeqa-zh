@@ -36,6 +36,12 @@ export async function renderDocument(slug){
     const source=sourcePath(entry.source,target),linked=c.documents.find(d=>d.source===source||d.source===source.replace(/\/$/,'')+'/README.md');
     if(linked)a.href=documentRoute(linked.slug,decodeURIComponent(fragment));
     else if(c.files.includes(source))a.href=siteURL('files/'+source);
+    else if(/^(workspace|artifacts)\//.test(source)||(c.repository_files&&!c.repository_files.includes(source)&&!c.repository_files.some(p=>p.startsWith(source.replace(/\/$/,'')+'/')))){
+      const note=document.createElement('span');
+      note.className='audit-source-note';note.title=source;
+      note.textContent=a.textContent+'（完整项目中的资料，未纳入本次公开附件）';
+      a.replaceWith(note);
+    }
     else {a.href=c.repository_url+(source.endsWith('/')||!source.split('/').at(-1).includes('.')?'/tree/main/':'/blob/main/')+source.split('/').map(encodeURIComponent).join('/');a.target='_blank';a.rel='noopener';}
   }
   for(const img of box.querySelectorAll('img[src]')){

@@ -11,6 +11,7 @@ on:
       - 'evaluation/**'
       - 'model-testing/**'
       - 'src/**'
+      - 'QA_Generator/**'
       - 'README.md'
       - 'AGENTS.md'
       - '.github/workflows/pages.yml'

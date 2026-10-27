@@ -3,9 +3,10 @@
   <section class="guide-intro">
     <div><p class="eyebrow">使用对象 / B 组模型测试</p><h2>从正确的输入开始，再分别核验答案与依据。</h2>
       <p>这页集中说明 B 组如何使用已交付的 benchmark。它不随顶部数据集选择变更；每次新增数据集，在本页追加一章并保留既有章节。其他页面继续服务于题目设计与审查，不按测试组的工作方式改造。</p></div>
-    <span class="hero-badge">当前收录 2 个数据集</span>
+    <span class="hero-badge">2版历史来源题集 + 最新多领域开发任务</span>
   </section>
   <nav class="guide-toc" aria-label="测试指引目录">
+    <a href="#/guide?section=guide-latest">最新252任务与504首答</a>
     <a href="#guide?section=guide-folders">目录用途</a>
     <a href="#guide?section=guide-pilot">第一版文件使用</a><a href="#guide?section=guide-v2">第二版文件使用</a>
     <a href="#guide?section=guide-main-run">主任务测试</a>
@@ -141,9 +142,16 @@ control_id、challenge_id、paired_changes、entity_mapping 等；
     <p>57题均未通过新版支持登记完整性认证，待复核不计作通过。历史deepseek-flash实跑的<a href="/files/data/multi_agent_hongloumeng_v2/blind-audit.json">逐条结果</a>分别保留机器严格判分和独立GPT语义审核；46/57是旧批次语义任务成功数，不是新版门禁通过数。独立人工复核未运行。本次上线未重跑模型。</p>
     <p>使用家族为配对单位，原题正确才纳入对应攻击成功率分母；共享作品与模板，不能当作正式独立测试集。下载、来源哈希、复现和限制见<a href="/files/data/multi_agent_hongloumeng_v2/README.md">第二版使用说明</a>及<a href="/files/data/multi_agent_hongloumeng_v2/publication.json">发布清单</a>。清洁输入采用文字输出约定，历史运行使用的完整JSON schema不在此冒称重现。</p>
   </section>
+  <section class="panel" id="guide-latest">
+    <h2>最新多领域开发题与Luna／Sol实测</h2>
+    <p><a href="#/latest">最新题库</a>单独展示252项任务：142主任务、48节点诊断、12状态对照，及16修订、30新算子、4边界题。阶段和任务分区分别筛选，声明三／四段不代表已认证必要跳数。</p>
+    <p>新测试只发送<a href="/files/explorer/publication_v18/inputs.jsonl">清洁输入JSONL</a>中的单题对象，或在单题页点击“下载本题清洁输入”。任务索引含审阅元数据，审阅参考与两模型原答也不能进入盲解提示。</p>
+    <p><a href="#/results">Luna／Sol实测</a>展示504份真实首答及逐维裁决。A是最终状态和完整目标，L要求真实充分一致的依据，C还要求完整输出合同。P通过，F失败，U需人工／强智能体复核。20份非法JSON原样保留，不能用修复或重采替代。</p>
+    <p>每题每模型n=1，pass@5、pass^5全部为空。有U时保留原分母，标签上下界不是置信区间。合成开发回归不代表独立测试，当前全局无捷径认证为0。详见<a href="#/scoring">评分器及过程实现</a>、<a href="#/docs/evaluation/scoring-guide">完整指标指南</a>和<a href="#/docs/model-testing/luna-sol-latest">逐题表现说明</a>。</p>
+  </section>
   <section class="protocol-strip guide-maintenance">
     <div><p class="eyebrow">本页维护</p><h2>新增数据集时，新增一章</h2>
-      <p>目前收录第一版 pilot_literature_history_v0 和第二版 multi_agent_hongloumeng_v2，更新日期为2026-10-26。新增数据集须补目录、版本/规模、逐文件用途、合法输入、标注关联、特殊状态、评分与结果口径，并检查链接。保留已有章节，不依据当前选择器自动替换内容。</p></div>
+      <p>保留第一版与第二版来源题集，2026-10-27新增最新多领域开发任务及Luna／Sol逐题实测。新增数据集须补目录、版本/规模、逐文件用途、合法输入、标注关联、特殊状态、评分与结果口径，并检查链接。保留已有章节，不依据当前选择器自动替换内容。</p></div>
     <a href="/files/data/pilot_literature_history_v0/README.md" target="_blank" rel="noopener">核对当前数据说明 ↗</a>
   </section>
 </article>
